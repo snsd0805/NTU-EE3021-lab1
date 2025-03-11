@@ -19,8 +19,8 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "FreeRTOS.h"
-#include "task.h"
 #include "main.h"
+#include "task.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -56,4 +56,3 @@
 /* USER CODE BEGIN Application */
 
 /* USER CODE END Application */
-
