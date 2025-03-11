@@ -1019,9 +1019,9 @@ typedef void (*pUART_RxEventCallbackTypeDef)(struct __UART_HandleTypeDef *huart,
  *            @arg @ref UART_IT_ERR   Error interrupt (frame error, noise error, overrun error)
  * @retval None
  */
-#define __HAL_UART_ENABLE_IT(__HANDLE__, __INTERRUPT__) (                                                                                                                                                                                       \
-    ((((uint8_t)(__INTERRUPT__)) >> 5U) == 1U) ? ((__HANDLE__)->Instance->CR1 |= (1U << ((__INTERRUPT__)&UART_IT_MASK))) : ((((uint8_t)(__INTERRUPT__)) >> 5U) == 2U) ? ((__HANDLE__)->Instance->CR2 |= (1U << ((__INTERRUPT__)&UART_IT_MASK))) \
-																				      : ((__HANDLE__)->Instance->CR3 |= (1U << ((__INTERRUPT__)&UART_IT_MASK))))
+#define __HAL_UART_ENABLE_IT(__HANDLE__, __INTERRUPT__) (                                                                                                                                                                                           \
+    ((((uint8_t)(__INTERRUPT__)) >> 5U) == 1U) ? ((__HANDLE__)->Instance->CR1 |= (1U << ((__INTERRUPT__) & UART_IT_MASK))) : ((((uint8_t)(__INTERRUPT__)) >> 5U) == 2U) ? ((__HANDLE__)->Instance->CR2 |= (1U << ((__INTERRUPT__) & UART_IT_MASK))) \
+																					: ((__HANDLE__)->Instance->CR3 |= (1U << ((__INTERRUPT__) & UART_IT_MASK))))
 
 /** @brief  Disable the specified UART interrupt.
  * @param  __HANDLE__ specifies the UART Handle.
@@ -1046,9 +1046,9 @@ typedef void (*pUART_RxEventCallbackTypeDef)(struct __UART_HandleTypeDef *huart,
  *            @arg @ref UART_IT_ERR   Error interrupt (Frame error, noise error, overrun error)
  * @retval None
  */
-#define __HAL_UART_DISABLE_IT(__HANDLE__, __INTERRUPT__) (                                                                                                                                                                                        \
-    ((((uint8_t)(__INTERRUPT__)) >> 5U) == 1U) ? ((__HANDLE__)->Instance->CR1 &= ~(1U << ((__INTERRUPT__)&UART_IT_MASK))) : ((((uint8_t)(__INTERRUPT__)) >> 5U) == 2U) ? ((__HANDLE__)->Instance->CR2 &= ~(1U << ((__INTERRUPT__)&UART_IT_MASK))) \
-																				       : ((__HANDLE__)->Instance->CR3 &= ~(1U << ((__INTERRUPT__)&UART_IT_MASK))))
+#define __HAL_UART_DISABLE_IT(__HANDLE__, __INTERRUPT__) (                                                                                                                                                                                            \
+    ((((uint8_t)(__INTERRUPT__)) >> 5U) == 1U) ? ((__HANDLE__)->Instance->CR1 &= ~(1U << ((__INTERRUPT__) & UART_IT_MASK))) : ((((uint8_t)(__INTERRUPT__)) >> 5U) == 2U) ? ((__HANDLE__)->Instance->CR2 &= ~(1U << ((__INTERRUPT__) & UART_IT_MASK))) \
+																					 : ((__HANDLE__)->Instance->CR3 &= ~(1U << ((__INTERRUPT__) & UART_IT_MASK))))
 
 /** @brief  Check whether the specified UART interrupt has occurred or not.
  * @param  __HANDLE__ specifies the UART Handle.
@@ -1297,14 +1297,14 @@ typedef void (*pUART_RxEventCallbackTypeDef)(struct __UART_HandleTypeDef *huart,
  * @param  __BAUD__ Baud rate set by the user.
  * @retval Division result
  */
-#define UART_DIV_LPUART(__PCLK__, __BAUD__) (((((uint64_t)(__PCLK__)*256U)) + ((__BAUD__) / 2U)) / (__BAUD__))
+#define UART_DIV_LPUART(__PCLK__, __BAUD__) (((((uint64_t)(__PCLK__) * 256U)) + ((__BAUD__) / 2U)) / (__BAUD__))
 
 /** @brief  BRR division operation to set BRR register in 8-bit oversampling mode.
  * @param  __PCLK__ UART clock.
  * @param  __BAUD__ Baud rate set by the user.
  * @retval Division result
  */
-#define UART_DIV_SAMPLING8(__PCLK__, __BAUD__) ((((__PCLK__)*2U) + ((__BAUD__) / 2U)) / (__BAUD__))
+#define UART_DIV_SAMPLING8(__PCLK__, __BAUD__) ((((__PCLK__) * 2U) + ((__BAUD__) / 2U)) / (__BAUD__))
 
 /** @brief  BRR division operation to set BRR register in 16-bit oversampling mode.
  * @param  __PCLK__ UART clock.

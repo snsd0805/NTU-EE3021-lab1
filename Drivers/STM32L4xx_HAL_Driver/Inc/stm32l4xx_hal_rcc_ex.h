@@ -915,7 +915,7 @@ typedef struct
     MODIFY_REG(RCC->PLLSAI1CFGR,                                                                       \
 	       (RCC_PLLSAI1CFGR_PLLSAI1M | RCC_PLLSAI1CFGR_PLLSAI1N | RCC_PLLSAI1CFGR_PLLSAI1P |       \
 		RCC_PLLSAI1CFGR_PLLSAI1Q | RCC_PLLSAI1CFGR_PLLSAI1R | RCC_PLLSAI1CFGR_PLLSAI1PDIV),    \
-	       ((((__PLLSAI1M__)-1U) << RCC_PLLSAI1CFGR_PLLSAI1M_Pos) |                                \
+	       ((((__PLLSAI1M__) - 1U) << RCC_PLLSAI1CFGR_PLLSAI1M_Pos) |                              \
 		((__PLLSAI1N__) << RCC_PLLSAI1CFGR_PLLSAI1N_Pos) |                                     \
 		((((__PLLSAI1Q__) >> 1U) - 1U) << RCC_PLLSAI1CFGR_PLLSAI1Q_Pos) |                      \
 		((((__PLLSAI1R__) >> 1U) - 1U) << RCC_PLLSAI1CFGR_PLLSAI1R_Pos) |                      \
@@ -927,7 +927,7 @@ typedef struct
     MODIFY_REG(RCC->PLLSAI1CFGR,                                                                       \
 	       (RCC_PLLSAI1CFGR_PLLSAI1M | RCC_PLLSAI1CFGR_PLLSAI1N | RCC_PLLSAI1CFGR_PLLSAI1P |       \
 		RCC_PLLSAI1CFGR_PLLSAI1Q | RCC_PLLSAI1CFGR_PLLSAI1R),                                  \
-	       ((((__PLLSAI1M__)-1U) << RCC_PLLSAI1CFGR_PLLSAI1M_Pos) |                                \
+	       ((((__PLLSAI1M__) - 1U) << RCC_PLLSAI1CFGR_PLLSAI1M_Pos) |                              \
 		((__PLLSAI1N__) << RCC_PLLSAI1CFGR_PLLSAI1N_Pos) |                                     \
 		((((__PLLSAI1Q__) >> 1U) - 1U) << RCC_PLLSAI1CFGR_PLLSAI1Q_Pos) |                      \
 		((((__PLLSAI1R__) >> 1U) - 1U) << RCC_PLLSAI1CFGR_PLLSAI1R_Pos) |                      \
@@ -996,7 +996,7 @@ typedef struct
  */
 
 #define __HAL_RCC_PLLSAI1_DIVM_CONFIG(__PLLSAI1M__) \
-    MODIFY_REG(RCC->PLLSAI1CFGR, RCC_PLLSAI1CFGR_PLLSAI1M, ((__PLLSAI1M__)-1U) << RCC_PLLSAI1CFGR_PLLSAI1M_Pos)
+    MODIFY_REG(RCC->PLLSAI1CFGR, RCC_PLLSAI1CFGR_PLLSAI1M, ((__PLLSAI1M__) - 1U) << RCC_PLLSAI1CFGR_PLLSAI1M_Pos)
 
 #endif /* RCC_PLLSAI1M_DIV_1_16_SUPPORT */
 
@@ -1142,7 +1142,7 @@ typedef struct
     MODIFY_REG(RCC->PLLSAI2CFGR,                                                                       \
 	       (RCC_PLLSAI2CFGR_PLLSAI2M | RCC_PLLSAI2CFGR_PLLSAI2N | RCC_PLLSAI2CFGR_PLLSAI2P |       \
 		RCC_PLLSAI2CFGR_PLLSAI2Q | RCC_PLLSAI2CFGR_PLLSAI2R | RCC_PLLSAI2CFGR_PLLSAI2PDIV),    \
-	       ((((__PLLSAI2M__)-1U) << RCC_PLLSAI2CFGR_PLLSAI2M_Pos) |                                \
+	       ((((__PLLSAI2M__) - 1U) << RCC_PLLSAI2CFGR_PLLSAI2M_Pos) |                              \
 		((__PLLSAI2N__) << RCC_PLLSAI2CFGR_PLLSAI2N_Pos) |                                     \
 		((((__PLLSAI2Q__) >> 1U) - 1U) << RCC_PLLSAI2CFGR_PLLSAI2Q_Pos) |                      \
 		((((__PLLSAI2R__) >> 1U) - 1U) << RCC_PLLSAI2CFGR_PLLSAI2R_Pos) |                      \
@@ -1154,7 +1154,7 @@ typedef struct
     MODIFY_REG(RCC->PLLSAI2CFGR,                                                                 \
 	       (RCC_PLLSAI2CFGR_PLLSAI2M | RCC_PLLSAI2CFGR_PLLSAI2N | RCC_PLLSAI2CFGR_PLLSAI2P | \
 		RCC_PLLSAI2CFGR_PLLSAI2R | RCC_PLLSAI2CFGR_PLLSAI2PDIV),                         \
-	       ((((__PLLSAI2M__)-1U) << RCC_PLLSAI2CFGR_PLLSAI2M_Pos) |                          \
+	       ((((__PLLSAI2M__) - 1U) << RCC_PLLSAI2CFGR_PLLSAI2M_Pos) |                        \
 		((__PLLSAI2N__) << RCC_PLLSAI2CFGR_PLLSAI2N_Pos) |                               \
 		((((__PLLSAI2R__) >> 1U) - 1U) << RCC_PLLSAI2CFGR_PLLSAI2R_Pos) |                \
 		((uint32_t)(__PLLSAI2P__) << RCC_PLLSAI2CFGR_PLLSAI2PDIV_Pos)))
@@ -1165,7 +1165,7 @@ typedef struct
     MODIFY_REG(RCC->PLLSAI2CFGR,                                                                 \
 	       (RCC_PLLSAI2CFGR_PLLSAI2M | RCC_PLLSAI2CFGR_PLLSAI2N | RCC_PLLSAI2CFGR_PLLSAI2P | \
 		RCC_PLLSAI2CFGR_PLLSAI2R),                                                       \
-	       ((((__PLLSAI2M__)-1U) << RCC_PLLSAI2CFGR_PLLSAI2M_Pos) |                          \
+	       ((((__PLLSAI2M__) - 1U) << RCC_PLLSAI2CFGR_PLLSAI2M_Pos) |                        \
 		((__PLLSAI2N__) << RCC_PLLSAI2CFGR_PLLSAI2N_Pos) |                               \
 		((((__PLLSAI2R__) >> 1U) - 1U) << RCC_PLLSAI2CFGR_PLLSAI2R_Pos) |                \
 		(((__PLLSAI2P__) >> 4U) << RCC_PLLSAI2CFGR_PLLSAI2P_Pos)))
@@ -1242,7 +1242,7 @@ typedef struct
  */
 
 #define __HAL_RCC_PLLSAI2_DIVM_CONFIG(__PLLSAI2M__) \
-    MODIFY_REG(RCC->PLLSAI2CFGR, RCC_PLLSAI2CFGR_PLLSAI2M, ((__PLLSAI2M__)-1U) << RCC_PLLSAI2CFGR_PLLSAI2M_Pos)
+    MODIFY_REG(RCC->PLLSAI2CFGR, RCC_PLLSAI2CFGR_PLLSAI2M, ((__PLLSAI2M__) - 1U) << RCC_PLLSAI2CFGR_PLLSAI2M_Pos)
 
 #endif /* RCC_PLLSAI2M_DIV_1_16_SUPPORT */
 
@@ -2256,7 +2256,7 @@ typedef struct
 
 #define __HAL_RCC_CRS_CLEAR_IT(__INTERRUPT__)                                               \
     do {                                                                                    \
-	if (((__INTERRUPT__)&RCC_CRS_IT_ERROR_MASK) != 0U) {                                \
+	if (((__INTERRUPT__) & RCC_CRS_IT_ERROR_MASK) != 0U) {                              \
 	    WRITE_REG(CRS->ICR, CRS_ICR_ERRC | ((__INTERRUPT__) & ~RCC_CRS_IT_ERROR_MASK)); \
 	} else {                                                                            \
 	    WRITE_REG(CRS->ICR, (__INTERRUPT__));                                           \
@@ -2298,7 +2298,7 @@ typedef struct
 
 #define __HAL_RCC_CRS_CLEAR_FLAG(__FLAG__)                                               \
     do {                                                                                 \
-	if (((__FLAG__)&RCC_CRS_FLAG_ERROR_MASK) != 0U) {                                \
+	if (((__FLAG__) & RCC_CRS_FLAG_ERROR_MASK) != 0U) {                              \
 	    WRITE_REG(CRS->ICR, CRS_ICR_ERRC | ((__FLAG__) & ~RCC_CRS_FLAG_ERROR_MASK)); \
 	} else {                                                                         \
 	    WRITE_REG(CRS->ICR, (__FLAG__));                                             \
@@ -2623,7 +2623,7 @@ void HAL_RCCEx_CRS_ErrorCallback(uint32_t Error);
 #define IS_RCC_LSCOSOURCE(__SOURCE__) (((__SOURCE__) == RCC_LSCOSOURCE_LSI) || \
 				       ((__SOURCE__) == RCC_LSCOSOURCE_LSE))
 
-#define IS_RCC_PERIPHCLOCK(__SELECTION__) ((((__SELECTION__)&RCC_PERIPHCLOCK_ALL) != 0x00u) && \
+#define IS_RCC_PERIPHCLOCK(__SELECTION__) ((((__SELECTION__) & RCC_PERIPHCLOCK_ALL) != 0x00u) && \
 					   (((__SELECTION__) & ~RCC_PERIPHCLOCK_ALL) == 0x00u))
 
 #define IS_RCC_USART1CLKSOURCE(__SOURCE__)           \

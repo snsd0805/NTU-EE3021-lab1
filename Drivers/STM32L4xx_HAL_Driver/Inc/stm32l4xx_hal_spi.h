@@ -594,9 +594,9 @@ typedef void (*pSPI_CallbackTypeDef)(SPI_HandleTypeDef *hspi); /*!< pointer to a
  *            @arg SPI_FLAG_FRLVL: SPI fifo reception level
  * @retval SET or RESET.
  */
-#define SPI_CHECK_FLAG(__SR__, __FLAG__) ((((__SR__) & ((__FLAG__)&SPI_FLAG_MASK)) == \
-					   ((__FLAG__)&SPI_FLAG_MASK))                \
-					      ? SET                                   \
+#define SPI_CHECK_FLAG(__SR__, __FLAG__) ((((__SR__) & ((__FLAG__) & SPI_FLAG_MASK)) == \
+					   ((__FLAG__) & SPI_FLAG_MASK))                \
+					      ? SET                                     \
 					      : RESET)
 
 /** @brief  Check whether the specified SPI Interrupt is set or not.
@@ -749,7 +749,7 @@ typedef void (*pSPI_CallbackTypeDef)(SPI_HandleTypeDef *hspi); /*!< pointer to a
  */
 #define IS_SPI_CRC_POLYNOMIAL(__POLYNOMIAL__) (((__POLYNOMIAL__) >= 0x1U) &&    \
 					       ((__POLYNOMIAL__) <= 0xFFFFU) && \
-					       (((__POLYNOMIAL__)&0x1U) != 0U))
+					       (((__POLYNOMIAL__) & 0x1U) != 0U))
 
 /** @brief  Checks if DMA handle is valid.
  * @param  __HANDLE__ specifies a DMA Handle.

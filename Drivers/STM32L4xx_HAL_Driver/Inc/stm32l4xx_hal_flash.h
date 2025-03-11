@@ -704,7 +704,7 @@ typedef struct
  */
 #define __HAL_FLASH_ENABLE_IT(__INTERRUPT__)                          \
     do {                                                              \
-	if (((__INTERRUPT__)&FLASH_IT_ECCC) != 0U) {                  \
+	if (((__INTERRUPT__) & FLASH_IT_ECCC) != 0U) {                \
 	    SET_BIT(FLASH->ECCR, FLASH_ECCR_ECCIE);                   \
 	}                                                             \
 	if (((__INTERRUPT__) & (~FLASH_IT_ECCC)) != 0U) {             \
@@ -724,7 +724,7 @@ typedef struct
  */
 #define __HAL_FLASH_DISABLE_IT(__INTERRUPT__)                           \
     do {                                                                \
-	if (((__INTERRUPT__)&FLASH_IT_ECCC) != 0U) {                    \
+	if (((__INTERRUPT__) & FLASH_IT_ECCC) != 0U) {                  \
 	    CLEAR_BIT(FLASH->ECCR, FLASH_ECCR_ECCIE);                   \
 	}                                                               \
 	if (((__INTERRUPT__) & (~FLASH_IT_ECCC)) != 0U) {               \
@@ -753,7 +753,7 @@ typedef struct
  *     @arg FLASH_FLAG_ECCD: FLASH two ECC errors have been detected
  * @retval The new state of FLASH_FLAG (SET or RESET).
  */
-#define __HAL_FLASH_GET_FLAG(__FLAG__) ((((__FLAG__)&FLASH_FLAG_ECCR_ERRORS) != 0U) ? (READ_BIT(FLASH->ECCR, (__FLAG__)) != 0U) : (READ_BIT(FLASH->SR, (__FLAG__)) != 0U))
+#define __HAL_FLASH_GET_FLAG(__FLAG__) ((((__FLAG__) & FLASH_FLAG_ECCR_ERRORS) != 0U) ? (READ_BIT(FLASH->ECCR, (__FLAG__)) != 0U) : (READ_BIT(FLASH->SR, (__FLAG__)) != 0U))
 
 /**
  * @brief  Clear the FLASH's pending flags.
@@ -777,8 +777,8 @@ typedef struct
  */
 #define __HAL_FLASH_CLEAR_FLAG(__FLAG__)                                    \
     do {                                                                    \
-	if (((__FLAG__)&FLASH_FLAG_ECCR_ERRORS) != 0U) {                    \
-	    SET_BIT(FLASH->ECCR, ((__FLAG__)&FLASH_FLAG_ECCR_ERRORS));      \
+	if (((__FLAG__) & FLASH_FLAG_ECCR_ERRORS) != 0U) {                  \
+	    SET_BIT(FLASH->ECCR, ((__FLAG__) & FLASH_FLAG_ECCR_ERRORS));    \
 	}                                                                   \
 	if (((__FLAG__) & ~(FLASH_FLAG_ECCR_ERRORS)) != 0U) {               \
 	    WRITE_REG(FLASH->SR, ((__FLAG__) & ~(FLASH_FLAG_ECCR_ERRORS))); \
@@ -949,7 +949,7 @@ HAL_StatusTypeDef FLASH_WaitForLastOperation(uint32_t Timeout);
 #elif defined(STM32L471xx) || defined(STM32L475xx) || defined(STM32L476xx) || defined(STM32L485xx) || defined(STM32L486xx) || defined(STM32L496xx) || defined(STM32L4A6xx)
 #define IS_OB_USER_TYPE(TYPE) (((TYPE) <= (uint32_t)0x1FFFU) && ((TYPE) != 0U))
 #else
-#define IS_OB_USER_TYPE(TYPE) (((TYPE) <= (uint32_t)0x7E7FU) && ((TYPE) != 0U) && (((TYPE)&0x0180U) == 0U))
+#define IS_OB_USER_TYPE(TYPE) (((TYPE) <= (uint32_t)0x7E7FU) && ((TYPE) != 0U) && (((TYPE) & 0x0180U) == 0U))
 #endif
 
 #define IS_OB_USER_BOR_LEVEL(LEVEL) (((LEVEL) == OB_BOR_LEVEL_0) || ((LEVEL) == OB_BOR_LEVEL_1) || \

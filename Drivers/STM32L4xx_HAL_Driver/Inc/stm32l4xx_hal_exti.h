@@ -699,20 +699,20 @@ typedef struct
  * @{
  */
 #define IS_EXTI_LINE(__EXTI_LINE__) ((((__EXTI_LINE__) & ~(EXTI_PROPERTY_MASK | EXTI_EVENT_PRESENCE_MASK | EXTI_REG_MASK | EXTI_PIN_MASK)) == 0x00u) && \
-				     ((((__EXTI_LINE__)&EXTI_PROPERTY_MASK) == EXTI_DIRECT) ||                                                          \
-				      (((__EXTI_LINE__)&EXTI_PROPERTY_MASK) == EXTI_CONFIG) ||                                                          \
-				      (((__EXTI_LINE__)&EXTI_PROPERTY_MASK) == EXTI_GPIO)) &&                                                           \
+				     ((((__EXTI_LINE__) & EXTI_PROPERTY_MASK) == EXTI_DIRECT) ||                                                        \
+				      (((__EXTI_LINE__) & EXTI_PROPERTY_MASK) == EXTI_CONFIG) ||                                                        \
+				      (((__EXTI_LINE__) & EXTI_PROPERTY_MASK) == EXTI_GPIO)) &&                                                         \
 				     (((__EXTI_LINE__) & (EXTI_REG_MASK | EXTI_PIN_MASK)) <                                                             \
 				      (((EXTI_LINE_NB / 32u) << EXTI_REG_SHIFT) | (EXTI_LINE_NB % 32u))))
 
-#define IS_EXTI_MODE(__EXTI_LINE__) ((((__EXTI_LINE__)&EXTI_MODE_MASK) != 0x00u) && \
+#define IS_EXTI_MODE(__EXTI_LINE__) ((((__EXTI_LINE__) & EXTI_MODE_MASK) != 0x00u) && \
 				     (((__EXTI_LINE__) & ~EXTI_MODE_MASK) == 0x00u))
 
 #define IS_EXTI_TRIGGER(__EXTI_LINE__) (((__EXTI_LINE__) & ~EXTI_TRIGGER_MASK) == 0x00u)
 
 #define IS_EXTI_PENDING_EDGE(__EXTI_LINE__) ((__EXTI_LINE__) == EXTI_TRIGGER_RISING_FALLING)
 
-#define IS_EXTI_CONFIG_LINE(__EXTI_LINE__) (((__EXTI_LINE__)&EXTI_CONFIG) != 0x00u)
+#define IS_EXTI_CONFIG_LINE(__EXTI_LINE__) (((__EXTI_LINE__) & EXTI_CONFIG) != 0x00u)
 
 #if defined(STM32L412xx) || defined(STM32L422xx)
 

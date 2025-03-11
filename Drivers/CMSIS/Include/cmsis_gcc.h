@@ -120,7 +120,7 @@ __PACKED_STRUCT T_UINT32_READ { uint32_t v; };
 						: "memory")
 #endif
 
-    /* #########################  Startup and Lowlevel Init  ######################## */
+/* #########################  Startup and Lowlevel Init  ######################## */
 
 #ifndef __PROGRAM_START
 

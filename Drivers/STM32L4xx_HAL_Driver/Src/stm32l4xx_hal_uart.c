@@ -2969,7 +2969,7 @@ HAL_StatusTypeDef UART_SetConfig(UART_HandleTypeDef *huart) {
 		    ret = HAL_ERROR;
 		}
 	    } /* if ( (pclk < (3 * huart->Init.BaudRate) ) || (pclk > (4096 * huart->Init.BaudRate) )) */
-#endif	  /* USART_PRESC_PRESCALER */
+#endif /* USART_PRESC_PRESCALER */
 	} /* if (pclk != 0) */
     }
     /* Check UART Over Sampling to set Baud Rate Register */
