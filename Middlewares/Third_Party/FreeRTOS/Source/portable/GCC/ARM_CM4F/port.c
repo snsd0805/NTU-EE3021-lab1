@@ -512,7 +512,8 @@ __attribute__((weak)) void vPortSuppressTicksAndSleep(TickType_t xExpectedIdleTi
 
     /* Enter a critical section but don't use the taskENTER_CRITICAL()
     method as that will mask interrupts that should exit sleep mode. */
-    __asm volatile("cpsid i" ::: "memory");
+    __asm volatile("cpsid i" ::
+		       : "memory");
     __asm volatile("dsb");
     __asm volatile("isb");
 
@@ -532,7 +533,8 @@ __attribute__((weak)) void vPortSuppressTicksAndSleep(TickType_t xExpectedIdleTi
 
 	/* Re-enable interrupts - see comments above the cpsid instruction()
 	above. */
-	__asm volatile("cpsie i" ::: "memory");
+	__asm volatile("cpsie i" ::
+			   : "memory");
     } else {
 	/* Set the new reload value. */
 	portNVIC_SYSTICK_LOAD_REG = ulReloadValue;
@@ -552,7 +554,8 @@ __attribute__((weak)) void vPortSuppressTicksAndSleep(TickType_t xExpectedIdleTi
 	xModifiableIdleTime = xExpectedIdleTime;
 	configPRE_SLEEP_PROCESSING(xModifiableIdleTime);
 	if (xModifiableIdleTime > 0) {
-	    __asm volatile("dsb" ::: "memory");
+	    __asm volatile("dsb" ::
+			       : "memory");
 	    __asm volatile("wfi");
 	    __asm volatile("isb");
 	}
@@ -561,7 +564,8 @@ __attribute__((weak)) void vPortSuppressTicksAndSleep(TickType_t xExpectedIdleTi
 	/* Re-enable interrupts to allow the interrupt that brought the MCU
 	out of sleep mode to execute immediately.  see comments above
 	__disable_interrupt() call above. */
-	__asm volatile("cpsie i" ::: "memory");
+	__asm volatile("cpsie i" ::
+			   : "memory");
 	__asm volatile("dsb");
 	__asm volatile("isb");
 
@@ -569,7 +573,8 @@ __attribute__((weak)) void vPortSuppressTicksAndSleep(TickType_t xExpectedIdleTi
 	and interrupts that execute while the clock is stopped will increase
 	any slippage between the time maintained by the RTOS and calendar
 	time. */
-	__asm volatile("cpsid i" ::: "memory");
+	__asm volatile("cpsid i" ::
+			   : "memory");
 	__asm volatile("dsb");
 	__asm volatile("isb");
 
@@ -634,7 +639,8 @@ __attribute__((weak)) void vPortSuppressTicksAndSleep(TickType_t xExpectedIdleTi
 	portNVIC_SYSTICK_LOAD_REG = ulTimerCountsForOneTick - 1UL;
 
 	/* Exit with interrupts enabled. */
-	__asm volatile("cpsie i" ::: "memory");
+	__asm volatile("cpsie i" ::
+			   : "memory");
     }
 }
 
@@ -684,7 +690,8 @@ void vPortValidateInterruptPriority(void) {
     uint8_t ucCurrentPriority;
 
     /* Obtain the number of the currently executing interrupt. */
-    __asm volatile("mrs %0, ipsr" : "=r"(ulCurrentInterrupt)::"memory");
+    __asm volatile("mrs %0, ipsr"
+		   : "=r"(ulCurrentInterrupt)::"memory");
 
     /* Is the interrupt number a user defined interrupt? */
     if (ulCurrentInterrupt >= portFIRST_USER_INTERRUPT_NUMBER) {

@@ -630,7 +630,7 @@ typedef struct
 #define __LL_USART_DIV_SAMPLING8(__PERIPHCLK__, __PRESCALER__, __BAUDRATE__) \
     (((((__PERIPHCLK__) / (USART_PRESCALER_TAB[(__PRESCALER__)])) * 2U) + ((__BAUDRATE__) / 2U)) / (__BAUDRATE__))
 #else
-#define __LL_USART_DIV_SAMPLING8(__PERIPHCLK__, __BAUDRATE__) ((((__PERIPHCLK__) * 2U) + ((__BAUDRATE__) / 2U)) / (__BAUDRATE__))
+#define __LL_USART_DIV_SAMPLING8(__PERIPHCLK__, __BAUDRATE__) ((((__PERIPHCLK__)*2U) + ((__BAUDRATE__) / 2U)) / (__BAUDRATE__))
 #endif /* USART_PRESC_PRESCALER */
 
 /**

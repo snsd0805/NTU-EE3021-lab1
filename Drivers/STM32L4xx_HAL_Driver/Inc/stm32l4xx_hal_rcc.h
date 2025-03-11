@@ -4303,7 +4303,7 @@ typedef struct
  *
  */
 #define __HAL_RCC_PLL_PLLM_CONFIG(__PLLM__) \
-    MODIFY_REG(RCC->PLLCFGR, RCC_PLLCFGR_PLLM, ((__PLLM__) - 1) << 4U)
+    MODIFY_REG(RCC->PLLCFGR, RCC_PLLCFGR_PLLM, ((__PLLM__)-1) << 4U)
 
 /**
  * @brief  Macro to configure the main PLL clock source, multiplication and division factors.
@@ -4351,7 +4351,7 @@ typedef struct
 	       (RCC_PLLCFGR_PLLSRC | RCC_PLLCFGR_PLLM | RCC_PLLCFGR_PLLN |                     \
 		RCC_PLLCFGR_PLLQ | RCC_PLLCFGR_PLLR | RCC_PLLCFGR_PLLP | RCC_PLLCFGR_PLLPDIV), \
 	       ((__PLLSOURCE__) |                                                              \
-		(((__PLLM__) - 1U) << RCC_PLLCFGR_PLLM_Pos) |                                  \
+		(((__PLLM__)-1U) << RCC_PLLCFGR_PLLM_Pos) |                                    \
 		((__PLLN__) << RCC_PLLCFGR_PLLN_Pos) |                                         \
 		((((__PLLQ__) >> 1U) - 1U) << RCC_PLLCFGR_PLLQ_Pos) |                          \
 		((((__PLLR__) >> 1U) - 1U) << RCC_PLLCFGR_PLLR_Pos) |                          \
@@ -4364,7 +4364,7 @@ typedef struct
 	       (RCC_PLLCFGR_PLLSRC | RCC_PLLCFGR_PLLM | RCC_PLLCFGR_PLLN |                    \
 		RCC_PLLCFGR_PLLQ | RCC_PLLCFGR_PLLR | RCC_PLLCFGR_PLLP),                      \
 	       ((__PLLSOURCE__) |                                                             \
-		(((__PLLM__) - 1U) << RCC_PLLCFGR_PLLM_Pos) |                                 \
+		(((__PLLM__)-1U) << RCC_PLLCFGR_PLLM_Pos) |                                   \
 		((__PLLN__) << RCC_PLLCFGR_PLLN_Pos) |                                        \
 		((((__PLLQ__) >> 1U) - 1U) << RCC_PLLCFGR_PLLQ_Pos) |                         \
 		((((__PLLR__) >> 1U) - 1U) << RCC_PLLCFGR_PLLR_Pos) |                         \
@@ -4377,7 +4377,7 @@ typedef struct
 	       (RCC_PLLCFGR_PLLSRC | RCC_PLLCFGR_PLLM | RCC_PLLCFGR_PLLN |          \
 		RCC_PLLCFGR_PLLQ | RCC_PLLCFGR_PLLR),                               \
 	       ((__PLLSOURCE__) |                                                   \
-		(((__PLLM__) - 1U) << RCC_PLLCFGR_PLLM_Pos) |                       \
+		(((__PLLM__)-1U) << RCC_PLLCFGR_PLLM_Pos) |                         \
 		((__PLLN__) << RCC_PLLCFGR_PLLN_Pos) |                              \
 		((((__PLLQ__) >> 1U) - 1U) << RCC_PLLCFGR_PLLQ_Pos) |               \
 		((((__PLLR__) >> 1U) - 1U) << RCC_PLLCFGR_PLLR_Pos)))
@@ -4636,12 +4636,12 @@ typedef struct
   */
 #if defined(RCC_HSI48_SUPPORT)
 #define __HAL_RCC_GET_FLAG(__FLAG__) (((((((__FLAG__) >> 5U) == 1U) ? RCC->CR : ((((__FLAG__) >> 5U) == 4U) ? RCC->CRRCR : ((((__FLAG__) >> 5U) == 2U) ? RCC->BDCR : ((((__FLAG__) >> 5U) == 3U) ? RCC->CSR : RCC->CIFR)))) & \
-					(1U << ((__FLAG__) & RCC_FLAG_MASK))) != 0U)                                                                                                                                          \
+					(1U << ((__FLAG__)&RCC_FLAG_MASK))) != 0U)                                                                                                                                            \
 					  ? 1U                                                                                                                                                                                \
 					  : 0U)
 #else
 #define __HAL_RCC_GET_FLAG(__FLAG__) (((((((__FLAG__) >> 5U) == 1U) ? RCC->CR : ((((__FLAG__) >> 5U) == 2U) ? RCC->BDCR : ((((__FLAG__) >> 5U) == 3U) ? RCC->CSR : RCC->CIFR))) & \
-					(1U << ((__FLAG__) & RCC_FLAG_MASK))) != 0U)                                                                                              \
+					(1U << ((__FLAG__)&RCC_FLAG_MASK))) != 0U)                                                                                                \
 					  ? 1U                                                                                                                                    \
 					  : 0U)
 #endif /* RCC_HSI48_SUPPORT */
@@ -4762,21 +4762,21 @@ typedef struct
 				      ((__VALUE__) == 6U) || ((__VALUE__) == 8U))
 
 #if defined(RCC_PLLSAI1_SUPPORT)
-#define IS_RCC_PLLSAI1CLOCKOUT_VALUE(__VALUE__) (((((__VALUE__) & RCC_PLLSAI1_SAI1CLK) == RCC_PLLSAI1_SAI1CLK) ||  \
-						  (((__VALUE__) & RCC_PLLSAI1_48M2CLK) == RCC_PLLSAI1_48M2CLK) ||  \
-						  (((__VALUE__) & RCC_PLLSAI1_ADC1CLK) == RCC_PLLSAI1_ADC1CLK)) && \
+#define IS_RCC_PLLSAI1CLOCKOUT_VALUE(__VALUE__) (((((__VALUE__)&RCC_PLLSAI1_SAI1CLK) == RCC_PLLSAI1_SAI1CLK) ||  \
+						  (((__VALUE__)&RCC_PLLSAI1_48M2CLK) == RCC_PLLSAI1_48M2CLK) ||  \
+						  (((__VALUE__)&RCC_PLLSAI1_ADC1CLK) == RCC_PLLSAI1_ADC1CLK)) && \
 						 (((__VALUE__) & ~(RCC_PLLSAI1_SAI1CLK | RCC_PLLSAI1_48M2CLK | RCC_PLLSAI1_ADC1CLK)) == 0U))
 #endif /* RCC_PLLSAI1_SUPPORT */
 
 #if defined(RCC_PLLSAI2_SUPPORT)
 #if defined(STM32L471xx) || defined(STM32L475xx) || defined(STM32L476xx) || defined(STM32L485xx) || defined(STM32L486xx) || defined(STM32L496xx) || defined(STM32L4A6xx)
-#define IS_RCC_PLLSAI2CLOCKOUT_VALUE(__VALUE__) (((((__VALUE__) & RCC_PLLSAI2_SAI2CLK) == RCC_PLLSAI2_SAI2CLK) ||  \
-						  (((__VALUE__) & RCC_PLLSAI2_ADC2CLK) == RCC_PLLSAI2_ADC2CLK)) && \
+#define IS_RCC_PLLSAI2CLOCKOUT_VALUE(__VALUE__) (((((__VALUE__)&RCC_PLLSAI2_SAI2CLK) == RCC_PLLSAI2_SAI2CLK) ||  \
+						  (((__VALUE__)&RCC_PLLSAI2_ADC2CLK) == RCC_PLLSAI2_ADC2CLK)) && \
 						 (((__VALUE__) & ~(RCC_PLLSAI2_SAI2CLK | RCC_PLLSAI2_ADC2CLK)) == 0U))
 #elif defined(STM32L4P5xx) || defined(STM32L4Q5xx) || defined(STM32L4R5xx) || defined(STM32L4R7xx) || defined(STM32L4R9xx) || defined(STM32L4S5xx) || defined(STM32L4S7xx) || defined(STM32L4S9xx)
-#define IS_RCC_PLLSAI2CLOCKOUT_VALUE(__VALUE__) (((((__VALUE__) & RCC_PLLSAI2_SAI2CLK) == RCC_PLLSAI2_SAI2CLK) ||  \
-						  (((__VALUE__) & RCC_PLLSAI2_DSICLK) == RCC_PLLSAI2_DSICLK) ||    \
-						  (((__VALUE__) & RCC_PLLSAI2_LTDCCLK) == RCC_PLLSAI2_LTDCCLK)) && \
+#define IS_RCC_PLLSAI2CLOCKOUT_VALUE(__VALUE__) (((((__VALUE__)&RCC_PLLSAI2_SAI2CLK) == RCC_PLLSAI2_SAI2CLK) ||  \
+						  (((__VALUE__)&RCC_PLLSAI2_DSICLK) == RCC_PLLSAI2_DSICLK) ||    \
+						  (((__VALUE__)&RCC_PLLSAI2_LTDCCLK) == RCC_PLLSAI2_LTDCCLK)) && \
 						 (((__VALUE__) & ~(RCC_PLLSAI2_SAI2CLK | RCC_PLLSAI2_DSICLK | RCC_PLLSAI2_LTDCCLK)) == 0U))
 #endif /* STM32L471xx || STM32L475xx || STM32L476xx || STM32L485xx || STM32L486xx || STM32L496xx || STM32L4A6xx */
 #endif /* RCC_PLLSAI2_SUPPORT */

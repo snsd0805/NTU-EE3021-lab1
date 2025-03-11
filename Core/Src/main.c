@@ -22,6 +22,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <stdbool.h>
 
 /* USER CODE END Includes */
 
@@ -68,6 +69,10 @@ const osThreadAttr_t myTask02_attributes = {
     .stack_size = 128 * 4,
     .priority = (osPriority_t)osPriorityHigh7,
 };
+/* Definitions for blinkQueue */
+osMessageQueueId_t blinkQueueHandle;
+const osMessageQueueAttr_t blinkQueue_attributes = {
+    .name = "blinkQueue"};
 /* Definitions for task2Timer */
 osTimerId_t task2TimerHandle;
 const osTimerAttr_t task2Timer_attributes = {
@@ -85,6 +90,14 @@ osSemaphoreId_t task2SemHandle;
 const osSemaphoreAttr_t task2Sem_attributes = {
     .name = "task2Sem"};
 /* USER CODE BEGIN PV */
+
+GPIO_PinState lastButtonState = GPIO_PIN_RESET;
+GPIO_PinState newButtonState = GPIO_PIN_RESET;
+GPIO_PinState newButtonStateConfirm = GPIO_PIN_RESET;
+bool isButtonProcessing = false;
+
+uint32_t pressTime = 0;
+uint32_t durationTime = 0;
 
 /* USER CODE END PV */
 
@@ -163,10 +176,10 @@ int main(void) {
 
     /* Create the semaphores(s) */
     /* creation of task1Sem */
-    task1SemHandle = osSemaphoreNew(1, 0, &task1Sem_attributes);
+    task1SemHandle = osSemaphoreNew(1, 1, &task1Sem_attributes);
 
     /* creation of task2Sem */
-    task2SemHandle = osSemaphoreNew(1, 0, &task2Sem_attributes);
+    task2SemHandle = osSemaphoreNew(1, 1, &task2Sem_attributes);
 
     /* USER CODE BEGIN RTOS_SEMAPHORES */
     /* add semaphores, ... */
@@ -180,6 +193,10 @@ int main(void) {
     /* start timers, add new ones, ... */
     osTimerStart(task2TimerHandle, 10000);
     /* USER CODE END RTOS_TIMERS */
+
+    /* Create the queue(s) */
+    /* creation of blinkQueue */
+    blinkQueueHandle = osMessageQueueNew(16, sizeof(uint32_t), &blinkQueue_attributes);
 
     /* USER CODE BEGIN RTOS_QUEUES */
     /* add queues, ... */
@@ -567,7 +584,7 @@ static void MX_GPIO_Init(void) {
 
     /*Configure GPIO pin : PC13 */
     GPIO_InitStruct.Pin = GPIO_PIN_13;
-    GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+    GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
@@ -710,7 +727,29 @@ void BlinkLED(uint32_t duration, uint32_t freq) {
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
     switch (GPIO_Pin) {
     case GPIO_PIN_13:
-	osSemaphoreRelease(task1SemHandle);
+	// if the previous callback function is processing
+	if (isButtonProcessing)
+	    return;
+
+	// start processing
+	isButtonProcessing = true;
+	// check the signal twice (50 ms)
+	newButtonState = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13);
+	osDelay(100);
+	newButtonStateConfirm = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13);
+
+	// (debounce)
+	if (newButtonState == newButtonStateConfirm && newButtonState != lastButtonState) {
+	    if (newButtonState == GPIO_PIN_SET) {
+		pressTime = HAL_GetTick();
+	    } else {
+		durationTime = HAL_GetTick() - pressTime;
+		osMessageQueuePut(blinkQueueHandle, &durationTime, 0, 0);
+	    }
+	    lastButtonState = newButtonState;
+	}
+	isButtonProcessing = false;
+
 	break;
     default:
 	break;
@@ -729,10 +768,17 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 void StartDefaultTask(void *argument) {
     /* USER CODE BEGIN 5 */
     /* Infinite loop */
+    uint16_t durationTime;
+
     for (;;) {
-	osSemaphoreAcquire(task1SemHandle, osWaitForever);
+	osMessageQueueGet(blinkQueueHandle, &durationTime, NULL, osWaitForever);
+
 	osMutexAcquire(LED_mutexHandle, osWaitForever);
-	BlinkLED(5000, 1);
+	if (durationTime >= 1000) {
+	    BlinkLED(5000, 10);
+	} else {
+	    BlinkLED(5000, 1);
+	}
 	osMutexRelease(LED_mutexHandle);
     }
     /* USER CODE END 5 */
@@ -749,10 +795,13 @@ void StartTask02(void *argument) {
     /* USER CODE BEGIN StartTask02 */
     /* Infinite loop */
     for (;;) {
-	osSemaphoreAcquire(task2SemHandle, osWaitForever);
-	osMutexAcquire(LED_mutexHandle, osWaitForever);
-	BlinkLED(2000, 10);
-	osMutexRelease(LED_mutexHandle);
+	/*
+		osSemaphoreAcquire(task2SemHandle, osWaitForever);
+		osMutexAcquire(LED_mutexHandle, osWaitForever);
+		BlinkLED(2000, 10);
+		osMutexRelease(LED_mutexHandle);
+		*/
+	osDelay(100);
     }
     /* USER CODE END StartTask02 */
 }

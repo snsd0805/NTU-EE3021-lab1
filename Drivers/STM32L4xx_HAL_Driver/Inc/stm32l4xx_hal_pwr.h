@@ -185,7 +185,7 @@ typedef struct
   *
   * @retval The new state of __FLAG__ (TRUE or FALSE).
   */
-#define __HAL_PWR_GET_FLAG(__FLAG__) (((((uint8_t)(__FLAG__)) >> 5U) == 1) ? (PWR->SR1 & (1U << ((__FLAG__) & 31U))) : (PWR->SR2 & (1U << ((__FLAG__) & 31U))))
+#define __HAL_PWR_GET_FLAG(__FLAG__) (((((uint8_t)(__FLAG__)) >> 5U) == 1) ? (PWR->SR1 & (1U << ((__FLAG__)&31U))) : (PWR->SR2 & (1U << ((__FLAG__)&31U))))
 
 /** @brief  Clear a specific PWR flag.
  * @param  __FLAG__ specifies the flag to clear.
@@ -205,7 +205,7 @@ typedef struct
  *                  entered Standby mode.
  * @retval None
  */
-#define __HAL_PWR_CLEAR_FLAG(__FLAG__) ((((uint8_t)(__FLAG__)) == PWR_FLAG_WU) ? (PWR->SCR = (__FLAG__)) : (PWR->SCR = (1U << ((__FLAG__) & 31U))))
+#define __HAL_PWR_CLEAR_FLAG(__FLAG__) ((((uint8_t)(__FLAG__)) == PWR_FLAG_WU) ? (PWR->SCR = (__FLAG__)) : (PWR->SCR = (1U << ((__FLAG__)&31U))))
 /**
  * @brief Enable the PVD Extended Interrupt Line.
  * @retval None

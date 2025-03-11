@@ -474,10 +474,10 @@ PCD_StateTypeDef HAL_PCD_GetState(PCD_HandleTypeDef const *hpcd);
 
 /* SetENDPOINT */
 #define PCD_SET_ENDPOINT(USBx, bEpNum, wRegValue) \
-    (*(__IO uint16_t *)(&(USBx)->EP0R + ((bEpNum) * 2U)) = (uint16_t)(wRegValue))
+    (*(__IO uint16_t *)(&(USBx)->EP0R + ((bEpNum)*2U)) = (uint16_t)(wRegValue))
 
 /* GetENDPOINT */
-#define PCD_GET_ENDPOINT(USBx, bEpNum) (*(__IO uint16_t *)(&(USBx)->EP0R + ((bEpNum) * 2U)))
+#define PCD_GET_ENDPOINT(USBx, bEpNum) (*(__IO uint16_t *)(&(USBx)->EP0R + ((bEpNum)*2U)))
 
 /**
  * @brief  sets the type in the endpoint register(bits EP_TYPE[1:0])
@@ -764,16 +764,16 @@ PCD_StateTypeDef HAL_PCD_GetState(PCD_HandleTypeDef const *hpcd);
  */
 #define PCD_GET_EP_ADDRESS(USBx, bEpNum) ((uint8_t)(PCD_GET_ENDPOINT((USBx), (bEpNum)) & USB_EPADDR_FIELD))
 
-#define PCD_EP_TX_CNT(USBx, bEpNum)                   \
-    ((uint16_t *)((((uint32_t)(USBx)->BTABLE +        \
-		    ((uint32_t)(bEpNum) * 8U) + 2U) * \
-		   PMA_ACCESS) +                      \
+#define PCD_EP_TX_CNT(USBx, bEpNum)                 \
+    ((uint16_t *)((((uint32_t)(USBx)->BTABLE +      \
+		    ((uint32_t)(bEpNum)*8U) + 2U) * \
+		   PMA_ACCESS) +                    \
 		  ((uint32_t)(USBx) + 0x400U)))
 
-#define PCD_EP_RX_CNT(USBx, bEpNum)                   \
-    ((uint16_t *)((((uint32_t)(USBx)->BTABLE +        \
-		    ((uint32_t)(bEpNum) * 8U) + 6U) * \
-		   PMA_ACCESS) +                      \
+#define PCD_EP_RX_CNT(USBx, bEpNum)                 \
+    ((uint16_t *)((((uint32_t)(USBx)->BTABLE +      \
+		    ((uint32_t)(bEpNum)*8U) + 6U) * \
+		   PMA_ACCESS) +                    \
 		  ((uint32_t)(USBx) + 0x400U)))
 
 /**
@@ -783,24 +783,24 @@ PCD_StateTypeDef HAL_PCD_GetState(PCD_HandleTypeDef const *hpcd);
  * @param  wAddr address to be set (must be word aligned).
  * @retval None
  */
-#define PCD_SET_EP_TX_ADDRESS(USBx, bEpNum, wAddr)                                                   \
-    do {                                                                                             \
-	__IO uint16_t *_wRegVal;                                                                     \
-	uint32_t _wRegBase = (uint32_t)USBx;                                                         \
-                                                                                                     \
-	_wRegBase += (uint32_t)(USBx)->BTABLE;                                                       \
-	_wRegVal = (__IO uint16_t *)(_wRegBase + 0x400U + (((uint32_t)(bEpNum) * 8U) * PMA_ACCESS)); \
-	*_wRegVal = ((wAddr) >> 1) << 1;                                                             \
+#define PCD_SET_EP_TX_ADDRESS(USBx, bEpNum, wAddr)                                                 \
+    do {                                                                                           \
+	__IO uint16_t *_wRegVal;                                                                   \
+	uint32_t _wRegBase = (uint32_t)USBx;                                                       \
+                                                                                                   \
+	_wRegBase += (uint32_t)(USBx)->BTABLE;                                                     \
+	_wRegVal = (__IO uint16_t *)(_wRegBase + 0x400U + (((uint32_t)(bEpNum)*8U) * PMA_ACCESS)); \
+	*_wRegVal = ((wAddr) >> 1) << 1;                                                           \
     } while (0) /* PCD_SET_EP_TX_ADDRESS */
 
-#define PCD_SET_EP_RX_ADDRESS(USBx, bEpNum, wAddr)                                                          \
-    do {                                                                                                    \
-	__IO uint16_t *_wRegVal;                                                                            \
-	uint32_t _wRegBase = (uint32_t)USBx;                                                                \
-                                                                                                            \
-	_wRegBase += (uint32_t)(USBx)->BTABLE;                                                              \
-	_wRegVal = (__IO uint16_t *)(_wRegBase + 0x400U + ((((uint32_t)(bEpNum) * 8U) + 4U) * PMA_ACCESS)); \
-	*_wRegVal = ((wAddr) >> 1) << 1;                                                                    \
+#define PCD_SET_EP_RX_ADDRESS(USBx, bEpNum, wAddr)                                                        \
+    do {                                                                                                  \
+	__IO uint16_t *_wRegVal;                                                                          \
+	uint32_t _wRegBase = (uint32_t)USBx;                                                              \
+                                                                                                          \
+	_wRegBase += (uint32_t)(USBx)->BTABLE;                                                            \
+	_wRegVal = (__IO uint16_t *)(_wRegBase + 0x400U + ((((uint32_t)(bEpNum)*8U) + 4U) * PMA_ACCESS)); \
+	*_wRegVal = ((wAddr) >> 1) << 1;                                                                  \
     } while (0) /* PCD_SET_EP_RX_ADDRESS */
 
 /**
@@ -809,8 +809,8 @@ PCD_StateTypeDef HAL_PCD_GetState(PCD_HandleTypeDef const *hpcd);
  * @param  bEpNum Endpoint Number.
  * @retval address of the buffer.
  */
-#define PCD_GET_EP_TX_ADDRESS(USBx, bEpNum) ((uint16_t) * PCD_EP_TX_ADDRESS((USBx), (bEpNum)))
-#define PCD_GET_EP_RX_ADDRESS(USBx, bEpNum) ((uint16_t) * PCD_EP_RX_ADDRESS((USBx), (bEpNum)))
+#define PCD_GET_EP_TX_ADDRESS(USBx, bEpNum) ((uint16_t)*PCD_EP_TX_ADDRESS((USBx), (bEpNum)))
+#define PCD_GET_EP_RX_ADDRESS(USBx, bEpNum) ((uint16_t)*PCD_EP_RX_ADDRESS((USBx), (bEpNum)))
 
 /**
  * @brief  Sets counter of rx buffer with no. of blocks.
@@ -822,7 +822,7 @@ PCD_StateTypeDef HAL_PCD_GetState(PCD_HandleTypeDef const *hpcd);
 #define PCD_CALC_BLK32(pdwReg, wCount, wNBlocks)                        \
     do {                                                                \
 	(wNBlocks) = (wCount) >> 5;                                     \
-	if (((wCount) & 0x1fU) == 0U) {                                 \
+	if (((wCount)&0x1fU) == 0U) {                                   \
 	    (wNBlocks)--;                                               \
 	}                                                               \
 	*(pdwReg) |= (uint16_t)(((wNBlocks) << 10) | USB_CNTRX_BLSIZE); \
@@ -831,7 +831,7 @@ PCD_StateTypeDef HAL_PCD_GetState(PCD_HandleTypeDef const *hpcd);
 #define PCD_CALC_BLK2(pdwReg, wCount, wNBlocks)    \
     do {                                           \
 	(wNBlocks) = (wCount) >> 1;                \
-	if (((wCount) & 0x1U) != 0U) {             \
+	if (((wCount)&0x1U) != 0U) {               \
 	    (wNBlocks)++;                          \
 	}                                          \
 	*(pdwReg) |= (uint16_t)((wNBlocks) << 10); \
@@ -852,14 +852,14 @@ PCD_StateTypeDef HAL_PCD_GetState(PCD_HandleTypeDef const *hpcd);
 	}                                                 \
     } while (0) /* PCD_SET_EP_CNT_RX_REG */
 
-#define PCD_SET_EP_RX_DBUF0_CNT(USBx, bEpNum, wCount)                                                     \
-    do {                                                                                                  \
-	uint32_t _wRegBase = (uint32_t)(USBx);                                                            \
-	__IO uint16_t *pdwReg;                                                                            \
-                                                                                                          \
-	_wRegBase += (uint32_t)(USBx)->BTABLE;                                                            \
-	pdwReg = (__IO uint16_t *)(_wRegBase + 0x400U + ((((uint32_t)(bEpNum) * 8U) + 2U) * PMA_ACCESS)); \
-	PCD_SET_EP_CNT_RX_REG(pdwReg, (wCount));                                                          \
+#define PCD_SET_EP_RX_DBUF0_CNT(USBx, bEpNum, wCount)                                                   \
+    do {                                                                                                \
+	uint32_t _wRegBase = (uint32_t)(USBx);                                                          \
+	__IO uint16_t *pdwReg;                                                                          \
+                                                                                                        \
+	_wRegBase += (uint32_t)(USBx)->BTABLE;                                                          \
+	pdwReg = (__IO uint16_t *)(_wRegBase + 0x400U + ((((uint32_t)(bEpNum)*8U) + 2U) * PMA_ACCESS)); \
+	PCD_SET_EP_CNT_RX_REG(pdwReg, (wCount));                                                        \
     } while (0)
 
 /**
@@ -869,24 +869,24 @@ PCD_StateTypeDef HAL_PCD_GetState(PCD_HandleTypeDef const *hpcd);
  * @param  wCount Counter value.
  * @retval None
  */
-#define PCD_SET_EP_TX_CNT(USBx, bEpNum, wCount)                                                             \
-    do {                                                                                                    \
-	uint32_t _wRegBase = (uint32_t)(USBx);                                                              \
-	__IO uint16_t *_wRegVal;                                                                            \
-                                                                                                            \
-	_wRegBase += (uint32_t)(USBx)->BTABLE;                                                              \
-	_wRegVal = (__IO uint16_t *)(_wRegBase + 0x400U + ((((uint32_t)(bEpNum) * 8U) + 2U) * PMA_ACCESS)); \
-	*_wRegVal = (uint16_t)(wCount);                                                                     \
+#define PCD_SET_EP_TX_CNT(USBx, bEpNum, wCount)                                                           \
+    do {                                                                                                  \
+	uint32_t _wRegBase = (uint32_t)(USBx);                                                            \
+	__IO uint16_t *_wRegVal;                                                                          \
+                                                                                                          \
+	_wRegBase += (uint32_t)(USBx)->BTABLE;                                                            \
+	_wRegVal = (__IO uint16_t *)(_wRegBase + 0x400U + ((((uint32_t)(bEpNum)*8U) + 2U) * PMA_ACCESS)); \
+	*_wRegVal = (uint16_t)(wCount);                                                                   \
     } while (0)
 
-#define PCD_SET_EP_RX_CNT(USBx, bEpNum, wCount)                                                             \
-    do {                                                                                                    \
-	uint32_t _wRegBase = (uint32_t)(USBx);                                                              \
-	__IO uint16_t *_wRegVal;                                                                            \
-                                                                                                            \
-	_wRegBase += (uint32_t)(USBx)->BTABLE;                                                              \
-	_wRegVal = (__IO uint16_t *)(_wRegBase + 0x400U + ((((uint32_t)(bEpNum) * 8U) + 6U) * PMA_ACCESS)); \
-	PCD_SET_EP_CNT_RX_REG(_wRegVal, (wCount));                                                          \
+#define PCD_SET_EP_RX_CNT(USBx, bEpNum, wCount)                                                           \
+    do {                                                                                                  \
+	uint32_t _wRegBase = (uint32_t)(USBx);                                                            \
+	__IO uint16_t *_wRegVal;                                                                          \
+                                                                                                          \
+	_wRegBase += (uint32_t)(USBx)->BTABLE;                                                            \
+	_wRegVal = (__IO uint16_t *)(_wRegBase + 0x400U + ((((uint32_t)(bEpNum)*8U) + 6U) * PMA_ACCESS)); \
+	PCD_SET_EP_CNT_RX_REG(_wRegVal, (wCount));                                                        \
     } while (0)
 
 /**
@@ -960,22 +960,22 @@ PCD_StateTypeDef HAL_PCD_GetState(PCD_HandleTypeDef const *hpcd);
 	}                                                        \
     } while (0) /* SetEPDblBuf0Count*/
 
-#define PCD_SET_EP_DBUF1_CNT(USBx, bEpNum, bDir, wCount)                                                           \
-    do {                                                                                                           \
-	uint32_t _wBase = (uint32_t)(USBx);                                                                        \
-	__IO uint16_t *_wEPRegVal;                                                                                 \
-                                                                                                                   \
-	if ((bDir) == 0U) {                                                                                        \
-	    /* OUT endpoint */                                                                                     \
-	    PCD_SET_EP_RX_CNT((USBx), (bEpNum), (wCount));                                                         \
-	} else {                                                                                                   \
-	    if ((bDir) == 1U) {                                                                                    \
-		/* IN endpoint */                                                                                  \
-		_wBase += (uint32_t)(USBx)->BTABLE;                                                                \
-		_wEPRegVal = (__IO uint16_t *)(_wBase + 0x400U + ((((uint32_t)(bEpNum) * 8U) + 6U) * PMA_ACCESS)); \
-		*_wEPRegVal = (uint16_t)(wCount);                                                                  \
-	    }                                                                                                      \
-	}                                                                                                          \
+#define PCD_SET_EP_DBUF1_CNT(USBx, bEpNum, bDir, wCount)                                                         \
+    do {                                                                                                         \
+	uint32_t _wBase = (uint32_t)(USBx);                                                                      \
+	__IO uint16_t *_wEPRegVal;                                                                               \
+                                                                                                                 \
+	if ((bDir) == 0U) {                                                                                      \
+	    /* OUT endpoint */                                                                                   \
+	    PCD_SET_EP_RX_CNT((USBx), (bEpNum), (wCount));                                                       \
+	} else {                                                                                                 \
+	    if ((bDir) == 1U) {                                                                                  \
+		/* IN endpoint */                                                                                \
+		_wBase += (uint32_t)(USBx)->BTABLE;                                                              \
+		_wEPRegVal = (__IO uint16_t *)(_wBase + 0x400U + ((((uint32_t)(bEpNum)*8U) + 6U) * PMA_ACCESS)); \
+		*_wEPRegVal = (uint16_t)(wCount);                                                                \
+	    }                                                                                                    \
+	}                                                                                                        \
     } while (0) /* SetEPDblBuf1Count */
 
 #define PCD_SET_EP_DBUF_CNT(USBx, bEpNum, bDir, wCount)           \
