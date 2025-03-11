@@ -2,9 +2,12 @@
 CAD.formats=
 CAD.pinconfig=
 CAD.provider=
+FREERTOS.BinarySemaphores01=task1Sem,Dynamic,NULL,Available;task2Sem,Dynamic,NULL,Available
 FREERTOS.FootprintOK=true
-FREERTOS.IPParameters=Tasks01,FootprintOK
+FREERTOS.IPParameters=Tasks01,FootprintOK,Mutexes01,BinarySemaphores01,Timers01
+FREERTOS.Mutexes01=LED_mutex,Dynamic,NULL,Available
 FREERTOS.Tasks01=defaultTask,24,128,StartDefaultTask,Default,NULL,Dynamic,NULL,NULL;myTask02,47,128,StartTask02,Default,NULL,Dynamic,NULL,NULL
+FREERTOS.Timers01=task2Timer,task2TimerCallback,osTimerPeriodic,Default,NULL,Dynamic,NULL
 File.Version=6
 KeepUserPlacement=false
 Mcu.CPN=STM32L475VGT6
