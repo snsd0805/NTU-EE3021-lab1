@@ -48,7 +48,7 @@ correct privileged Vs unprivileged linkage and placement. */
 #undef MPU_WRAPPERS_INCLUDED_FROM_API_FILE /*lint !e961 !e750 !e9021. */
 
 /* Constants used with the cRxLock and cTxLock structure members. */
-#define queueUNLOCKED ((int8_t)-1)
+#define queueUNLOCKED ((int8_t) - 1)
 #define queueLOCKED_UNMODIFIED ((int8_t)0)
 
 /* When the Queue_t structure is used to represent a base queue its pcHead and
@@ -195,9 +195,9 @@ static void prvCopyDataFromQueue(Queue_t *const pxQueue, void *const pvBuffer) P
 
 #if (configUSE_QUEUE_SETS == 1)
 /*
-	 * Checks to see if a queue is a member of a queue set, and if so, notifies
-	 * the queue set that the queue contains data.
-	 */
+ * Checks to see if a queue is a member of a queue set, and if so, notifies
+ * the queue set that the queue contains data.
+ */
 static BaseType_t prvNotifyQueueSetContainer(const Queue_t *const pxQueue) PRIVILEGED_FUNCTION;
 #endif
 
@@ -218,12 +218,12 @@ static void prvInitialiseMutex(Queue_t *pxNewQueue) PRIVILEGED_FUNCTION;
 
 #if (configUSE_MUTEXES == 1)
 /*
-	 * If a task waiting for a mutex causes the mutex holder to inherit a
-	 * priority, but the waiting task times out, then the holder should
-	 * disinherit the priority - but only down to the highest priority of any
-	 * other tasks that are waiting for the same mutex.  This function returns
-	 * that priority.
-	 */
+ * If a task waiting for a mutex causes the mutex holder to inherit a
+ * priority, but the waiting task times out, then the holder should
+ * disinherit the priority - but only down to the highest priority of any
+ * other tasks that are waiting for the same mutex.  This function returns
+ * that priority.
+ */
 static UBaseType_t prvGetDisinheritPriorityAfterTimeout(const Queue_t *const pxQueue) PRIVILEGED_FUNCTION;
 #endif
 /*-----------------------------------------------------------*/

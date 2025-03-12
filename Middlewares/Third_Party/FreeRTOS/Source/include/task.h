@@ -310,7 +310,7 @@ is used in assert() statements. */
 	 // Use the handle to delete the task.
 	 if( xHandle != NULL )
 	 {
-	 	vTaskDelete( xHandle );
+		vTaskDelete( xHandle );
 	 }
  }
    </pre>
@@ -399,35 +399,35 @@ BaseType_t xTaskCreate(TaskFunction_t pxTaskCode,
     // Function that implements the task being created.
     void vTaskCode( void * pvParameters )
     {
-        // The parameter value is expected to be 1 as 1 is passed in the
-        // pvParameters value in the call to xTaskCreateStatic().
-        configASSERT( ( uint32_t ) pvParameters == 1UL );
+	// The parameter value is expected to be 1 as 1 is passed in the
+	// pvParameters value in the call to xTaskCreateStatic().
+	configASSERT( ( uint32_t ) pvParameters == 1UL );
 
-        for( ;; )
-        {
-            // Task code goes here.
-        }
+	for( ;; )
+	{
+	    // Task code goes here.
+	}
     }
 
     // Function that creates a task.
     void vOtherFunction( void )
     {
-        TaskHandle_t xHandle = NULL;
+	TaskHandle_t xHandle = NULL;
 
-        // Create the task without using any dynamic memory allocation.
-        xHandle = xTaskCreateStatic(
-                      vTaskCode,       // Function that implements the task.
-                      "NAME",          // Text name for the task.
-                      STACK_SIZE,      // Stack size in words, not bytes.
-                      ( void * ) 1,    // Parameter passed into the task.
-                      tskIDLE_PRIORITY,// Priority at which the task is created.
-                      xStack,          // Array to use as the task's stack.
-                      &xTaskBuffer );  // Variable to hold the task's data structure.
+	// Create the task without using any dynamic memory allocation.
+	xHandle = xTaskCreateStatic(
+		      vTaskCode,       // Function that implements the task.
+		      "NAME",          // Text name for the task.
+		      STACK_SIZE,      // Stack size in words, not bytes.
+		      ( void * ) 1,    // Parameter passed into the task.
+		      tskIDLE_PRIORITY,// Priority at which the task is created.
+		      xStack,          // Array to use as the task's stack.
+		      &xTaskBuffer );  // Variable to hold the task's data structure.
 
-        // puxStackBuffer and pxTaskBuffer were not NULL, so the task will have
-        // been created, and xHandle will be the task's handle.  Use the handle
-        // to suspend the task.
-        vTaskSuspend( xHandle );
+	// puxStackBuffer and pxTaskBuffer were not NULL, so the task will have
+	// been created, and xHandle will be the task's handle.  Use the handle
+	// to suspend the task.
+	vTaskSuspend( xHandle );
     }
    </pre>
  * \defgroup xTaskCreateStatic xTaskCreateStatic
@@ -956,9 +956,9 @@ eTaskState eTaskGetState(TaskHandle_t xTask) PRIVILEGED_FUNCTION;
 
     // Use the handle to obtain further information about the task.
     vTaskGetInfo( xHandle,
-                  &xTaskDetails,
-                  pdTRUE, // Include the high water mark in xTaskDetails.
-                  eInvalid ); // Include the task state in xTaskDetails.
+		  &xTaskDetails,
+		  pdTRUE, // Include the high water mark in xTaskDetails.
+		  eInvalid ); // Include the task state in xTaskDetails.
  }
    </pre>
  * \defgroup vTaskGetInfo vTaskGetInfo
@@ -1468,32 +1468,32 @@ constant. */
 #ifdef configUSE_APPLICATION_TASK_TAG
 #if configUSE_APPLICATION_TASK_TAG == 1
 /**
-		 * task.h
-		 * <pre>void vTaskSetApplicationTaskTag( TaskHandle_t xTask, TaskHookFunction_t pxHookFunction );</pre>
-		 *
-		 * Sets pxHookFunction to be the task hook function used by the task xTask.
-		 * Passing xTask as NULL has the effect of setting the calling tasks hook
-		 * function.
-		 */
+ * task.h
+ * <pre>void vTaskSetApplicationTaskTag( TaskHandle_t xTask, TaskHookFunction_t pxHookFunction );</pre>
+ *
+ * Sets pxHookFunction to be the task hook function used by the task xTask.
+ * Passing xTask as NULL has the effect of setting the calling tasks hook
+ * function.
+ */
 void vTaskSetApplicationTaskTag(TaskHandle_t xTask, TaskHookFunction_t pxHookFunction) PRIVILEGED_FUNCTION;
 
 /**
-		 * task.h
-		 * <pre>void xTaskGetApplicationTaskTag( TaskHandle_t xTask );</pre>
-		 *
-		 * Returns the pxHookFunction value assigned to the task xTask.  Do not
-		 * call from an interrupt service routine - call
-		 * xTaskGetApplicationTaskTagFromISR() instead.
-		 */
+ * task.h
+ * <pre>void xTaskGetApplicationTaskTag( TaskHandle_t xTask );</pre>
+ *
+ * Returns the pxHookFunction value assigned to the task xTask.  Do not
+ * call from an interrupt service routine - call
+ * xTaskGetApplicationTaskTagFromISR() instead.
+ */
 TaskHookFunction_t xTaskGetApplicationTaskTag(TaskHandle_t xTask) PRIVILEGED_FUNCTION;
 
 /**
-		 * task.h
-		 * <pre>void xTaskGetApplicationTaskTagFromISR( TaskHandle_t xTask );</pre>
-		 *
-		 * Returns the pxHookFunction value assigned to the task xTask.  Can
-		 * be called from an interrupt service routine.
-		 */
+ * task.h
+ * <pre>void xTaskGetApplicationTaskTagFromISR( TaskHandle_t xTask );</pre>
+ *
+ * Returns the pxHookFunction value assigned to the task xTask.  Can
+ * be called from an interrupt service routine.
+ */
 TaskHookFunction_t xTaskGetApplicationTaskTagFromISR(TaskHandle_t xTask) PRIVILEGED_FUNCTION;
 #endif /* configUSE_APPLICATION_TASK_TAG ==1 */
 #endif /* ifdef configUSE_APPLICATION_TASK_TAG */
@@ -1733,33 +1733,33 @@ void vTaskList(char *pcWriteBuffer) PRIVILEGED_FUNCTION; /*lint !e971 Unqualifie
 void vTaskGetRunTimeStats(char *pcWriteBuffer) PRIVILEGED_FUNCTION; /*lint !e971 Unqualified char types are allowed for strings and single characters only. */
 
 /**
-* task. h
-* <PRE>uint32_t ulTaskGetIdleRunTimeCounter( void );</PRE>
-*
-* configGENERATE_RUN_TIME_STATS and configUSE_STATS_FORMATTING_FUNCTIONS
-* must both be defined as 1 for this function to be available.  The application
-* must also then provide definitions for
-* portCONFIGURE_TIMER_FOR_RUN_TIME_STATS() and portGET_RUN_TIME_COUNTER_VALUE()
-* to configure a peripheral timer/counter and return the timers current count
-* value respectively.  The counter should be at least 10 times the frequency of
-* the tick count.
-*
-* Setting configGENERATE_RUN_TIME_STATS to 1 will result in a total
-* accumulated execution time being stored for each task.  The resolution
-* of the accumulated time value depends on the frequency of the timer
-* configured by the portCONFIGURE_TIMER_FOR_RUN_TIME_STATS() macro.
-* While uxTaskGetSystemState() and vTaskGetRunTimeStats() writes the total
-* execution time of each task into a buffer, ulTaskGetIdleRunTimeCounter()
-* returns the total execution time of just the idle task.
-*
-* @return The total run time of the idle task.  This is the amount of time the
-* idle task has actually been executing.  The unit of time is dependent on the
-* frequency configured using the portCONFIGURE_TIMER_FOR_RUN_TIME_STATS() and
-* portGET_RUN_TIME_COUNTER_VALUE() macros.
-*
-* \defgroup ulTaskGetIdleRunTimeCounter ulTaskGetIdleRunTimeCounter
-* \ingroup TaskUtils
-*/
+ * task. h
+ * <PRE>uint32_t ulTaskGetIdleRunTimeCounter( void );</PRE>
+ *
+ * configGENERATE_RUN_TIME_STATS and configUSE_STATS_FORMATTING_FUNCTIONS
+ * must both be defined as 1 for this function to be available.  The application
+ * must also then provide definitions for
+ * portCONFIGURE_TIMER_FOR_RUN_TIME_STATS() and portGET_RUN_TIME_COUNTER_VALUE()
+ * to configure a peripheral timer/counter and return the timers current count
+ * value respectively.  The counter should be at least 10 times the frequency of
+ * the tick count.
+ *
+ * Setting configGENERATE_RUN_TIME_STATS to 1 will result in a total
+ * accumulated execution time being stored for each task.  The resolution
+ * of the accumulated time value depends on the frequency of the timer
+ * configured by the portCONFIGURE_TIMER_FOR_RUN_TIME_STATS() macro.
+ * While uxTaskGetSystemState() and vTaskGetRunTimeStats() writes the total
+ * execution time of each task into a buffer, ulTaskGetIdleRunTimeCounter()
+ * returns the total execution time of just the idle task.
+ *
+ * @return The total run time of the idle task.  This is the amount of time the
+ * idle task has actually been executing.  The unit of time is dependent on the
+ * frequency configured using the portCONFIGURE_TIMER_FOR_RUN_TIME_STATS() and
+ * portGET_RUN_TIME_COUNTER_VALUE() macros.
+ *
+ * \defgroup ulTaskGetIdleRunTimeCounter ulTaskGetIdleRunTimeCounter
+ * \ingroup TaskUtils
+ */
 uint32_t ulTaskGetIdleRunTimeCounter(void) PRIVILEGED_FUNCTION;
 
 /**
@@ -2198,21 +2198,21 @@ uint32_t ulTaskNotifyTake(BaseType_t xClearCountOnExit, TickType_t xTicksToWait)
 BaseType_t xTaskNotifyStateClear(TaskHandle_t xTask);
 
 /**
-* task. h
-* <PRE>uint32_t ulTaskNotifyValueClear( TaskHandle_t xTask, uint32_t ulBitsToClear );</pre>
-*
-* Clears the bits specified by the ulBitsToClear bit mask in the notification
-* value of the task referenced by xTask.
-*
-* Set ulBitsToClear to 0xffffffff (UINT_MAX on 32-bit architectures) to clear
-* the notification value to 0.  Set ulBitsToClear to 0 to query the task's
-* notification value without clearing any bits.
-*
-* @return The value of the target task's notification value before the bits
-* specified by ulBitsToClear were cleared.
-* \defgroup ulTaskNotifyValueClear ulTaskNotifyValueClear
-* \ingroup TaskNotifications
-*/
+ * task. h
+ * <PRE>uint32_t ulTaskNotifyValueClear( TaskHandle_t xTask, uint32_t ulBitsToClear );</pre>
+ *
+ * Clears the bits specified by the ulBitsToClear bit mask in the notification
+ * value of the task referenced by xTask.
+ *
+ * Set ulBitsToClear to 0xffffffff (UINT_MAX on 32-bit architectures) to clear
+ * the notification value to 0.  Set ulBitsToClear to 0 to query the task's
+ * notification value without clearing any bits.
+ *
+ * @return The value of the target task's notification value before the bits
+ * specified by ulBitsToClear were cleared.
+ * \defgroup ulTaskNotifyValueClear ulTaskNotifyValueClear
+ * \ingroup TaskNotifications
+ */
 uint32_t ulTaskNotifyValueClear(TaskHandle_t xTask, uint32_t ulBitsToClear) PRIVILEGED_FUNCTION;
 
 /**

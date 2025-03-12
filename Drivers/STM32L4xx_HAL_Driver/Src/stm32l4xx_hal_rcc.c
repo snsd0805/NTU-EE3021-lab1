@@ -10,7 +10,7 @@
   *
   @verbatim
   ==============================================================================
-                      ##### RCC specific features #####
+		      ##### RCC specific features #####
   ==============================================================================
     [..]
       After reset the device is running from Multiple Speed Internal oscillator
@@ -19,20 +19,20 @@
       SRAM, Flash and JTAG.
 
       (+) There is no prescaler on High speed (AHBs) and Low speed (APBs) busses:
-          all peripherals mapped on these busses are running at MSI speed.
+	  all peripherals mapped on these busses are running at MSI speed.
       (+) The clock for all peripherals is switched off, except the SRAM and FLASH.
       (+) All GPIOs are in analog mode, except the JTAG pins which
-          are assigned to be used for debug purpose.
+	  are assigned to be used for debug purpose.
 
     [..]
       Once the device started from reset, the user application has to:
       (+) Configure the clock source to be used to drive the System clock
-          (if the application needs higher frequency/performance)
+	  (if the application needs higher frequency/performance)
       (+) Configure the System clock frequency and Flash settings
       (+) Configure the AHB and APB busses prescalers
       (+) Enable the clock for the peripheral(s) to be used
       (+) Configure the clock source(s) for peripherals which clocks are not
-          derived from the System clock (SAIx, RTC, ADC, USB OTG FS/SDMMC1/RNG)
+	  derived from the System clock (SAIx, RTC, ADC, USB OTG FS/SDMMC1/RNG)
 
   @endverbatim
   ******************************************************************************
@@ -51,13 +51,13 @@
 #include "stm32l4xx_hal.h"
 
 /** @addtogroup STM32L4xx_HAL_Driver
-  * @{
-  */
+ * @{
+ */
 
 /** @defgroup RCC RCC
-  * @brief RCC HAL module driver
-  * @{
-  */
+ * @brief RCC HAL module driver
+ * @{
+ */
 
 #ifdef HAL_RCC_MODULE_ENABLED
 
@@ -78,13 +78,13 @@
 #define PLL_TIMEOUT_VALUE 2U		/* 2 ms (minimum Tick + 1) */
 #define CLOCKSWITCH_TIMEOUT_VALUE 5000U /* 5 s    */
 /**
-  * @}
-  */
+ * @}
+ */
 
 /* Private macro -------------------------------------------------------------*/
 /** @defgroup RCC_Private_Macros RCC Private Macros
-  * @{
-  */
+ * @{
+ */
 #define __MCO1_CLK_ENABLE() __HAL_RCC_GPIOA_CLK_ENABLE()
 #define MCO1_GPIO_PORT GPIOA
 #define MCO1_PIN GPIO_PIN_8
@@ -92,36 +92,36 @@
 #define RCC_PLL_OSCSOURCE_CONFIG(__HAL_RCC_PLLSOURCE__) \
     (MODIFY_REG(RCC->PLLCFGR, RCC_PLLCFGR_PLLSRC, (__HAL_RCC_PLLSOURCE__)))
 /**
-  * @}
-  */
+ * @}
+ */
 
 /* Private variables ---------------------------------------------------------*/
 
 /* Private function prototypes -----------------------------------------------*/
 /** @defgroup RCC_Private_Functions RCC Private Functions
-  * @{
-  */
+ * @{
+ */
 static HAL_StatusTypeDef RCC_SetFlashLatencyFromMSIRange(uint32_t msirange);
 #if defined(STM32L4P5xx) || defined(STM32L4Q5xx) || \
     defined(STM32L4R5xx) || defined(STM32L4R7xx) || defined(STM32L4R9xx) || defined(STM32L4S5xx) || defined(STM32L4S7xx) || defined(STM32L4S9xx)
 static uint32_t RCC_GetSysClockFreqFromPLLSource(void);
 #endif
 /**
-  * @}
-  */
+ * @}
+ */
 
 /* Exported functions --------------------------------------------------------*/
 
 /** @defgroup RCC_Exported_Functions RCC Exported Functions
-  * @{
-  */
+ * @{
+ */
 
 /** @defgroup RCC_Exported_Functions_Group1 Initialization and de-initialization functions
   *  @brief    Initialization and Configuration functions
   *
   @verbatim
  ===============================================================================
-           ##### Initialization and de-initialization functions #####
+	   ##### Initialization and de-initialization functions #####
  ===============================================================================
     [..]
       This section provides functions allowing to configure the internal and external oscillators
@@ -129,139 +129,139 @@ static uint32_t RCC_GetSysClockFreqFromPLLSource(void);
        and APB2).
 
     [..] Internal/external clock and PLL configuration
-         (+) HSI (high-speed internal): 16 MHz factory-trimmed RC used directly or through
-             the PLL as System clock source.
+	 (+) HSI (high-speed internal): 16 MHz factory-trimmed RC used directly or through
+	     the PLL as System clock source.
 
-         (+) MSI (Multiple Speed Internal): Its frequency is software trimmable from 100KHZ to 48MHZ.
-             It can be used to generate the clock for the USB OTG FS (48 MHz).
-             The number of flash wait states is automatically adjusted when MSI range is updated with
-             HAL_RCC_OscConfig() and the MSI is used as System clock source.
+	 (+) MSI (Multiple Speed Internal): Its frequency is software trimmable from 100KHZ to 48MHZ.
+	     It can be used to generate the clock for the USB OTG FS (48 MHz).
+	     The number of flash wait states is automatically adjusted when MSI range is updated with
+	     HAL_RCC_OscConfig() and the MSI is used as System clock source.
 
-         (+) LSI (low-speed internal): 32 KHz low consumption RC used as IWDG and/or RTC
-             clock source.
+	 (+) LSI (low-speed internal): 32 KHz low consumption RC used as IWDG and/or RTC
+	     clock source.
 
-         (+) HSE (high-speed external): 4 to 48 MHz crystal oscillator used directly or
-             through the PLL as System clock source. Can be used also optionally as RTC clock source.
+	 (+) HSE (high-speed external): 4 to 48 MHz crystal oscillator used directly or
+	     through the PLL as System clock source. Can be used also optionally as RTC clock source.
 
-         (+) LSE (low-speed external): 32.768 KHz oscillator used optionally as RTC clock source.
+	 (+) LSE (low-speed external): 32.768 KHz oscillator used optionally as RTC clock source.
 
-         (+) PLL (clocked by HSI, HSE or MSI) providing up to three independent output clocks:
-           (++) The first output is used to generate the high speed system clock (up to 80MHz).
-           (++) The second output is used to generate the clock for the USB OTG FS (48 MHz),
-                the random analog generator (<=48 MHz) and the SDMMC1 (<= 48 MHz).
-           (++) The third output is used to generate an accurate clock to achieve
-                high-quality audio performance on SAI interface.
+	 (+) PLL (clocked by HSI, HSE or MSI) providing up to three independent output clocks:
+	   (++) The first output is used to generate the high speed system clock (up to 80MHz).
+	   (++) The second output is used to generate the clock for the USB OTG FS (48 MHz),
+		the random analog generator (<=48 MHz) and the SDMMC1 (<= 48 MHz).
+	   (++) The third output is used to generate an accurate clock to achieve
+		high-quality audio performance on SAI interface.
 
-         (+) PLLSAI1 (clocked by HSI, HSE or MSI) providing up to three independent output clocks:
-           (++) The first output is used to generate SAR ADC1 clock.
-           (++) The second output is used to generate the clock for the USB OTG FS (48 MHz),
-                the random analog generator (<=48 MHz) and the SDMMC1 (<= 48 MHz).
-           (++) The third output is used to generate an accurate clock to achieve
-                high-quality audio performance on SAI interface.
+	 (+) PLLSAI1 (clocked by HSI, HSE or MSI) providing up to three independent output clocks:
+	   (++) The first output is used to generate SAR ADC1 clock.
+	   (++) The second output is used to generate the clock for the USB OTG FS (48 MHz),
+		the random analog generator (<=48 MHz) and the SDMMC1 (<= 48 MHz).
+	   (++) The third output is used to generate an accurate clock to achieve
+		high-quality audio performance on SAI interface.
 
-         (+) PLLSAI2 (clocked by HSI, HSE or MSI) providing up to three independent output clocks:
-           (++) The first output is used to generate an accurate clock to achieve
-                high-quality audio performance on SAI interface.
-           (++) The second output is used to generate either SAR ADC2 clock if ADC2 is present
-                or LCD clock if LTDC is present.
-           (++) The third output is used to generate DSI clock if DSI is present.
+	 (+) PLLSAI2 (clocked by HSI, HSE or MSI) providing up to three independent output clocks:
+	   (++) The first output is used to generate an accurate clock to achieve
+		high-quality audio performance on SAI interface.
+	   (++) The second output is used to generate either SAR ADC2 clock if ADC2 is present
+		or LCD clock if LTDC is present.
+	   (++) The third output is used to generate DSI clock if DSI is present.
 
-         (+) CSS (Clock security system): once enabled, if a HSE clock failure occurs
-            (HSE used directly or through PLL as System clock source), the System clock
-             is automatically switched to HSI and an interrupt is generated if enabled.
-             The interrupt is linked to the Cortex-M4 NMI (Non-Maskable Interrupt)
-             exception vector.
+	 (+) CSS (Clock security system): once enabled, if a HSE clock failure occurs
+	    (HSE used directly or through PLL as System clock source), the System clock
+	     is automatically switched to HSI and an interrupt is generated if enabled.
+	     The interrupt is linked to the Cortex-M4 NMI (Non-Maskable Interrupt)
+	     exception vector.
 
-         (+) MCO (microcontroller clock output): used to output MSI, LSI, HSI, LSE, HSE or
-             main PLL clock (through a configurable prescaler) on PA8 pin.
+	 (+) MCO (microcontroller clock output): used to output MSI, LSI, HSI, LSE, HSE or
+	     main PLL clock (through a configurable prescaler) on PA8 pin.
 
     [..] System, AHB and APB busses clocks configuration
-         (+) Several clock sources can be used to drive the System clock (SYSCLK): MSI, HSI,
-             HSE and main PLL.
-             The AHB clock (HCLK) is derived from System clock through configurable
-             prescaler and used to clock the CPU, memory and peripherals mapped
-             on AHB bus (DMA, GPIO...). APB1 (PCLK1) and APB2 (PCLK2) clocks are derived
-             from AHB clock through configurable prescalers and used to clock
-             the peripherals mapped on these busses. You can use
-             "HAL_RCC_GetSysClockFreq()" function to retrieve the frequencies of these clocks.
+	 (+) Several clock sources can be used to drive the System clock (SYSCLK): MSI, HSI,
+	     HSE and main PLL.
+	     The AHB clock (HCLK) is derived from System clock through configurable
+	     prescaler and used to clock the CPU, memory and peripherals mapped
+	     on AHB bus (DMA, GPIO...). APB1 (PCLK1) and APB2 (PCLK2) clocks are derived
+	     from AHB clock through configurable prescalers and used to clock
+	     the peripherals mapped on these busses. You can use
+	     "HAL_RCC_GetSysClockFreq()" function to retrieve the frequencies of these clocks.
 
-         -@- All the peripheral clocks are derived from the System clock (SYSCLK) except:
+	 -@- All the peripheral clocks are derived from the System clock (SYSCLK) except:
 
-           (+@) SAI: the SAI clock can be derived either from a specific PLL (PLLSAI1) or (PLLSAI2) or
-                from an external clock mapped on the SAI_CKIN pin.
-                You have to use HAL_RCCEx_PeriphCLKConfig() function to configure this clock.
-           (+@) RTC: the RTC clock can be derived either from the LSI, LSE or HSE clock
-                divided by 2 to 31.
-                You have to use __HAL_RCC_RTC_ENABLE() and HAL_RCCEx_PeriphCLKConfig() function
-                to configure this clock.
-           (+@) USB OTG FS, SDMMC1 and RNG: USB OTG FS requires a frequency equal to 48 MHz
-                to work correctly, while the SDMMC1 and RNG peripherals require a frequency
-                equal or lower than to 48 MHz. This clock is derived of the main PLL or PLLSAI1
-                through PLLQ divider. You have to enable the peripheral clock and use
-                HAL_RCCEx_PeriphCLKConfig() function to configure this clock.
-           (+@) IWDG clock which is always the LSI clock.
+	   (+@) SAI: the SAI clock can be derived either from a specific PLL (PLLSAI1) or (PLLSAI2) or
+		from an external clock mapped on the SAI_CKIN pin.
+		You have to use HAL_RCCEx_PeriphCLKConfig() function to configure this clock.
+	   (+@) RTC: the RTC clock can be derived either from the LSI, LSE or HSE clock
+		divided by 2 to 31.
+		You have to use __HAL_RCC_RTC_ENABLE() and HAL_RCCEx_PeriphCLKConfig() function
+		to configure this clock.
+	   (+@) USB OTG FS, SDMMC1 and RNG: USB OTG FS requires a frequency equal to 48 MHz
+		to work correctly, while the SDMMC1 and RNG peripherals require a frequency
+		equal or lower than to 48 MHz. This clock is derived of the main PLL or PLLSAI1
+		through PLLQ divider. You have to enable the peripheral clock and use
+		HAL_RCCEx_PeriphCLKConfig() function to configure this clock.
+	   (+@) IWDG clock which is always the LSI clock.
 
 
-         (+) The maximum frequency of the SYSCLK, HCLK, PCLK1 and PCLK2 is 80 MHz.
-             The clock source frequency should be adapted depending on the device voltage range
-             as listed in the Reference Manual "Clock source frequency versus voltage scaling" chapter.
+	 (+) The maximum frequency of the SYSCLK, HCLK, PCLK1 and PCLK2 is 80 MHz.
+	     The clock source frequency should be adapted depending on the device voltage range
+	     as listed in the Reference Manual "Clock source frequency versus voltage scaling" chapter.
 
   @endverbatim
 
-           Table 1. HCLK clock frequency for other STM32L4 devices
-           +-------------------------------------------------------+
-           | Latency         |    HCLK clock frequency (MHz)       |
-           |                 |-------------------------------------|
-           |                 | voltage range 1  | voltage range 2  |
-           |                 |      1.2 V       |     1.0 V        |
-           |-----------------|------------------|------------------|
-           |0WS(1 CPU cycles)|  0 < HCLK <= 16  |  0 < HCLK <= 6   |
-           |-----------------|------------------|------------------|
-           |1WS(2 CPU cycles)| 16 < HCLK <= 32  |  6 < HCLK <= 12  |
-           |-----------------|------------------|------------------|
-           |2WS(3 CPU cycles)| 32 < HCLK <= 48  | 12 < HCLK <= 18  |
-           |-----------------|------------------|------------------|
-           |3WS(4 CPU cycles)| 48 < HCLK <= 64  | 18 < HCLK <= 26  |
-           |-----------------|------------------|------------------|
-           |4WS(5 CPU cycles)| 64 < HCLK <= 80  | 18 < HCLK <= 26  |
-           +-------------------------------------------------------+
+	   Table 1. HCLK clock frequency for other STM32L4 devices
+	   +-------------------------------------------------------+
+	   | Latency         |    HCLK clock frequency (MHz)       |
+	   |                 |-------------------------------------|
+	   |                 | voltage range 1  | voltage range 2  |
+	   |                 |      1.2 V       |     1.0 V        |
+	   |-----------------|------------------|------------------|
+	   |0WS(1 CPU cycles)|  0 < HCLK <= 16  |  0 < HCLK <= 6   |
+	   |-----------------|------------------|------------------|
+	   |1WS(2 CPU cycles)| 16 < HCLK <= 32  |  6 < HCLK <= 12  |
+	   |-----------------|------------------|------------------|
+	   |2WS(3 CPU cycles)| 32 < HCLK <= 48  | 12 < HCLK <= 18  |
+	   |-----------------|------------------|------------------|
+	   |3WS(4 CPU cycles)| 48 < HCLK <= 64  | 18 < HCLK <= 26  |
+	   |-----------------|------------------|------------------|
+	   |4WS(5 CPU cycles)| 64 < HCLK <= 80  | 18 < HCLK <= 26  |
+	   +-------------------------------------------------------+
 
-           Table 2. HCLK clock frequency for STM32L4+ devices
-           +--------------------------------------------------------+
-           | Latency         |     HCLK clock frequency (MHz)       |
-           |                 |--------------------------------------|
-           |                 |  voltage range 1  | voltage range 2  |
-           |                 |       1.2 V       |     1.0 V        |
-           |-----------------|-------------------|------------------|
-           |0WS(1 CPU cycles)|   0 < HCLK <= 20  |  0 < HCLK <= 8   |
-           |-----------------|-------------------|------------------|
-           |1WS(2 CPU cycles)|  20 < HCLK <= 40  |  8 < HCLK <= 16  |
-           |-----------------|-------------------|------------------|
-           |2WS(3 CPU cycles)|  40 < HCLK <= 60  | 16 < HCLK <= 26  |
-           |-----------------|-------------------|------------------|
-           |3WS(4 CPU cycles)|  60 < HCLK <= 80  | 16 < HCLK <= 26  |
-           |-----------------|-------------------|------------------|
-           |4WS(5 CPU cycles)|  80 < HCLK <= 100 | 16 < HCLK <= 26  |
-           |-----------------|-------------------|------------------|
-           |5WS(6 CPU cycles)| 100 < HCLK <= 120 | 16 < HCLK <= 26  |
-           +--------------------------------------------------------+
+	   Table 2. HCLK clock frequency for STM32L4+ devices
+	   +--------------------------------------------------------+
+	   | Latency         |     HCLK clock frequency (MHz)       |
+	   |                 |--------------------------------------|
+	   |                 |  voltage range 1  | voltage range 2  |
+	   |                 |       1.2 V       |     1.0 V        |
+	   |-----------------|-------------------|------------------|
+	   |0WS(1 CPU cycles)|   0 < HCLK <= 20  |  0 < HCLK <= 8   |
+	   |-----------------|-------------------|------------------|
+	   |1WS(2 CPU cycles)|  20 < HCLK <= 40  |  8 < HCLK <= 16  |
+	   |-----------------|-------------------|------------------|
+	   |2WS(3 CPU cycles)|  40 < HCLK <= 60  | 16 < HCLK <= 26  |
+	   |-----------------|-------------------|------------------|
+	   |3WS(4 CPU cycles)|  60 < HCLK <= 80  | 16 < HCLK <= 26  |
+	   |-----------------|-------------------|------------------|
+	   |4WS(5 CPU cycles)|  80 < HCLK <= 100 | 16 < HCLK <= 26  |
+	   |-----------------|-------------------|------------------|
+	   |5WS(6 CPU cycles)| 100 < HCLK <= 120 | 16 < HCLK <= 26  |
+	   +--------------------------------------------------------+
   * @{
   */
 
 /**
-  * @brief  Reset the RCC clock configuration to the default reset state.
-  * @note   The default reset state of the clock configuration is given below:
-  *            - MSI ON and used as system clock source
-  *            - HSE, HSI, PLL, PLLSAI1 and PLLSAI2 OFF
-  *            - AHB, APB1 and APB2 prescalers set to 1.
-  *            - CSS, MCO1 OFF
-  *            - All interrupts disabled
-  *            - All interrupt and reset flags cleared
-  * @note   This function does not modify the configuration of the
-  *            - Peripheral clock sources
-  *            - LSI, LSE and RTC clocks (Backup domain)
-  * @retval HAL status
-  */
+ * @brief  Reset the RCC clock configuration to the default reset state.
+ * @note   The default reset state of the clock configuration is given below:
+ *            - MSI ON and used as system clock source
+ *            - HSE, HSI, PLL, PLLSAI1 and PLLSAI2 OFF
+ *            - AHB, APB1 and APB2 prescalers set to 1.
+ *            - CSS, MCO1 OFF
+ *            - All interrupts disabled
+ *            - All interrupt and reset flags cleared
+ * @note   This function does not modify the configuration of the
+ *            - Peripheral clock sources
+ *            - LSI, LSE and RTC clocks (Backup domain)
+ * @retval HAL status
+ */
 HAL_StatusTypeDef HAL_RCC_DeInit(void) {
     uint32_t tickstart;
 
@@ -392,7 +392,7 @@ HAL_StatusTypeDef HAL_RCC_DeInit(void) {
   *         supported by this macro. User should request a transition to HSE Off
   *         first and then HSE On or HSE Bypass.
   * @note   If HSE failed to start, HSE should be disabled before recalling
-            HAL_RCC_OscConfig().
+	    HAL_RCC_OscConfig().
   * @retval HAL status
   */
 HAL_StatusTypeDef HAL_RCC_OscConfig(RCC_OscInitTypeDef *RCC_OscInitStruct) {
@@ -428,8 +428,8 @@ HAL_StatusTypeDef HAL_RCC_OscConfig(RCC_OscInitTypeDef *RCC_OscInitStruct) {
 	    /* Otherwise, just the calibration and MSI range change are allowed */
 	    else {
 		/* To correctly read data from FLASH memory, the number of wait states (LATENCY)
-           must be correctly programmed according to the frequency of the CPU clock
-           (HCLK) and the supply voltage of the device. */
+	   must be correctly programmed according to the frequency of the CPU clock
+	   (HCLK) and the supply voltage of the device. */
 		if (RCC_OscInitStruct->MSIClockRange > __HAL_RCC_GET_MSI_RANGE()) {
 		    /* First increase number of wait states update if necessary */
 		    if (RCC_SetFlashLatencyFromMSIRange(RCC_OscInitStruct->MSIClockRange) != HAL_OK) {
@@ -609,7 +609,7 @@ HAL_StatusTypeDef HAL_RCC_OscConfig(RCC_OscInitTypeDef *RCC_OscInitStruct) {
 		if (((csr_temp & RCC_CSR_LSIRDY) == RCC_CSR_LSIRDY) &&
 		    ((csr_temp & RCC_CSR_LSION) != RCC_CSR_LSION)) {
 		    /* If LSIRDY is set while LSION is not enabled,
-              LSIPREDIV can't be updated  */
+	      LSIPREDIV can't be updated  */
 		    return HAL_ERROR;
 		}
 
@@ -1138,15 +1138,15 @@ HAL_StatusTypeDef HAL_RCC_ClockConfig(RCC_ClkInitTypeDef *RCC_ClkInitStruct, uin
 }
 
 /**
-  * @}
-  */
+ * @}
+ */
 
 /** @defgroup RCC_Exported_Functions_Group2 Peripheral Control functions
  *  @brief   RCC clocks control functions
  *
 @verbatim
  ===============================================================================
-                      ##### Peripheral Control functions #####
+		      ##### Peripheral Control functions #####
  ===============================================================================
     [..]
     This subsection provides a set of functions allowing to:
@@ -1214,37 +1214,37 @@ void HAL_RCC_MCOConfig(uint32_t RCC_MCOx, uint32_t RCC_MCOSource, uint32_t RCC_M
 }
 
 /**
-  * @brief  Return the SYSCLK frequency.
-  *
-  * @note   The system frequency computed by this function is not the real
-  *         frequency in the chip. It is calculated based on the predefined
-  *         constant and the selected clock source:
-  * @note     If SYSCLK source is MSI, function returns values based on MSI
-  *             Value as defined by the MSI range.
-  * @note     If SYSCLK source is HSI, function returns values based on HSI_VALUE(*)
-  * @note     If SYSCLK source is HSE, function returns values based on HSE_VALUE(**)
-  * @note     If SYSCLK source is PLL, function returns values based on HSE_VALUE(**),
-  *           HSI_VALUE(*) or MSI Value multiplied/divided by the PLL factors.
-  * @note     (*) HSI_VALUE is a constant defined in stm32l4xx_hal_conf.h file (default value
-  *               16 MHz) but the real value may vary depending on the variations
-  *               in voltage and temperature.
-  * @note     (**) HSE_VALUE is a constant defined in stm32l4xx_hal_conf.h file (default value
-  *                8 MHz), user has to ensure that HSE_VALUE is same as the real
-  *                frequency of the crystal used. Otherwise, this function may
-  *                have wrong result.
-  *
-  * @note   The result of this function could be not correct when using fractional
-  *         value for HSE crystal.
-  *
-  * @note   This function can be used by the user application to compute the
-  *         baudrate for the communication peripherals or configure other parameters.
-  *
-  * @note   Each time SYSCLK changes, this function must be called to update the
-  *         right SYSCLK value. Otherwise, any configuration based on this function will be incorrect.
-  *
-  *
-  * @retval SYSCLK frequency
-  */
+ * @brief  Return the SYSCLK frequency.
+ *
+ * @note   The system frequency computed by this function is not the real
+ *         frequency in the chip. It is calculated based on the predefined
+ *         constant and the selected clock source:
+ * @note     If SYSCLK source is MSI, function returns values based on MSI
+ *             Value as defined by the MSI range.
+ * @note     If SYSCLK source is HSI, function returns values based on HSI_VALUE(*)
+ * @note     If SYSCLK source is HSE, function returns values based on HSE_VALUE(**)
+ * @note     If SYSCLK source is PLL, function returns values based on HSE_VALUE(**),
+ *           HSI_VALUE(*) or MSI Value multiplied/divided by the PLL factors.
+ * @note     (*) HSI_VALUE is a constant defined in stm32l4xx_hal_conf.h file (default value
+ *               16 MHz) but the real value may vary depending on the variations
+ *               in voltage and temperature.
+ * @note     (**) HSE_VALUE is a constant defined in stm32l4xx_hal_conf.h file (default value
+ *                8 MHz), user has to ensure that HSE_VALUE is same as the real
+ *                frequency of the crystal used. Otherwise, this function may
+ *                have wrong result.
+ *
+ * @note   The result of this function could be not correct when using fractional
+ *         value for HSE crystal.
+ *
+ * @note   This function can be used by the user application to compute the
+ *         baudrate for the communication peripherals or configure other parameters.
+ *
+ * @note   Each time SYSCLK changes, this function must be called to update the
+ *         right SYSCLK value. Otherwise, any configuration based on this function will be incorrect.
+ *
+ *
+ * @retval SYSCLK frequency
+ */
 uint32_t HAL_RCC_GetSysClockFreq(void) {
     uint32_t msirange = 0U, sysclockfreq = 0U;
     uint32_t pllvco, pllsource, pllr, pllm; /* no init needed */
@@ -1312,46 +1312,46 @@ uint32_t HAL_RCC_GetSysClockFreq(void) {
 }
 
 /**
-  * @brief  Return the HCLK frequency.
-  * @note   Each time HCLK changes, this function must be called to update the
-  *         right HCLK value. Otherwise, any configuration based on this function will be incorrect.
-  *
-  * @note   The SystemCoreClock CMSIS variable is used to store System Clock Frequency.
-  * @retval HCLK frequency in Hz
-  */
+ * @brief  Return the HCLK frequency.
+ * @note   Each time HCLK changes, this function must be called to update the
+ *         right HCLK value. Otherwise, any configuration based on this function will be incorrect.
+ *
+ * @note   The SystemCoreClock CMSIS variable is used to store System Clock Frequency.
+ * @retval HCLK frequency in Hz
+ */
 uint32_t HAL_RCC_GetHCLKFreq(void) {
     return SystemCoreClock;
 }
 
 /**
-  * @brief  Return the PCLK1 frequency.
-  * @note   Each time PCLK1 changes, this function must be called to update the
-  *         right PCLK1 value. Otherwise, any configuration based on this function will be incorrect.
-  * @retval PCLK1 frequency in Hz
-  */
+ * @brief  Return the PCLK1 frequency.
+ * @note   Each time PCLK1 changes, this function must be called to update the
+ *         right PCLK1 value. Otherwise, any configuration based on this function will be incorrect.
+ * @retval PCLK1 frequency in Hz
+ */
 uint32_t HAL_RCC_GetPCLK1Freq(void) {
     /* Get HCLK source and Compute PCLK1 frequency ---------------------------*/
     return (HAL_RCC_GetHCLKFreq() >> (APBPrescTable[READ_BIT(RCC->CFGR, RCC_CFGR_PPRE1) >> RCC_CFGR_PPRE1_Pos] & 0x1FU));
 }
 
 /**
-  * @brief  Return the PCLK2 frequency.
-  * @note   Each time PCLK2 changes, this function must be called to update the
-  *         right PCLK2 value. Otherwise, any configuration based on this function will be incorrect.
-  * @retval PCLK2 frequency in Hz
-  */
+ * @brief  Return the PCLK2 frequency.
+ * @note   Each time PCLK2 changes, this function must be called to update the
+ *         right PCLK2 value. Otherwise, any configuration based on this function will be incorrect.
+ * @retval PCLK2 frequency in Hz
+ */
 uint32_t HAL_RCC_GetPCLK2Freq(void) {
     /* Get HCLK source and Compute PCLK2 frequency ---------------------------*/
     return (HAL_RCC_GetHCLKFreq() >> (APBPrescTable[READ_BIT(RCC->CFGR, RCC_CFGR_PPRE2) >> RCC_CFGR_PPRE2_Pos] & 0x1FU));
 }
 
 /**
-  * @brief  Configure the RCC_OscInitStruct according to the internal
-  *         RCC configuration registers.
-  * @param  RCC_OscInitStruct  pointer to an RCC_OscInitTypeDef structure that
-  *         will be configured.
-  * @retval None
-  */
+ * @brief  Configure the RCC_OscInitStruct according to the internal
+ *         RCC configuration registers.
+ * @param  RCC_OscInitStruct  pointer to an RCC_OscInitTypeDef structure that
+ *         will be configured.
+ * @retval None
+ */
 void HAL_RCC_GetOscConfig(RCC_OscInitTypeDef *RCC_OscInitStruct) {
     /* Check the parameters */
     assert_param(RCC_OscInitStruct != (void *)NULL);
@@ -1468,13 +1468,13 @@ void HAL_RCC_GetOscConfig(RCC_OscInitTypeDef *RCC_OscInitStruct) {
 }
 
 /**
-  * @brief  Configure the RCC_ClkInitStruct according to the internal
-  *         RCC configuration registers.
-  * @param  RCC_ClkInitStruct  pointer to an RCC_ClkInitTypeDef structure that
-  *         will be configured.
-  * @param  pFLatency  Pointer on the Flash Latency.
-  * @retval None
-  */
+ * @brief  Configure the RCC_ClkInitStruct according to the internal
+ *         RCC configuration registers.
+ * @param  RCC_ClkInitStruct  pointer to an RCC_ClkInitTypeDef structure that
+ *         will be configured.
+ * @param  pFLatency  Pointer on the Flash Latency.
+ * @retval None
+ */
 void HAL_RCC_GetClockConfig(RCC_ClkInitTypeDef *RCC_ClkInitStruct, uint32_t *pFLatency) {
     /* Check the parameters */
     assert_param(RCC_ClkInitStruct != (void *)NULL);
@@ -1500,24 +1500,24 @@ void HAL_RCC_GetClockConfig(RCC_ClkInitTypeDef *RCC_ClkInitStruct, uint32_t *pFL
 }
 
 /**
-  * @brief  Enable the Clock Security System.
-  * @note   If a failure is detected on the HSE oscillator clock, this oscillator
-  *         is automatically disabled and an interrupt is generated to inform the
-  *         software about the failure (Clock Security System Interrupt, CSSI),
-  *         allowing the MCU to perform rescue operations. The CSSI is linked to
-  *         the Cortex-M4 NMI (Non-Maskable Interrupt) exception vector.
-  * @note   The Clock Security System can only be cleared by reset.
-  * @retval None
-  */
+ * @brief  Enable the Clock Security System.
+ * @note   If a failure is detected on the HSE oscillator clock, this oscillator
+ *         is automatically disabled and an interrupt is generated to inform the
+ *         software about the failure (Clock Security System Interrupt, CSSI),
+ *         allowing the MCU to perform rescue operations. The CSSI is linked to
+ *         the Cortex-M4 NMI (Non-Maskable Interrupt) exception vector.
+ * @note   The Clock Security System can only be cleared by reset.
+ * @retval None
+ */
 void HAL_RCC_EnableCSS(void) {
     SET_BIT(RCC->CR, RCC_CR_CSSON);
 }
 
 /**
-  * @brief Handle the RCC Clock Security System interrupt request.
-  * @note This API should be called under the NMI_Handler().
-  * @retval None
-  */
+ * @brief Handle the RCC Clock Security System interrupt request.
+ * @note This API should be called under the NMI_Handler().
+ * @retval None
+ */
 void HAL_RCC_NMI_IRQHandler(void) {
     /* Check RCC CSSF interrupt flag  */
     if (__HAL_RCC_GET_IT(RCC_IT_CSS)) {
@@ -1530,22 +1530,22 @@ void HAL_RCC_NMI_IRQHandler(void) {
 }
 
 /**
-  * @brief  RCC Clock Security System interrupt callback.
-  * @retval none
-  */
+ * @brief  RCC Clock Security System interrupt callback.
+ * @retval none
+ */
 __weak void HAL_RCC_CSSCallback(void) {
     /* NOTE : This function should not be modified, when the callback is needed,
-            the HAL_RCC_CSSCallback should be implemented in the user file
+	    the HAL_RCC_CSSCallback should be implemented in the user file
    */
 }
 
 /**
-  * @brief  Get and clear reset flags
-  * @param  None
-  * @note   Once reset flags are retrieved, this API is clearing them in order
-  *         to isolate next reset reason.
-  * @retval can be a combination of @ref RCC_Reset_Flag
-  */
+ * @brief  Get and clear reset flags
+ * @param  None
+ * @note   Once reset flags are retrieved, this API is clearing them in order
+ *         to isolate next reset reason.
+ * @retval can be a combination of @ref RCC_Reset_Flag
+ */
 uint32_t HAL_RCC_GetResetSource(void) {
     uint32_t reset;
 
@@ -1559,19 +1559,19 @@ uint32_t HAL_RCC_GetResetSource(void) {
 }
 
 /**  * @}
-  */
+ */
 
 /**
-  * @}
-  */
+ * @}
+ */
 
 /* Private function prototypes -----------------------------------------------*/
 /** @addtogroup RCC_Private_Functions
-  * @{
-  */
+ * @{
+ */
 /**
   * @brief  Update number of Flash wait states in line with MSI range and current
-            voltage range.
+	    voltage range.
   * @param  msirange  MSI range value from RCC_MSIRANGE_0 to RCC_MSIRANGE_11
   * @retval HAL status
   */
@@ -1645,9 +1645,9 @@ static HAL_StatusTypeDef RCC_SetFlashLatencyFromMSIRange(uint32_t msirange) {
 #if defined(STM32L4P5xx) || defined(STM32L4Q5xx) || \
     defined(STM32L4R5xx) || defined(STM32L4R7xx) || defined(STM32L4R9xx) || defined(STM32L4S5xx) || defined(STM32L4S7xx) || defined(STM32L4S9xx)
 /**
-  * @brief  Compute SYSCLK frequency based on PLL SYSCLK source.
-  * @retval SYSCLK frequency
-  */
+ * @brief  Compute SYSCLK frequency based on PLL SYSCLK source.
+ * @retval SYSCLK frequency
+ */
 static uint32_t RCC_GetSysClockFreqFromPLLSource(void) {
     uint32_t msirange, pllvco, pllsource, pllr, pllm, sysclockfreq; /* no init needed */
 
@@ -1690,14 +1690,14 @@ static uint32_t RCC_GetSysClockFreqFromPLLSource(void) {
 #endif
 
 /**
-  * @}
-  */
+ * @}
+ */
 
 #endif /* HAL_RCC_MODULE_ENABLED */
 /**
-  * @}
-  */
+ * @}
+ */
 
 /**
-  * @}
-  */
+ * @}
+ */

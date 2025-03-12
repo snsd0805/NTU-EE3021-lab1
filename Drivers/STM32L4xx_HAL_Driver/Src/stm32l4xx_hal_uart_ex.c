@@ -22,19 +22,19 @@
   ******************************************************************************
   @verbatim
   ==============================================================================
-               ##### UART peripheral extended features  #####
+	       ##### UART peripheral extended features  #####
   ==============================================================================
 
     (#) Declare a UART_HandleTypeDef handle structure.
 
     (#) For the UART RS485 Driver Enable mode, initialize the UART registers
-        by calling the HAL_RS485Ex_Init() API.
+	by calling the HAL_RS485Ex_Init() API.
 
     (#) FIFO mode enabling/disabling and RX/TX FIFO threshold programming.
 
-        -@- When UART operates in FIFO mode, FIFO mode must be enabled prior
-            starting RX/TX transfers. Also RX/TX FIFO thresholds must be
-            configured prior starting RX/TX transfers.
+	-@- When UART operates in FIFO mode, FIFO mode must be enabled prior
+	    starting RX/TX transfers. Also RX/TX FIFO thresholds must be
+	    configured prior starting RX/TX transfers.
 
   @endverbatim
   ******************************************************************************
@@ -44,13 +44,13 @@
 #include "stm32l4xx_hal.h"
 
 /** @addtogroup STM32L4xx_HAL_Driver
-  * @{
-  */
+ * @{
+ */
 
 /** @defgroup UARTEx UARTEx
-  * @brief UART Extended HAL module driver
-  * @{
-  */
+ * @brief UART Extended HAL module driver
+ * @{
+ */
 
 #ifdef HAL_UART_MODULE_ENABLED
 
@@ -58,66 +58,66 @@
 /* Private define ------------------------------------------------------------*/
 #if defined(USART_CR1_FIFOEN)
 /** @defgroup UARTEX_Private_Constants UARTEx Private Constants
-  * @{
-  */
+ * @{
+ */
 /* UART RX FIFO depth */
 #define RX_FIFO_DEPTH 8U
 
 /* UART TX FIFO depth */
 #define TX_FIFO_DEPTH 8U
 /**
-  * @}
-  */
+ * @}
+ */
 #endif /* USART_CR1_FIFOEN */
 
 /* Private macros ------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
 /** @defgroup UARTEx_Private_Functions UARTEx Private Functions
-  * @{
-  */
+ * @{
+ */
 static void UARTEx_Wakeup_AddressConfig(UART_HandleTypeDef *huart, UART_WakeUpTypeDef WakeUpSelection);
 #if defined(USART_CR1_FIFOEN)
 static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart);
 #endif /* USART_CR1_FIFOEN */
 /**
-  * @}
-  */
+ * @}
+ */
 
 /* Exported functions --------------------------------------------------------*/
 
 /** @defgroup UARTEx_Exported_Functions  UARTEx Exported Functions
-  * @{
-  */
+ * @{
+ */
 
 /** @defgroup UARTEx_Exported_Functions_Group1 Initialization and de-initialization functions
   * @brief    Extended Initialization and Configuration Functions
   *
 @verbatim
 ===============================================================================
-            ##### Initialization and Configuration functions #####
+	    ##### Initialization and Configuration functions #####
  ===============================================================================
     [..]
     This subsection provides a set of functions allowing to initialize the USARTx or the UARTy
     in asynchronous mode.
       (+) For the asynchronous mode the parameters below can be configured:
-        (++) Baud Rate
-        (++) Word Length
-        (++) Stop Bit
-        (++) Parity: If the parity is enabled, then the MSB bit of the data written
-             in the data register is transmitted but is changed by the parity bit.
-        (++) Hardware flow control
-        (++) Receiver/transmitter modes
-        (++) Over Sampling Method
-        (++) One-Bit Sampling Method
+	(++) Baud Rate
+	(++) Word Length
+	(++) Stop Bit
+	(++) Parity: If the parity is enabled, then the MSB bit of the data written
+	     in the data register is transmitted but is changed by the parity bit.
+	(++) Hardware flow control
+	(++) Receiver/transmitter modes
+	(++) Over Sampling Method
+	(++) One-Bit Sampling Method
       (+) For the asynchronous mode, the following advanced features can be configured as well:
-        (++) TX and/or RX pin level inversion
-        (++) data logical level inversion
-        (++) RX and TX pins swap
-        (++) RX overrun detection disabling
-        (++) DMA disabling on RX error
-        (++) MSB first on communication line
-        (++) auto Baud rate detection
+	(++) TX and/or RX pin level inversion
+	(++) data logical level inversion
+	(++) RX and TX pins swap
+	(++) RX overrun detection disabling
+	(++) DMA disabling on RX error
+	(++) MSB first on communication line
+	(++) auto Baud rate detection
     [..]
     The HAL_RS485Ex_Init() API follows the UART RS485 mode configuration
      procedures (details for the procedures are available in reference manual).
@@ -149,24 +149,24 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart);
   */
 
 /**
-  * @brief Initialize the RS485 Driver enable feature according to the specified
-  *         parameters in the UART_InitTypeDef and creates the associated handle.
-  * @param huart            UART handle.
-  * @param Polarity         Select the driver enable polarity.
-  *          This parameter can be one of the following values:
-  *          @arg @ref UART_DE_POLARITY_HIGH DE signal is active high
-  *          @arg @ref UART_DE_POLARITY_LOW  DE signal is active low
-  * @param AssertionTime    Driver Enable assertion time:
-  *       5-bit value defining the time between the activation of the DE (Driver Enable)
-  *       signal and the beginning of the start bit. It is expressed in sample time
-  *       units (1/8 or 1/16 bit time, depending on the oversampling rate)
-  * @param DeassertionTime  Driver Enable deassertion time:
-  *       5-bit value defining the time between the end of the last stop bit, in a
-  *       transmitted message, and the de-activation of the DE (Driver Enable) signal.
-  *       It is expressed in sample time units (1/8 or 1/16 bit time, depending on the
-  *       oversampling rate).
-  * @retval HAL status
-  */
+ * @brief Initialize the RS485 Driver enable feature according to the specified
+ *         parameters in the UART_InitTypeDef and creates the associated handle.
+ * @param huart            UART handle.
+ * @param Polarity         Select the driver enable polarity.
+ *          This parameter can be one of the following values:
+ *          @arg @ref UART_DE_POLARITY_HIGH DE signal is active high
+ *          @arg @ref UART_DE_POLARITY_LOW  DE signal is active low
+ * @param AssertionTime    Driver Enable assertion time:
+ *       5-bit value defining the time between the activation of the DE (Driver Enable)
+ *       signal and the beginning of the start bit. It is expressed in sample time
+ *       units (1/8 or 1/16 bit time, depending on the oversampling rate)
+ * @param DeassertionTime  Driver Enable deassertion time:
+ *       5-bit value defining the time between the end of the last stop bit, in a
+ *       transmitted message, and the de-activation of the DE (Driver Enable) signal.
+ *       It is expressed in sample time units (1/8 or 1/16 bit time, depending on the
+ *       oversampling rate).
+ * @retval HAL status
+ */
 HAL_StatusTypeDef HAL_RS485Ex_Init(UART_HandleTypeDef *huart, uint32_t Polarity, uint32_t AssertionTime,
 				   uint32_t DeassertionTime) {
     uint32_t temp;
@@ -241,91 +241,91 @@ HAL_StatusTypeDef HAL_RS485Ex_Init(UART_HandleTypeDef *huart, uint32_t Polarity,
 }
 
 /**
-  * @}
-  */
+ * @}
+ */
 
 /** @defgroup UARTEx_Exported_Functions_Group2 IO operation functions
   *  @brief Extended functions
   *
 @verbatim
  ===============================================================================
-                      ##### IO operation functions #####
+		      ##### IO operation functions #####
  ===============================================================================
     This subsection provides a set of Wakeup and FIFO mode related callback functions.
 
     (#) Wakeup from Stop mode Callback:
-        (+) HAL_UARTEx_WakeupCallback()
+	(+) HAL_UARTEx_WakeupCallback()
 
     (#) TX/RX Fifos Callbacks:
-        (+) HAL_UARTEx_RxFifoFullCallback()
-        (+) HAL_UARTEx_TxFifoEmptyCallback()
+	(+) HAL_UARTEx_RxFifoFullCallback()
+	(+) HAL_UARTEx_TxFifoEmptyCallback()
 
 @endverbatim
   * @{
   */
 
 /**
-  * @brief UART wakeup from Stop mode callback.
-  * @param huart UART handle.
-  * @retval None
-  */
+ * @brief UART wakeup from Stop mode callback.
+ * @param huart UART handle.
+ * @retval None
+ */
 __weak void HAL_UARTEx_WakeupCallback(UART_HandleTypeDef *huart) {
     /* Prevent unused argument(s) compilation warning */
     UNUSED(huart);
 
     /* NOTE : This function should not be modified, when the callback is needed,
-            the HAL_UARTEx_WakeupCallback can be implemented in the user file.
+	    the HAL_UARTEx_WakeupCallback can be implemented in the user file.
    */
 }
 
 #if defined(USART_CR1_FIFOEN)
 /**
-  * @brief  UART RX Fifo full callback.
-  * @param  huart UART handle.
-  * @retval None
-  */
+ * @brief  UART RX Fifo full callback.
+ * @param  huart UART handle.
+ * @retval None
+ */
 __weak void HAL_UARTEx_RxFifoFullCallback(UART_HandleTypeDef *huart) {
     /* Prevent unused argument(s) compilation warning */
     UNUSED(huart);
 
     /* NOTE : This function should not be modified, when the callback is needed,
-            the HAL_UARTEx_RxFifoFullCallback can be implemented in the user file.
+	    the HAL_UARTEx_RxFifoFullCallback can be implemented in the user file.
    */
 }
 
 /**
-  * @brief  UART TX Fifo empty callback.
-  * @param  huart UART handle.
-  * @retval None
-  */
+ * @brief  UART TX Fifo empty callback.
+ * @param  huart UART handle.
+ * @retval None
+ */
 __weak void HAL_UARTEx_TxFifoEmptyCallback(UART_HandleTypeDef *huart) {
     /* Prevent unused argument(s) compilation warning */
     UNUSED(huart);
 
     /* NOTE : This function should not be modified, when the callback is needed,
-            the HAL_UARTEx_TxFifoEmptyCallback can be implemented in the user file.
+	    the HAL_UARTEx_TxFifoEmptyCallback can be implemented in the user file.
    */
 }
 #endif /* USART_CR1_FIFOEN */
 
 /**
-  * @}
-  */
+ * @}
+ */
 
 /** @defgroup UARTEx_Exported_Functions_Group3 Peripheral Control functions
   * @brief    Extended Peripheral Control functions
   *
 @verbatim
  ===============================================================================
-                      ##### Peripheral Control functions #####
+		      ##### Peripheral Control functions #####
  ===============================================================================
     [..] This section provides the following functions:
      (+) HAL_UARTEx_EnableClockStopMode() API enables the UART clock (HSI or LSE only) during stop mode
      (+) HAL_UARTEx_DisableClockStopMode() API disables the above functionality
      (+) HAL_MultiProcessorEx_AddressLength_Set() API optionally sets the UART node address
-         detection length to more than 4 bits for multiprocessor address mark wake up.
+	 detection length to more than 4 bits for multiprocessor address mark wake up.
      (+) HAL_UARTEx_StopModeWakeUpSourceConfig() API defines the wake-up from stop mode
-         trigger: address match, Start Bit detection or RXNE bit status.
+	 trigger: address match, Start Bit detection or RXNE bit status.
      (+) HAL_UARTEx_EnableStopMode() API enables the UART to wake up the MCU from stop mode
      (+) HAL_UARTEx_DisableStopMode() API disables the above functionality
      (+) HAL_UARTEx_EnableFifoMode() API enables the FIFO mode
@@ -338,35 +338,35 @@ __weak void HAL_UARTEx_TxFifoEmptyCallback(UART_HandleTypeDef *huart) {
     where number of data to be received is unknown).
 
     (#) Compared to standard reception services which only consider number of received
-        data elements as reception completion criteria, these functions also consider additional events
-        as triggers for updating reception status to caller :
+	data elements as reception completion criteria, these functions also consider additional events
+	as triggers for updating reception status to caller :
        (+) Detection of inactivity period (RX line has not been active for a given period).
-          (++) RX inactivity detected by IDLE event, i.e. RX line has been in idle state (normally high state)
-               for 1 frame time, after last received byte.
-          (++) RX inactivity detected by RTO, i.e. line has been in idle state
-               for a programmable time, after last received byte.
+	  (++) RX inactivity detected by IDLE event, i.e. RX line has been in idle state (normally high state)
+	       for 1 frame time, after last received byte.
+	  (++) RX inactivity detected by RTO, i.e. line has been in idle state
+	       for a programmable time, after last received byte.
        (+) Detection that a specific character has been received.
 
     (#) There are two mode of transfer:
        (+) Blocking mode: The reception is performed in polling mode, until either expected number of data is received,
-           or till IDLE event occurs. Reception is handled only during function execution.
-           When function exits, no data reception could occur. HAL status and number of actually received data elements,
-           are returned by function after finishing transfer.
+	   or till IDLE event occurs. Reception is handled only during function execution.
+	   When function exits, no data reception could occur. HAL status and number of actually received data elements,
+	   are returned by function after finishing transfer.
        (+) Non-Blocking mode: The reception is performed using Interrupts or DMA.
-           These API's return the HAL status.
-           The end of the data processing will be indicated through the
-           dedicated UART IRQ when using Interrupt mode or the DMA IRQ when using DMA mode.
-           The HAL_UARTEx_RxEventCallback() user callback will be executed during Receive process
-           The HAL_UART_ErrorCallback()user callback will be executed when a reception error is detected.
+	   These API's return the HAL status.
+	   The end of the data processing will be indicated through the
+	   dedicated UART IRQ when using Interrupt mode or the DMA IRQ when using DMA mode.
+	   The HAL_UARTEx_RxEventCallback() user callback will be executed during Receive process
+	   The HAL_UART_ErrorCallback()user callback will be executed when a reception error is detected.
 
     (#) Blocking mode API:
-        (+) HAL_UARTEx_ReceiveToIdle()
+	(+) HAL_UARTEx_ReceiveToIdle()
 
     (#) Non-Blocking mode API with Interrupt:
-        (+) HAL_UARTEx_ReceiveToIdle_IT()
+	(+) HAL_UARTEx_ReceiveToIdle_IT()
 
     (#) Non-Blocking mode API with DMA:
-        (+) HAL_UARTEx_ReceiveToIdle_DMA()
+	(+) HAL_UARTEx_ReceiveToIdle_DMA()
 
 @endverbatim
   * @{
@@ -374,14 +374,14 @@ __weak void HAL_UARTEx_TxFifoEmptyCallback(UART_HandleTypeDef *huart) {
 
 #if defined(USART_CR3_UCESM)
 /**
-  * @brief  Keep UART Clock enabled when in Stop Mode.
-  * @note   When the USART clock source is configured to be LSE or HSI, it is possible to keep enabled
-  *         this clock during STOP mode by setting the UCESM bit in USART_CR3 control register.
-  * @note   When LPUART is used to wakeup from stop with LSE is selected as LPUART clock source,
-  *         and desired baud rate is 9600 baud, the bit UCESM bit in LPUART_CR3 control register must be set.
-  * @param  huart UART handle.
-  * @retval HAL status
-  */
+ * @brief  Keep UART Clock enabled when in Stop Mode.
+ * @note   When the USART clock source is configured to be LSE or HSI, it is possible to keep enabled
+ *         this clock during STOP mode by setting the UCESM bit in USART_CR3 control register.
+ * @note   When LPUART is used to wakeup from stop with LSE is selected as LPUART clock source,
+ *         and desired baud rate is 9600 baud, the bit UCESM bit in LPUART_CR3 control register must be set.
+ * @param  huart UART handle.
+ * @retval HAL status
+ */
 HAL_StatusTypeDef HAL_UARTEx_EnableClockStopMode(UART_HandleTypeDef *huart) {
     /* Process Locked */
     __HAL_LOCK(huart);
@@ -396,10 +396,10 @@ HAL_StatusTypeDef HAL_UARTEx_EnableClockStopMode(UART_HandleTypeDef *huart) {
 }
 
 /**
-  * @brief  Disable UART Clock when in Stop Mode.
-  * @param  huart UART handle.
-  * @retval HAL status
-  */
+ * @brief  Disable UART Clock when in Stop Mode.
+ * @param  huart UART handle.
+ * @retval HAL status
+ */
 HAL_StatusTypeDef HAL_UARTEx_DisableClockStopMode(UART_HandleTypeDef *huart) {
     /* Process Locked */
     __HAL_LOCK(huart);
@@ -415,18 +415,18 @@ HAL_StatusTypeDef HAL_UARTEx_DisableClockStopMode(UART_HandleTypeDef *huart) {
 
 #endif /* USART_CR3_UCESM */
 /**
-  * @brief By default in multiprocessor mode, when the wake up method is set
-  *        to address mark, the UART handles only 4-bit long addresses detection;
-  *        this API allows to enable longer addresses detection (6-, 7- or 8-bit
-  *        long).
-  * @note  Addresses detection lengths are: 6-bit address detection in 7-bit data mode,
-  *        7-bit address detection in 8-bit data mode, 8-bit address detection in 9-bit data mode.
-  * @param huart         UART handle.
-  * @param AddressLength This parameter can be one of the following values:
-  *          @arg @ref UART_ADDRESS_DETECT_4B 4-bit long address
-  *          @arg @ref UART_ADDRESS_DETECT_7B 6-, 7- or 8-bit long address
-  * @retval HAL status
-  */
+ * @brief By default in multiprocessor mode, when the wake up method is set
+ *        to address mark, the UART handles only 4-bit long addresses detection;
+ *        this API allows to enable longer addresses detection (6-, 7- or 8-bit
+ *        long).
+ * @note  Addresses detection lengths are: 6-bit address detection in 7-bit data mode,
+ *        7-bit address detection in 8-bit data mode, 8-bit address detection in 9-bit data mode.
+ * @param huart         UART handle.
+ * @param AddressLength This parameter can be one of the following values:
+ *          @arg @ref UART_ADDRESS_DETECT_4B 4-bit long address
+ *          @arg @ref UART_ADDRESS_DETECT_7B 6-, 7- or 8-bit long address
+ * @retval HAL status
+ */
 HAL_StatusTypeDef HAL_MultiProcessorEx_AddressLength_Set(UART_HandleTypeDef *huart, uint32_t AddressLength) {
     /* Check the UART handle allocation */
     if (huart == NULL) {
@@ -452,17 +452,17 @@ HAL_StatusTypeDef HAL_MultiProcessorEx_AddressLength_Set(UART_HandleTypeDef *hua
 }
 
 /**
-  * @brief Set Wakeup from Stop mode interrupt flag selection.
-  * @note It is the application responsibility to enable the interrupt used as
-  *       usart_wkup interrupt source before entering low-power mode.
-  * @param huart           UART handle.
-  * @param WakeUpSelection Address match, Start Bit detection or RXNE/RXFNE bit status.
-  *          This parameter can be one of the following values:
-  *          @arg @ref UART_WAKEUP_ON_ADDRESS
-  *          @arg @ref UART_WAKEUP_ON_STARTBIT
-  *          @arg @ref UART_WAKEUP_ON_READDATA_NONEMPTY
-  * @retval HAL status
-  */
+ * @brief Set Wakeup from Stop mode interrupt flag selection.
+ * @note It is the application responsibility to enable the interrupt used as
+ *       usart_wkup interrupt source before entering low-power mode.
+ * @param huart           UART handle.
+ * @param WakeUpSelection Address match, Start Bit detection or RXNE/RXFNE bit status.
+ *          This parameter can be one of the following values:
+ *          @arg @ref UART_WAKEUP_ON_ADDRESS
+ *          @arg @ref UART_WAKEUP_ON_STARTBIT
+ *          @arg @ref UART_WAKEUP_ON_READDATA_NONEMPTY
+ * @retval HAL status
+ */
 HAL_StatusTypeDef HAL_UARTEx_StopModeWakeUpSourceConfig(UART_HandleTypeDef *huart, UART_WakeUpTypeDef WakeUpSelection) {
     HAL_StatusTypeDef status = HAL_OK;
     uint32_t tickstart;
@@ -508,11 +508,11 @@ HAL_StatusTypeDef HAL_UARTEx_StopModeWakeUpSourceConfig(UART_HandleTypeDef *huar
 }
 
 /**
-  * @brief Enable UART Stop Mode.
-  * @note The UART is able to wake up the MCU from Stop 1 mode as long as UART clock is HSI or LSE.
-  * @param huart UART handle.
-  * @retval HAL status
-  */
+ * @brief Enable UART Stop Mode.
+ * @note The UART is able to wake up the MCU from Stop 1 mode as long as UART clock is HSI or LSE.
+ * @param huart UART handle.
+ * @retval HAL status
+ */
 HAL_StatusTypeDef HAL_UARTEx_EnableStopMode(UART_HandleTypeDef *huart) {
     /* Process Locked */
     __HAL_LOCK(huart);
@@ -527,10 +527,10 @@ HAL_StatusTypeDef HAL_UARTEx_EnableStopMode(UART_HandleTypeDef *huart) {
 }
 
 /**
-  * @brief Disable UART Stop Mode.
-  * @param huart UART handle.
-  * @retval HAL status
-  */
+ * @brief Disable UART Stop Mode.
+ * @param huart UART handle.
+ * @retval HAL status
+ */
 HAL_StatusTypeDef HAL_UARTEx_DisableStopMode(UART_HandleTypeDef *huart) {
     /* Process Locked */
     __HAL_LOCK(huart);
@@ -546,10 +546,10 @@ HAL_StatusTypeDef HAL_UARTEx_DisableStopMode(UART_HandleTypeDef *huart) {
 
 #if defined(USART_CR1_FIFOEN)
 /**
-  * @brief  Enable the FIFO mode.
-  * @param huart      UART handle.
-  * @retval HAL status
-  */
+ * @brief  Enable the FIFO mode.
+ * @param huart      UART handle.
+ * @retval HAL status
+ */
 HAL_StatusTypeDef HAL_UARTEx_EnableFifoMode(UART_HandleTypeDef *huart) {
     uint32_t tmpcr1;
 
@@ -586,10 +586,10 @@ HAL_StatusTypeDef HAL_UARTEx_EnableFifoMode(UART_HandleTypeDef *huart) {
 }
 
 /**
-  * @brief  Disable the FIFO mode.
-  * @param huart      UART handle.
-  * @retval HAL status
-  */
+ * @brief  Disable the FIFO mode.
+ * @param huart      UART handle.
+ * @retval HAL status
+ */
 HAL_StatusTypeDef HAL_UARTEx_DisableFifoMode(UART_HandleTypeDef *huart) {
     uint32_t tmpcr1;
 
@@ -623,18 +623,18 @@ HAL_StatusTypeDef HAL_UARTEx_DisableFifoMode(UART_HandleTypeDef *huart) {
 }
 
 /**
-  * @brief  Set the TXFIFO threshold.
-  * @param huart      UART handle.
-  * @param Threshold  TX FIFO threshold value
-  *          This parameter can be one of the following values:
-  *            @arg @ref UART_TXFIFO_THRESHOLD_1_8
-  *            @arg @ref UART_TXFIFO_THRESHOLD_1_4
-  *            @arg @ref UART_TXFIFO_THRESHOLD_1_2
-  *            @arg @ref UART_TXFIFO_THRESHOLD_3_4
-  *            @arg @ref UART_TXFIFO_THRESHOLD_7_8
-  *            @arg @ref UART_TXFIFO_THRESHOLD_8_8
-  * @retval HAL status
-  */
+ * @brief  Set the TXFIFO threshold.
+ * @param huart      UART handle.
+ * @param Threshold  TX FIFO threshold value
+ *          This parameter can be one of the following values:
+ *            @arg @ref UART_TXFIFO_THRESHOLD_1_8
+ *            @arg @ref UART_TXFIFO_THRESHOLD_1_4
+ *            @arg @ref UART_TXFIFO_THRESHOLD_1_2
+ *            @arg @ref UART_TXFIFO_THRESHOLD_3_4
+ *            @arg @ref UART_TXFIFO_THRESHOLD_7_8
+ *            @arg @ref UART_TXFIFO_THRESHOLD_8_8
+ * @retval HAL status
+ */
 HAL_StatusTypeDef HAL_UARTEx_SetTxFifoThreshold(UART_HandleTypeDef *huart, uint32_t Threshold) {
     uint32_t tmpcr1;
 
@@ -671,18 +671,18 @@ HAL_StatusTypeDef HAL_UARTEx_SetTxFifoThreshold(UART_HandleTypeDef *huart, uint3
 }
 
 /**
-  * @brief  Set the RXFIFO threshold.
-  * @param huart      UART handle.
-  * @param Threshold  RX FIFO threshold value
-  *          This parameter can be one of the following values:
-  *            @arg @ref UART_RXFIFO_THRESHOLD_1_8
-  *            @arg @ref UART_RXFIFO_THRESHOLD_1_4
-  *            @arg @ref UART_RXFIFO_THRESHOLD_1_2
-  *            @arg @ref UART_RXFIFO_THRESHOLD_3_4
-  *            @arg @ref UART_RXFIFO_THRESHOLD_7_8
-  *            @arg @ref UART_RXFIFO_THRESHOLD_8_8
-  * @retval HAL status
-  */
+ * @brief  Set the RXFIFO threshold.
+ * @param huart      UART handle.
+ * @param Threshold  RX FIFO threshold value
+ *          This parameter can be one of the following values:
+ *            @arg @ref UART_RXFIFO_THRESHOLD_1_8
+ *            @arg @ref UART_RXFIFO_THRESHOLD_1_4
+ *            @arg @ref UART_RXFIFO_THRESHOLD_1_2
+ *            @arg @ref UART_RXFIFO_THRESHOLD_3_4
+ *            @arg @ref UART_RXFIFO_THRESHOLD_7_8
+ *            @arg @ref UART_RXFIFO_THRESHOLD_8_8
+ * @retval HAL status
+ */
 HAL_StatusTypeDef HAL_UARTEx_SetRxFifoThreshold(UART_HandleTypeDef *huart, uint32_t Threshold) {
     uint32_t tmpcr1;
 
@@ -720,26 +720,26 @@ HAL_StatusTypeDef HAL_UARTEx_SetRxFifoThreshold(UART_HandleTypeDef *huart, uint3
 
 #endif /* USART_CR1_FIFOEN */
 /**
-  * @brief Receive an amount of data in blocking mode till either the expected number of data
-  *        is received or an IDLE event occurs.
-  * @note  HAL_OK is returned if reception is completed (expected number of data has been received)
-  *        or if reception is stopped after IDLE event (less than the expected number of data has been received)
-  *        In this case, RxLen output parameter indicates number of data available in reception buffer.
-  * @note  When UART parity is not enabled (PCE = 0), and Word Length is configured to 9 bits (M1-M0 = 01),
-  *        the received data is handled as a set of uint16_t. In this case, Size must indicate the number
-  *        of uint16_t available through pData.
-  * @note When FIFO mode is enabled, the RXFNE flag is set as long as the RXFIFO
-  *       is not empty. Read operations from the RDR register are performed when
-  *       RXFNE flag is set. From hardware perspective, RXFNE flag and
-  *       RXNE are mapped on the same bit-field.
-  * @param huart   UART handle.
-  * @param pData   Pointer to data buffer (uint8_t or uint16_t data elements).
-  * @param Size    Amount of data elements (uint8_t or uint16_t) to be received.
-  * @param RxLen   Number of data elements finally received
-  *                (could be lower than Size, in case reception ends on IDLE event)
-  * @param Timeout Timeout duration expressed in ms (covers the whole reception sequence).
-  * @retval HAL status
-  */
+ * @brief Receive an amount of data in blocking mode till either the expected number of data
+ *        is received or an IDLE event occurs.
+ * @note  HAL_OK is returned if reception is completed (expected number of data has been received)
+ *        or if reception is stopped after IDLE event (less than the expected number of data has been received)
+ *        In this case, RxLen output parameter indicates number of data available in reception buffer.
+ * @note  When UART parity is not enabled (PCE = 0), and Word Length is configured to 9 bits (M1-M0 = 01),
+ *        the received data is handled as a set of uint16_t. In this case, Size must indicate the number
+ *        of uint16_t available through pData.
+ * @note When FIFO mode is enabled, the RXFNE flag is set as long as the RXFIFO
+ *       is not empty. Read operations from the RDR register are performed when
+ *       RXFNE flag is set. From hardware perspective, RXFNE flag and
+ *       RXNE are mapped on the same bit-field.
+ * @param huart   UART handle.
+ * @param pData   Pointer to data buffer (uint8_t or uint16_t data elements).
+ * @param Size    Amount of data elements (uint8_t or uint16_t) to be received.
+ * @param RxLen   Number of data elements finally received
+ *                (could be lower than Size, in case reception ends on IDLE event)
+ * @param Timeout Timeout duration expressed in ms (covers the whole reception sequence).
+ * @retval HAL status
+ */
 HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint16_t *RxLen,
 					   uint32_t Timeout) {
     uint8_t *pdata8bits;
@@ -833,19 +833,19 @@ HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle(UART_HandleTypeDef *huart, uint8_t *p
 }
 
 /**
-  * @brief Receive an amount of data in interrupt mode till either the expected number of data
-  *        is received or an IDLE event occurs.
-  * @note  Reception is initiated by this function call. Further progress of reception is achieved thanks
-  *        to UART interrupts raised by RXNE and IDLE events. Callback is called at end of reception indicating
-  *        number of received data elements.
-  * @note  When UART parity is not enabled (PCE = 0), and Word Length is configured to 9 bits (M1-M0 = 01),
-  *        the received data is handled as a set of uint16_t. In this case, Size must indicate the number
-  *        of uint16_t available through pData.
-  * @param huart UART handle.
-  * @param pData Pointer to data buffer (uint8_t or uint16_t data elements).
-  * @param Size  Amount of data elements (uint8_t or uint16_t) to be received.
-  * @retval HAL status
-  */
+ * @brief Receive an amount of data in interrupt mode till either the expected number of data
+ *        is received or an IDLE event occurs.
+ * @note  Reception is initiated by this function call. Further progress of reception is achieved thanks
+ *        to UART interrupts raised by RXNE and IDLE events. Callback is called at end of reception indicating
+ *        number of received data elements.
+ * @note  When UART parity is not enabled (PCE = 0), and Word Length is configured to 9 bits (M1-M0 = 01),
+ *        the received data is handled as a set of uint16_t. In this case, Size must indicate the number
+ *        of uint16_t available through pData.
+ * @param huart UART handle.
+ * @param pData Pointer to data buffer (uint8_t or uint16_t data elements).
+ * @param Size  Amount of data elements (uint8_t or uint16_t) to be received.
+ * @retval HAL status
+ */
 HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle_IT(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size) {
     HAL_StatusTypeDef status = HAL_OK;
 
@@ -866,9 +866,9 @@ HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle_IT(UART_HandleTypeDef *huart, uint8_t
 	    ATOMIC_SET_BIT(huart->Instance->CR1, USART_CR1_IDLEIE);
 	} else {
 	    /* In case of errors already pending when reception is started,
-         Interrupts may have already been raised and lead to reception abortion.
-         (Overrun error for instance).
-         In such case Reception Type has been reset to HAL_UART_RECEPTION_STANDARD. */
+	 Interrupts may have already been raised and lead to reception abortion.
+	 (Overrun error for instance).
+	 In such case Reception Type has been reset to HAL_UART_RECEPTION_STANDARD. */
 	    status = HAL_ERROR;
 	}
 
@@ -879,22 +879,22 @@ HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle_IT(UART_HandleTypeDef *huart, uint8_t
 }
 
 /**
-  * @brief Receive an amount of data in DMA mode till either the expected number
-  *        of data is received or an IDLE event occurs.
-  * @note  Reception is initiated by this function call. Further progress of reception is achieved thanks
-  *        to DMA services, transferring automatically received data elements in user reception buffer and
-  *        calling registered callbacks at half/end of reception. UART IDLE events are also used to consider
-  *        reception phase as ended. In all cases, callback execution will indicate number of received data elements.
-  * @note  When the UART parity is enabled (PCE = 1), the received data contain
-  *        the parity bit (MSB position).
-  * @note  When UART parity is not enabled (PCE = 0), and Word Length is configured to 9 bits (M1-M0 = 01),
-  *        the received data is handled as a set of uint16_t. In this case, Size must indicate the number
-  *        of uint16_t available through pData.
-  * @param huart UART handle.
-  * @param pData Pointer to data buffer (uint8_t or uint16_t data elements).
-  * @param Size  Amount of data elements (uint8_t or uint16_t) to be received.
-  * @retval HAL status
-  */
+ * @brief Receive an amount of data in DMA mode till either the expected number
+ *        of data is received or an IDLE event occurs.
+ * @note  Reception is initiated by this function call. Further progress of reception is achieved thanks
+ *        to DMA services, transferring automatically received data elements in user reception buffer and
+ *        calling registered callbacks at half/end of reception. UART IDLE events are also used to consider
+ *        reception phase as ended. In all cases, callback execution will indicate number of received data elements.
+ * @note  When the UART parity is enabled (PCE = 1), the received data contain
+ *        the parity bit (MSB position).
+ * @note  When UART parity is not enabled (PCE = 0), and Word Length is configured to 9 bits (M1-M0 = 01),
+ *        the received data is handled as a set of uint16_t. In this case, Size must indicate the number
+ *        of uint16_t available through pData.
+ * @param huart UART handle.
+ * @param pData Pointer to data buffer (uint8_t or uint16_t data elements).
+ * @param Size  Amount of data elements (uint8_t or uint16_t) to be received.
+ * @retval HAL status
+ */
 HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle_DMA(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size) {
     HAL_StatusTypeDef status;
 
@@ -917,9 +917,9 @@ HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle_DMA(UART_HandleTypeDef *huart, uint8_
 		ATOMIC_SET_BIT(huart->Instance->CR1, USART_CR1_IDLEIE);
 	    } else {
 		/* In case of errors already pending when reception is started,
-           Interrupts may have already been raised and lead to reception abortion.
-           (Overrun error for instance).
-           In such case Reception Type has been reset to HAL_UART_RECEPTION_STANDARD. */
+	   Interrupts may have already been raised and lead to reception abortion.
+	   (Overrun error for instance).
+	   In such case Reception Type has been reset to HAL_UART_RECEPTION_STANDARD. */
 		status = HAL_ERROR;
 	    }
 	}
@@ -931,52 +931,52 @@ HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle_DMA(UART_HandleTypeDef *huart, uint8_
 }
 
 /**
-  * @brief Provide Rx Event type that has lead to RxEvent callback execution.
-  * @note  When HAL_UARTEx_ReceiveToIdle_IT() or HAL_UARTEx_ReceiveToIdle_DMA() API are called, progress
-  *        of reception process is provided to application through calls of Rx Event callback (either default one
-  *        HAL_UARTEx_RxEventCallback() or user registered one). As several types of events could occur (IDLE event,
-  *        Half Transfer, or Transfer Complete), this function allows to retrieve the Rx Event type that has lead
-  *        to Rx Event callback execution.
-  * @note  This function is expected to be called within the user implementation of Rx Event Callback,
-  *        in order to provide the accurate value :
-  *        In Interrupt Mode :
-  *           - HAL_UART_RXEVENT_TC : when Reception has been completed (expected nb of data has been received)
-  *           - HAL_UART_RXEVENT_IDLE : when Idle event occurred prior reception has been completed (nb of
-  *             received data is lower than expected one)
-  *        In DMA Mode :
-  *           - HAL_UART_RXEVENT_TC : when Reception has been completed (expected nb of data has been received)
-  *           - HAL_UART_RXEVENT_HT : when half of expected nb of data has been received
-  *           - HAL_UART_RXEVENT_IDLE : when Idle event occurred prior reception has been completed (nb of
-  *             received data is lower than expected one).
-  *        In DMA mode, RxEvent callback could be called several times;
-  *        When DMA is configured in Normal Mode, HT event does not stop Reception process;
-  *        When DMA is configured in Circular Mode, HT, TC or IDLE events don't stop Reception process;
-  * @param  huart UART handle.
-  * @retval Rx Event Type (return vale will be a value of @ref UART_RxEvent_Type_Values)
-  */
+ * @brief Provide Rx Event type that has lead to RxEvent callback execution.
+ * @note  When HAL_UARTEx_ReceiveToIdle_IT() or HAL_UARTEx_ReceiveToIdle_DMA() API are called, progress
+ *        of reception process is provided to application through calls of Rx Event callback (either default one
+ *        HAL_UARTEx_RxEventCallback() or user registered one). As several types of events could occur (IDLE event,
+ *        Half Transfer, or Transfer Complete), this function allows to retrieve the Rx Event type that has lead
+ *        to Rx Event callback execution.
+ * @note  This function is expected to be called within the user implementation of Rx Event Callback,
+ *        in order to provide the accurate value :
+ *        In Interrupt Mode :
+ *           - HAL_UART_RXEVENT_TC : when Reception has been completed (expected nb of data has been received)
+ *           - HAL_UART_RXEVENT_IDLE : when Idle event occurred prior reception has been completed (nb of
+ *             received data is lower than expected one)
+ *        In DMA Mode :
+ *           - HAL_UART_RXEVENT_TC : when Reception has been completed (expected nb of data has been received)
+ *           - HAL_UART_RXEVENT_HT : when half of expected nb of data has been received
+ *           - HAL_UART_RXEVENT_IDLE : when Idle event occurred prior reception has been completed (nb of
+ *             received data is lower than expected one).
+ *        In DMA mode, RxEvent callback could be called several times;
+ *        When DMA is configured in Normal Mode, HT event does not stop Reception process;
+ *        When DMA is configured in Circular Mode, HT, TC or IDLE events don't stop Reception process;
+ * @param  huart UART handle.
+ * @retval Rx Event Type (return vale will be a value of @ref UART_RxEvent_Type_Values)
+ */
 HAL_UART_RxEventTypeTypeDef HAL_UARTEx_GetRxEventType(const UART_HandleTypeDef *huart) {
     /* Return Rx Event type value, as stored in UART handle */
     return (huart->RxEventType);
 }
 
 /**
-  * @}
-  */
+ * @}
+ */
 
 /**
-  * @}
-  */
+ * @}
+ */
 
 /** @addtogroup UARTEx_Private_Functions
-  * @{
-  */
+ * @{
+ */
 
 /**
-  * @brief Initialize the UART wake-up from stop mode parameters when triggered by address detection.
-  * @param huart           UART handle.
-  * @param WakeUpSelection UART wake up from stop mode parameters.
-  * @retval None
-  */
+ * @brief Initialize the UART wake-up from stop mode parameters when triggered by address detection.
+ * @param huart           UART handle.
+ * @param WakeUpSelection UART wake up from stop mode parameters.
+ * @retval None
+ */
 static void UARTEx_Wakeup_AddressConfig(UART_HandleTypeDef *huart, UART_WakeUpTypeDef WakeUpSelection) {
     assert_param(IS_UART_ADDRESSLENGTH_DETECT(WakeUpSelection.AddressLength));
 
@@ -989,12 +989,12 @@ static void UARTEx_Wakeup_AddressConfig(UART_HandleTypeDef *huart, UART_WakeUpTy
 
 #if defined(USART_CR1_FIFOEN)
 /**
-  * @brief Calculate the number of data to process in RX/TX ISR.
-  * @note The RX FIFO depth and the TX FIFO depth is extracted from
-  *       the UART configuration registers.
-  * @param huart UART handle.
-  * @retval None
-  */
+ * @brief Calculate the number of data to process in RX/TX ISR.
+ * @note The RX FIFO depth and the TX FIFO depth is extracted from
+ *       the UART configuration registers.
+ * @param huart UART handle.
+ * @retval None
+ */
 static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart) {
     uint8_t rx_fifo_depth;
     uint8_t tx_fifo_depth;
@@ -1019,15 +1019,15 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart) {
 }
 #endif /* USART_CR1_FIFOEN */
 /**
-  * @}
-  */
+ * @}
+ */
 
 #endif /* HAL_UART_MODULE_ENABLED */
 
 /**
-  * @}
-  */
+ * @}
+ */
 
 /**
-  * @}
-  */
+ * @}
+ */

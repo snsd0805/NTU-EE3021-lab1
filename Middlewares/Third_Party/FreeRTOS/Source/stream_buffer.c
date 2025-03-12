@@ -309,7 +309,7 @@ StreamBufferHandle_t xStreamBufferGenericCreateStatic(size_t xBufferSizeBytes,
 			message buffer structure. */
 	volatile size_t xSize = sizeof(StaticStreamBuffer_t);
 	configASSERT(xSize == sizeof(StreamBuffer_t));
-    }  /*lint !e529 xSize is referenced is configASSERT() is defined. */
+    } /*lint !e529 xSize is referenced is configASSERT() is defined. */
 #endif /* configASSERT_DEFINED */
 
     if ((pucStreamBufferStorageArea != NULL) && (pxStaticStreamBuffer != NULL)) {

@@ -21,82 +21,82 @@
   ******************************************************************************
   @verbatim
   ==============================================================================
-                    ##### GPIO Peripheral features #####
+		    ##### GPIO Peripheral features #####
   ==============================================================================
   [..]
     (+) Each port bit of the general-purpose I/O (GPIO) ports can be individually
-        configured by software in several modes:
-        (++) Input mode
-        (++) Analog mode
-        (++) Output mode
-        (++) Alternate function mode
-        (++) External interrupt/event lines
+	configured by software in several modes:
+	(++) Input mode
+	(++) Analog mode
+	(++) Output mode
+	(++) Alternate function mode
+	(++) External interrupt/event lines
 
     (+) During and just after reset, the alternate functions and external interrupt
-        lines are not active and the I/O ports are configured in input floating mode.
+	lines are not active and the I/O ports are configured in input floating mode.
 
     (+) All GPIO pins have weak internal pull-up and pull-down resistors, which can be
-        activated or not.
+	activated or not.
 
     (+) In Output or Alternate mode, each IO can be configured on open-drain or push-pull
-        type and the IO speed can be selected depending on the VDD value.
+	type and the IO speed can be selected depending on the VDD value.
 
     (+) The microcontroller IO pins are connected to onboard peripherals/modules through a
-        multiplexer that allows only one peripheral alternate function (AF) connected
+	multiplexer that allows only one peripheral alternate function (AF) connected
        to an IO pin at a time. In this way, there can be no conflict between peripherals
        sharing the same IO pin.
 
     (+) All ports have external interrupt/event capability. To use external interrupt
-        lines, the port must be configured in input mode. All available GPIO pins are
-        connected to the 16 external interrupt/event lines from EXTI0 to EXTI15.
+	lines, the port must be configured in input mode. All available GPIO pins are
+	connected to the 16 external interrupt/event lines from EXTI0 to EXTI15.
 
     (+) The external interrupt/event controller consists of up to 39 edge detectors
-        (16 lines are connected to GPIO) for generating event/interrupt requests (each
-        input line can be independently configured to select the type (interrupt or event)
-        and the corresponding trigger event (rising or falling or both). Each line can
-        also be masked independently.
+	(16 lines are connected to GPIO) for generating event/interrupt requests (each
+	input line can be independently configured to select the type (interrupt or event)
+	and the corresponding trigger event (rising or falling or both). Each line can
+	also be masked independently.
 
-                     ##### How to use this driver #####
+		     ##### How to use this driver #####
   ==============================================================================
   [..]
     (#) Enable the GPIO AHB clock using the following function: __HAL_RCC_GPIOx_CLK_ENABLE().
 
     (#) Configure the GPIO pin(s) using HAL_GPIO_Init().
-        (++) Configure the IO mode using "Mode" member from GPIO_InitTypeDef structure
-        (++) Activate Pull-up, Pull-down resistor using "Pull" member from GPIO_InitTypeDef
-             structure.
-        (++) In case of Output or alternate function mode selection: the speed is
-             configured through "Speed" member from GPIO_InitTypeDef structure.
-        (++) In alternate mode is selection, the alternate function connected to the IO
-             is configured through "Alternate" member from GPIO_InitTypeDef structure.
-        (++) Analog mode is required when a pin is to be used as ADC channel
-             or DAC output.
-        (++) In case of external interrupt/event selection the "Mode" member from
-             GPIO_InitTypeDef structure select the type (interrupt or event) and
-             the corresponding trigger event (rising or falling or both).
+	(++) Configure the IO mode using "Mode" member from GPIO_InitTypeDef structure
+	(++) Activate Pull-up, Pull-down resistor using "Pull" member from GPIO_InitTypeDef
+	     structure.
+	(++) In case of Output or alternate function mode selection: the speed is
+	     configured through "Speed" member from GPIO_InitTypeDef structure.
+	(++) In alternate mode is selection, the alternate function connected to the IO
+	     is configured through "Alternate" member from GPIO_InitTypeDef structure.
+	(++) Analog mode is required when a pin is to be used as ADC channel
+	     or DAC output.
+	(++) In case of external interrupt/event selection the "Mode" member from
+	     GPIO_InitTypeDef structure select the type (interrupt or event) and
+	     the corresponding trigger event (rising or falling or both).
 
     (#) In case of external interrupt/event mode selection, configure NVIC IRQ priority
-        mapped to the EXTI line using HAL_NVIC_SetPriority() and enable it using
-        HAL_NVIC_EnableIRQ().
+	mapped to the EXTI line using HAL_NVIC_SetPriority() and enable it using
+	HAL_NVIC_EnableIRQ().
 
     (#) To get the level of a pin configured in input mode use HAL_GPIO_ReadPin().
 
     (#) To set/reset the level of a pin configured in output mode use
-        HAL_GPIO_WritePin()/HAL_GPIO_TogglePin().
+	HAL_GPIO_WritePin()/HAL_GPIO_TogglePin().
 
    (#) To lock pin configuration until next reset use HAL_GPIO_LockPin().
 
     (#) During and just after reset, the alternate functions are not
-        active and the GPIO pins are configured in input floating mode (except JTAG
-        pins).
+	active and the GPIO pins are configured in input floating mode (except JTAG
+	pins).
 
     (#) The LSE oscillator pins OSC32_IN and OSC32_OUT can be used as general purpose
-        (PC14 and PC15, respectively) when the LSE oscillator is off. The LSE has
-        priority over the GPIO function.
+	(PC14 and PC15, respectively) when the LSE oscillator is off. The LSE has
+	priority over the GPIO function.
 
     (#) The HSE oscillator pins OSC_IN/OSC_OUT can be used as
-        general purpose PH0 and PH1, respectively, when the HSE oscillator is off.
-        The HSE has priority over the GPIO function.
+	general purpose PH0 and PH1, respectively, when the HSE oscillator is off.
+	The HSE has priority over the GPIO function.
 
   @endverbatim
   ******************************************************************************
@@ -106,31 +106,31 @@
 #include "stm32l4xx_hal.h"
 
 /** @addtogroup STM32L4xx_HAL_Driver
-  * @{
-  */
+ * @{
+ */
 
 /** @defgroup GPIO GPIO
-  * @brief GPIO HAL module driver
-  * @{
-  */
+ * @brief GPIO HAL module driver
+ * @{
+ */
 /** MISRA C:2012 deviation rule has been granted for following rules:
-  * Rule-12.2 - Medium: RHS argument is in interval [0,INF] which is out of
-  * range of the shift operator in following API :
-  * HAL_GPIO_Init
-  * HAL_GPIO_DeInit
-  */
+ * Rule-12.2 - Medium: RHS argument is in interval [0,INF] which is out of
+ * range of the shift operator in following API :
+ * HAL_GPIO_Init
+ * HAL_GPIO_DeInit
+ */
 
 #ifdef HAL_GPIO_MODULE_ENABLED
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private defines -----------------------------------------------------------*/
 /** @addtogroup GPIO_Private_Defines GPIO Private Defines
-  * @{
-  */
+ * @{
+ */
 #define GPIO_NUMBER (16u)
 /**
-  * @}
-  */
+ * @}
+ */
 
 /* Private macros ------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
@@ -138,15 +138,15 @@
 /* Exported functions --------------------------------------------------------*/
 
 /** @defgroup GPIO_Exported_Functions GPIO Exported Functions
-  * @{
-  */
+ * @{
+ */
 
 /** @defgroup GPIO_Exported_Functions_Group1 Initialization/de-initialization functions
  *  @brief    Initialization and Configuration functions
  *
 @verbatim
  ===============================================================================
-              ##### Initialization and de-initialization functions #####
+	      ##### Initialization and de-initialization functions #####
  ===============================================================================
 
 @endverbatim
@@ -154,12 +154,12 @@
   */
 
 /**
-  * @brief  Initialize the GPIOx peripheral according to the specified parameters in the GPIO_Init.
-  * @param  GPIOx where x can be (A..H) to select the GPIO peripheral for STM32L4 family
-  * @param  GPIO_Init pointer to a GPIO_InitTypeDef structure that contains
-  *         the configuration information for the specified GPIO peripheral.
-  * @retval None
-  */
+ * @brief  Initialize the GPIOx peripheral according to the specified parameters in the GPIO_Init.
+ * @param  GPIOx where x can be (A..H) to select the GPIO peripheral for STM32L4 family
+ * @param  GPIO_Init pointer to a GPIO_InitTypeDef structure that contains
+ *         the configuration information for the specified GPIO peripheral.
+ * @retval None
+ */
 void HAL_GPIO_Init(GPIO_TypeDef *GPIOx, GPIO_InitTypeDef *GPIO_Init) {
     uint32_t position = 0x00u;
     uint32_t iocurrent;
@@ -286,12 +286,12 @@ void HAL_GPIO_Init(GPIO_TypeDef *GPIOx, GPIO_InitTypeDef *GPIO_Init) {
 }
 
 /**
-  * @brief  De-initialize the GPIOx peripheral registers to their default reset values.
-  * @param  GPIOx where x can be (A..H) to select the GPIO peripheral for STM32L4 family
-  * @param  GPIO_Pin specifies the port bit to be written.
-  *         This parameter can be any combination of GPIO_PIN_x where x can be (0..15).
-  * @retval None
-  */
+ * @brief  De-initialize the GPIOx peripheral registers to their default reset values.
+ * @param  GPIOx where x can be (A..H) to select the GPIO peripheral for STM32L4 family
+ * @param  GPIO_Pin specifies the port bit to be written.
+ *         This parameter can be any combination of GPIO_PIN_x where x can be (0..15).
+ * @retval None
+ */
 void HAL_GPIO_DeInit(GPIO_TypeDef *GPIOx, uint32_t GPIO_Pin) {
     uint32_t position = 0x00u;
     uint32_t iocurrent;
@@ -352,15 +352,15 @@ void HAL_GPIO_DeInit(GPIO_TypeDef *GPIOx, uint32_t GPIO_Pin) {
 }
 
 /**
-  * @}
-  */
+ * @}
+ */
 
 /** @defgroup GPIO_Exported_Functions_Group2 IO operation functions
  *  @brief GPIO Read, Write, Toggle, Lock and EXTI management functions.
  *
 @verbatim
  ===============================================================================
-                       ##### IO operation functions #####
+		       ##### IO operation functions #####
  ===============================================================================
 
 @endverbatim
@@ -368,12 +368,12 @@ void HAL_GPIO_DeInit(GPIO_TypeDef *GPIOx, uint32_t GPIO_Pin) {
   */
 
 /**
-  * @brief  Read the specified input port pin.
-  * @param  GPIOx where x can be (A..H) to select the GPIO peripheral for STM32L4 family
-  * @param  GPIO_Pin specifies the port bit to read.
-  *         This parameter can be any combination of GPIO_PIN_x where x can be (0..15).
-  * @retval The input port pin value.
-  */
+ * @brief  Read the specified input port pin.
+ * @param  GPIOx where x can be (A..H) to select the GPIO peripheral for STM32L4 family
+ * @param  GPIO_Pin specifies the port bit to read.
+ *         This parameter can be any combination of GPIO_PIN_x where x can be (0..15).
+ * @retval The input port pin value.
+ */
 GPIO_PinState HAL_GPIO_ReadPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin) {
     GPIO_PinState bitstatus;
 
@@ -389,21 +389,21 @@ GPIO_PinState HAL_GPIO_ReadPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin) {
 }
 
 /**
-  * @brief  Set or clear the selected data port bit.
-  *
-  * @note   This function uses GPIOx_BSRR and GPIOx_BRR registers to allow atomic read/modify
-  *         accesses. In this way, there is no risk of an IRQ occurring between
-  *         the read and the modify access.
-  *
-  * @param  GPIOx where x can be (A..H) to select the GPIO peripheral for STM32L4 family
-  * @param  GPIO_Pin specifies the port bit to be written.
-  *         This parameter can be any combination of GPIO_PIN_x where x can be (0..15).
-  * @param  PinState specifies the value to be written to the selected bit.
-  *         This parameter can be one of the GPIO_PinState enum values:
-  *            @arg GPIO_PIN_RESET: to clear the port pin
-  *            @arg GPIO_PIN_SET: to set the port pin
-  * @retval None
-  */
+ * @brief  Set or clear the selected data port bit.
+ *
+ * @note   This function uses GPIOx_BSRR and GPIOx_BRR registers to allow atomic read/modify
+ *         accesses. In this way, there is no risk of an IRQ occurring between
+ *         the read and the modify access.
+ *
+ * @param  GPIOx where x can be (A..H) to select the GPIO peripheral for STM32L4 family
+ * @param  GPIO_Pin specifies the port bit to be written.
+ *         This parameter can be any combination of GPIO_PIN_x where x can be (0..15).
+ * @param  PinState specifies the value to be written to the selected bit.
+ *         This parameter can be one of the GPIO_PinState enum values:
+ *            @arg GPIO_PIN_RESET: to clear the port pin
+ *            @arg GPIO_PIN_SET: to set the port pin
+ * @retval None
+ */
 void HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState) {
     /* Check the parameters */
     assert_param(IS_GPIO_PIN(GPIO_Pin));
@@ -417,11 +417,11 @@ void HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState Pin
 }
 
 /**
-  * @brief  Toggle the specified GPIO pin.
-  * @param  GPIOx where x can be (A..H) to select the GPIO peripheral for STM32L4 family
-  * @param  GPIO_Pin specifies the pin to be toggled.
-  * @retval None
-  */
+ * @brief  Toggle the specified GPIO pin.
+ * @param  GPIOx where x can be (A..H) to select the GPIO peripheral for STM32L4 family
+ * @param  GPIO_Pin specifies the pin to be toggled.
+ * @retval None
+ */
 void HAL_GPIO_TogglePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin) {
     uint32_t odr;
 
@@ -436,16 +436,16 @@ void HAL_GPIO_TogglePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin) {
 }
 
 /**
-* @brief  Lock GPIO Pins configuration registers.
-  * @note   The locked registers are GPIOx_MODER, GPIOx_OTYPER, GPIOx_OSPEEDR,
-  *         GPIOx_PUPDR, GPIOx_AFRL and GPIOx_AFRH.
-  * @note   The configuration of the locked GPIO pins can no longer be modified
-  *         until the next reset.
-  * @param  GPIOx where x can be (A..H) to select the GPIO peripheral for STM32L4 family
-  * @param  GPIO_Pin specifies the port bits to be locked.
-  *         This parameter can be any combination of GPIO_PIN_x where x can be (0..15).
-  * @retval None
-  */
+ * @brief  Lock GPIO Pins configuration registers.
+ * @note   The locked registers are GPIOx_MODER, GPIOx_OTYPER, GPIOx_OSPEEDR,
+ *         GPIOx_PUPDR, GPIOx_AFRL and GPIOx_AFRH.
+ * @note   The configuration of the locked GPIO pins can no longer be modified
+ *         until the next reset.
+ * @param  GPIOx where x can be (A..H) to select the GPIO peripheral for STM32L4 family
+ * @param  GPIO_Pin specifies the port bits to be locked.
+ *         This parameter can be any combination of GPIO_PIN_x where x can be (0..15).
+ * @retval None
+ */
 HAL_StatusTypeDef HAL_GPIO_LockPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin) {
     __IO uint32_t tmp = GPIO_LCKR_LCKK;
 
@@ -473,10 +473,10 @@ HAL_StatusTypeDef HAL_GPIO_LockPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin) {
 }
 
 /**
-  * @brief  Handle EXTI interrupt request.
-  * @param  GPIO_Pin Specifies the port pin connected to corresponding EXTI line.
-  * @retval None
-  */
+ * @brief  Handle EXTI interrupt request.
+ * @param  GPIO_Pin Specifies the port pin connected to corresponding EXTI line.
+ * @retval None
+ */
 void HAL_GPIO_EXTI_IRQHandler(uint16_t GPIO_Pin) {
     /* EXTI line interrupt detected */
     if (__HAL_GPIO_EXTI_GET_IT(GPIO_Pin) != 0x00u) {
@@ -486,32 +486,32 @@ void HAL_GPIO_EXTI_IRQHandler(uint16_t GPIO_Pin) {
 }
 
 /**
-  * @brief  EXTI line detection callback.
-  * @param  GPIO_Pin Specifies the port pin connected to corresponding EXTI line.
-  * @retval None
-  */
+ * @brief  EXTI line detection callback.
+ * @param  GPIO_Pin Specifies the port pin connected to corresponding EXTI line.
+ * @retval None
+ */
 __weak void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
     /* Prevent unused argument(s) compilation warning */
     UNUSED(GPIO_Pin);
 
     /* NOTE: This function should not be modified, when the callback is needed,
-           the HAL_GPIO_EXTI_Callback could be implemented in the user file
+	   the HAL_GPIO_EXTI_Callback could be implemented in the user file
    */
 }
 
 /**
-  * @}
-  */
+ * @}
+ */
 
 /**
-  * @}
-  */
+ * @}
+ */
 
 #endif /* HAL_GPIO_MODULE_ENABLED */
 /**
-  * @}
-  */
+ * @}
+ */
 
 /**
-  * @}
-  */
+ * @}
+ */
