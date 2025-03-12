@@ -50,8 +50,8 @@ be used solely through the macros that make up the public software timer API,
 as defined below.  The commands that are sent from interrupts must use the
 highest numbers as tmrFIRST_FROM_ISR_COMMAND is used to determine if the task
 or interrupt version of the queue send function should be used. */
-#define tmrCOMMAND_EXECUTE_CALLBACK_FROM_ISR ((BaseType_t) - 2)
-#define tmrCOMMAND_EXECUTE_CALLBACK ((BaseType_t) - 1)
+#define tmrCOMMAND_EXECUTE_CALLBACK_FROM_ISR ((BaseType_t)-2)
+#define tmrCOMMAND_EXECUTE_CALLBACK ((BaseType_t)-1)
 #define tmrCOMMAND_START_DONT_TRACE ((BaseType_t)0)
 #define tmrCOMMAND_START ((BaseType_t)1)
 #define tmrCOMMAND_RESET ((BaseType_t)2)
@@ -1184,37 +1184,37 @@ TaskHandle_t xTimerGetTimerDaemonTaskHandle(void) PRIVILEGED_FUNCTION;
 BaseType_t xTimerPendFunctionCallFromISR(PendedFunction_t xFunctionToPend, void *pvParameter1, uint32_t ulParameter2, BaseType_t *pxHigherPriorityTaskWoken) PRIVILEGED_FUNCTION;
 
 /**
- * BaseType_t xTimerPendFunctionCall( PendedFunction_t xFunctionToPend,
- *                                    void *pvParameter1,
- *                                    uint32_t ulParameter2,
- *                                    TickType_t xTicksToWait );
- *
- *
- * Used to defer the execution of a function to the RTOS daemon task (the timer
- * service task, hence this function is implemented in timers.c and is prefixed
- * with 'Timer').
- *
- * @param xFunctionToPend The function to execute from the timer service/
- * daemon task.  The function must conform to the PendedFunction_t
- * prototype.
- *
- * @param pvParameter1 The value of the callback function's first parameter.
- * The parameter has a void * type to allow it to be used to pass any type.
- * For example, unsigned longs can be cast to a void *, or the void * can be
- * used to point to a structure.
- *
- * @param ulParameter2 The value of the callback function's second parameter.
- *
- * @param xTicksToWait Calling this function will result in a message being
- * sent to the timer daemon task on a queue.  xTicksToWait is the amount of
- * time the calling task should remain in the Blocked state (so not using any
- * processing time) for space to become available on the timer queue if the
- * queue is found to be full.
- *
- * @return pdPASS is returned if the message was successfully sent to the
- * timer daemon task, otherwise pdFALSE is returned.
- *
- */
+  * BaseType_t xTimerPendFunctionCall( PendedFunction_t xFunctionToPend,
+  *                                    void *pvParameter1,
+  *                                    uint32_t ulParameter2,
+  *                                    TickType_t xTicksToWait );
+  *
+  *
+  * Used to defer the execution of a function to the RTOS daemon task (the timer
+  * service task, hence this function is implemented in timers.c and is prefixed
+  * with 'Timer').
+  *
+  * @param xFunctionToPend The function to execute from the timer service/
+  * daemon task.  The function must conform to the PendedFunction_t
+  * prototype.
+  *
+  * @param pvParameter1 The value of the callback function's first parameter.
+  * The parameter has a void * type to allow it to be used to pass any type.
+  * For example, unsigned longs can be cast to a void *, or the void * can be
+  * used to point to a structure.
+  *
+  * @param ulParameter2 The value of the callback function's second parameter.
+  *
+  * @param xTicksToWait Calling this function will result in a message being
+  * sent to the timer daemon task on a queue.  xTicksToWait is the amount of
+  * time the calling task should remain in the Blocked state (so not using any
+  * processing time) for space to become available on the timer queue if the
+  * queue is found to be full.
+  *
+  * @return pdPASS is returned if the message was successfully sent to the
+  * timer daemon task, otherwise pdFALSE is returned.
+  *
+  */
 BaseType_t xTimerPendFunctionCall(PendedFunction_t xFunctionToPend, void *pvParameter1, uint32_t ulParameter2, TickType_t xTicksToWait) PRIVILEGED_FUNCTION;
 
 /**
@@ -1246,17 +1246,17 @@ const char *pcTimerGetName(TimerHandle_t xTimer) PRIVILEGED_FUNCTION; /*lint !e9
 void vTimerSetReloadMode(TimerHandle_t xTimer, const UBaseType_t uxAutoReload) PRIVILEGED_FUNCTION;
 
 /**
- * UBaseType_t uxTimerGetReloadMode( TimerHandle_t xTimer );
- *
- * Queries a timer to determine if it is an auto-reload timer, in which case the timer
- * automatically resets itself each time it expires, or a one-shot timer, in
- * which case the timer will only expire once unless it is manually restarted.
- *
- * @param xTimer The handle of the timer being queried.
- *
- * @return If the timer is an auto-reload timer then pdTRUE is returned, otherwise
- * pdFALSE is returned.
- */
+* UBaseType_t uxTimerGetReloadMode( TimerHandle_t xTimer );
+*
+* Queries a timer to determine if it is an auto-reload timer, in which case the timer
+* automatically resets itself each time it expires, or a one-shot timer, in
+* which case the timer will only expire once unless it is manually restarted.
+*
+* @param xTimer The handle of the timer being queried.
+*
+* @return If the timer is an auto-reload timer then pdTRUE is returned, otherwise
+* pdFALSE is returned.
+*/
 UBaseType_t uxTimerGetReloadMode(TimerHandle_t xTimer) PRIVILEGED_FUNCTION;
 
 /**
@@ -1271,18 +1271,18 @@ UBaseType_t uxTimerGetReloadMode(TimerHandle_t xTimer) PRIVILEGED_FUNCTION;
 TickType_t xTimerGetPeriod(TimerHandle_t xTimer) PRIVILEGED_FUNCTION;
 
 /**
- * TickType_t xTimerGetExpiryTime( TimerHandle_t xTimer );
- *
- * Returns the time in ticks at which the timer will expire.  If this is less
- * than the current tick count then the expiry time has overflowed from the
- * current time.
- *
- * @param xTimer The handle of the timer being queried.
- *
- * @return If the timer is running then the time in ticks at which the timer
- * will next expire is returned.  If the timer is not running then the return
- * value is undefined.
- */
+* TickType_t xTimerGetExpiryTime( TimerHandle_t xTimer );
+*
+* Returns the time in ticks at which the timer will expire.  If this is less
+* than the current tick count then the expiry time has overflowed from the
+* current time.
+*
+* @param xTimer The handle of the timer being queried.
+*
+* @return If the timer is running then the time in ticks at which the timer
+* will next expire is returned.  If the timer is not running then the return
+* value is undefined.
+*/
 TickType_t xTimerGetExpiryTime(TimerHandle_t xTimer) PRIVILEGED_FUNCTION;
 
 /*

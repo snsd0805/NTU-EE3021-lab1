@@ -127,7 +127,7 @@ use of FreeRTOS.*/
 #define listSET_LIST_INTEGRITY_CHECK_2_VALUE(pxList) (pxList)->xListIntegrityValue2 = pdINTEGRITY_CHECK_VALUE
 
 /* Define macros that will assert if one of the structure members does not
-contain its expected value. */
+	contain its expected value. */
 #define listTEST_LIST_ITEM_INTEGRITY(pxItem) configASSERT(((pxItem)->xListItemIntegrityValue1 == pdINTEGRITY_CHECK_VALUE) && ((pxItem)->xListItemIntegrityValue2 == pdINTEGRITY_CHECK_VALUE))
 #define listTEST_LIST_INTEGRITY(pxList) configASSERT(((pxList)->xListIntegrityValue1 == pdINTEGRITY_CHECK_VALUE) && ((pxList)->xListIntegrityValue2 == pdINTEGRITY_CHECK_VALUE))
 #endif /* configUSE_LIST_DATA_INTEGRITY_CHECK_BYTES */

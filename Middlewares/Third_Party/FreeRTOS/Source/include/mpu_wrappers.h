@@ -33,17 +33,17 @@ only for ports that are using the MPU. */
 #ifdef portUSING_MPU_WRAPPERS
 
 /* MPU_WRAPPERS_INCLUDED_FROM_API_FILE will be defined when this file is
-included from queue.c or task.c to prevent it from having an effect within
-those files. */
+	included from queue.c or task.c to prevent it from having an effect within
+	those files. */
 #ifndef MPU_WRAPPERS_INCLUDED_FROM_API_FILE
 
 /*
- * Map standard (non MPU) API functions to equivalents that start
- * "MPU_".  This will cause the application code to call the MPU_
- * version, which wraps the non-MPU version with privilege promoting
- * then demoting code, so the kernel code always runs will full
- * privileges.
- */
+		 * Map standard (non MPU) API functions to equivalents that start
+		 * "MPU_".  This will cause the application code to call the MPU_
+		 * version, which wraps the non-MPU version with privilege promoting
+		 * then demoting code, so the kernel code always runs will full
+		 * privileges.
+		 */
 
 /* Map standard tasks.h API functions to the MPU equivalents. */
 #define xTaskCreate MPU_xTaskCreate
@@ -144,7 +144,7 @@ those files. */
 #define vEventGroupDelete MPU_vEventGroupDelete
 
 /* Map standard message/stream_buffer.h API functions to the MPU
-equivalents. */
+		equivalents. */
 #define xStreamBufferSend MPU_xStreamBufferSend
 #define xStreamBufferReceive MPU_xStreamBufferReceive
 #define xStreamBufferNextMessageLengthBytes MPU_xStreamBufferNextMessageLengthBytes
@@ -159,8 +159,8 @@ equivalents. */
 #define xStreamBufferGenericCreateStatic MPU_xStreamBufferGenericCreateStatic
 
 /* Remove the privileged function macro, but keep the PRIVILEGED_DATA
-macro so applications can place data in privileged access sections
-(useful when using statically allocated objects). */
+		macro so applications can place data in privileged access sections
+		(useful when using statically allocated objects). */
 #define PRIVILEGED_FUNCTION
 #define PRIVILEGED_DATA __attribute__((section("privileged_data")))
 #define FREERTOS_SYSTEM_CALL

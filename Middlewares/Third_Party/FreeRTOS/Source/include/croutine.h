@@ -59,10 +59,10 @@ typedef struct corCoRoutineControlBlock {
  * croutine. h
  *<pre>
  BaseType_t xCoRoutineCreate(
-				 crCOROUTINE_CODE pxCoRoutineCode,
-				 UBaseType_t uxPriority,
-				 UBaseType_t uxIndex
-			       );</pre>
+                                 crCOROUTINE_CODE pxCoRoutineCode,
+                                 UBaseType_t uxPriority,
+                                 UBaseType_t uxIndex
+                               );</pre>
  *
  * Create a new co-routine and add it to the list of co-routines that are
  * ready to run.
@@ -96,13 +96,13 @@ typedef struct corCoRoutineControlBlock {
 
      for( ;; )
      {
-	 // This co-routine just delays for a fixed period, then toggles
-	 // an LED.  Two co-routines are created using this function, so
-	 // the uxIndex parameter is used to tell the co-routine which
-	 // LED to flash and how int32_t to delay.  This assumes xQueue has
-	 // already been created.
-	 vParTestToggleLED( cLedToFlash[ uxIndex ] );
-	 crDELAY( xHandle, uxFlashRates[ uxIndex ] );
+         // This co-routine just delays for a fixed period, then toggles
+         // an LED.  Two co-routines are created using this function, so
+         // the uxIndex parameter is used to tell the co-routine which
+         // LED to flash and how int32_t to delay.  This assumes xQueue has
+         // already been created.
+         vParTestToggleLED( cLedToFlash[ uxIndex ] );
+         crDELAY( xHandle, uxFlashRates[ uxIndex ] );
      }
 
      // Must end every co-routine with a call to crEND();
@@ -120,7 +120,7 @@ typedef struct corCoRoutineControlBlock {
      // is given index 1 so toggles LED 6 every 400 ticks.
      for( uxIndex = 0; uxIndex < 2; uxIndex++ )
      {
-	 xCoRoutineCreate( vFlashCoRoutine, 0, uxIndex );
+         xCoRoutineCreate( vFlashCoRoutine, 0, uxIndex );
      }
  }
    </pre>
@@ -161,7 +161,7 @@ BaseType_t xCoRoutineCreate(crCOROUTINE_CODE pxCoRoutineCode, UBaseType_t uxPrio
  {
     for( ;; )
     {
-	vCoRoutineSchedule();
+        vCoRoutineSchedule();
     }
  }
  </pre>
@@ -190,7 +190,7 @@ void vCoRoutineSchedule(void);
 
      for( ;; )
      {
-	  // Co-routine functionality goes here.
+          // Co-routine functionality goes here.
      }
 
      // Must end every co-routine with a call to crEND();
@@ -223,7 +223,7 @@ void vCoRoutineSchedule(void);
 
      for( ;; )
      {
-	  // Co-routine functionality goes here.
+          // Co-routine functionality goes here.
      }
 
      // Must end every co-routine with a call to crEND();
@@ -281,10 +281,10 @@ void vCoRoutineSchedule(void);
 
      for( ;; )
      {
-	// Delay for 200ms.
-	crDELAY( xHandle, xDelayTime );
+        // Delay for 200ms.
+        crDELAY( xHandle, xDelayTime );
 
-	// Do something here.
+        // Do something here.
      }
 
      // Must end every co-routine with a call to crEND();
@@ -302,12 +302,12 @@ void vCoRoutineSchedule(void);
 /**
  * <pre>
  crQUEUE_SEND(
-		  CoRoutineHandle_t xHandle,
-		  QueueHandle_t pxQueue,
-		  void *pvItemToQueue,
-		  TickType_t xTicksToWait,
-		  BaseType_t *pxResult
-	     )</pre>
+                  CoRoutineHandle_t xHandle,
+                  QueueHandle_t pxQueue,
+                  void *pvItemToQueue,
+                  TickType_t xTicksToWait,
+                  BaseType_t *pxResult
+             )</pre>
  *
  * The macro's crQUEUE_SEND() and crQUEUE_RECEIVE() are the co-routine
  * equivalent to the xQueueSend() and xQueueReceive() functions used by tasks.
@@ -361,19 +361,19 @@ void vCoRoutineSchedule(void);
 
     for( ;; )
     {
-	// This assumes the queue has already been created.
-	crQUEUE_SEND( xHandle, xCoRoutineQueue, &xNumberToPost, NO_DELAY, &xResult );
+        // This assumes the queue has already been created.
+        crQUEUE_SEND( xHandle, xCoRoutineQueue, &xNumberToPost, NO_DELAY, &xResult );
 
-	if( xResult != pdPASS )
-	{
-	    // The message was not posted!
-	}
+        if( xResult != pdPASS )
+        {
+            // The message was not posted!
+        }
 
-	// Increment the number to be posted onto the queue.
-	xNumberToPost++;
+        // Increment the number to be posted onto the queue.
+        xNumberToPost++;
 
-	// Delay for 100 ticks.
-	crDELAY( xHandle, 100 );
+        // Delay for 100 ticks.
+        crDELAY( xHandle, 100 );
     }
 
     // Co-routines must end with a call to crEND().
@@ -399,12 +399,12 @@ void vCoRoutineSchedule(void);
  * croutine. h
  * <pre>
   crQUEUE_RECEIVE(
-		     CoRoutineHandle_t xHandle,
-		     QueueHandle_t pxQueue,
-		     void *pvBuffer,
-		     TickType_t xTicksToWait,
-		     BaseType_t *pxResult
-		 )</pre>
+                     CoRoutineHandle_t xHandle,
+                     QueueHandle_t pxQueue,
+                     void *pvBuffer,
+                     TickType_t xTicksToWait,
+                     BaseType_t *pxResult
+                 )</pre>
  *
  * The macro's crQUEUE_SEND() and crQUEUE_RECEIVE() are the co-routine
  * equivalent to the xQueueSend() and xQueueReceive() functions used by tasks.
@@ -457,14 +457,14 @@ void vCoRoutineSchedule(void);
 
     for( ;; )
     {
-	// Wait for data to become available on the queue.
-	crQUEUE_RECEIVE( xHandle, xCoRoutineQueue, &uxLEDToFlash, portMAX_DELAY, &xResult );
+        // Wait for data to become available on the queue.
+        crQUEUE_RECEIVE( xHandle, xCoRoutineQueue, &uxLEDToFlash, portMAX_DELAY, &xResult );
 
-	if( xResult == pdPASS )
-	{
-	    // We received the LED to flash - flash it!
-	    vParTestToggleLED( uxLEDToFlash );
-	}
+        if( xResult == pdPASS )
+        {
+            // We received the LED to flash - flash it!
+            vParTestToggleLED( uxLEDToFlash );
+        }
     }
 
     crEND();
@@ -489,10 +489,10 @@ void vCoRoutineSchedule(void);
  * croutine. h
  * <pre>
   crQUEUE_SEND_FROM_ISR(
-			    QueueHandle_t pxQueue,
-			    void *pvItemToQueue,
-			    BaseType_t xCoRoutinePreviouslyWoken
-		       )</pre>
+                            QueueHandle_t pxQueue,
+                            void *pvItemToQueue,
+                            BaseType_t xCoRoutinePreviouslyWoken
+                       )</pre>
  *
  * The macro's crQUEUE_SEND_FROM_ISR() and crQUEUE_RECEIVE_FROM_ISR() are the
  * co-routine equivalent to the xQueueSendFromISR() and xQueueReceiveFromISR()
@@ -539,15 +539,15 @@ void vCoRoutineSchedule(void);
 
      for( ;; )
      {
-	 // Wait for data to become available on the queue.  This assumes the
-	 // queue xCommsRxQueue has already been created!
-	 crQUEUE_RECEIVE( xHandle, xCommsRxQueue, &uxLEDToFlash, portMAX_DELAY, &xResult );
+         // Wait for data to become available on the queue.  This assumes the
+         // queue xCommsRxQueue has already been created!
+         crQUEUE_RECEIVE( xHandle, xCommsRxQueue, &uxLEDToFlash, portMAX_DELAY, &xResult );
 
-	 // Was a character received?
-	 if( xResult == pdPASS )
-	 {
-	     // Process the character here.
-	 }
+         // Was a character received?
+         if( xResult == pdPASS )
+         {
+             // Process the character here.
+         }
      }
 
      // All co-routines must end with a call to crEND().
@@ -564,16 +564,16 @@ void vCoRoutineSchedule(void);
      // We loop around reading characters until there are none left in the UART.
      while( UART_RX_REG_NOT_EMPTY() )
      {
-	 // Obtain the character from the UART.
-	 cRxedChar = UART_RX_REG;
+         // Obtain the character from the UART.
+         cRxedChar = UART_RX_REG;
 
-	 // Post the character onto a queue.  xCRWokenByPost will be pdFALSE
-	 // the first time around the loop.  If the post causes a co-routine
-	 // to be woken (unblocked) then xCRWokenByPost will be set to pdTRUE.
-	 // In this manner we can ensure that if more than one co-routine is
-	 // blocked on the queue only one is woken by this ISR no matter how
-	 // many characters are posted to the queue.
-	 xCRWokenByPost = crQUEUE_SEND_FROM_ISR( xCommsRxQueue, &cRxedChar, xCRWokenByPost );
+         // Post the character onto a queue.  xCRWokenByPost will be pdFALSE
+         // the first time around the loop.  If the post causes a co-routine
+         // to be woken (unblocked) then xCRWokenByPost will be set to pdTRUE.
+         // In this manner we can ensure that if more than one co-routine is
+         // blocked on the queue only one is woken by this ISR no matter how
+         // many characters are posted to the queue.
+         xCRWokenByPost = crQUEUE_SEND_FROM_ISR( xCommsRxQueue, &cRxedChar, xCRWokenByPost );
      }
  }</pre>
  * \defgroup crQUEUE_SEND_FROM_ISR crQUEUE_SEND_FROM_ISR
@@ -585,10 +585,10 @@ void vCoRoutineSchedule(void);
  * croutine. h
  * <pre>
   crQUEUE_SEND_FROM_ISR(
-			    QueueHandle_t pxQueue,
-			    void *pvBuffer,
-			    BaseType_t * pxCoRoutineWoken
-		       )</pre>
+                            QueueHandle_t pxQueue,
+                            void *pvBuffer,
+                            BaseType_t * pxCoRoutineWoken
+                       )</pre>
  *
  * The macro's crQUEUE_SEND_FROM_ISR() and crQUEUE_RECEIVE_FROM_ISR() are the
  * co-routine equivalent to the xQueueSendFromISR() and xQueueReceiveFromISR()
@@ -638,19 +638,19 @@ void vCoRoutineSchedule(void);
 
      for( ;; )
      {
-	 // Send the next character to the queue.
-	 crQUEUE_SEND( xHandle, xCoRoutineQueue, &cCharToTx, NO_DELAY, &xResult );
+         // Send the next character to the queue.
+         crQUEUE_SEND( xHandle, xCoRoutineQueue, &cCharToTx, NO_DELAY, &xResult );
 
-	 if( xResult == pdPASS )
-	 {
-	     // The character was successfully posted to the queue.
-	 }
+         if( xResult == pdPASS )
+         {
+             // The character was successfully posted to the queue.
+         }
 		 else
 		 {
 			// Could not post the character to the queue.
 		 }
 
-	 // Enable the UART Tx interrupt to cause an interrupt in this
+         // Enable the UART Tx interrupt to cause an interrupt in this
 		 // hypothetical UART.  The interrupt will obtain the character
 		 // from the queue and send it.
 		 ENABLE_RX_INTERRUPT();
@@ -678,11 +678,11 @@ void vCoRoutineSchedule(void);
 
      while( UART_TX_REG_EMPTY() )
      {
-	 // Are there any characters in the queue waiting to be sent?
+         // Are there any characters in the queue waiting to be sent?
 		 // xCRWokenByPost will automatically be set to pdTRUE if a co-routine
 		 // is woken by the post - ensuring that only a single co-routine is
 		 // woken no matter how many times we go around this loop.
-	 if( crQUEUE_RECEIVE_FROM_ISR( pxQueue, &cCharToTx, &xCRWokenByPost ) )
+         if( crQUEUE_RECEIVE_FROM_ISR( pxQueue, &cCharToTx, &xCRWokenByPost ) )
 		 {
 			 SEND_CHARACTER( cCharToTx );
 		 }

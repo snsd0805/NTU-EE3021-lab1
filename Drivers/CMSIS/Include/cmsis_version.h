@@ -1,9 +1,9 @@
 /**************************************************************************/ /**
-									      * @file     cmsis_version.h
-									      * @brief    CMSIS Core(M) Version definitions
-									      * @version  V5.0.3
-									      * @date     24. June 2019
-									      ******************************************************************************/
+ * @file     cmsis_version.h
+ * @brief    CMSIS Core(M) Version definitions
+ * @version  V5.0.3
+ * @date     24. June 2019
+ ******************************************************************************/
 /*
  * Copyright (c) 2009-2019 ARM Limited. All rights reserved.
  *

@@ -29,7 +29,7 @@
   ******************************************************************************
   @verbatim
   ==============================================================================
-		     ##### How to use this driver #####
+                     ##### How to use this driver #####
   ==============================================================================
   [..]
     *** Channel initialization ***
@@ -37,52 +37,52 @@
     [..]
       (#) User has first to initialize channels (before filters initialization).
       (#) As prerequisite, fill in the HAL_DFSDM_ChannelMspInit() :
-	(++) Enable DFSDMz clock interface with __HAL_RCC_DFSDMz_CLK_ENABLE().
-	(++) Enable the clocks for the DFSDMz GPIOS with __HAL_RCC_GPIOx_CLK_ENABLE().
-	(++) Configure these DFSDMz pins in alternate mode using HAL_GPIO_Init().
-	(++) If interrupt mode is used, enable and configure DFSDMz_FLT0 global
-	    interrupt with HAL_NVIC_SetPriority() and HAL_NVIC_EnableIRQ().
+        (++) Enable DFSDMz clock interface with __HAL_RCC_DFSDMz_CLK_ENABLE().
+        (++) Enable the clocks for the DFSDMz GPIOS with __HAL_RCC_GPIOx_CLK_ENABLE().
+        (++) Configure these DFSDMz pins in alternate mode using HAL_GPIO_Init().
+        (++) If interrupt mode is used, enable and configure DFSDMz_FLT0 global
+            interrupt with HAL_NVIC_SetPriority() and HAL_NVIC_EnableIRQ().
       (#) Configure the output clock, input, serial interface, analog watchdog,
-	  offset and data right bit shift parameters for this channel using the
-	  HAL_DFSDM_ChannelInit() function.
+          offset and data right bit shift parameters for this channel using the
+          HAL_DFSDM_ChannelInit() function.
 
     *** Channel clock absence detector ***
     ======================================
     [..]
       (#) Start clock absence detector using HAL_DFSDM_ChannelCkabStart() or
-	  HAL_DFSDM_ChannelCkabStart_IT().
+          HAL_DFSDM_ChannelCkabStart_IT().
       (#) In polling mode, use HAL_DFSDM_ChannelPollForCkab() to detect the clock
-	  absence.
+          absence.
       (#) In interrupt mode, HAL_DFSDM_ChannelCkabCallback() will be called if
-	  clock absence is detected.
+          clock absence is detected.
       (#) Stop clock absence detector using HAL_DFSDM_ChannelCkabStop() or
-	  HAL_DFSDM_ChannelCkabStop_IT().
+          HAL_DFSDM_ChannelCkabStop_IT().
       (#) Please note that the same mode (polling or interrupt) has to be used
-	  for all channels because the channels are sharing the same interrupt.
+          for all channels because the channels are sharing the same interrupt.
       (#) Please note also that in interrupt mode, if clock absence detector is
-	  stopped for one channel, interrupt will be disabled for all channels.
+          stopped for one channel, interrupt will be disabled for all channels.
 
     *** Channel short circuit detector ***
     ======================================
     [..]
       (#) Start short circuit detector using HAL_DFSDM_ChannelScdStart() or
-	  or HAL_DFSDM_ChannelScdStart_IT().
+          or HAL_DFSDM_ChannelScdStart_IT().
       (#) In polling mode, use HAL_DFSDM_ChannelPollForScd() to detect short
-	  circuit.
+          circuit.
       (#) In interrupt mode, HAL_DFSDM_ChannelScdCallback() will be called if
-	  short circuit is detected.
+          short circuit is detected.
       (#) Stop short circuit detector using HAL_DFSDM_ChannelScdStop() or
-	  or HAL_DFSDM_ChannelScdStop_IT().
+          or HAL_DFSDM_ChannelScdStop_IT().
       (#) Please note that the same mode (polling or interrupt) has to be used
-	  for all channels because the channels are sharing the same interrupt.
+          for all channels because the channels are sharing the same interrupt.
       (#) Please note also that in interrupt mode, if short circuit detector is
-	  stopped for one channel, interrupt will be disabled for all channels.
+          stopped for one channel, interrupt will be disabled for all channels.
 
     *** Channel analog watchdog value ***
     =====================================
     [..]
       (#) Get analog watchdog filter value of a channel using
-	  HAL_DFSDM_ChannelGetAwdValue().
+          HAL_DFSDM_ChannelGetAwdValue().
 
     *** Channel offset value ***
     =====================================
@@ -94,57 +94,57 @@
     [..]
       (#) After channel initialization, user has to init filters.
       (#) As prerequisite, fill in the HAL_DFSDM_FilterMspInit() :
-	(++) If interrupt mode is used , enable and configure DFSDMz_FLTx global
-	    interrupt with HAL_NVIC_SetPriority() and HAL_NVIC_EnableIRQ().
-	    Please note that DFSDMz_FLT0 global interrupt could be already
-	    enabled if interrupt is used for channel.
-	(++) If DMA mode is used, configure DMA with HAL_DMA_Init() and link it
-	    with DFSDMz filter handle using __HAL_LINKDMA().
+        (++) If interrupt mode is used , enable and configure DFSDMz_FLTx global
+            interrupt with HAL_NVIC_SetPriority() and HAL_NVIC_EnableIRQ().
+            Please note that DFSDMz_FLT0 global interrupt could be already
+            enabled if interrupt is used for channel.
+        (++) If DMA mode is used, configure DMA with HAL_DMA_Init() and link it
+            with DFSDMz filter handle using __HAL_LINKDMA().
       (#) Configure the regular conversion, injected conversion and filter
-	  parameters for this filter using the HAL_DFSDM_FilterInit() function.
+          parameters for this filter using the HAL_DFSDM_FilterInit() function.
 
     *** Filter regular channel conversion ***
     =========================================
     [..]
       (#) Select regular channel and enable/disable continuous mode using
-	  HAL_DFSDM_FilterConfigRegChannel().
+          HAL_DFSDM_FilterConfigRegChannel().
       (#) Start regular conversion using HAL_DFSDM_FilterRegularStart(),
-	  HAL_DFSDM_FilterRegularStart_IT(), HAL_DFSDM_FilterRegularStart_DMA() or
-	  HAL_DFSDM_FilterRegularMsbStart_DMA().
+          HAL_DFSDM_FilterRegularStart_IT(), HAL_DFSDM_FilterRegularStart_DMA() or
+          HAL_DFSDM_FilterRegularMsbStart_DMA().
       (#) In polling mode, use HAL_DFSDM_FilterPollForRegConversion() to detect
-	  the end of regular conversion.
+          the end of regular conversion.
       (#) In interrupt mode, HAL_DFSDM_FilterRegConvCpltCallback() will be called
-	  at the end of regular conversion.
+          at the end of regular conversion.
       (#) Get value of regular conversion and corresponding channel using
-	  HAL_DFSDM_FilterGetRegularValue().
+          HAL_DFSDM_FilterGetRegularValue().
       (#) In DMA mode, HAL_DFSDM_FilterRegConvHalfCpltCallback() and
-	  HAL_DFSDM_FilterRegConvCpltCallback() will be called respectively at the
-	  half transfer and at the transfer complete. Please note that
-	  HAL_DFSDM_FilterRegConvHalfCpltCallback() will be called only in DMA
-	  circular mode.
+          HAL_DFSDM_FilterRegConvCpltCallback() will be called respectively at the
+          half transfer and at the transfer complete. Please note that
+          HAL_DFSDM_FilterRegConvHalfCpltCallback() will be called only in DMA
+          circular mode.
       (#) Stop regular conversion using HAL_DFSDM_FilterRegularStop(),
-	  HAL_DFSDM_FilterRegularStop_IT() or HAL_DFSDM_FilterRegularStop_DMA().
+          HAL_DFSDM_FilterRegularStop_IT() or HAL_DFSDM_FilterRegularStop_DMA().
 
     *** Filter injected channels conversion ***
     ===========================================
     [..]
       (#) Select injected channels using HAL_DFSDM_FilterConfigInjChannel().
       (#) Start injected conversion using HAL_DFSDM_FilterInjectedStart(),
-	  HAL_DFSDM_FilterInjectedStart_IT(), HAL_DFSDM_FilterInjectedStart_DMA() or
-	  HAL_DFSDM_FilterInjectedMsbStart_DMA().
+          HAL_DFSDM_FilterInjectedStart_IT(), HAL_DFSDM_FilterInjectedStart_DMA() or
+          HAL_DFSDM_FilterInjectedMsbStart_DMA().
       (#) In polling mode, use HAL_DFSDM_FilterPollForInjConversion() to detect
-	  the end of injected conversion.
+          the end of injected conversion.
       (#) In interrupt mode, HAL_DFSDM_FilterInjConvCpltCallback() will be called
-	  at the end of injected conversion.
+          at the end of injected conversion.
       (#) Get value of injected conversion and corresponding channel using
-	  HAL_DFSDM_FilterGetInjectedValue().
+          HAL_DFSDM_FilterGetInjectedValue().
       (#) In DMA mode, HAL_DFSDM_FilterInjConvHalfCpltCallback() and
-	  HAL_DFSDM_FilterInjConvCpltCallback() will be called respectively at the
-	  half transfer and at the transfer complete. Please note that
-	  HAL_DFSDM_FilterInjConvCpltCallback() will be called only in DMA
-	  circular mode.
+          HAL_DFSDM_FilterInjConvCpltCallback() will be called respectively at the
+          half transfer and at the transfer complete. Please note that
+          HAL_DFSDM_FilterInjConvCpltCallback() will be called only in DMA
+          circular mode.
       (#) Stop injected conversion using HAL_DFSDM_FilterInjectedStop(),
-	  HAL_DFSDM_FilterInjectedStop_IT() or HAL_DFSDM_FilterInjectedStop_DMA().
+          HAL_DFSDM_FilterInjectedStop_IT() or HAL_DFSDM_FilterInjectedStop_DMA().
 
     *** Filter analog watchdog ***
     ==============================
@@ -268,8 +268,8 @@
 #include "stm32l4xx_hal.h"
 
 /** @addtogroup STM32L4xx_HAL_Driver
- * @{
- */
+  * @{
+  */
 #ifdef HAL_DFSDM_MODULE_ENABLED
 
 #if defined(STM32L451xx) || defined(STM32L452xx) || defined(STM32L462xx) ||                                                                         \
@@ -279,9 +279,9 @@
     defined(STM32L4P5xx) || defined(STM32L4Q5xx)
 
 /** @defgroup DFSDM DFSDM
- * @brief DFSDM HAL driver module
- * @{
- */
+  * @brief DFSDM HAL driver module
+  * @{
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -299,24 +299,24 @@
 #define DFSDM1_CHANNEL_NUMBER 8U
 #endif /* STM32L451xx || STM32L452xx || STM32L462xx || STM32L4P5xx || STM32L4Q5xx */
 /**
- * @}
- */
+  * @}
+  */
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 /** @defgroup DFSDM_Private_Variables DFSDM Private Variables
- * @{
- */
+  * @{
+  */
 static __IO uint32_t v_dfsdm1ChannelCounter = 0;
 static DFSDM_Channel_HandleTypeDef *a_dfsdm1ChannelHandle[DFSDM1_CHANNEL_NUMBER] = {NULL};
 /**
- * @}
- */
+  * @}
+  */
 
 /* Private function prototypes -----------------------------------------------*/
 /** @defgroup DFSDM_Private_Functions DFSDM Private Functions
- * @{
- */
+  * @{
+  */
 static uint32_t DFSDM_GetInjChannelsNbr(uint32_t Channels);
 static uint32_t DFSDM_GetChannelFromInstance(const DFSDM_Channel_TypeDef *Instance);
 static void DFSDM_RegConvStart(DFSDM_Filter_HandleTypeDef *hdfsdm_filter);
@@ -329,20 +329,20 @@ static void DFSDM_DMAInjectedHalfConvCplt(DMA_HandleTypeDef *hdma);
 static void DFSDM_DMAInjectedConvCplt(DMA_HandleTypeDef *hdma);
 static void DFSDM_DMAError(DMA_HandleTypeDef *hdma);
 /**
- * @}
- */
+  * @}
+  */
 
 /* Exported functions --------------------------------------------------------*/
 /** @defgroup DFSDM_Exported_Functions DFSDM Exported Functions
- * @{
- */
+  * @{
+  */
 
 /** @defgroup DFSDM_Exported_Functions_Group1_Channel Channel initialization and de-initialization functions
  *  @brief    Channel initialization and de-initialization functions
  *
 @verbatim
   ==============================================================================
-	##### Channel initialization and de-initialization functions #####
+        ##### Channel initialization and de-initialization functions #####
   ==============================================================================
     [..]  This section provides functions allowing to:
       (+) Initialize the DFSDM channel.
@@ -352,11 +352,11 @@ static void DFSDM_DMAError(DMA_HandleTypeDef *hdma);
   */
 
 /**
- * @brief  Initialize the DFSDM channel according to the specified parameters
- *         in the DFSDM_ChannelInitTypeDef structure and initialize the associated handle.
- * @param  hdfsdm_channel DFSDM channel handle.
- * @retval HAL status.
- */
+  * @brief  Initialize the DFSDM channel according to the specified parameters
+  *         in the DFSDM_ChannelInitTypeDef structure and initialize the associated handle.
+  * @param  hdfsdm_channel DFSDM channel handle.
+  * @retval HAL status.
+  */
 HAL_StatusTypeDef HAL_DFSDM_ChannelInit(DFSDM_Channel_HandleTypeDef *hdfsdm_channel) {
     /* Check DFSDM Channel handle */
     if (hdfsdm_channel == NULL) {
@@ -453,10 +453,10 @@ HAL_StatusTypeDef HAL_DFSDM_ChannelInit(DFSDM_Channel_HandleTypeDef *hdfsdm_chan
 }
 
 /**
- * @brief  De-initialize the DFSDM channel.
- * @param  hdfsdm_channel DFSDM channel handle.
- * @retval HAL status.
- */
+  * @brief  De-initialize the DFSDM channel.
+  * @param  hdfsdm_channel DFSDM channel handle.
+  * @retval HAL status.
+  */
 HAL_StatusTypeDef HAL_DFSDM_ChannelDeInit(DFSDM_Channel_HandleTypeDef *hdfsdm_channel) {
     /* Check DFSDM Channel handle */
     if (hdfsdm_channel == NULL) {
@@ -502,47 +502,47 @@ HAL_StatusTypeDef HAL_DFSDM_ChannelDeInit(DFSDM_Channel_HandleTypeDef *hdfsdm_ch
 }
 
 /**
- * @brief  Initialize the DFSDM channel MSP.
- * @param  hdfsdm_channel DFSDM channel handle.
- * @retval None
- */
+  * @brief  Initialize the DFSDM channel MSP.
+  * @param  hdfsdm_channel DFSDM channel handle.
+  * @retval None
+  */
 __weak void HAL_DFSDM_ChannelMspInit(DFSDM_Channel_HandleTypeDef *hdfsdm_channel) {
     /* Prevent unused argument(s) compilation warning */
     UNUSED(hdfsdm_channel);
 
     /* NOTE : This function should not be modified, when the function is needed,
-	      the HAL_DFSDM_ChannelMspInit could be implemented in the user file.
-     */
+            the HAL_DFSDM_ChannelMspInit could be implemented in the user file.
+   */
 }
 
 /**
- * @brief  De-initialize the DFSDM channel MSP.
- * @param  hdfsdm_channel DFSDM channel handle.
- * @retval None
- */
+  * @brief  De-initialize the DFSDM channel MSP.
+  * @param  hdfsdm_channel DFSDM channel handle.
+  * @retval None
+  */
 __weak void HAL_DFSDM_ChannelMspDeInit(DFSDM_Channel_HandleTypeDef *hdfsdm_channel) {
     /* Prevent unused argument(s) compilation warning */
     UNUSED(hdfsdm_channel);
 
     /* NOTE : This function should not be modified, when the function is needed,
-	      the HAL_DFSDM_ChannelMspDeInit could be implemented in the user file.
-     */
+            the HAL_DFSDM_ChannelMspDeInit could be implemented in the user file.
+   */
 }
 
 #if (USE_HAL_DFSDM_REGISTER_CALLBACKS == 1)
 /**
- * @brief  Register a user DFSDM channel callback
- *         to be used instead of the weak predefined callback.
- * @param  hdfsdm_channel DFSDM channel handle.
- * @param  CallbackID ID of the callback to be registered.
- *         This parameter can be one of the following values:
- *           @arg @ref HAL_DFSDM_CHANNEL_CKAB_CB_ID clock absence detection callback ID.
- *           @arg @ref HAL_DFSDM_CHANNEL_SCD_CB_ID short circuit detection callback ID.
- *           @arg @ref HAL_DFSDM_CHANNEL_MSPINIT_CB_ID MSP init callback ID.
- *           @arg @ref HAL_DFSDM_CHANNEL_MSPDEINIT_CB_ID MSP de-init callback ID.
- * @param  pCallback pointer to the callback function.
- * @retval HAL status.
- */
+  * @brief  Register a user DFSDM channel callback
+  *         to be used instead of the weak predefined callback.
+  * @param  hdfsdm_channel DFSDM channel handle.
+  * @param  CallbackID ID of the callback to be registered.
+  *         This parameter can be one of the following values:
+  *           @arg @ref HAL_DFSDM_CHANNEL_CKAB_CB_ID clock absence detection callback ID.
+  *           @arg @ref HAL_DFSDM_CHANNEL_SCD_CB_ID short circuit detection callback ID.
+  *           @arg @ref HAL_DFSDM_CHANNEL_MSPINIT_CB_ID MSP init callback ID.
+  *           @arg @ref HAL_DFSDM_CHANNEL_MSPDEINIT_CB_ID MSP de-init callback ID.
+  * @param  pCallback pointer to the callback function.
+  * @retval HAL status.
+  */
 HAL_StatusTypeDef HAL_DFSDM_Channel_RegisterCallback(DFSDM_Channel_HandleTypeDef *hdfsdm_channel,
 						     HAL_DFSDM_Channel_CallbackIDTypeDef CallbackID,
 						     pDFSDM_Channel_CallbackTypeDef pCallback) {
@@ -593,17 +593,17 @@ HAL_StatusTypeDef HAL_DFSDM_Channel_RegisterCallback(DFSDM_Channel_HandleTypeDef
 }
 
 /**
- * @brief  Unregister a user DFSDM channel callback.
- *         DFSDM channel callback is redirected to the weak predefined callback.
- * @param  hdfsdm_channel DFSDM channel handle.
- * @param  CallbackID ID of the callback to be unregistered.
- *         This parameter can be one of the following values:
- *           @arg @ref HAL_DFSDM_CHANNEL_CKAB_CB_ID clock absence detection callback ID.
- *           @arg @ref HAL_DFSDM_CHANNEL_SCD_CB_ID short circuit detection callback ID.
- *           @arg @ref HAL_DFSDM_CHANNEL_MSPINIT_CB_ID MSP init callback ID.
- *           @arg @ref HAL_DFSDM_CHANNEL_MSPDEINIT_CB_ID MSP de-init callback ID.
- * @retval HAL status.
- */
+  * @brief  Unregister a user DFSDM channel callback.
+  *         DFSDM channel callback is redirected to the weak predefined callback.
+  * @param  hdfsdm_channel DFSDM channel handle.
+  * @param  CallbackID ID of the callback to be unregistered.
+  *         This parameter can be one of the following values:
+  *           @arg @ref HAL_DFSDM_CHANNEL_CKAB_CB_ID clock absence detection callback ID.
+  *           @arg @ref HAL_DFSDM_CHANNEL_SCD_CB_ID short circuit detection callback ID.
+  *           @arg @ref HAL_DFSDM_CHANNEL_MSPINIT_CB_ID MSP init callback ID.
+  *           @arg @ref HAL_DFSDM_CHANNEL_MSPDEINIT_CB_ID MSP de-init callback ID.
+  * @retval HAL status.
+  */
 HAL_StatusTypeDef HAL_DFSDM_Channel_UnRegisterCallback(DFSDM_Channel_HandleTypeDef *hdfsdm_channel,
 						       HAL_DFSDM_Channel_CallbackIDTypeDef CallbackID) {
     HAL_StatusTypeDef status = HAL_OK;
@@ -649,15 +649,15 @@ HAL_StatusTypeDef HAL_DFSDM_Channel_UnRegisterCallback(DFSDM_Channel_HandleTypeD
 #endif /* USE_HAL_DFSDM_REGISTER_CALLBACKS */
 
 /**
- * @}
- */
+  * @}
+  */
 
 /** @defgroup DFSDM_Exported_Functions_Group2_Channel Channel operation functions
  *  @brief    Channel operation functions
  *
 @verbatim
   ==============================================================================
-		   ##### Channel operation functions #####
+                   ##### Channel operation functions #####
   ==============================================================================
     [..]  This section provides functions allowing to:
       (+) Manage clock absence detector feature.
@@ -669,14 +669,14 @@ HAL_StatusTypeDef HAL_DFSDM_Channel_UnRegisterCallback(DFSDM_Channel_HandleTypeD
   */
 
 /**
- * @brief  This function allows to start clock absence detection in polling mode.
- * @note   Same mode has to be used for all channels.
- * @note   If clock is not available on this channel during 5 seconds,
- *         clock absence detection will not be activated and function
- *         will return HAL_TIMEOUT error.
- * @param  hdfsdm_channel DFSDM channel handle.
- * @retval HAL status
- */
+  * @brief  This function allows to start clock absence detection in polling mode.
+  * @note   Same mode has to be used for all channels.
+  * @note   If clock is not available on this channel during 5 seconds,
+  *         clock absence detection will not be activated and function
+  *         will return HAL_TIMEOUT error.
+  * @param  hdfsdm_channel DFSDM channel handle.
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_DFSDM_ChannelCkabStart(DFSDM_Channel_HandleTypeDef *hdfsdm_channel) {
     HAL_StatusTypeDef status = HAL_OK;
     uint32_t channel;
@@ -718,11 +718,11 @@ HAL_StatusTypeDef HAL_DFSDM_ChannelCkabStart(DFSDM_Channel_HandleTypeDef *hdfsdm
 }
 
 /**
- * @brief  This function allows to poll for the clock absence detection.
- * @param  hdfsdm_channel DFSDM channel handle.
- * @param  Timeout Timeout value in milliseconds.
- * @retval HAL status
- */
+  * @brief  This function allows to poll for the clock absence detection.
+  * @param  hdfsdm_channel DFSDM channel handle.
+  * @param  Timeout Timeout value in milliseconds.
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_DFSDM_ChannelPollForCkab(const DFSDM_Channel_HandleTypeDef *hdfsdm_channel,
 					       uint32_t Timeout) {
     uint32_t tickstart;
@@ -762,10 +762,10 @@ HAL_StatusTypeDef HAL_DFSDM_ChannelPollForCkab(const DFSDM_Channel_HandleTypeDef
 }
 
 /**
- * @brief  This function allows to stop clock absence detection in polling mode.
- * @param  hdfsdm_channel DFSDM channel handle.
- * @retval HAL status
- */
+  * @brief  This function allows to stop clock absence detection in polling mode.
+  * @param  hdfsdm_channel DFSDM channel handle.
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_DFSDM_ChannelCkabStop(DFSDM_Channel_HandleTypeDef *hdfsdm_channel) {
     HAL_StatusTypeDef status = HAL_OK;
     uint32_t channel;
@@ -790,14 +790,14 @@ HAL_StatusTypeDef HAL_DFSDM_ChannelCkabStop(DFSDM_Channel_HandleTypeDef *hdfsdm_
 }
 
 /**
- * @brief  This function allows to start clock absence detection in interrupt mode.
- * @note   Same mode has to be used for all channels.
- * @note   If clock is not available on this channel during 5 seconds,
- *         clock absence detection will not be activated and function
- *         will return HAL_TIMEOUT error.
- * @param  hdfsdm_channel DFSDM channel handle.
- * @retval HAL status
- */
+  * @brief  This function allows to start clock absence detection in interrupt mode.
+  * @note   Same mode has to be used for all channels.
+  * @note   If clock is not available on this channel during 5 seconds,
+  *         clock absence detection will not be activated and function
+  *         will return HAL_TIMEOUT error.
+  * @param  hdfsdm_channel DFSDM channel handle.
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_DFSDM_ChannelCkabStart_IT(DFSDM_Channel_HandleTypeDef *hdfsdm_channel) {
     HAL_StatusTypeDef status = HAL_OK;
     uint32_t channel;
@@ -842,25 +842,25 @@ HAL_StatusTypeDef HAL_DFSDM_ChannelCkabStart_IT(DFSDM_Channel_HandleTypeDef *hdf
 }
 
 /**
- * @brief  Clock absence detection callback.
- * @param  hdfsdm_channel DFSDM channel handle.
- * @retval None
- */
+  * @brief  Clock absence detection callback.
+  * @param  hdfsdm_channel DFSDM channel handle.
+  * @retval None
+  */
 __weak void HAL_DFSDM_ChannelCkabCallback(DFSDM_Channel_HandleTypeDef *hdfsdm_channel) {
     /* Prevent unused argument(s) compilation warning */
     UNUSED(hdfsdm_channel);
 
     /* NOTE : This function should not be modified, when the callback is needed,
-	      the HAL_DFSDM_ChannelCkabCallback could be implemented in the user file
-     */
+            the HAL_DFSDM_ChannelCkabCallback could be implemented in the user file
+   */
 }
 
 /**
- * @brief  This function allows to stop clock absence detection in interrupt mode.
- * @note   Interrupt will be disabled for all channels
- * @param  hdfsdm_channel DFSDM channel handle.
- * @retval HAL status
- */
+  * @brief  This function allows to stop clock absence detection in interrupt mode.
+  * @note   Interrupt will be disabled for all channels
+  * @param  hdfsdm_channel DFSDM channel handle.
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_DFSDM_ChannelCkabStop_IT(DFSDM_Channel_HandleTypeDef *hdfsdm_channel) {
     HAL_StatusTypeDef status = HAL_OK;
     uint32_t channel;
@@ -888,15 +888,15 @@ HAL_StatusTypeDef HAL_DFSDM_ChannelCkabStop_IT(DFSDM_Channel_HandleTypeDef *hdfs
 }
 
 /**
- * @brief  This function allows to start short circuit detection in polling mode.
- * @note   Same mode has to be used for all channels
- * @param  hdfsdm_channel DFSDM channel handle.
- * @param  Threshold Short circuit detector threshold.
- *         This parameter must be a number between Min_Data = 0 and Max_Data = 255.
- * @param  BreakSignal Break signals assigned to short circuit event.
- *         This parameter can be a values combination of @ref DFSDM_BreakSignals.
- * @retval HAL status
- */
+  * @brief  This function allows to start short circuit detection in polling mode.
+  * @note   Same mode has to be used for all channels
+  * @param  hdfsdm_channel DFSDM channel handle.
+  * @param  Threshold Short circuit detector threshold.
+  *         This parameter must be a number between Min_Data = 0 and Max_Data = 255.
+  * @param  BreakSignal Break signals assigned to short circuit event.
+  *         This parameter can be a values combination of @ref DFSDM_BreakSignals.
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_DFSDM_ChannelScdStart(DFSDM_Channel_HandleTypeDef *hdfsdm_channel,
 					    uint32_t Threshold,
 					    uint32_t BreakSignal) {
@@ -925,11 +925,11 @@ HAL_StatusTypeDef HAL_DFSDM_ChannelScdStart(DFSDM_Channel_HandleTypeDef *hdfsdm_
 }
 
 /**
- * @brief  This function allows to poll for the short circuit detection.
- * @param  hdfsdm_channel DFSDM channel handle.
- * @param  Timeout Timeout value in milliseconds.
- * @retval HAL status
- */
+  * @brief  This function allows to poll for the short circuit detection.
+  * @param  hdfsdm_channel DFSDM channel handle.
+  * @param  Timeout Timeout value in milliseconds.
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_DFSDM_ChannelPollForScd(const DFSDM_Channel_HandleTypeDef *hdfsdm_channel,
 					      uint32_t Timeout) {
     uint32_t tickstart;
@@ -969,10 +969,10 @@ HAL_StatusTypeDef HAL_DFSDM_ChannelPollForScd(const DFSDM_Channel_HandleTypeDef 
 }
 
 /**
- * @brief  This function allows to stop short circuit detection in polling mode.
- * @param  hdfsdm_channel DFSDM channel handle.
- * @retval HAL status
- */
+  * @brief  This function allows to stop short circuit detection in polling mode.
+  * @param  hdfsdm_channel DFSDM channel handle.
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_DFSDM_ChannelScdStop(DFSDM_Channel_HandleTypeDef *hdfsdm_channel) {
     HAL_StatusTypeDef status = HAL_OK;
     uint32_t channel;
@@ -997,15 +997,15 @@ HAL_StatusTypeDef HAL_DFSDM_ChannelScdStop(DFSDM_Channel_HandleTypeDef *hdfsdm_c
 }
 
 /**
- * @brief  This function allows to start short circuit detection in interrupt mode.
- * @note   Same mode has to be used for all channels
- * @param  hdfsdm_channel DFSDM channel handle.
- * @param  Threshold Short circuit detector threshold.
- *         This parameter must be a number between Min_Data = 0 and Max_Data = 255.
- * @param  BreakSignal Break signals assigned to short circuit event.
- *         This parameter can be a values combination of @ref DFSDM_BreakSignals.
- * @retval HAL status
- */
+  * @brief  This function allows to start short circuit detection in interrupt mode.
+  * @note   Same mode has to be used for all channels
+  * @param  hdfsdm_channel DFSDM channel handle.
+  * @param  Threshold Short circuit detector threshold.
+  *         This parameter must be a number between Min_Data = 0 and Max_Data = 255.
+  * @param  BreakSignal Break signals assigned to short circuit event.
+  *         This parameter can be a values combination of @ref DFSDM_BreakSignals.
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_DFSDM_ChannelScdStart_IT(DFSDM_Channel_HandleTypeDef *hdfsdm_channel,
 					       uint32_t Threshold,
 					       uint32_t BreakSignal) {
@@ -1037,25 +1037,25 @@ HAL_StatusTypeDef HAL_DFSDM_ChannelScdStart_IT(DFSDM_Channel_HandleTypeDef *hdfs
 }
 
 /**
- * @brief  Short circuit detection callback.
- * @param  hdfsdm_channel DFSDM channel handle.
- * @retval None
- */
+  * @brief  Short circuit detection callback.
+  * @param  hdfsdm_channel DFSDM channel handle.
+  * @retval None
+  */
 __weak void HAL_DFSDM_ChannelScdCallback(DFSDM_Channel_HandleTypeDef *hdfsdm_channel) {
     /* Prevent unused argument(s) compilation warning */
     UNUSED(hdfsdm_channel);
 
     /* NOTE : This function should not be modified, when the callback is needed,
-	      the HAL_DFSDM_ChannelScdCallback could be implemented in the user file
-     */
+            the HAL_DFSDM_ChannelScdCallback could be implemented in the user file
+   */
 }
 
 /**
- * @brief  This function allows to stop short circuit detection in interrupt mode.
- * @note   Interrupt will be disabled for all channels
- * @param  hdfsdm_channel DFSDM channel handle.
- * @retval HAL status
- */
+  * @brief  This function allows to stop short circuit detection in interrupt mode.
+  * @note   Interrupt will be disabled for all channels
+  * @param  hdfsdm_channel DFSDM channel handle.
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_DFSDM_ChannelScdStop_IT(DFSDM_Channel_HandleTypeDef *hdfsdm_channel) {
     HAL_StatusTypeDef status = HAL_OK;
     uint32_t channel;
@@ -1083,21 +1083,21 @@ HAL_StatusTypeDef HAL_DFSDM_ChannelScdStop_IT(DFSDM_Channel_HandleTypeDef *hdfsd
 }
 
 /**
- * @brief  This function allows to get channel analog watchdog value.
- * @param  hdfsdm_channel DFSDM channel handle.
- * @retval Channel analog watchdog value.
- */
+  * @brief  This function allows to get channel analog watchdog value.
+  * @param  hdfsdm_channel DFSDM channel handle.
+  * @retval Channel analog watchdog value.
+  */
 int16_t HAL_DFSDM_ChannelGetAwdValue(const DFSDM_Channel_HandleTypeDef *hdfsdm_channel) {
     return (int16_t)hdfsdm_channel->Instance->CHWDATAR;
 }
 
 /**
- * @brief  This function allows to modify channel offset value.
- * @param  hdfsdm_channel DFSDM channel handle.
- * @param  Offset DFSDM channel offset.
- *         This parameter must be a number between Min_Data = -8388608 and Max_Data = 8388607.
- * @retval HAL status.
- */
+  * @brief  This function allows to modify channel offset value.
+  * @param  hdfsdm_channel DFSDM channel handle.
+  * @param  Offset DFSDM channel offset.
+  *         This parameter must be a number between Min_Data = -8388608 and Max_Data = 8388607.
+  * @retval HAL status.
+  */
 HAL_StatusTypeDef HAL_DFSDM_ChannelModifyOffset(DFSDM_Channel_HandleTypeDef *hdfsdm_channel,
 						int32_t Offset) {
     HAL_StatusTypeDef status = HAL_OK;
@@ -1120,15 +1120,15 @@ HAL_StatusTypeDef HAL_DFSDM_ChannelModifyOffset(DFSDM_Channel_HandleTypeDef *hdf
 }
 
 /**
- * @}
- */
+  * @}
+  */
 
 /** @defgroup DFSDM_Exported_Functions_Group3_Channel Channel state function
  *  @brief    Channel state function
  *
 @verbatim
   ==============================================================================
-		   ##### Channel state function #####
+                   ##### Channel state function #####
   ==============================================================================
     [..]  This section provides function allowing to:
       (+) Get channel handle state.
@@ -1137,25 +1137,25 @@ HAL_StatusTypeDef HAL_DFSDM_ChannelModifyOffset(DFSDM_Channel_HandleTypeDef *hdf
   */
 
 /**
- * @brief  This function allows to get the current DFSDM channel handle state.
- * @param  hdfsdm_channel DFSDM channel handle.
- * @retval DFSDM channel state.
- */
+  * @brief  This function allows to get the current DFSDM channel handle state.
+  * @param  hdfsdm_channel DFSDM channel handle.
+  * @retval DFSDM channel state.
+  */
 HAL_DFSDM_Channel_StateTypeDef HAL_DFSDM_ChannelGetState(const DFSDM_Channel_HandleTypeDef *hdfsdm_channel) {
     /* Return DFSDM channel handle state */
     return hdfsdm_channel->State;
 }
 
 /**
- * @}
- */
+  * @}
+  */
 
 /** @defgroup DFSDM_Exported_Functions_Group1_Filter Filter initialization and de-initialization functions
  *  @brief    Filter initialization and de-initialization functions
  *
 @verbatim
   ==============================================================================
-	##### Filter initialization and de-initialization functions #####
+        ##### Filter initialization and de-initialization functions #####
   ==============================================================================
     [..]  This section provides functions allowing to:
       (+) Initialize the DFSDM filter.
@@ -1165,11 +1165,11 @@ HAL_DFSDM_Channel_StateTypeDef HAL_DFSDM_ChannelGetState(const DFSDM_Channel_Han
   */
 
 /**
- * @brief  Initialize the DFSDM filter according to the specified parameters
- *         in the DFSDM_FilterInitTypeDef structure and initialize the associated handle.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @retval HAL status.
- */
+  * @brief  Initialize the DFSDM filter according to the specified parameters
+  *         in the DFSDM_FilterInitTypeDef structure and initialize the associated handle.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @retval HAL status.
+  */
 HAL_StatusTypeDef HAL_DFSDM_FilterInit(DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
     /* Check DFSDM Channel handle */
     if (hdfsdm_filter == NULL) {
@@ -1276,10 +1276,10 @@ HAL_StatusTypeDef HAL_DFSDM_FilterInit(DFSDM_Filter_HandleTypeDef *hdfsdm_filter
 }
 
 /**
- * @brief  De-initializes the DFSDM filter.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @retval HAL status.
- */
+  * @brief  De-initializes the DFSDM filter.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @retval HAL status.
+  */
 HAL_StatusTypeDef HAL_DFSDM_FilterDeInit(DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
     /* Check DFSDM filter handle */
     if (hdfsdm_filter == NULL) {
@@ -1309,50 +1309,50 @@ HAL_StatusTypeDef HAL_DFSDM_FilterDeInit(DFSDM_Filter_HandleTypeDef *hdfsdm_filt
 }
 
 /**
- * @brief  Initializes the DFSDM filter MSP.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @retval None
- */
+  * @brief  Initializes the DFSDM filter MSP.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @retval None
+  */
 __weak void HAL_DFSDM_FilterMspInit(DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
     /* Prevent unused argument(s) compilation warning */
     UNUSED(hdfsdm_filter);
 
     /* NOTE : This function should not be modified, when the function is needed,
-	      the HAL_DFSDM_FilterMspInit could be implemented in the user file.
-     */
+            the HAL_DFSDM_FilterMspInit could be implemented in the user file.
+   */
 }
 
 /**
- * @brief  De-initializes the DFSDM filter MSP.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @retval None
- */
+  * @brief  De-initializes the DFSDM filter MSP.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @retval None
+  */
 __weak void HAL_DFSDM_FilterMspDeInit(DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
     /* Prevent unused argument(s) compilation warning */
     UNUSED(hdfsdm_filter);
 
     /* NOTE : This function should not be modified, when the function is needed,
-	      the HAL_DFSDM_FilterMspDeInit could be implemented in the user file.
-     */
+            the HAL_DFSDM_FilterMspDeInit could be implemented in the user file.
+   */
 }
 
 #if (USE_HAL_DFSDM_REGISTER_CALLBACKS == 1)
 /**
- * @brief  Register a user DFSDM filter callback
- *         to be used instead of the weak predefined callback.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @param  CallbackID ID of the callback to be registered.
- *         This parameter can be one of the following values:
- *           @arg @ref HAL_DFSDM_FILTER_REGCONV_COMPLETE_CB_ID regular conversion complete callback ID.
- *           @arg @ref HAL_DFSDM_FILTER_REGCONV_HALFCOMPLETE_CB_ID half regular conversion complete callback ID.
- *           @arg @ref HAL_DFSDM_FILTER_INJCONV_COMPLETE_CB_ID injected conversion complete callback ID.
- *           @arg @ref HAL_DFSDM_FILTER_INJCONV_HALFCOMPLETE_CB_ID half injected conversion complete callback ID.
- *           @arg @ref HAL_DFSDM_FILTER_ERROR_CB_ID error callback ID.
- *           @arg @ref HAL_DFSDM_FILTER_MSPINIT_CB_ID MSP init callback ID.
- *           @arg @ref HAL_DFSDM_FILTER_MSPDEINIT_CB_ID MSP de-init callback ID.
- * @param  pCallback pointer to the callback function.
- * @retval HAL status.
- */
+  * @brief  Register a user DFSDM filter callback
+  *         to be used instead of the weak predefined callback.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @param  CallbackID ID of the callback to be registered.
+  *         This parameter can be one of the following values:
+  *           @arg @ref HAL_DFSDM_FILTER_REGCONV_COMPLETE_CB_ID regular conversion complete callback ID.
+  *           @arg @ref HAL_DFSDM_FILTER_REGCONV_HALFCOMPLETE_CB_ID half regular conversion complete callback ID.
+  *           @arg @ref HAL_DFSDM_FILTER_INJCONV_COMPLETE_CB_ID injected conversion complete callback ID.
+  *           @arg @ref HAL_DFSDM_FILTER_INJCONV_HALFCOMPLETE_CB_ID half injected conversion complete callback ID.
+  *           @arg @ref HAL_DFSDM_FILTER_ERROR_CB_ID error callback ID.
+  *           @arg @ref HAL_DFSDM_FILTER_MSPINIT_CB_ID MSP init callback ID.
+  *           @arg @ref HAL_DFSDM_FILTER_MSPDEINIT_CB_ID MSP de-init callback ID.
+  * @param  pCallback pointer to the callback function.
+  * @retval HAL status.
+  */
 HAL_StatusTypeDef HAL_DFSDM_Filter_RegisterCallback(DFSDM_Filter_HandleTypeDef *hdfsdm_filter,
 						    HAL_DFSDM_Filter_CallbackIDTypeDef CallbackID,
 						    pDFSDM_Filter_CallbackTypeDef pCallback) {
@@ -1420,20 +1420,20 @@ HAL_StatusTypeDef HAL_DFSDM_Filter_RegisterCallback(DFSDM_Filter_HandleTypeDef *
 }
 
 /**
- * @brief  Unregister a user DFSDM filter callback.
- *         DFSDM filter callback is redirected to the weak predefined callback.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @param  CallbackID ID of the callback to be unregistered.
- *         This parameter can be one of the following values:
- *           @arg @ref HAL_DFSDM_FILTER_REGCONV_COMPLETE_CB_ID regular conversion complete callback ID.
- *           @arg @ref HAL_DFSDM_FILTER_REGCONV_HALFCOMPLETE_CB_ID half regular conversion complete callback ID.
- *           @arg @ref HAL_DFSDM_FILTER_INJCONV_COMPLETE_CB_ID injected conversion complete callback ID.
- *           @arg @ref HAL_DFSDM_FILTER_INJCONV_HALFCOMPLETE_CB_ID half injected conversion complete callback ID.
- *           @arg @ref HAL_DFSDM_FILTER_ERROR_CB_ID error callback ID.
- *           @arg @ref HAL_DFSDM_FILTER_MSPINIT_CB_ID MSP init callback ID.
- *           @arg @ref HAL_DFSDM_FILTER_MSPDEINIT_CB_ID MSP de-init callback ID.
- * @retval HAL status.
- */
+  * @brief  Unregister a user DFSDM filter callback.
+  *         DFSDM filter callback is redirected to the weak predefined callback.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @param  CallbackID ID of the callback to be unregistered.
+  *         This parameter can be one of the following values:
+  *           @arg @ref HAL_DFSDM_FILTER_REGCONV_COMPLETE_CB_ID regular conversion complete callback ID.
+  *           @arg @ref HAL_DFSDM_FILTER_REGCONV_HALFCOMPLETE_CB_ID half regular conversion complete callback ID.
+  *           @arg @ref HAL_DFSDM_FILTER_INJCONV_COMPLETE_CB_ID injected conversion complete callback ID.
+  *           @arg @ref HAL_DFSDM_FILTER_INJCONV_HALFCOMPLETE_CB_ID half injected conversion complete callback ID.
+  *           @arg @ref HAL_DFSDM_FILTER_ERROR_CB_ID error callback ID.
+  *           @arg @ref HAL_DFSDM_FILTER_MSPINIT_CB_ID MSP init callback ID.
+  *           @arg @ref HAL_DFSDM_FILTER_MSPDEINIT_CB_ID MSP de-init callback ID.
+  * @retval HAL status.
+  */
 HAL_StatusTypeDef HAL_DFSDM_Filter_UnRegisterCallback(DFSDM_Filter_HandleTypeDef *hdfsdm_filter,
 						      HAL_DFSDM_Filter_CallbackIDTypeDef CallbackID) {
     HAL_StatusTypeDef status = HAL_OK;
@@ -1493,12 +1493,12 @@ HAL_StatusTypeDef HAL_DFSDM_Filter_UnRegisterCallback(DFSDM_Filter_HandleTypeDef
 }
 
 /**
- * @brief  Register a user DFSDM filter analog watchdog callback
- *         to be used instead of the weak predefined callback.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @param  pCallback pointer to the DFSDM filter analog watchdog callback function.
- * @retval HAL status.
- */
+  * @brief  Register a user DFSDM filter analog watchdog callback
+  *         to be used instead of the weak predefined callback.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @param  pCallback pointer to the DFSDM filter analog watchdog callback function.
+  * @retval HAL status.
+  */
 HAL_StatusTypeDef HAL_DFSDM_Filter_RegisterAwdCallback(DFSDM_Filter_HandleTypeDef *hdfsdm_filter,
 						       pDFSDM_Filter_AwdCallbackTypeDef pCallback) {
     HAL_StatusTypeDef status = HAL_OK;
@@ -1522,11 +1522,11 @@ HAL_StatusTypeDef HAL_DFSDM_Filter_RegisterAwdCallback(DFSDM_Filter_HandleTypeDe
 }
 
 /**
- * @brief  Unregister a user DFSDM filter analog watchdog callback.
- *         DFSDM filter AWD callback is redirected to the weak predefined callback.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @retval HAL status.
- */
+  * @brief  Unregister a user DFSDM filter analog watchdog callback.
+  *         DFSDM filter AWD callback is redirected to the weak predefined callback.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @retval HAL status.
+  */
 HAL_StatusTypeDef HAL_DFSDM_Filter_UnRegisterAwdCallback(DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
     HAL_StatusTypeDef status = HAL_OK;
 
@@ -1543,15 +1543,15 @@ HAL_StatusTypeDef HAL_DFSDM_Filter_UnRegisterAwdCallback(DFSDM_Filter_HandleType
 #endif /* USE_HAL_DFSDM_REGISTER_CALLBACKS */
 
 /**
- * @}
- */
+  * @}
+  */
 
 /** @defgroup DFSDM_Exported_Functions_Group2_Filter Filter control functions
  *  @brief    Filter control functions
  *
 @verbatim
   ==============================================================================
-		    ##### Filter control functions #####
+                    ##### Filter control functions #####
   ==============================================================================
     [..]  This section provides functions allowing to:
       (+) Select channel and enable/disable continuous mode for regular conversion.
@@ -1561,15 +1561,15 @@ HAL_StatusTypeDef HAL_DFSDM_Filter_UnRegisterAwdCallback(DFSDM_Filter_HandleType
   */
 
 /**
- * @brief  This function allows to select channel and to enable/disable
- *         continuous mode for regular conversion.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @param  Channel Channel for regular conversion.
- *         This parameter can be a value of @ref DFSDM_Channel_Selection.
- * @param  ContinuousMode Enable/disable continuous mode for regular conversion.
- *         This parameter can be a value of @ref DFSDM_ContinuousMode.
- * @retval HAL status
- */
+  * @brief  This function allows to select channel and to enable/disable
+  *         continuous mode for regular conversion.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @param  Channel Channel for regular conversion.
+  *         This parameter can be a value of @ref DFSDM_Channel_Selection.
+  * @param  ContinuousMode Enable/disable continuous mode for regular conversion.
+  *         This parameter can be a value of @ref DFSDM_ContinuousMode.
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_DFSDM_FilterConfigRegChannel(DFSDM_Filter_HandleTypeDef *hdfsdm_filter,
 						   uint32_t Channel,
 						   uint32_t ContinuousMode) {
@@ -1602,12 +1602,12 @@ HAL_StatusTypeDef HAL_DFSDM_FilterConfigRegChannel(DFSDM_Filter_HandleTypeDef *h
 }
 
 /**
- * @brief  This function allows to select channels for injected conversion.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @param  Channel Channels for injected conversion.
- *         This parameter can be a values combination of @ref DFSDM_Channel_Selection.
- * @retval HAL status
- */
+  * @brief  This function allows to select channels for injected conversion.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @param  Channel Channels for injected conversion.
+  *         This parameter can be a values combination of @ref DFSDM_Channel_Selection.
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_DFSDM_FilterConfigInjChannel(DFSDM_Filter_HandleTypeDef *hdfsdm_filter,
 						   uint32_t Channel) {
     HAL_StatusTypeDef status = HAL_OK;
@@ -1633,15 +1633,15 @@ HAL_StatusTypeDef HAL_DFSDM_FilterConfigInjChannel(DFSDM_Filter_HandleTypeDef *h
 }
 
 /**
- * @}
- */
+  * @}
+  */
 
 /** @defgroup DFSDM_Exported_Functions_Group3_Filter Filter operation functions
  *  @brief    Filter operation functions
  *
 @verbatim
   ==============================================================================
-		    ##### Filter operation functions #####
+                    ##### Filter operation functions #####
   ==============================================================================
     [..]  This section provides functions allowing to:
       (+) Start conversion of regular/injected channel.
@@ -1667,12 +1667,12 @@ HAL_StatusTypeDef HAL_DFSDM_FilterConfigInjChannel(DFSDM_Filter_HandleTypeDef *h
   */
 
 /**
- * @brief  This function allows to start regular conversion in polling mode.
- * @note   This function should be called only when DFSDM filter instance is
- *         in idle state or if injected conversion is ongoing.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @retval HAL status
- */
+  * @brief  This function allows to start regular conversion in polling mode.
+  * @note   This function should be called only when DFSDM filter instance is
+  *         in idle state or if injected conversion is ongoing.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_DFSDM_FilterRegularStart(DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
     HAL_StatusTypeDef status = HAL_OK;
 
@@ -1692,12 +1692,12 @@ HAL_StatusTypeDef HAL_DFSDM_FilterRegularStart(DFSDM_Filter_HandleTypeDef *hdfsd
 }
 
 /**
- * @brief  This function allows to poll for the end of regular conversion.
- * @note   This function should be called only if regular conversion is ongoing.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @param  Timeout Timeout value in milliseconds.
- * @retval HAL status
- */
+  * @brief  This function allows to poll for the end of regular conversion.
+  * @note   This function should be called only if regular conversion is ongoing.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @param  Timeout Timeout value in milliseconds.
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_DFSDM_FilterPollForRegConversion(DFSDM_Filter_HandleTypeDef *hdfsdm_filter,
 						       uint32_t Timeout) {
     uint32_t tickstart;
@@ -1748,11 +1748,11 @@ HAL_StatusTypeDef HAL_DFSDM_FilterPollForRegConversion(DFSDM_Filter_HandleTypeDe
 }
 
 /**
- * @brief  This function allows to stop regular conversion in polling mode.
- * @note   This function should be called only if regular conversion is ongoing.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @retval HAL status
- */
+  * @brief  This function allows to stop regular conversion in polling mode.
+  * @note   This function should be called only if regular conversion is ongoing.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_DFSDM_FilterRegularStop(DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
     HAL_StatusTypeDef status = HAL_OK;
 
@@ -1773,12 +1773,12 @@ HAL_StatusTypeDef HAL_DFSDM_FilterRegularStop(DFSDM_Filter_HandleTypeDef *hdfsdm
 }
 
 /**
- * @brief  This function allows to start regular conversion in interrupt mode.
- * @note   This function should be called only when DFSDM filter instance is
- *         in idle state or if injected conversion is ongoing.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @retval HAL status
- */
+  * @brief  This function allows to start regular conversion in interrupt mode.
+  * @note   This function should be called only when DFSDM filter instance is
+  *         in idle state or if injected conversion is ongoing.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_DFSDM_FilterRegularStart_IT(DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
     HAL_StatusTypeDef status = HAL_OK;
 
@@ -1801,11 +1801,11 @@ HAL_StatusTypeDef HAL_DFSDM_FilterRegularStart_IT(DFSDM_Filter_HandleTypeDef *hd
 }
 
 /**
- * @brief  This function allows to stop regular conversion in interrupt mode.
- * @note   This function should be called only if regular conversion is ongoing.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @retval HAL status
- */
+  * @brief  This function allows to stop regular conversion in interrupt mode.
+  * @note   This function should be called only if regular conversion is ongoing.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_DFSDM_FilterRegularStop_IT(DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
     HAL_StatusTypeDef status = HAL_OK;
 
@@ -1829,17 +1829,17 @@ HAL_StatusTypeDef HAL_DFSDM_FilterRegularStop_IT(DFSDM_Filter_HandleTypeDef *hdf
 }
 
 /**
- * @brief  This function allows to start regular conversion in DMA mode.
- * @note   This function should be called only when DFSDM filter instance is
- *         in idle state or if injected conversion is ongoing.
- *         Please note that data on buffer will contain signed regular conversion
- *         value on 24 most significant bits and corresponding channel on 3 least
- *         significant bits.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @param  pData The destination buffer address.
- * @param  Length The length of data to be transferred from DFSDM filter to memory.
- * @retval HAL status
- */
+  * @brief  This function allows to start regular conversion in DMA mode.
+  * @note   This function should be called only when DFSDM filter instance is
+  *         in idle state or if injected conversion is ongoing.
+  *         Please note that data on buffer will contain signed regular conversion
+  *         value on 24 most significant bits and corresponding channel on 3 least
+  *         significant bits.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @param  pData The destination buffer address.
+  * @param  Length The length of data to be transferred from DFSDM filter to memory.
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_DFSDM_FilterRegularStart_DMA(DFSDM_Filter_HandleTypeDef *hdfsdm_filter,
 						   int32_t *pData,
 						   uint32_t Length) {
@@ -1893,17 +1893,17 @@ HAL_StatusTypeDef HAL_DFSDM_FilterRegularStart_DMA(DFSDM_Filter_HandleTypeDef *h
 }
 
 /**
- * @brief  This function allows to start regular conversion in DMA mode and to get
- *         only the 16 most significant bits of conversion.
- * @note   This function should be called only when DFSDM filter instance is
- *         in idle state or if injected conversion is ongoing.
- *         Please note that data on buffer will contain signed 16 most significant
- *         bits of regular conversion.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @param  pData The destination buffer address.
- * @param  Length The length of data to be transferred from DFSDM filter to memory.
- * @retval HAL status
- */
+  * @brief  This function allows to start regular conversion in DMA mode and to get
+  *         only the 16 most significant bits of conversion.
+  * @note   This function should be called only when DFSDM filter instance is
+  *         in idle state or if injected conversion is ongoing.
+  *         Please note that data on buffer will contain signed 16 most significant
+  *         bits of regular conversion.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @param  pData The destination buffer address.
+  * @param  Length The length of data to be transferred from DFSDM filter to memory.
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_DFSDM_FilterRegularMsbStart_DMA(DFSDM_Filter_HandleTypeDef *hdfsdm_filter,
 						      int16_t *pData,
 						      uint32_t Length) {
@@ -1957,11 +1957,11 @@ HAL_StatusTypeDef HAL_DFSDM_FilterRegularMsbStart_DMA(DFSDM_Filter_HandleTypeDef
 }
 
 /**
- * @brief  This function allows to stop regular conversion in DMA mode.
- * @note   This function should be called only if regular conversion is ongoing.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @retval HAL status
- */
+  * @brief  This function allows to stop regular conversion in DMA mode.
+  * @note   This function should be called only if regular conversion is ongoing.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_DFSDM_FilterRegularStop_DMA(DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
     HAL_StatusTypeDef status = HAL_OK;
 
@@ -1987,11 +1987,11 @@ HAL_StatusTypeDef HAL_DFSDM_FilterRegularStop_DMA(DFSDM_Filter_HandleTypeDef *hd
 }
 
 /**
- * @brief  This function allows to get regular conversion value.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @param  Channel Corresponding channel of regular conversion.
- * @retval Regular conversion value
- */
+  * @brief  This function allows to get regular conversion value.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @param  Channel Corresponding channel of regular conversion.
+  * @retval Regular conversion value
+  */
 int32_t HAL_DFSDM_FilterGetRegularValue(const DFSDM_Filter_HandleTypeDef *hdfsdm_filter,
 					uint32_t *Channel) {
     uint32_t reg;
@@ -2016,12 +2016,12 @@ int32_t HAL_DFSDM_FilterGetRegularValue(const DFSDM_Filter_HandleTypeDef *hdfsdm
 }
 
 /**
- * @brief  This function allows to start injected conversion in polling mode.
- * @note   This function should be called only when DFSDM filter instance is
- *         in idle state or if regular conversion is ongoing.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @retval HAL status
- */
+  * @brief  This function allows to start injected conversion in polling mode.
+  * @note   This function should be called only when DFSDM filter instance is
+  *         in idle state or if regular conversion is ongoing.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_DFSDM_FilterInjectedStart(DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
     HAL_StatusTypeDef status = HAL_OK;
 
@@ -2041,12 +2041,12 @@ HAL_StatusTypeDef HAL_DFSDM_FilterInjectedStart(DFSDM_Filter_HandleTypeDef *hdfs
 }
 
 /**
- * @brief  This function allows to poll for the end of injected conversion.
- * @note   This function should be called only if injected conversion is ongoing.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @param  Timeout Timeout value in milliseconds.
- * @retval HAL status
- */
+  * @brief  This function allows to poll for the end of injected conversion.
+  * @note   This function should be called only if injected conversion is ongoing.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @param  Timeout Timeout value in milliseconds.
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_DFSDM_FilterPollForInjConversion(DFSDM_Filter_HandleTypeDef *hdfsdm_filter,
 						       uint32_t Timeout) {
     uint32_t tickstart;
@@ -2105,11 +2105,11 @@ HAL_StatusTypeDef HAL_DFSDM_FilterPollForInjConversion(DFSDM_Filter_HandleTypeDe
 }
 
 /**
- * @brief  This function allows to stop injected conversion in polling mode.
- * @note   This function should be called only if injected conversion is ongoing.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @retval HAL status
- */
+  * @brief  This function allows to stop injected conversion in polling mode.
+  * @note   This function should be called only if injected conversion is ongoing.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_DFSDM_FilterInjectedStop(DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
     HAL_StatusTypeDef status = HAL_OK;
 
@@ -2130,12 +2130,12 @@ HAL_StatusTypeDef HAL_DFSDM_FilterInjectedStop(DFSDM_Filter_HandleTypeDef *hdfsd
 }
 
 /**
- * @brief  This function allows to start injected conversion in interrupt mode.
- * @note   This function should be called only when DFSDM filter instance is
- *         in idle state or if regular conversion is ongoing.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @retval HAL status
- */
+  * @brief  This function allows to start injected conversion in interrupt mode.
+  * @note   This function should be called only when DFSDM filter instance is
+  *         in idle state or if regular conversion is ongoing.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_DFSDM_FilterInjectedStart_IT(DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
     HAL_StatusTypeDef status = HAL_OK;
 
@@ -2158,11 +2158,11 @@ HAL_StatusTypeDef HAL_DFSDM_FilterInjectedStart_IT(DFSDM_Filter_HandleTypeDef *h
 }
 
 /**
- * @brief  This function allows to stop injected conversion in interrupt mode.
- * @note   This function should be called only if injected conversion is ongoing.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @retval HAL status
- */
+  * @brief  This function allows to stop injected conversion in interrupt mode.
+  * @note   This function should be called only if injected conversion is ongoing.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_DFSDM_FilterInjectedStop_IT(DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
     HAL_StatusTypeDef status = HAL_OK;
 
@@ -2186,17 +2186,17 @@ HAL_StatusTypeDef HAL_DFSDM_FilterInjectedStop_IT(DFSDM_Filter_HandleTypeDef *hd
 }
 
 /**
- * @brief  This function allows to start injected conversion in DMA mode.
- * @note   This function should be called only when DFSDM filter instance is
- *         in idle state or if regular conversion is ongoing.
- *         Please note that data on buffer will contain signed injected conversion
- *         value on 24 most significant bits and corresponding channel on 3 least
- *         significant bits.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @param  pData The destination buffer address.
- * @param  Length The length of data to be transferred from DFSDM filter to memory.
- * @retval HAL status
- */
+  * @brief  This function allows to start injected conversion in DMA mode.
+  * @note   This function should be called only when DFSDM filter instance is
+  *         in idle state or if regular conversion is ongoing.
+  *         Please note that data on buffer will contain signed injected conversion
+  *         value on 24 most significant bits and corresponding channel on 3 least
+  *         significant bits.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @param  pData The destination buffer address.
+  * @param  Length The length of data to be transferred from DFSDM filter to memory.
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_DFSDM_FilterInjectedStart_DMA(DFSDM_Filter_HandleTypeDef *hdfsdm_filter,
 						    int32_t *pData,
 						    uint32_t Length) {
@@ -2248,17 +2248,17 @@ HAL_StatusTypeDef HAL_DFSDM_FilterInjectedStart_DMA(DFSDM_Filter_HandleTypeDef *
 }
 
 /**
- * @brief  This function allows to start injected conversion in DMA mode and to get
- *         only the 16 most significant bits of conversion.
- * @note   This function should be called only when DFSDM filter instance is
- *         in idle state or if regular conversion is ongoing.
- *         Please note that data on buffer will contain signed 16 most significant
- *         bits of injected conversion.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @param  pData The destination buffer address.
- * @param  Length The length of data to be transferred from DFSDM filter to memory.
- * @retval HAL status
- */
+  * @brief  This function allows to start injected conversion in DMA mode and to get
+  *         only the 16 most significant bits of conversion.
+  * @note   This function should be called only when DFSDM filter instance is
+  *         in idle state or if regular conversion is ongoing.
+  *         Please note that data on buffer will contain signed 16 most significant
+  *         bits of injected conversion.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @param  pData The destination buffer address.
+  * @param  Length The length of data to be transferred from DFSDM filter to memory.
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_DFSDM_FilterInjectedMsbStart_DMA(DFSDM_Filter_HandleTypeDef *hdfsdm_filter,
 						       int16_t *pData,
 						       uint32_t Length) {
@@ -2310,11 +2310,11 @@ HAL_StatusTypeDef HAL_DFSDM_FilterInjectedMsbStart_DMA(DFSDM_Filter_HandleTypeDe
 }
 
 /**
- * @brief  This function allows to stop injected conversion in DMA mode.
- * @note   This function should be called only if injected conversion is ongoing.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @retval HAL status
- */
+  * @brief  This function allows to stop injected conversion in DMA mode.
+  * @note   This function should be called only if injected conversion is ongoing.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_DFSDM_FilterInjectedStop_DMA(DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
     HAL_StatusTypeDef status = HAL_OK;
 
@@ -2340,11 +2340,11 @@ HAL_StatusTypeDef HAL_DFSDM_FilterInjectedStop_DMA(DFSDM_Filter_HandleTypeDef *h
 }
 
 /**
- * @brief  This function allows to get injected conversion value.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @param  Channel Corresponding channel of injected conversion.
- * @retval Injected conversion value
- */
+  * @brief  This function allows to get injected conversion value.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @param  Channel Corresponding channel of injected conversion.
+  * @retval Injected conversion value
+  */
 int32_t HAL_DFSDM_FilterGetInjectedValue(const DFSDM_Filter_HandleTypeDef *hdfsdm_filter,
 					 uint32_t *Channel) {
     uint32_t reg;
@@ -2369,11 +2369,11 @@ int32_t HAL_DFSDM_FilterGetInjectedValue(const DFSDM_Filter_HandleTypeDef *hdfsd
 }
 
 /**
- * @brief  This function allows to start filter analog watchdog in interrupt mode.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @param  awdParam DFSDM filter analog watchdog parameters.
- * @retval HAL status
- */
+  * @brief  This function allows to start filter analog watchdog in interrupt mode.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @param  awdParam DFSDM filter analog watchdog parameters.
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_DFSDM_FilterAwdStart_IT(DFSDM_Filter_HandleTypeDef *hdfsdm_filter,
 					      const DFSDM_Filter_AwdParamTypeDef *awdParam) {
     HAL_StatusTypeDef status = HAL_OK;
@@ -2415,10 +2415,10 @@ HAL_StatusTypeDef HAL_DFSDM_FilterAwdStart_IT(DFSDM_Filter_HandleTypeDef *hdfsdm
 }
 
 /**
- * @brief  This function allows to stop filter analog watchdog in interrupt mode.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @retval HAL status
- */
+  * @brief  This function allows to stop filter analog watchdog in interrupt mode.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_DFSDM_FilterAwdStop_IT(DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
     HAL_StatusTypeDef status = HAL_OK;
 
@@ -2449,12 +2449,12 @@ HAL_StatusTypeDef HAL_DFSDM_FilterAwdStop_IT(DFSDM_Filter_HandleTypeDef *hdfsdm_
 }
 
 /**
- * @brief  This function allows to start extreme detector feature.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @param  Channel Channels where extreme detector is enabled.
- *         This parameter can be a values combination of @ref DFSDM_Channel_Selection.
- * @retval HAL status
- */
+  * @brief  This function allows to start extreme detector feature.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @param  Channel Channels where extreme detector is enabled.
+  *         This parameter can be a values combination of @ref DFSDM_Channel_Selection.
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_DFSDM_FilterExdStart(DFSDM_Filter_HandleTypeDef *hdfsdm_filter,
 					   uint32_t Channel) {
     HAL_StatusTypeDef status = HAL_OK;
@@ -2478,10 +2478,10 @@ HAL_StatusTypeDef HAL_DFSDM_FilterExdStart(DFSDM_Filter_HandleTypeDef *hdfsdm_fi
 }
 
 /**
- * @brief  This function allows to stop extreme detector feature.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @retval HAL status
- */
+  * @brief  This function allows to stop extreme detector feature.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_DFSDM_FilterExdStop(DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
     HAL_StatusTypeDef status = HAL_OK;
     __IO uint32_t reg1;
@@ -2510,12 +2510,12 @@ HAL_StatusTypeDef HAL_DFSDM_FilterExdStop(DFSDM_Filter_HandleTypeDef *hdfsdm_fil
 }
 
 /**
- * @brief  This function allows to get extreme detector maximum value.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @param  Channel Corresponding channel.
- * @retval Extreme detector maximum value
- *         This value is between Min_Data = -8388608 and Max_Data = 8388607.
- */
+  * @brief  This function allows to get extreme detector maximum value.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @param  Channel Corresponding channel.
+  * @retval Extreme detector maximum value
+  *         This value is between Min_Data = -8388608 and Max_Data = 8388607.
+  */
 int32_t HAL_DFSDM_FilterGetExdMaxValue(const DFSDM_Filter_HandleTypeDef *hdfsdm_filter,
 				       uint32_t *Channel) {
     uint32_t reg;
@@ -2540,12 +2540,12 @@ int32_t HAL_DFSDM_FilterGetExdMaxValue(const DFSDM_Filter_HandleTypeDef *hdfsdm_
 }
 
 /**
- * @brief  This function allows to get extreme detector minimum value.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @param  Channel Corresponding channel.
- * @retval Extreme detector minimum value
- *         This value is between Min_Data = -8388608 and Max_Data = 8388607.
- */
+  * @brief  This function allows to get extreme detector minimum value.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @param  Channel Corresponding channel.
+  * @retval Extreme detector minimum value
+  *         This value is between Min_Data = -8388608 and Max_Data = 8388607.
+  */
 int32_t HAL_DFSDM_FilterGetExdMinValue(const DFSDM_Filter_HandleTypeDef *hdfsdm_filter,
 				       uint32_t *Channel) {
     uint32_t reg;
@@ -2570,11 +2570,11 @@ int32_t HAL_DFSDM_FilterGetExdMinValue(const DFSDM_Filter_HandleTypeDef *hdfsdm_
 }
 
 /**
- * @brief  This function allows to get conversion time value.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @retval Conversion time value
- * @note   To get time in second, this value has to be divided by DFSDM clock frequency.
- */
+  * @brief  This function allows to get conversion time value.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @retval Conversion time value
+  * @note   To get time in second, this value has to be divided by DFSDM clock frequency.
+  */
 uint32_t HAL_DFSDM_FilterGetConvTimeValue(const DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
     uint32_t reg;
     uint32_t value;
@@ -2593,10 +2593,10 @@ uint32_t HAL_DFSDM_FilterGetConvTimeValue(const DFSDM_Filter_HandleTypeDef *hdfs
 }
 
 /**
- * @brief  This function handles the DFSDM interrupts.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @retval None
- */
+  * @brief  This function handles the DFSDM interrupts.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @retval None
+  */
 void HAL_DFSDM_IRQHandler(DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
     /* Get FTLISR and FLTCR2 register values */
     const uint32_t temp_fltisr = hdfsdm_filter->Instance->FLTISR;
@@ -2762,72 +2762,72 @@ void HAL_DFSDM_IRQHandler(DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
 }
 
 /**
- * @brief  Regular conversion complete callback.
- * @note   In interrupt mode, user has to read conversion value in this function
- *         using HAL_DFSDM_FilterGetRegularValue.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @retval None
- */
+  * @brief  Regular conversion complete callback.
+  * @note   In interrupt mode, user has to read conversion value in this function
+  *         using HAL_DFSDM_FilterGetRegularValue.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @retval None
+  */
 __weak void HAL_DFSDM_FilterRegConvCpltCallback(DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
     /* Prevent unused argument(s) compilation warning */
     UNUSED(hdfsdm_filter);
 
     /* NOTE : This function should not be modified, when the callback is needed,
-	      the HAL_DFSDM_FilterRegConvCpltCallback could be implemented in the user file.
-     */
+            the HAL_DFSDM_FilterRegConvCpltCallback could be implemented in the user file.
+   */
 }
 
 /**
- * @brief  Half regular conversion complete callback.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @retval None
- */
+  * @brief  Half regular conversion complete callback.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @retval None
+  */
 __weak void HAL_DFSDM_FilterRegConvHalfCpltCallback(DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
     /* Prevent unused argument(s) compilation warning */
     UNUSED(hdfsdm_filter);
 
     /* NOTE : This function should not be modified, when the callback is needed,
-	      the HAL_DFSDM_FilterRegConvHalfCpltCallback could be implemented in the user file.
-     */
+            the HAL_DFSDM_FilterRegConvHalfCpltCallback could be implemented in the user file.
+   */
 }
 
 /**
- * @brief  Injected conversion complete callback.
- * @note   In interrupt mode, user has to read conversion value in this function
- *         using HAL_DFSDM_FilterGetInjectedValue.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @retval None
- */
+  * @brief  Injected conversion complete callback.
+  * @note   In interrupt mode, user has to read conversion value in this function
+  *         using HAL_DFSDM_FilterGetInjectedValue.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @retval None
+  */
 __weak void HAL_DFSDM_FilterInjConvCpltCallback(DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
     /* Prevent unused argument(s) compilation warning */
     UNUSED(hdfsdm_filter);
 
     /* NOTE : This function should not be modified, when the callback is needed,
-	      the HAL_DFSDM_FilterInjConvCpltCallback could be implemented in the user file.
-     */
+            the HAL_DFSDM_FilterInjConvCpltCallback could be implemented in the user file.
+   */
 }
 
 /**
- * @brief  Half injected conversion complete callback.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @retval None
- */
+  * @brief  Half injected conversion complete callback.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @retval None
+  */
 __weak void HAL_DFSDM_FilterInjConvHalfCpltCallback(DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
     /* Prevent unused argument(s) compilation warning */
     UNUSED(hdfsdm_filter);
 
     /* NOTE : This function should not be modified, when the callback is needed,
-	      the HAL_DFSDM_FilterInjConvHalfCpltCallback could be implemented in the user file.
-     */
+            the HAL_DFSDM_FilterInjConvHalfCpltCallback could be implemented in the user file.
+   */
 }
 
 /**
- * @brief  Filter analog watchdog callback.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @param  Channel Corresponding channel.
- * @param  Threshold Low or high threshold has been reached.
- * @retval None
- */
+  * @brief  Filter analog watchdog callback.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @param  Channel Corresponding channel.
+  * @param  Threshold Low or high threshold has been reached.
+  * @retval None
+  */
 __weak void HAL_DFSDM_FilterAwdCallback(DFSDM_Filter_HandleTypeDef *hdfsdm_filter,
 					uint32_t Channel, uint32_t Threshold) {
     /* Prevent unused argument(s) compilation warning */
@@ -2836,34 +2836,34 @@ __weak void HAL_DFSDM_FilterAwdCallback(DFSDM_Filter_HandleTypeDef *hdfsdm_filte
     UNUSED(Threshold);
 
     /* NOTE : This function should not be modified, when the callback is needed,
-	      the HAL_DFSDM_FilterAwdCallback could be implemented in the user file.
-     */
+            the HAL_DFSDM_FilterAwdCallback could be implemented in the user file.
+   */
 }
 
 /**
- * @brief  Error callback.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @retval None
- */
+  * @brief  Error callback.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @retval None
+  */
 __weak void HAL_DFSDM_FilterErrorCallback(DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
     /* Prevent unused argument(s) compilation warning */
     UNUSED(hdfsdm_filter);
 
     /* NOTE : This function should not be modified, when the callback is needed,
-	      the HAL_DFSDM_FilterErrorCallback could be implemented in the user file.
-     */
+            the HAL_DFSDM_FilterErrorCallback could be implemented in the user file.
+   */
 }
 
 /**
- * @}
- */
+  * @}
+  */
 
 /** @defgroup DFSDM_Exported_Functions_Group4_Filter Filter state functions
  *  @brief    Filter state functions
  *
 @verbatim
   ==============================================================================
-		     ##### Filter state functions #####
+                     ##### Filter state functions #####
   ==============================================================================
     [..]  This section provides functions allowing to:
       (+) Get the DFSDM filter state.
@@ -2873,43 +2873,43 @@ __weak void HAL_DFSDM_FilterErrorCallback(DFSDM_Filter_HandleTypeDef *hdfsdm_fil
   */
 
 /**
- * @brief  This function allows to get the current DFSDM filter handle state.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @retval DFSDM filter state.
- */
+  * @brief  This function allows to get the current DFSDM filter handle state.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @retval DFSDM filter state.
+  */
 HAL_DFSDM_Filter_StateTypeDef HAL_DFSDM_FilterGetState(const DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
     /* Return DFSDM filter handle state */
     return hdfsdm_filter->State;
 }
 
 /**
- * @brief  This function allows to get the current DFSDM filter error.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @retval DFSDM filter error code.
- */
+  * @brief  This function allows to get the current DFSDM filter error.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @retval DFSDM filter error code.
+  */
 uint32_t HAL_DFSDM_FilterGetError(const DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
     return hdfsdm_filter->ErrorCode;
 }
 
 /**
- * @}
- */
+  * @}
+  */
 
 /**
- * @}
- */
+  * @}
+  */
 /* End of exported functions -------------------------------------------------*/
 
 /* Private functions ---------------------------------------------------------*/
 /** @addtogroup DFSDM_Private_Functions DFSDM Private Functions
- * @{
- */
+  * @{
+  */
 
 /**
- * @brief  DMA half transfer complete callback for regular conversion.
- * @param  hdma DMA handle.
- * @retval None
- */
+  * @brief  DMA half transfer complete callback for regular conversion.
+  * @param  hdma DMA handle.
+  * @retval None
+  */
 static void DFSDM_DMARegularHalfConvCplt(DMA_HandleTypeDef *hdma) {
     /* Get DFSDM filter handle */
     DFSDM_Filter_HandleTypeDef *hdfsdm_filter = (DFSDM_Filter_HandleTypeDef *)((DMA_HandleTypeDef *)hdma)->Parent;
@@ -2923,10 +2923,10 @@ static void DFSDM_DMARegularHalfConvCplt(DMA_HandleTypeDef *hdma) {
 }
 
 /**
- * @brief  DMA transfer complete callback for regular conversion.
- * @param  hdma DMA handle.
- * @retval None
- */
+  * @brief  DMA transfer complete callback for regular conversion.
+  * @param  hdma DMA handle.
+  * @retval None
+  */
 static void DFSDM_DMARegularConvCplt(DMA_HandleTypeDef *hdma) {
     /* Get DFSDM filter handle */
     DFSDM_Filter_HandleTypeDef *hdfsdm_filter = (DFSDM_Filter_HandleTypeDef *)((DMA_HandleTypeDef *)hdma)->Parent;
@@ -2940,10 +2940,10 @@ static void DFSDM_DMARegularConvCplt(DMA_HandleTypeDef *hdma) {
 }
 
 /**
- * @brief  DMA half transfer complete callback for injected conversion.
- * @param  hdma DMA handle.
- * @retval None
- */
+  * @brief  DMA half transfer complete callback for injected conversion.
+  * @param  hdma DMA handle.
+  * @retval None
+  */
 static void DFSDM_DMAInjectedHalfConvCplt(DMA_HandleTypeDef *hdma) {
     /* Get DFSDM filter handle */
     DFSDM_Filter_HandleTypeDef *hdfsdm_filter = (DFSDM_Filter_HandleTypeDef *)((DMA_HandleTypeDef *)hdma)->Parent;
@@ -2957,10 +2957,10 @@ static void DFSDM_DMAInjectedHalfConvCplt(DMA_HandleTypeDef *hdma) {
 }
 
 /**
- * @brief  DMA transfer complete callback for injected conversion.
- * @param  hdma DMA handle.
- * @retval None
- */
+  * @brief  DMA transfer complete callback for injected conversion.
+  * @param  hdma DMA handle.
+  * @retval None
+  */
 static void DFSDM_DMAInjectedConvCplt(DMA_HandleTypeDef *hdma) {
     /* Get DFSDM filter handle */
     DFSDM_Filter_HandleTypeDef *hdfsdm_filter = (DFSDM_Filter_HandleTypeDef *)((DMA_HandleTypeDef *)hdma)->Parent;
@@ -2974,10 +2974,10 @@ static void DFSDM_DMAInjectedConvCplt(DMA_HandleTypeDef *hdma) {
 }
 
 /**
- * @brief  DMA error callback.
- * @param  hdma DMA handle.
- * @retval None
- */
+  * @brief  DMA error callback.
+  * @param  hdma DMA handle.
+  * @retval None
+  */
 static void DFSDM_DMAError(DMA_HandleTypeDef *hdma) {
     /* Get DFSDM filter handle */
     DFSDM_Filter_HandleTypeDef *hdfsdm_filter = (DFSDM_Filter_HandleTypeDef *)((DMA_HandleTypeDef *)hdma)->Parent;
@@ -2994,10 +2994,10 @@ static void DFSDM_DMAError(DMA_HandleTypeDef *hdma) {
 }
 
 /**
- * @brief  This function allows to get the number of injected channels.
- * @param  Channels bitfield of injected channels.
- * @retval Number of injected channels.
- */
+  * @brief  This function allows to get the number of injected channels.
+  * @param  Channels bitfield of injected channels.
+  * @retval Number of injected channels.
+  */
 static uint32_t DFSDM_GetInjChannelsNbr(uint32_t Channels) {
     uint32_t nbChannels = 0;
     uint32_t tmp;
@@ -3014,10 +3014,10 @@ static uint32_t DFSDM_GetInjChannelsNbr(uint32_t Channels) {
 }
 
 /**
- * @brief  This function allows to get the channel number from channel instance.
- * @param  Instance DFSDM channel instance.
- * @retval Channel number.
- */
+  * @brief  This function allows to get the channel number from channel instance.
+  * @param  Instance DFSDM channel instance.
+  * @retval Channel number.
+  */
 static uint32_t DFSDM_GetChannelFromInstance(const DFSDM_Channel_TypeDef *Instance) {
     uint32_t channel;
 
@@ -3051,10 +3051,10 @@ static uint32_t DFSDM_GetChannelFromInstance(const DFSDM_Channel_TypeDef *Instan
 }
 
 /**
- * @brief  This function allows to really start regular conversion.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @retval None
- */
+  * @brief  This function allows to really start regular conversion.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @retval None
+  */
 static void DFSDM_RegConvStart(DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
     /* Check regular trigger */
     if (hdfsdm_filter->RegularTrigger == DFSDM_FILTER_SW_TRIGGER) {
@@ -3085,10 +3085,10 @@ static void DFSDM_RegConvStart(DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
 }
 
 /**
- * @brief  This function allows to really stop regular conversion.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @retval None
- */
+  * @brief  This function allows to really stop regular conversion.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @retval None
+  */
 static void DFSDM_RegConvStop(DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
     /* Disable DFSDM filter */
     hdfsdm_filter->Instance->FLTCR1 &= ~(DFSDM_FLTCR1_DFEN);
@@ -3115,10 +3115,10 @@ static void DFSDM_RegConvStop(DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
 }
 
 /**
- * @brief  This function allows to really start injected conversion.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @retval None
- */
+  * @brief  This function allows to really start injected conversion.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @retval None
+  */
 static void DFSDM_InjConvStart(DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
     /* Check injected trigger */
     if (hdfsdm_filter->InjectedTrigger == DFSDM_FILTER_SW_TRIGGER) {
@@ -3152,10 +3152,10 @@ static void DFSDM_InjConvStart(DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
 }
 
 /**
- * @brief  This function allows to really stop injected conversion.
- * @param  hdfsdm_filter DFSDM filter handle.
- * @retval None
- */
+  * @brief  This function allows to really stop injected conversion.
+  * @param  hdfsdm_filter DFSDM filter handle.
+  * @retval None
+  */
 static void DFSDM_InjConvStop(DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
     /* Disable DFSDM filter */
     hdfsdm_filter->Instance->FLTCR1 &= ~(DFSDM_FLTCR1_DFEN);
@@ -3187,18 +3187,18 @@ static void DFSDM_InjConvStop(DFSDM_Filter_HandleTypeDef *hdfsdm_filter) {
 }
 
 /**
- * @}
- */
+  * @}
+  */
 /* End of private functions --------------------------------------------------*/
 
 /**
- * @}
- */
+  * @}
+  */
 
 #endif /* STM32L451xx || STM32L452xx || STM32L462xx || STM32L471xx || STM32L475xx || STM32L476xx || STM32L485xx || STM32L486xx || STM32L496xx || STM32L4A6xx || STM32L4R5xx || STM32L4R7xx || STM32L4R9xx || STM32L4S5xx || STM32L4S7xx || STM32L4S9xx || STM32L4P5xx || STM32L4Q5xx */
 
 #endif /* HAL_DFSDM_MODULE_ENABLED */
 
 /**
- * @}
- */
+  * @}
+  */

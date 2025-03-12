@@ -1,9 +1,9 @@
 /**************************************************************************/ /**
-									      * @file     cmsis_armclang.h
-									      * @brief    CMSIS compiler armclang (Arm Compiler 6) header file
-									      * @version  V5.2.0
-									      * @date     08. May 2019
-									      ******************************************************************************/
+ * @file     cmsis_armclang.h
+ * @brief    CMSIS compiler armclang (Arm Compiler 6) header file
+ * @version  V5.2.0
+ * @date     08. May 2019
+ ******************************************************************************/
 /*
  * Copyright (c) 2009-2019 Arm Limited. All rights reserved.
  *
@@ -117,7 +117,7 @@ __PACKED_STRUCT T_UINT32_READ { uint32_t v; };
 						: "memory")
 #endif
 
-/* #########################  Startup and Lowlevel Init  ######################## */
+    /* #########################  Startup and Lowlevel Init  ######################## */
 
 #ifndef __PROGRAM_START
 #define __PROGRAM_START __main
@@ -148,14 +148,14 @@ __PACKED_STRUCT T_UINT32_READ { uint32_t v; };
 /**
   \brief   Enable IRQ Interrupts
   \details Enables IRQ interrupts by clearing the I-bit in the CPSR.
-	   Can only be executed in Privileged modes.
+           Can only be executed in Privileged modes.
  */
 /* intrinsic void __enable_irq();  see arm_compat.h */
 
 /**
   \brief   Disable IRQ Interrupts
   \details Disables IRQ interrupts by setting the I-bit in the CPSR.
-	   Can only be executed in Privileged modes.
+           Can only be executed in Privileged modes.
  */
 /* intrinsic void __disable_irq();  see arm_compat.h */
 
@@ -447,14 +447,14 @@ __STATIC_FORCEINLINE void __TZ_set_PRIMASK_NS(uint32_t priMask) {
 /**
   \brief   Enable FIQ
   \details Enables FIQ interrupts by clearing the F-bit in the CPSR.
-	   Can only be executed in Privileged modes.
+           Can only be executed in Privileged modes.
  */
 #define __enable_fault_irq __enable_fiq /* see arm_compat.h */
 
 /**
   \brief   Disable FIQ
   \details Disables FIQ interrupts by setting the F-bit in the CPSR.
-	   Can only be executed in Privileged modes.
+           Can only be executed in Privileged modes.
  */
 #define __disable_fault_irq __disable_fiq /* see arm_compat.h */
 
@@ -515,7 +515,7 @@ __STATIC_FORCEINLINE void __TZ_set_BASEPRI_NS(uint32_t basePri) {
 /**
   \brief   Set Base Priority with condition
   \details Assigns the given value to the Base Priority register only if BASEPRI masking is disabled,
-	   or the new value increases the BASEPRI priority level.
+           or the new value increases the BASEPRI priority level.
   \param [in]    basePri  Base Priority value to set
  */
 __STATIC_FORCEINLINE void __set_BASEPRI_MAX(uint32_t basePri) {
@@ -591,7 +591,7 @@ __STATIC_FORCEINLINE void __TZ_set_FAULTMASK_NS(uint32_t faultMask) {
   Devices without ARMv8-M Main Extensions (i.e. Cortex-M23) lack the non-secure
   Stack Pointer Limit register hence zero is returned always in non-secure
   mode.
-
+  
   \details Returns the current value of the Process Stack Pointer Limit (PSPLIM).
   \return               PSPLIM Register value
  */
@@ -636,7 +636,7 @@ __STATIC_FORCEINLINE uint32_t __TZ_get_PSPLIM_NS(void) {
   Devices without ARMv8-M Main Extensions (i.e. Cortex-M23) lack the non-secure
   Stack Pointer Limit register hence the write is silently ignored in non-secure
   mode.
-
+  
   \details Assigns the given value to the Process Stack Pointer Limit (PSPLIM).
   \param [in]    ProcStackPtrLimit  Process Stack Pointer Limit value to set
  */
@@ -821,7 +821,7 @@ __STATIC_FORCEINLINE void __TZ_set_MSPLIM_NS(uint32_t MainStackPtrLimit) {
 /**
   \brief   Wait For Event
   \details Wait For Event is a hint instruction that permits the processor to enter
-	   a low-power state until one of a number of events occurs.
+           a low-power state until one of a number of events occurs.
  */
 #define __WFE __builtin_arm_wfe
 
@@ -834,22 +834,22 @@ __STATIC_FORCEINLINE void __TZ_set_MSPLIM_NS(uint32_t MainStackPtrLimit) {
 /**
   \brief   Instruction Synchronization Barrier
   \details Instruction Synchronization Barrier flushes the pipeline in the processor,
-	   so that all instructions following the ISB are fetched from cache or memory,
-	   after the instruction has been completed.
+           so that all instructions following the ISB are fetched from cache or memory,
+           after the instruction has been completed.
  */
 #define __ISB() __builtin_arm_isb(0xF)
 
 /**
   \brief   Data Synchronization Barrier
   \details Acts as a special kind of Data Memory Barrier.
-	   It completes when all explicit memory accesses before this instruction complete.
+           It completes when all explicit memory accesses before this instruction complete.
  */
 #define __DSB() __builtin_arm_dsb(0xF)
 
 /**
   \brief   Data Memory Barrier
   \details Ensures the apparent order of the explicit memory operations before
-	   and after the instruction, without ensuring their completion.
+           and after the instruction, without ensuring their completion.
  */
 #define __DMB() __builtin_arm_dmb(0xF)
 
@@ -895,9 +895,9 @@ __STATIC_FORCEINLINE uint32_t __ROR(uint32_t op1, uint32_t op2) {
 /**
   \brief   Breakpoint
   \details Causes the processor to enter Debug state.
-	   Debug tools can use this to investigate system state when the instruction at a particular address is reached.
+           Debug tools can use this to investigate system state when the instruction at a particular address is reached.
   \param [in]    value  is ignored by the processor.
-		 If required, a debugger can use it to store additional information about the breakpoint.
+                 If required, a debugger can use it to store additional information about the breakpoint.
  */
 #define __BKPT(value) __ASM volatile("bkpt " #value)
 
@@ -917,14 +917,14 @@ __STATIC_FORCEINLINE uint32_t __ROR(uint32_t op1, uint32_t op2) {
  */
 __STATIC_FORCEINLINE uint8_t __CLZ(uint32_t value) {
     /* Even though __builtin_clz produces a CLZ instruction on ARM, formally
-       __builtin_clz(0) is undefined behaviour, so handle this case specially.
-       This guarantees ARM-compatible results if happening to compile on a non-ARM
-       target, and ensures the compiler doesn't decide to activate any
-       optimisations using the logic "value was passed to __builtin_clz, so it
-       is non-zero".
-       ARM Compiler 6.10 and possibly earlier will optimise this test away, leaving a
-       single CLZ instruction.
-     */
+     __builtin_clz(0) is undefined behaviour, so handle this case specially.
+     This guarantees ARM-compatible results if happening to compile on a non-ARM
+     target, and ensures the compiler doesn't decide to activate any
+     optimisations using the logic "value was passed to __builtin_clz, so it
+     is non-zero".
+     ARM Compiler 6.10 and possibly earlier will optimise this test away, leaving a
+     single CLZ instruction.
+   */
     if (value == 0U) {
 	return 32U;
     }
@@ -1025,7 +1025,7 @@ __STATIC_FORCEINLINE uint8_t __CLZ(uint32_t value) {
 /**
   \brief   Rotate Right with Extend (32 bit)
   \details Moves each bit of a bitstring right by one bit.
-	   The carry input is shifted in at the left end of the bitstring.
+           The carry input is shifted in at the left end of the bitstring.
   \param [in]    value  Value to rotate
   \return               Rotated value
  */

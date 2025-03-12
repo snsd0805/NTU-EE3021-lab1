@@ -1,9 +1,9 @@
 /**************************************************************************/ /**
-									      * @file     cmsis_armcc.h
-									      * @brief    CMSIS compiler ARMCC (Arm Compiler 5) header file
-									      * @version  V5.1.0
-									      * @date     08. May 2019
-									      ******************************************************************************/
+ * @file     cmsis_armcc.h
+ * @brief    CMSIS compiler ARMCC (Arm Compiler 5) header file
+ * @version  V5.1.0
+ * @date     08. May 2019
+ ******************************************************************************/
 /*
  * Copyright (c) 2009-2019 Arm Limited. All rights reserved.
  *
@@ -138,14 +138,14 @@
 /**
   \brief   Enable IRQ Interrupts
   \details Enables IRQ interrupts by clearing the I-bit in the CPSR.
-	   Can only be executed in Privileged modes.
+           Can only be executed in Privileged modes.
  */
 /* intrinsic void __enable_irq();     */
 
 /**
   \brief   Disable IRQ Interrupts
   \details Disables IRQ interrupts by setting the I-bit in the CPSR.
-	   Can only be executed in Privileged modes.
+           Can only be executed in Privileged modes.
  */
 /* intrinsic void __disable_irq();    */
 
@@ -265,14 +265,14 @@ __STATIC_INLINE void __set_PRIMASK(uint32_t priMask) {
 /**
   \brief   Enable FIQ
   \details Enables FIQ interrupts by clearing the F-bit in the CPSR.
-	   Can only be executed in Privileged modes.
+           Can only be executed in Privileged modes.
  */
 #define __enable_fault_irq __enable_fiq
 
 /**
   \brief   Disable FIQ
   \details Disables FIQ interrupts by setting the F-bit in the CPSR.
-	   Can only be executed in Privileged modes.
+           Can only be executed in Privileged modes.
  */
 #define __disable_fault_irq __disable_fiq
 
@@ -299,7 +299,7 @@ __STATIC_INLINE void __set_BASEPRI(uint32_t basePri) {
 /**
   \brief   Set Base Priority with condition
   \details Assigns the given value to the Base Priority register only if BASEPRI masking is disabled,
-	   or the new value increases the BASEPRI priority level.
+           or the new value increases the BASEPRI priority level.
   \param [in]    basePri  Base Priority value to set
  */
 __STATIC_INLINE void __set_BASEPRI_MAX(uint32_t basePri) {
@@ -383,7 +383,7 @@ __STATIC_INLINE void __set_FPSCR(uint32_t fpscr) {
 /**
   \brief   Wait For Event
   \details Wait For Event is a hint instruction that permits the processor to enter
-	   a low-power state until one of a number of events occurs.
+           a low-power state until one of a number of events occurs.
  */
 #define __WFE __wfe
 
@@ -396,8 +396,8 @@ __STATIC_INLINE void __set_FPSCR(uint32_t fpscr) {
 /**
   \brief   Instruction Synchronization Barrier
   \details Instruction Synchronization Barrier flushes the pipeline in the processor,
-	   so that all instructions following the ISB are fetched from cache or memory,
-	   after the instruction has been completed.
+           so that all instructions following the ISB are fetched from cache or memory,
+           after the instruction has been completed.
  */
 #define __ISB()               \
     do {                      \
@@ -409,7 +409,7 @@ __STATIC_INLINE void __set_FPSCR(uint32_t fpscr) {
 /**
   \brief   Data Synchronization Barrier
   \details Acts as a special kind of Data Memory Barrier.
-	   It completes when all explicit memory accesses before this instruction complete.
+           It completes when all explicit memory accesses before this instruction complete.
  */
 #define __DSB()               \
     do {                      \
@@ -421,7 +421,7 @@ __STATIC_INLINE void __set_FPSCR(uint32_t fpscr) {
 /**
   \brief   Data Memory Barrier
   \details Ensures the apparent order of the explicit memory operations before
-	   and after the instruction, without ensuring their completion.
+           and after the instruction, without ensuring their completion.
  */
 #define __DMB()               \
     do {                      \
@@ -458,9 +458,10 @@ __attribute__((section(".rev16_text"))) __STATIC_INLINE __ASM uint32_t __REV16(u
   \return               Reversed value
  */
 #ifndef __NO_EMBEDDED_ASM
-__attribute__((section(".revsh_text"))) __STATIC_INLINE __ASM int16_t __REVSH(int16_t value){
+__attribute__((section(".revsh_text"))) __STATIC_INLINE __ASM int16_t __REVSH(int16_t value) {
     revsh r0, r0
-		  bx lr}
+		  bx lr
+}
 #endif
 
 /**
@@ -475,9 +476,9 @@ __attribute__((section(".revsh_text"))) __STATIC_INLINE __ASM int16_t __REVSH(in
 /**
   \brief   Breakpoint
   \details Causes the processor to enter Debug state.
-	   Debug tools can use this to investigate system state when the instruction at a particular address is reached.
+           Debug tools can use this to investigate system state when the instruction at a particular address is reached.
   \param [in]    value  is ignored by the processor.
-		 If required, a debugger can use it to store additional information about the breakpoint.
+                 If required, a debugger can use it to store additional information about the breakpoint.
  */
 #define __BKPT(value) __breakpoint(value)
 
@@ -622,7 +623,7 @@ __attribute__((always_inline)) __STATIC_INLINE uint32_t __RBIT(uint32_t value) {
 /**
   \brief   Rotate Right with Extend (32 bit)
   \details Moves each bit of a bitstring right by one bit.
-	   The carry input is shifted in at the left end of the bitstring.
+           The carry input is shifted in at the left end of the bitstring.
   \param [in]    value  Value to rotate
   \return               Rotated value
  */

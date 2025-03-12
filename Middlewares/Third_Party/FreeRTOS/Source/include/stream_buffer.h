@@ -121,12 +121,12 @@ const size_t xStreamBufferSizeBytes = 100, xTriggerLevel = 10;
 
     if( xStreamBuffer == NULL )
     {
-	// There was not enough heap memory space available to create the
-	// stream buffer.
+        // There was not enough heap memory space available to create the
+        // stream buffer.
     }
     else
     {
-	// The stream buffer was created successfully and can now be used.
+        // The stream buffer was created successfully and can now be used.
     }
 }
 </pre>
@@ -140,9 +140,9 @@ const size_t xStreamBufferSizeBytes = 100, xTriggerLevel = 10;
  *
 <pre>
 StreamBufferHandle_t xStreamBufferCreateStatic( size_t xBufferSizeBytes,
-						size_t xTriggerLevelBytes,
-						uint8_t *pucStreamBufferStorageArea,
-						StaticStreamBuffer_t *pxStaticStreamBuffer );
+                                                size_t xTriggerLevelBytes,
+                                                uint8_t *pucStreamBufferStorageArea,
+                                                StaticStreamBuffer_t *pxStaticStreamBuffer );
 </pre>
  * Creates a new stream buffer using statically allocated memory.  See
  * xStreamBufferCreate() for a version that uses dynamically allocated memory.
@@ -199,9 +199,9 @@ StreamBufferHandle_t xStreamBuffer;
 const size_t xTriggerLevel = 1;
 
     xStreamBuffer = xStreamBufferCreateStatic( sizeof( ucBufferStorage ),
-					       xTriggerLevel,
-					       ucBufferStorage,
-					       &xStreamBufferStruct );
+                                               xTriggerLevel,
+                                               ucBufferStorage,
+                                               &xStreamBufferStruct );
 
     // As neither the pucStreamBufferStorageArea or pxStaticStreamBuffer
     // parameters were NULL, xStreamBuffer will not be NULL, and can be used to
@@ -221,9 +221,9 @@ const size_t xTriggerLevel = 1;
  *
 <pre>
 size_t xStreamBufferSend( StreamBufferHandle_t xStreamBuffer,
-			  const void *pvTxData,
-			  size_t xDataLengthBytes,
-			  TickType_t xTicksToWait );
+                          const void *pvTxData,
+                          size_t xDataLengthBytes,
+                          TickType_t xTicksToWait );
 </pre>
  *
  * Sends bytes to a stream buffer.  The bytes are copied into the stream buffer.
@@ -288,9 +288,9 @@ const TickType_t x100ms = pdMS_TO_TICKS( 100 );
 
     if( xBytesSent != sizeof( ucArrayToSend ) )
     {
-	// The call to xStreamBufferSend() times out before there was enough
-	// space in the buffer for the data to be written, but it did
-	// successfully write xBytesSent bytes.
+        // The call to xStreamBufferSend() times out before there was enough
+        // space in the buffer for the data to be written, but it did
+        // successfully write xBytesSent bytes.
     }
 
     // Send the string to the stream buffer.  Return immediately if there is not
@@ -299,9 +299,9 @@ const TickType_t x100ms = pdMS_TO_TICKS( 100 );
 
     if( xBytesSent != strlen( pcStringToSend ) )
     {
-	// The entire string could not be added to the stream buffer because
-	// there was not enough free space in the buffer, but xBytesSent bytes
-	// were sent.  Could try again to send the remaining bytes.
+        // The entire string could not be added to the stream buffer because
+        // there was not enough free space in the buffer, but xBytesSent bytes
+        // were sent.  Could try again to send the remaining bytes.
     }
 }
 </pre>
@@ -318,9 +318,9 @@ size_t xStreamBufferSend(StreamBufferHandle_t xStreamBuffer,
  *
 <pre>
 size_t xStreamBufferSendFromISR( StreamBufferHandle_t xStreamBuffer,
-				 const void *pvTxData,
-				 size_t xDataLengthBytes,
-				 BaseType_t *pxHigherPriorityTaskWoken );
+                                 const void *pvTxData,
+                                 size_t xDataLengthBytes,
+                                 BaseType_t *pxHigherPriorityTaskWoken );
 </pre>
  *
  * Interrupt safe version of the API function that sends a stream of bytes to
@@ -385,14 +385,14 @@ BaseType_t xHigherPriorityTaskWoken = pdFALSE; // Initialised to pdFALSE.
 
     // Attempt to send the string to the stream buffer.
     xBytesSent = xStreamBufferSendFromISR( xStreamBuffer,
-					   ( void * ) pcStringToSend,
-					   strlen( pcStringToSend ),
-					   &xHigherPriorityTaskWoken );
+                                           ( void * ) pcStringToSend,
+                                           strlen( pcStringToSend ),
+                                           &xHigherPriorityTaskWoken );
 
     if( xBytesSent != strlen( pcStringToSend ) )
     {
-	// There was not enough free space in the stream buffer for the entire
-	// string to be written, ut xBytesSent bytes were written.
+        // There was not enough free space in the stream buffer for the entire
+        // string to be written, ut xBytesSent bytes were written.
     }
 
     // If xHigherPriorityTaskWoken was set to pdTRUE inside
@@ -419,9 +419,9 @@ size_t xStreamBufferSendFromISR(StreamBufferHandle_t xStreamBuffer,
  *
 <pre>
 size_t xStreamBufferReceive( StreamBufferHandle_t xStreamBuffer,
-			     void *pvRxData,
-			     size_t xBufferLengthBytes,
-			     TickType_t xTicksToWait );
+                             void *pvRxData,
+                             size_t xBufferLengthBytes,
+                             TickType_t xTicksToWait );
 </pre>
  *
  * Receives bytes from a stream buffer.
@@ -484,14 +484,14 @@ const TickType_t xBlockTime = pdMS_TO_TICKS( 20 );
     // maximum of 100ms for the full sizeof( ucRxData ) number of bytes to be
     // available.
     xReceivedBytes = xStreamBufferReceive( xStreamBuffer,
-					   ( void * ) ucRxData,
-					   sizeof( ucRxData ),
-					   xBlockTime );
+                                           ( void * ) ucRxData,
+                                           sizeof( ucRxData ),
+                                           xBlockTime );
 
     if( xReceivedBytes > 0 )
     {
-	// A ucRxData contains another xRecievedBytes bytes of data, which can
-	// be processed here....
+        // A ucRxData contains another xRecievedBytes bytes of data, which can
+        // be processed here....
     }
 }
 </pre>
@@ -508,9 +508,9 @@ size_t xStreamBufferReceive(StreamBufferHandle_t xStreamBuffer,
  *
 <pre>
 size_t xStreamBufferReceiveFromISR( StreamBufferHandle_t xStreamBuffer,
-				    void *pvRxData,
-				    size_t xBufferLengthBytes,
-				    BaseType_t *pxHigherPriorityTaskWoken );
+                                    void *pvRxData,
+                                    size_t xBufferLengthBytes,
+                                    BaseType_t *pxHigherPriorityTaskWoken );
 </pre>
  *
  * An interrupt safe version of the API function that receives bytes from a
@@ -560,14 +560,14 @@ BaseType_t xHigherPriorityTaskWoken = pdFALSE;  // Initialised to pdFALSE.
 
     // Receive the next stream from the stream buffer.
     xReceivedBytes = xStreamBufferReceiveFromISR( xStreamBuffer,
-						  ( void * ) ucRxData,
-						  sizeof( ucRxData ),
-						  &xHigherPriorityTaskWoken );
+                                                  ( void * ) ucRxData,
+                                                  sizeof( ucRxData ),
+                                                  &xHigherPriorityTaskWoken );
 
     if( xReceivedBytes > 0 )
     {
-	// ucRxData contains xReceivedBytes read from the stream buffer.
-	// Process the stream here....
+        // ucRxData contains xReceivedBytes read from the stream buffer.
+        // Process the stream here....
     }
 
     // If xHigherPriorityTaskWoken was set to pdTRUE inside

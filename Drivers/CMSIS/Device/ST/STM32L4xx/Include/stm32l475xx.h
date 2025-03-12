@@ -1,34 +1,34 @@
 /**
- ******************************************************************************
- * @file    stm32l475xx.h
- * @author  MCD Application Team
- * @brief   CMSIS STM32L475xx Device Peripheral Access Layer Header File.
- *
- *          This file contains:
- *           - Data structures and the address mapping for all peripherals
- *           - Peripheral's registers declarations and bits definition
- *           - Macros to access peripheral's registers hardware
- *
- ******************************************************************************
- * @attention
- *
- * Copyright (c) 2017 STMicroelectronics.
- * All rights reserved.
- *
- * This software is licensed under terms that can be found in the LICENSE file
- * in the root directory of this software component.
- * If no LICENSE file comes with this software, it is provided AS-IS.
- *
- ******************************************************************************
- */
+  ******************************************************************************
+  * @file    stm32l475xx.h
+  * @author  MCD Application Team
+  * @brief   CMSIS STM32L475xx Device Peripheral Access Layer Header File.
+  *
+  *          This file contains:
+  *           - Data structures and the address mapping for all peripherals
+  *           - Peripheral's registers declarations and bits definition
+  *           - Macros to access peripheral's registers hardware
+  *
+  ******************************************************************************
+  * @attention
+  *
+  * Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
+  */
 
 /** @addtogroup CMSIS_Device
- * @{
- */
+  * @{
+  */
 
 /** @addtogroup stm32l475xx
- * @{
- */
+  * @{
+  */
 
 #ifndef __STM32L475xx_H
 #define __STM32L475xx_H
@@ -38,12 +38,12 @@ extern "C" {
 #endif /* __cplusplus */
 
 /** @addtogroup Configuration_section_for_CMSIS
- * @{
- */
+  * @{
+  */
 
 /**
- * @brief Configuration of the Cortex-M4 Processor and Core Peripherals
- */
+  * @brief Configuration of the Cortex-M4 Processor and Core Peripherals
+   */
 #define __CM4_REV 0x0001U	  /*!< Cortex-M4 revision r0p1                       */
 #define __MPU_PRESENT 1U	  /*!< STM32L4XX provides an MPU                     */
 #define __NVIC_PRIO_BITS 4U	  /*!< STM32L4XX uses 4 Bits for the Priority Levels */
@@ -51,12 +51,12 @@ extern "C" {
 #define __FPU_PRESENT 1U	  /*!< FPU present                                   */
 
 /**
- * @}
- */
+  * @}
+  */
 
 /** @addtogroup Peripheral_interrupt_number_definition
- * @{
- */
+  * @{
+  */
 
 /**
  * @brief STM32L4XX Interrupt Number Definition, according to the selected device
@@ -157,20 +157,20 @@ typedef enum {
 } IRQn_Type;
 
 /**
- * @}
- */
+  * @}
+  */
 
 #include "core_cm4.h" /* Cortex-M4 processor and core peripherals */
 #include "system_stm32l4xx.h"
 #include <stdint.h>
 
 /** @addtogroup Peripheral_registers_structures
- * @{
- */
+  * @{
+  */
 
 /**
- * @brief Analog to Digital Converter
- */
+  * @brief Analog to Digital Converter
+  */
 
 typedef struct
 {
@@ -223,8 +223,8 @@ typedef struct
 } ADC_Common_TypeDef;
 
 /**
- * @brief Controller Area Network TxMailBox
- */
+  * @brief Controller Area Network TxMailBox
+  */
 
 typedef struct
 {
@@ -235,8 +235,8 @@ typedef struct
 } CAN_TxMailBox_TypeDef;
 
 /**
- * @brief Controller Area Network FIFOMailBox
- */
+  * @brief Controller Area Network FIFOMailBox
+  */
 
 typedef struct
 {
@@ -247,8 +247,8 @@ typedef struct
 } CAN_FIFOMailBox_TypeDef;
 
 /**
- * @brief Controller Area Network FilterRegister
- */
+  * @brief Controller Area Network FilterRegister
+  */
 
 typedef struct
 {
@@ -257,8 +257,8 @@ typedef struct
 } CAN_FilterRegister_TypeDef;
 
 /**
- * @brief Controller Area Network
- */
+  * @brief Controller Area Network
+  */
 
 typedef struct
 {
@@ -287,8 +287,8 @@ typedef struct
 } CAN_TypeDef;
 
 /**
- * @brief Comparator
- */
+  * @brief Comparator
+  */
 
 typedef struct
 {
@@ -301,8 +301,8 @@ typedef struct
 } COMP_Common_TypeDef;
 
 /**
- * @brief CRC calculation unit
- */
+  * @brief CRC calculation unit
+  */
 
 typedef struct
 {
@@ -317,8 +317,8 @@ typedef struct
 } CRC_TypeDef;
 
 /**
- * @brief Digital to Analog Converter
- */
+  * @brief Digital to Analog Converter
+  */
 
 typedef struct
 {
@@ -345,8 +345,8 @@ typedef struct
 } DAC_TypeDef;
 
 /**
- * @brief DFSDM module registers
- */
+  * @brief DFSDM module registers
+  */
 typedef struct
 {
     __IO uint32_t FLTCR1;     /*!< DFSDM control register1,                          Address offset: 0x100 */
@@ -367,21 +367,21 @@ typedef struct
 } DFSDM_Filter_TypeDef;
 
 /**
- * @brief DFSDM channel configuration registers
- */
+  * @brief DFSDM channel configuration registers
+  */
 typedef struct
 {
     __IO uint32_t CHCFGR1;  /*!< DFSDM channel configuration register1,            Address offset: 0x00 */
     __IO uint32_t CHCFGR2;  /*!< DFSDM channel configuration register2,            Address offset: 0x04 */
     __IO uint32_t CHAWSCDR; /*!< DFSDM channel analog watchdog and
-				 short circuit detector register,                  Address offset: 0x08 */
+                                  short circuit detector register,                  Address offset: 0x08 */
     __IO uint32_t CHWDATAR; /*!< DFSDM channel watchdog filter data register,      Address offset: 0x0C */
     __IO uint32_t CHDATINR; /*!< DFSDM channel data input register,                Address offset: 0x10 */
 } DFSDM_Channel_TypeDef;
 
 /**
- * @brief Debug MCU
- */
+  * @brief Debug MCU
+  */
 
 typedef struct
 {
@@ -393,8 +393,8 @@ typedef struct
 } DBGMCU_TypeDef;
 
 /**
- * @brief DMA Controller
- */
+  * @brief DMA Controller
+  */
 
 typedef struct
 {
@@ -419,8 +419,8 @@ typedef struct
 #define DMA_request_TypeDef DMA_Request_TypeDef
 
 /**
- * @brief External Interrupt/Event Controller
- */
+  * @brief External Interrupt/Event Controller
+  */
 
 typedef struct
 {
@@ -441,8 +441,8 @@ typedef struct
 } EXTI_TypeDef;
 
 /**
- * @brief Firewall
- */
+  * @brief Firewall
+  */
 
 typedef struct
 {
@@ -458,8 +458,8 @@ typedef struct
 } FIREWALL_TypeDef;
 
 /**
- * @brief FLASH Registers
- */
+  * @brief FLASH Registers
+  */
 
 typedef struct
 {
@@ -484,8 +484,8 @@ typedef struct
 } FLASH_TypeDef;
 
 /**
- * @brief Flexible Memory Controller
- */
+  * @brief Flexible Memory Controller
+  */
 
 typedef struct
 {
@@ -493,8 +493,8 @@ typedef struct
 } FMC_Bank1_TypeDef;
 
 /**
- * @brief Flexible Memory Controller Bank1E
- */
+  * @brief Flexible Memory Controller Bank1E
+  */
 
 typedef struct
 {
@@ -502,8 +502,8 @@ typedef struct
 } FMC_Bank1E_TypeDef;
 
 /**
- * @brief Flexible Memory Controller Bank3
- */
+  * @brief Flexible Memory Controller Bank3
+  */
 
 typedef struct
 {
@@ -516,8 +516,8 @@ typedef struct
 } FMC_Bank3_TypeDef;
 
 /**
- * @brief General Purpose I/O
- */
+  * @brief General Purpose I/O
+  */
 
 typedef struct
 {
@@ -536,8 +536,8 @@ typedef struct
 } GPIO_TypeDef;
 
 /**
- * @brief Inter-integrated Circuit Interface
- */
+  * @brief Inter-integrated Circuit Interface
+  */
 
 typedef struct
 {
@@ -555,8 +555,8 @@ typedef struct
 } I2C_TypeDef;
 
 /**
- * @brief Independent WATCHDOG
- */
+  * @brief Independent WATCHDOG
+  */
 
 typedef struct
 {
@@ -568,8 +568,8 @@ typedef struct
 } IWDG_TypeDef;
 
 /**
- * @brief LPTIMER
- */
+  * @brief LPTIMER
+  */
 typedef struct
 {
     __IO uint32_t ISR;	/*!< LPTIM Interrupt and Status register,                Address offset: 0x00 */
@@ -584,8 +584,8 @@ typedef struct
 } LPTIM_TypeDef;
 
 /**
- * @brief Operational Amplifier (OPAMP)
- */
+  * @brief Operational Amplifier (OPAMP)
+  */
 
 typedef struct
 {
@@ -600,8 +600,8 @@ typedef struct
 } OPAMP_Common_TypeDef;
 
 /**
- * @brief Power Control
- */
+  * @brief Power Control
+  */
 
 typedef struct
 {
@@ -632,8 +632,8 @@ typedef struct
 } PWR_TypeDef;
 
 /**
- * @brief QUAD Serial Peripheral Interface
- */
+  * @brief QUAD Serial Peripheral Interface
+  */
 
 typedef struct
 {
@@ -653,8 +653,8 @@ typedef struct
 } QUADSPI_TypeDef;
 
 /**
- * @brief Reset and Clock Control
- */
+  * @brief Reset and Clock Control
+  */
 
 typedef struct
 {
@@ -699,8 +699,8 @@ typedef struct
 } RCC_TypeDef;
 
 /**
- * @brief Real-Time Clock
- */
+  * @brief Real-Time Clock
+  */
 
 typedef struct
 {
@@ -759,8 +759,8 @@ typedef struct
 } RTC_TypeDef;
 
 /**
- * @brief Serial Audio Interface
- */
+  * @brief Serial Audio Interface
+  */
 
 typedef struct
 {
@@ -780,8 +780,8 @@ typedef struct
 } SAI_Block_TypeDef;
 
 /**
- * @brief Secure digital input/output Interface
- */
+  * @brief Secure digital input/output Interface
+  */
 
 typedef struct
 {
@@ -808,8 +808,8 @@ typedef struct
 } SDMMC_TypeDef;
 
 /**
- * @brief Serial Peripheral Interface
- */
+  * @brief Serial Peripheral Interface
+  */
 
 typedef struct
 {
@@ -823,8 +823,8 @@ typedef struct
 } SPI_TypeDef;
 
 /**
- * @brief Single Wire Protocol Master Interface SPWMI
- */
+  * @brief Single Wire Protocol Master Interface SPWMI
+  */
 
 typedef struct
 {
@@ -841,8 +841,8 @@ typedef struct
 } SWPMI_TypeDef;
 
 /**
- * @brief System configuration controller
- */
+  * @brief System configuration controller
+  */
 
 typedef struct
 {
@@ -856,8 +856,8 @@ typedef struct
 } SYSCFG_TypeDef;
 
 /**
- * @brief TIM
- */
+  * @brief TIM
+  */
 
 typedef struct
 {
@@ -890,8 +890,8 @@ typedef struct
 } TIM_TypeDef;
 
 /**
- * @brief Touch Sensing Controller (TSC)
- */
+  * @brief Touch Sensing Controller (TSC)
+  */
 
 typedef struct
 {
@@ -912,8 +912,8 @@ typedef struct
 } TSC_TypeDef;
 
 /**
- * @brief Universal Synchronous Asynchronous Receiver Transmitter
- */
+  * @brief Universal Synchronous Asynchronous Receiver Transmitter
+  */
 
 typedef struct
 {
@@ -935,8 +935,8 @@ typedef struct
 } USART_TypeDef;
 
 /**
- * @brief VREFBUF
- */
+  * @brief VREFBUF
+  */
 
 typedef struct
 {
@@ -945,8 +945,8 @@ typedef struct
 } VREFBUF_TypeDef;
 
 /**
- * @brief Window WATCHDOG
- */
+  * @brief Window WATCHDOG
+  */
 
 typedef struct
 {
@@ -956,8 +956,8 @@ typedef struct
 } WWDG_TypeDef;
 
 /**
- * @brief RNG
- */
+  * @brief RNG
+  */
 
 typedef struct
 {
@@ -967,8 +967,8 @@ typedef struct
 } RNG_TypeDef;
 
 /**
- * @brief USB_OTG_Core_register
- */
+  * @brief USB_OTG_Core_register
+  */
 typedef struct
 {
     __IO uint32_t GOTGCTL;	      /*!<  USB_OTG Control and Status Register          000h*/
@@ -1001,8 +1001,8 @@ typedef struct
 } USB_OTG_GlobalTypeDef;
 
 /**
- * @brief USB_OTG_device_Registers
- */
+  * @brief USB_OTG_device_Registers
+  */
 typedef struct
 {
     __IO uint32_t DCFG;	      /* dev Configuration Register   800h*/
@@ -1028,8 +1028,8 @@ typedef struct
 } USB_OTG_DeviceTypeDef;
 
 /**
- * @brief USB_OTG_IN_Endpoint-Specific_Register
- */
+  * @brief USB_OTG_IN_Endpoint-Specific_Register
+  */
 typedef struct
 {
     __IO uint32_t DIEPCTL;  /* dev IN Endpoint Control Reg 900h + (ep_num * 20h) + 00h*/
@@ -1043,8 +1043,8 @@ typedef struct
 } USB_OTG_INEndpointTypeDef;
 
 /**
- * @brief USB_OTG_OUT_Endpoint-Specific_Registers
- */
+  * @brief USB_OTG_OUT_Endpoint-Specific_Registers
+  */
 typedef struct
 {
     __IO uint32_t DOEPCTL;  /* dev OUT Endpoint Control Reg  B00h + (ep_num * 20h) + 00h*/
@@ -1057,8 +1057,8 @@ typedef struct
 } USB_OTG_OUTEndpointTypeDef;
 
 /**
- * @brief USB_OTG_Host_Mode_Register_Structures
- */
+  * @brief USB_OTG_Host_Mode_Register_Structures
+  */
 typedef struct
 {
     __IO uint32_t HCFG;	    /* Host Configuration Register    400h*/
@@ -1071,8 +1071,8 @@ typedef struct
 } USB_OTG_HostTypeDef;
 
 /**
- * @brief USB_OTG_Host_Channel_Specific_Registers
- */
+  * @brief USB_OTG_Host_Channel_Specific_Registers
+  */
 typedef struct
 {
     __IO uint32_t HCCHAR;
@@ -1085,12 +1085,12 @@ typedef struct
 } USB_OTG_HostChannelTypeDef;
 
 /**
- * @}
- */
+  * @}
+  */
 
 /** @addtogroup Peripheral_memory_map
- * @{
- */
+  * @{
+  */
 #define FLASH_BASE (0x08000000UL)      /*!< FLASH(up to 1 MB) base address  */
 #define FLASH_END (0x080FFFFFUL)       /*!< FLASH END address               */
 #define FLASH_BANK1_END (0x0807FFFFUL) /*!< FLASH END address of bank1      */
@@ -1269,12 +1269,12 @@ typedef struct
 #define UID_BASE (0x1FFF7590UL)	      /*!< Unique device ID register base address */
 #define FLASHSIZE_BASE (0x1FFF75E0UL) /*!< Flash size data register base address  */
 /**
- * @}
- */
+  * @}
+  */
 
 /** @addtogroup Peripheral_declaration
- * @{
- */
+  * @{
+  */
 #define TIM2 ((TIM_TypeDef *)TIM2_BASE)
 #define TIM3 ((TIM_TypeDef *)TIM3_BASE)
 #define TIM4 ((TIM_TypeDef *)TIM4_BASE)
@@ -1402,25 +1402,25 @@ typedef struct
 
 #define USB_OTG_FS ((USB_OTG_GlobalTypeDef *)USB_OTG_FS_PERIPH_BASE)
 /**
- * @}
- */
+  * @}
+  */
 
 /** @addtogroup Exported_constants
- * @{
- */
+  * @{
+  */
 
 /** @addtogroup Hardware_Constant_Definition
- * @{
- */
+  * @{
+  */
 #define LSI_STARTUP_TIME 130U /*!< LSI Maximum startup time in us */
 
 /**
- * @}
- */
+  * @}
+  */
 
 /** @addtogroup Peripheral_Registers_Bits_Definition
- * @{
- */
+  * @{
+  */
 
 /******************************************************************************/
 /*                         Peripheral Registers_Bits_Definition               */
@@ -10450,8 +10450,8 @@ typedef struct
 /*                                                                            */
 /******************************************************************************/
 /*
- * @brief Specific device feature definitions  (not present on all devices in the STM32L4 series)
- */
+* @brief Specific device feature definitions  (not present on all devices in the STM32L4 series)
+*/
 #define RCC_PLLSAI1_SUPPORT
 #define RCC_PLLP_SUPPORT
 #define RCC_PLLSAI2_SUPPORT
@@ -11653,8 +11653,8 @@ typedef struct
 /*                                                                            */
 /******************************************************************************/
 /*
- * @brief Specific device feature definitions
- */
+* @brief Specific device feature definitions
+*/
 #define RTC_TAMPER1_SUPPORT
 #define RTC_TAMPER2_SUPPORT
 #define RTC_TAMPER3_SUPPORT
@@ -13419,8 +13419,8 @@ typedef struct
 #define SYSCFG_EXTICR1_EXTI3 SYSCFG_EXTICR1_EXTI3_Msk		     /*!<EXTI 3 configuration */
 
 /**
- * @brief   EXTI0 configuration
- */
+  * @brief   EXTI0 configuration
+  */
 #define SYSCFG_EXTICR1_EXTI0_PA (0x00000000UL) /*!<PA[0] pin */
 #define SYSCFG_EXTICR1_EXTI0_PB (0x00000001UL) /*!<PB[0] pin */
 #define SYSCFG_EXTICR1_EXTI0_PC (0x00000002UL) /*!<PC[0] pin */
@@ -13431,8 +13431,8 @@ typedef struct
 #define SYSCFG_EXTICR1_EXTI0_PH (0x00000007UL) /*!<PH[0] pin */
 
 /**
- * @brief   EXTI1 configuration
- */
+  * @brief   EXTI1 configuration
+  */
 #define SYSCFG_EXTICR1_EXTI1_PA (0x00000000UL) /*!<PA[1] pin */
 #define SYSCFG_EXTICR1_EXTI1_PB (0x00000010UL) /*!<PB[1] pin */
 #define SYSCFG_EXTICR1_EXTI1_PC (0x00000020UL) /*!<PC[1] pin */
@@ -13443,8 +13443,8 @@ typedef struct
 #define SYSCFG_EXTICR1_EXTI1_PH (0x00000070UL) /*!<PH[1] pin */
 
 /**
- * @brief   EXTI2 configuration
- */
+  * @brief   EXTI2 configuration
+  */
 #define SYSCFG_EXTICR1_EXTI2_PA (0x00000000UL) /*!<PA[2] pin */
 #define SYSCFG_EXTICR1_EXTI2_PB (0x00000100UL) /*!<PB[2] pin */
 #define SYSCFG_EXTICR1_EXTI2_PC (0x00000200UL) /*!<PC[2] pin */
@@ -13454,8 +13454,8 @@ typedef struct
 #define SYSCFG_EXTICR1_EXTI2_PG (0x00000600UL) /*!<PG[2] pin */
 
 /**
- * @brief   EXTI3 configuration
- */
+  * @brief   EXTI3 configuration
+  */
 #define SYSCFG_EXTICR1_EXTI3_PA (0x00000000UL) /*!<PA[3] pin */
 #define SYSCFG_EXTICR1_EXTI3_PB (0x00001000UL) /*!<PB[3] pin */
 #define SYSCFG_EXTICR1_EXTI3_PC (0x00002000UL) /*!<PC[3] pin */
@@ -13478,8 +13478,8 @@ typedef struct
 #define SYSCFG_EXTICR2_EXTI7_Msk (0x7UL << SYSCFG_EXTICR2_EXTI7_Pos) /*!< 0x00007000 */
 #define SYSCFG_EXTICR2_EXTI7 SYSCFG_EXTICR2_EXTI7_Msk		     /*!<EXTI 7 configuration */
 /**
- * @brief   EXTI4 configuration
- */
+  * @brief   EXTI4 configuration
+  */
 #define SYSCFG_EXTICR2_EXTI4_PA (0x00000000UL) /*!<PA[4] pin */
 #define SYSCFG_EXTICR2_EXTI4_PB (0x00000001UL) /*!<PB[4] pin */
 #define SYSCFG_EXTICR2_EXTI4_PC (0x00000002UL) /*!<PC[4] pin */
@@ -13489,8 +13489,8 @@ typedef struct
 #define SYSCFG_EXTICR2_EXTI4_PG (0x00000006UL) /*!<PG[4] pin */
 
 /**
- * @brief   EXTI5 configuration
- */
+  * @brief   EXTI5 configuration
+  */
 #define SYSCFG_EXTICR2_EXTI5_PA (0x00000000UL) /*!<PA[5] pin */
 #define SYSCFG_EXTICR2_EXTI5_PB (0x00000010UL) /*!<PB[5] pin */
 #define SYSCFG_EXTICR2_EXTI5_PC (0x00000020UL) /*!<PC[5] pin */
@@ -13500,8 +13500,8 @@ typedef struct
 #define SYSCFG_EXTICR2_EXTI5_PG (0x00000060UL) /*!<PG[5] pin */
 
 /**
- * @brief   EXTI6 configuration
- */
+  * @brief   EXTI6 configuration
+  */
 #define SYSCFG_EXTICR2_EXTI6_PA (0x00000000UL) /*!<PA[6] pin */
 #define SYSCFG_EXTICR2_EXTI6_PB (0x00000100UL) /*!<PB[6] pin */
 #define SYSCFG_EXTICR2_EXTI6_PC (0x00000200UL) /*!<PC[6] pin */
@@ -13511,8 +13511,8 @@ typedef struct
 #define SYSCFG_EXTICR2_EXTI6_PG (0x00000600UL) /*!<PG[6] pin */
 
 /**
- * @brief   EXTI7 configuration
- */
+  * @brief   EXTI7 configuration
+  */
 #define SYSCFG_EXTICR2_EXTI7_PA (0x00000000UL) /*!<PA[7] pin */
 #define SYSCFG_EXTICR2_EXTI7_PB (0x00001000UL) /*!<PB[7] pin */
 #define SYSCFG_EXTICR2_EXTI7_PC (0x00002000UL) /*!<PC[7] pin */
@@ -13536,8 +13536,8 @@ typedef struct
 #define SYSCFG_EXTICR3_EXTI11 SYSCFG_EXTICR3_EXTI11_Msk		       /*!<EXTI 11 configuration */
 
 /**
- * @brief   EXTI8 configuration
- */
+  * @brief   EXTI8 configuration
+  */
 #define SYSCFG_EXTICR3_EXTI8_PA (0x00000000UL) /*!<PA[8] pin */
 #define SYSCFG_EXTICR3_EXTI8_PB (0x00000001UL) /*!<PB[8] pin */
 #define SYSCFG_EXTICR3_EXTI8_PC (0x00000002UL) /*!<PC[8] pin */
@@ -13547,8 +13547,8 @@ typedef struct
 #define SYSCFG_EXTICR3_EXTI8_PG (0x00000006UL) /*!<PG[8] pin */
 
 /**
- * @brief   EXTI9 configuration
- */
+  * @brief   EXTI9 configuration
+  */
 #define SYSCFG_EXTICR3_EXTI9_PA (0x00000000UL) /*!<PA[9] pin */
 #define SYSCFG_EXTICR3_EXTI9_PB (0x00000010UL) /*!<PB[9] pin */
 #define SYSCFG_EXTICR3_EXTI9_PC (0x00000020UL) /*!<PC[9] pin */
@@ -13558,8 +13558,8 @@ typedef struct
 #define SYSCFG_EXTICR3_EXTI9_PG (0x00000060UL) /*!<PG[9] pin */
 
 /**
- * @brief   EXTI10 configuration
- */
+  * @brief   EXTI10 configuration
+  */
 #define SYSCFG_EXTICR3_EXTI10_PA (0x00000000UL) /*!<PA[10] pin */
 #define SYSCFG_EXTICR3_EXTI10_PB (0x00000100UL) /*!<PB[10] pin */
 #define SYSCFG_EXTICR3_EXTI10_PC (0x00000200UL) /*!<PC[10] pin */
@@ -13569,8 +13569,8 @@ typedef struct
 #define SYSCFG_EXTICR3_EXTI10_PG (0x00000600UL) /*!<PG[10] pin */
 
 /**
- * @brief   EXTI11 configuration
- */
+  * @brief   EXTI11 configuration
+  */
 #define SYSCFG_EXTICR3_EXTI11_PA (0x00000000UL) /*!<PA[11] pin */
 #define SYSCFG_EXTICR3_EXTI11_PB (0x00001000UL) /*!<PB[11] pin */
 #define SYSCFG_EXTICR3_EXTI11_PC (0x00002000UL) /*!<PC[11] pin */
@@ -13594,8 +13594,8 @@ typedef struct
 #define SYSCFG_EXTICR4_EXTI15 SYSCFG_EXTICR4_EXTI15_Msk		       /*!<EXTI 15 configuration */
 
 /**
- * @brief   EXTI12 configuration
- */
+  * @brief   EXTI12 configuration
+  */
 #define SYSCFG_EXTICR4_EXTI12_PA (0x00000000UL) /*!<PA[12] pin */
 #define SYSCFG_EXTICR4_EXTI12_PB (0x00000001UL) /*!<PB[12] pin */
 #define SYSCFG_EXTICR4_EXTI12_PC (0x00000002UL) /*!<PC[12] pin */
@@ -13605,8 +13605,8 @@ typedef struct
 #define SYSCFG_EXTICR4_EXTI12_PG (0x00000006UL) /*!<PG[12] pin */
 
 /**
- * @brief   EXTI13 configuration
- */
+  * @brief   EXTI13 configuration
+  */
 #define SYSCFG_EXTICR4_EXTI13_PA (0x00000000UL) /*!<PA[13] pin */
 #define SYSCFG_EXTICR4_EXTI13_PB (0x00000010UL) /*!<PB[13] pin */
 #define SYSCFG_EXTICR4_EXTI13_PC (0x00000020UL) /*!<PC[13] pin */
@@ -13616,8 +13616,8 @@ typedef struct
 #define SYSCFG_EXTICR4_EXTI13_PG (0x00000060UL) /*!<PG[13] pin */
 
 /**
- * @brief   EXTI14 configuration
- */
+  * @brief   EXTI14 configuration
+  */
 #define SYSCFG_EXTICR4_EXTI14_PA (0x00000000UL) /*!<PA[14] pin */
 #define SYSCFG_EXTICR4_EXTI14_PB (0x00000100UL) /*!<PB[14] pin */
 #define SYSCFG_EXTICR4_EXTI14_PC (0x00000200UL) /*!<PC[14] pin */
@@ -13627,8 +13627,8 @@ typedef struct
 #define SYSCFG_EXTICR4_EXTI14_PG (0x00000600UL) /*!<PG[14] pin */
 
 /**
- * @brief   EXTI15 configuration
- */
+  * @brief   EXTI15 configuration
+  */
 #define SYSCFG_EXTICR4_EXTI15_PA (0x00000000UL) /*!<PA[15] pin */
 #define SYSCFG_EXTICR4_EXTI15_PB (0x00001000UL) /*!<PB[15] pin */
 #define SYSCFG_EXTICR4_EXTI15_PC (0x00002000UL) /*!<PC[15] pin */
@@ -17668,16 +17668,16 @@ typedef struct
 #define USB_OTG_HCSPLT_SPLITEN USB_OTG_HCSPLT_SPLITEN_Msk		 /*!< Split enable */
 
 /**
- * @}
- */
+  * @}
+  */
 
 /**
- * @}
- */
+  * @}
+  */
 
 /** @addtogroup Exported_macros
- * @{
- */
+  * @{
+  */
 
 /******************************* ADC Instances ********************************/
 #define IS_ADC_ALL_INSTANCE(INSTANCE) (((INSTANCE) == ADC1) || \
@@ -18234,8 +18234,8 @@ typedef struct
 #define IS_WWDG_ALL_INSTANCE(INSTANCE) ((INSTANCE) == WWDG)
 
 /**
- * @}
- */
+  * @}
+  */
 
 /******************************************************************************/
 /*  For a painless codes migration between the STM32L4xx device product       */
@@ -18274,9 +18274,9 @@ typedef struct
 #endif /* __STM32L475xx_H */
 
 /**
- * @}
- */
+  * @}
+  */
 
 /**
- * @}
- */
+  * @}
+  */

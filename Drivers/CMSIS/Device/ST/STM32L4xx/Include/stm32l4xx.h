@@ -1,38 +1,38 @@
 /**
- ******************************************************************************
- * @file    stm32l4xx.h
- * @author  MCD Application Team
- * @brief   CMSIS STM32L4xx Device Peripheral Access Layer Header File.
- *
- *          The file is the unique include file that the application programmer
- *          is using in the C source code, usually in main.c. This file contains:
- *           - Configuration section that allows to select:
- *              - The STM32L4xx device used in the target application
- *              - To use or not the peripheral's drivers in application code(i.e.
- *                code will be based on direct access to peripheral's registers
- *                rather than drivers API), this option is controlled by
- *                "#define USE_HAL_DRIVER"
- *
- ******************************************************************************
- * @attention
- *
- * Copyright (c) 2017 STMicroelectronics.
- * All rights reserved.
- *
- * This software is licensed under terms that can be found in the LICENSE file
- * in the root directory of this software component.
- * If no LICENSE file comes with this software, it is provided AS-IS.
- *
- ******************************************************************************
- */
+  ******************************************************************************
+  * @file    stm32l4xx.h
+  * @author  MCD Application Team
+  * @brief   CMSIS STM32L4xx Device Peripheral Access Layer Header File.
+  *
+  *          The file is the unique include file that the application programmer
+  *          is using in the C source code, usually in main.c. This file contains:
+  *           - Configuration section that allows to select:
+  *              - The STM32L4xx device used in the target application
+  *              - To use or not the peripheral's drivers in application code(i.e.
+  *                code will be based on direct access to peripheral's registers
+  *                rather than drivers API), this option is controlled by
+  *                "#define USE_HAL_DRIVER"
+  *
+  ******************************************************************************
+  * @attention
+  *
+  * Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
+  */
 
 /** @addtogroup CMSIS
- * @{
- */
+  * @{
+  */
 
 /** @addtogroup stm32l4xx
- * @{
- */
+  * @{
+  */
 
 #ifndef __STM32L4xx_H
 #define __STM32L4xx_H
@@ -42,12 +42,12 @@ extern "C" {
 #endif /* __cplusplus */
 
 /** @addtogroup Library_configuration_section
- * @{
- */
+  * @{
+  */
 
 /**
- * @brief STM32 Family
- */
+  * @brief STM32 Family
+  */
 #if !defined(STM32L4)
 #define STM32L4
 #endif /* STM32L4 */
@@ -90,7 +90,7 @@ extern "C" {
 #endif
 
 /*  Tip: To avoid modifying this file each time you need to switch between these
-	devices, you can define the device in your toolchain compiler preprocessor.
+        devices, you can define the device in your toolchain compiler preprocessor.
   */
 #if !defined(USE_HAL_DRIVER)
 /**
@@ -102,8 +102,8 @@ extern "C" {
 #endif /* USE_HAL_DRIVER */
 
 /**
- * @brief CMSIS Device version number
- */
+  * @brief CMSIS Device version number
+  */
 #define __STM32L4_CMSIS_VERSION_MAIN (0x01) /*!< [31:24] main version */
 #define __STM32L4_CMSIS_VERSION_SUB1 (0x07) /*!< [23:16] sub1 version */
 #define __STM32L4_CMSIS_VERSION_SUB2 (0x04) /*!< [15:8]  sub2 version */
@@ -111,12 +111,12 @@ extern "C" {
 #define __STM32L4_CMSIS_VERSION ((__STM32L4_CMSIS_VERSION_MAIN << 24) | (__STM32L4_CMSIS_VERSION_SUB1 << 16) | (__STM32L4_CMSIS_VERSION_SUB2 << 8) | (__STM32L4_CMSIS_VERSION_RC))
 
 /**
- * @}
- */
+  * @}
+  */
 
 /** @addtogroup Device_Included
- * @{
- */
+  * @{
+  */
 
 #if defined(STM32L412xx)
 #include "stm32l412xx.h"
@@ -173,12 +173,12 @@ extern "C" {
 #endif
 
 /**
- * @}
- */
+  * @}
+  */
 
 /** @addtogroup Exported_types
- * @{
- */
+  * @{
+  */
 typedef enum {
     RESET = 0,
     SET = !RESET
@@ -197,12 +197,12 @@ typedef enum {
 } ErrorStatus;
 
 /**
- * @}
- */
+  * @}
+  */
 
 /** @addtogroup Exported_macros
- * @{
- */
+  * @{
+  */
 #define SET_BIT(REG, BIT) ((REG) |= (BIT))
 
 #define CLEAR_BIT(REG, BIT) ((REG) &= ~(BIT))
@@ -275,8 +275,8 @@ typedef enum {
 #define POSITION_VAL(VAL) (__CLZ(__RBIT(VAL)))
 
 /**
- * @}
- */
+  * @}
+  */
 
 #if defined(USE_HAL_DRIVER)
 #include "stm32l4xx_hal.h"
@@ -288,9 +288,9 @@ typedef enum {
 
 #endif /* __STM32L4xx_H */
 /**
- * @}
- */
+  * @}
+  */
 
 /**
- * @}
- */
+  * @}
+  */

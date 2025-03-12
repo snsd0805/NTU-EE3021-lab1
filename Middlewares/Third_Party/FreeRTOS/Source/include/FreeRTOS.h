@@ -315,25 +315,25 @@ hold explicit before calling the code. */
 /* Remove any unused trace macros. */
 #ifndef traceSTART
 /* Used to perform any necessary initialisation - for example, open a file
-into which trace is to be written. */
+	into which trace is to be written. */
 #define traceSTART()
 #endif
 
 #ifndef traceEND
 /* Use to close a trace, for example close a file into which trace has been
-written. */
+	written. */
 #define traceEND()
 #endif
 
 #ifndef traceTASK_SWITCHED_IN
 /* Called after a task has been selected to run.  pxCurrentTCB holds a pointer
-to the task control block of the selected task. */
+	to the task control block of the selected task. */
 #define traceTASK_SWITCHED_IN()
 #endif
 
 #ifndef traceINCREASE_TICK_COUNT
 /* Called before stepping the tick count after waking from tickless idle
-sleep. */
+	sleep. */
 #define traceINCREASE_TICK_COUNT(x)
 #endif
 
@@ -349,48 +349,48 @@ sleep. */
 
 #ifndef traceTASK_SWITCHED_OUT
 /* Called before a task has been selected to run.  pxCurrentTCB holds a pointer
-to the task control block of the task being switched out. */
+	to the task control block of the task being switched out. */
 #define traceTASK_SWITCHED_OUT()
 #endif
 
 #ifndef traceTASK_PRIORITY_INHERIT
 /* Called when a task attempts to take a mutex that is already held by a
-lower priority task.  pxTCBOfMutexHolder is a pointer to the TCB of the task
-that holds the mutex.  uxInheritedPriority is the priority the mutex holder
-will inherit (the priority of the task that is attempting to obtain the
-muted. */
+	lower priority task.  pxTCBOfMutexHolder is a pointer to the TCB of the task
+	that holds the mutex.  uxInheritedPriority is the priority the mutex holder
+	will inherit (the priority of the task that is attempting to obtain the
+	muted. */
 #define traceTASK_PRIORITY_INHERIT(pxTCBOfMutexHolder, uxInheritedPriority)
 #endif
 
 #ifndef traceTASK_PRIORITY_DISINHERIT
 /* Called when a task releases a mutex, the holding of which had resulted in
-the task inheriting the priority of a higher priority task.
-pxTCBOfMutexHolder is a pointer to the TCB of the task that is releasing the
-mutex.  uxOriginalPriority is the task's configured (base) priority. */
+	the task inheriting the priority of a higher priority task.
+	pxTCBOfMutexHolder is a pointer to the TCB of the task that is releasing the
+	mutex.  uxOriginalPriority is the task's configured (base) priority. */
 #define traceTASK_PRIORITY_DISINHERIT(pxTCBOfMutexHolder, uxOriginalPriority)
 #endif
 
 #ifndef traceBLOCKING_ON_QUEUE_RECEIVE
 /* Task is about to block because it cannot read from a
-queue/mutex/semaphore.  pxQueue is a pointer to the queue/mutex/semaphore
-upon which the read was attempted.  pxCurrentTCB points to the TCB of the
-task that attempted the read. */
+	queue/mutex/semaphore.  pxQueue is a pointer to the queue/mutex/semaphore
+	upon which the read was attempted.  pxCurrentTCB points to the TCB of the
+	task that attempted the read. */
 #define traceBLOCKING_ON_QUEUE_RECEIVE(pxQueue)
 #endif
 
 #ifndef traceBLOCKING_ON_QUEUE_PEEK
 /* Task is about to block because it cannot read from a
-queue/mutex/semaphore.  pxQueue is a pointer to the queue/mutex/semaphore
-upon which the read was attempted.  pxCurrentTCB points to the TCB of the
-task that attempted the read. */
+	queue/mutex/semaphore.  pxQueue is a pointer to the queue/mutex/semaphore
+	upon which the read was attempted.  pxCurrentTCB points to the TCB of the
+	task that attempted the read. */
 #define traceBLOCKING_ON_QUEUE_PEEK(pxQueue)
 #endif
 
 #ifndef traceBLOCKING_ON_QUEUE_SEND
 /* Task is about to block because it cannot write to a
-queue/mutex/semaphore.  pxQueue is a pointer to the queue/mutex/semaphore
-upon which the write was attempted.  pxCurrentTCB points to the TCB of the
-task that attempted the write. */
+	queue/mutex/semaphore.  pxQueue is a pointer to the queue/mutex/semaphore
+	upon which the write was attempted.  pxCurrentTCB points to the TCB of the
+	task that attempted the write. */
 #define traceBLOCKING_ON_QUEUE_SEND(pxQueue)
 #endif
 
@@ -854,14 +854,14 @@ task that attempted the write. */
 
 #ifndef configSTACK_DEPTH_TYPE
 /* Defaults to uint16_t for backward compatibility, but can be overridden
-in FreeRTOSConfig.h if uint16_t is too restrictive. */
+	in FreeRTOSConfig.h if uint16_t is too restrictive. */
 #define configSTACK_DEPTH_TYPE uint16_t
 #endif
 
 #ifndef configMESSAGE_BUFFER_LENGTH_TYPE
 /* Defaults to size_t for backward compatibility, but can be overridden
-in FreeRTOSConfig.h if lengths will always be less than the number of bytes
-in a size_t. */
+	in FreeRTOSConfig.h if lengths will always be less than the number of bytes
+	in a size_t. */
 #define configMESSAGE_BUFFER_LENGTH_TYPE size_t
 #endif
 
@@ -886,15 +886,15 @@ in a size_t. */
 
 #if (portTICK_TYPE_IS_ATOMIC == 0)
 /* Either variables of tick type cannot be read atomically, or
-portTICK_TYPE_IS_ATOMIC was not set - map the critical sections used when
-the tick count is returned to the standard critical section macros. */
+	portTICK_TYPE_IS_ATOMIC was not set - map the critical sections used when
+	the tick count is returned to the standard critical section macros. */
 #define portTICK_TYPE_ENTER_CRITICAL() portENTER_CRITICAL()
 #define portTICK_TYPE_EXIT_CRITICAL() portEXIT_CRITICAL()
 #define portTICK_TYPE_SET_INTERRUPT_MASK_FROM_ISR() portSET_INTERRUPT_MASK_FROM_ISR()
 #define portTICK_TYPE_CLEAR_INTERRUPT_MASK_FROM_ISR(x) portCLEAR_INTERRUPT_MASK_FROM_ISR((x))
 #else
 /* The tick type can be read atomically, so critical sections used when the
-tick count is returned can be defined away. */
+	tick count is returned can be defined away. */
 #define portTICK_TYPE_ENTER_CRITICAL()
 #define portTICK_TYPE_EXIT_CRITICAL()
 #define portTICK_TYPE_SET_INTERRUPT_MASK_FROM_ISR() 0
@@ -909,27 +909,27 @@ V8 if desired. */
 
 #ifndef configPRINTF
 /* configPRINTF() was not defined, so define it away to nothing.  To use
-configPRINTF() then define it as follows (where MyPrintFunction() is
-provided by the application writer):
+	configPRINTF() then define it as follows (where MyPrintFunction() is
+	provided by the application writer):
 
-void MyPrintFunction(const char *pcFormat, ... );
-#define configPRINTF( X )   MyPrintFunction X
+	void MyPrintFunction(const char *pcFormat, ... );
+	#define configPRINTF( X )   MyPrintFunction X
 
-Then call like a standard printf() function, but placing brackets around
-all parameters so they are passed as a single parameter.  For example:
-configPRINTF( ("Value = %d", MyVariable) ); */
+	Then call like a standard printf() function, but placing brackets around
+	all parameters so they are passed as a single parameter.  For example:
+	configPRINTF( ("Value = %d", MyVariable) ); */
 #define configPRINTF(X)
 #endif
 
 #ifndef configMAX
 /* The application writer has not provided their own MAX macro, so define
-the following generic implementation. */
+	the following generic implementation. */
 #define configMAX(a, b) (((a) > (b)) ? (a) : (b))
 #endif
 
 #ifndef configMIN
 /* The application writer has not provided their own MAX macro, so define
-the following generic implementation. */
+	the following generic implementation. */
 #define configMIN(a, b) (((a) < (b)) ? (a) : (b))
 #endif
 
@@ -956,14 +956,14 @@ the following generic implementation. */
 #define xTaskGetIdleRunTimeCounter ulTaskGetIdleRunTimeCounter
 
 /* Backward compatibility within the scheduler code only - these definitions
-are not really required but are included for completeness. */
+	are not really required but are included for completeness. */
 #define tmrTIMER_CALLBACK TimerCallbackFunction_t
 #define pdTASK_CODE TaskFunction_t
 #define xListItem ListItem_t
 #define xList List_t
 
 /* For libraries that break the list data hiding, and access list structure
-members directly (which is not supposed to be done). */
+	members directly (which is not supposed to be done). */
 #define pxContainer pvContainer
 #endif /* configENABLE_BACKWARD_COMPATIBILITY */
 
@@ -1253,19 +1253,19 @@ typedef struct xSTATIC_TIMER {
 } StaticTimer_t;
 
 /*
- * In line with software engineering best practice, especially when supplying a
- * library that is likely to change in future versions, FreeRTOS implements a
- * strict data hiding policy.  This means the stream buffer structure used
- * internally by FreeRTOS is not accessible to application code.  However, if
- * the application writer wants to statically allocate the memory required to
- * create a stream buffer then the size of the stream buffer object needs to be
- * know.  The StaticStreamBuffer_t structure below is provided for this purpose.
- * Its size and alignment requirements are guaranteed to match those of the
- * genuine structure, no matter which architecture is being used, and no matter
- * how the values in FreeRTOSConfig.h are set.  Its contents are somewhat
- * obfuscated in the hope users will recognise that it would be unwise to make
- * direct use of the structure members.
- */
+* In line with software engineering best practice, especially when supplying a
+* library that is likely to change in future versions, FreeRTOS implements a
+* strict data hiding policy.  This means the stream buffer structure used
+* internally by FreeRTOS is not accessible to application code.  However, if
+* the application writer wants to statically allocate the memory required to
+* create a stream buffer then the size of the stream buffer object needs to be
+* know.  The StaticStreamBuffer_t structure below is provided for this purpose.
+* Its size and alignment requirements are guaranteed to match those of the
+* genuine structure, no matter which architecture is being used, and no matter
+* how the values in FreeRTOSConfig.h are set.  Its contents are somewhat
+* obfuscated in the hope users will recognise that it would be unwise to make
+* direct use of the structure members.
+*/
 typedef struct xSTATIC_STREAM_BUFFER {
     size_t uxDummy1[4];
     void *pvDummy2[3];

@@ -1,9 +1,9 @@
 /**************************************************************************/ /**
-									      * @file     core_sc000.h
-									      * @brief    CMSIS SC000 Core Peripheral Access Layer Header File
-									      * @version  V5.0.6
-									      * @date     12. November 2018
-									      ******************************************************************************/
+ * @file     core_sc000.h
+ * @brief    CMSIS SC000 Core Peripheral Access Layer Header File
+ * @version  V5.0.6
+ * @date     12. November 2018
+ ******************************************************************************/
 /*
  * Copyright (c) 2009-2018 Arm Limited. All rights reserved.
  *
@@ -598,7 +598,7 @@ typedef struct
   \ingroup  CMSIS_core_register
   \defgroup CMSIS_CoreDebug       Core Debug Registers (CoreDebug)
   \brief    SC000 Core Debug Registers (DCB registers, SHCSR, and DFSR) are only accessible over DAP and not via processor.
-	    Therefore they are not covered by the SC000 header file.
+            Therefore they are not covered by the SC000 header file.
   @{
  */
 /*@} end of group CMSIS_CoreDebug */
@@ -624,7 +624,7 @@ typedef struct
   \param[in] value  Value of register. This parameter is interpreted as an uint32_t type.
   \return           Masked and shifted bit field value.
 */
-#define _FLD2VAL(field, value) (((uint32_t)(value) & field##_Msk) >> field##_Pos)
+#define _FLD2VAL(field, value) (((uint32_t)(value)&field##_Msk) >> field##_Pos)
 
 /*@} end of group CMSIS_core_bitfield */
 
@@ -802,8 +802,8 @@ __STATIC_INLINE void __NVIC_ClearPendingIRQ(IRQn_Type IRQn) {
 /**
   \brief   Set Interrupt Priority
   \details Sets the priority of a device specific interrupt or a processor exception.
-	   The interrupt number can be positive to specify a device specific interrupt,
-	   or negative to specify a processor exception.
+           The interrupt number can be positive to specify a device specific interrupt,
+           or negative to specify a processor exception.
   \param [in]      IRQn  Interrupt number.
   \param [in]  priority  Priority to set.
   \note    The priority cannot be set for every processor exception.
@@ -821,11 +821,11 @@ __STATIC_INLINE void __NVIC_SetPriority(IRQn_Type IRQn, uint32_t priority) {
 /**
   \brief   Get Interrupt Priority
   \details Reads the priority of a device specific interrupt or a processor exception.
-	   The interrupt number can be positive to specify a device specific interrupt,
-	   or negative to specify a processor exception.
+           The interrupt number can be positive to specify a device specific interrupt,
+           or negative to specify a processor exception.
   \param [in]   IRQn  Interrupt number.
   \return             Interrupt Priority.
-		      Value is aligned automatically to the implemented priority bits of the microcontroller.
+                      Value is aligned automatically to the implemented priority bits of the microcontroller.
  */
 __STATIC_INLINE uint32_t __NVIC_GetPriority(IRQn_Type IRQn) {
 
@@ -839,9 +839,9 @@ __STATIC_INLINE uint32_t __NVIC_GetPriority(IRQn_Type IRQn) {
 /**
   \brief   Set Interrupt Vector
   \details Sets an interrupt vector in SRAM based interrupt vector table.
-	   The interrupt number can be positive to specify a device specific interrupt,
-	   or negative to specify a processor exception.
-	   VTOR must been relocated to SRAM before.
+           The interrupt number can be positive to specify a device specific interrupt,
+           or negative to specify a processor exception.
+           VTOR must been relocated to SRAM before.
   \param [in]   IRQn      Interrupt number
   \param [in]   vector    Address of interrupt handler function
  */
@@ -854,8 +854,8 @@ __STATIC_INLINE void __NVIC_SetVector(IRQn_Type IRQn, uint32_t vector) {
 /**
   \brief   Get Interrupt Vector
   \details Reads an interrupt vector from interrupt vector table.
-	   The interrupt number can be positive to specify a device specific interrupt,
-	   or negative to specify a processor exception.
+           The interrupt number can be positive to specify a device specific interrupt,
+           or negative to specify a processor exception.
   \param [in]   IRQn      Interrupt number.
   \return                 Address of interrupt handler function
  */
@@ -870,7 +870,7 @@ __STATIC_INLINE uint32_t __NVIC_GetVector(IRQn_Type IRQn) {
  */
 __NO_RETURN __STATIC_INLINE void __NVIC_SystemReset(void) {
     __DSB(); /* Ensure all outstanding memory accesses included
-		buffered write are completed before reset */
+                                                                       buffered write are completed before reset */
     SCB->AIRCR = ((0x5FAUL << SCB_AIRCR_VECTKEY_Pos) |
 		  SCB_AIRCR_SYSRESETREQ_Msk);
     __DSB(); /* Ensure completion of memory access */
@@ -918,13 +918,13 @@ __STATIC_INLINE uint32_t SCB_GetFPUType(void) {
 /**
   \brief   System Tick Configuration
   \details Initializes the System Timer and its interrupt, and starts the System Tick Timer.
-	   Counter is in free running mode to generate periodic interrupts.
+           Counter is in free running mode to generate periodic interrupts.
   \param [in]  ticks  Number of ticks between two interrupts.
   \return          0  Function succeeded.
   \return          1  Function failed.
   \note    When the variable <b>__Vendor_SysTickConfig</b> is set to 1, then the
-	   function <b>SysTick_Config</b> is not included. In this case, the file <b><i>device</i>.h</b>
-	   must contain a vendor-specific implementation of this function.
+           function <b>SysTick_Config</b> is not included. In this case, the file <b><i>device</i>.h</b>
+           must contain a vendor-specific implementation of this function.
  */
 __STATIC_INLINE uint32_t SysTick_Config(uint32_t ticks) {
     if ((ticks - 1UL) > SysTick_LOAD_RELOAD_Msk) {

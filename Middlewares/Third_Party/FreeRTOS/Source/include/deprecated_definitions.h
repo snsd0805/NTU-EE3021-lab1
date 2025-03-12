@@ -209,7 +209,7 @@ typedef void(__interrupt __far *pxISR)();
 
 #ifdef BCC_INDUSTRIAL_PC_PORT
 /* A short file name has to be used in place of the normal
-FreeRTOSConfig.h when using the Borland compiler. */
+	FreeRTOSConfig.h when using the Borland compiler. */
 #include "..\portable\BCC\16BitDOS\PC\prtmacro.h"
 #include "frconfig.h"
 typedef void(__interrupt __far *pxISR)();
@@ -217,7 +217,7 @@ typedef void(__interrupt __far *pxISR)();
 
 #ifdef BCC_FLASH_LITE_186_PORT
 /* A short file name has to be used in place of the normal
-FreeRTOSConfig.h when using the Borland compiler. */
+	FreeRTOSConfig.h when using the Borland compiler. */
 #include "..\portable\BCC\16BitDOS\flsh186\prtmacro.h"
 #include "frconfig.h"
 typedef void(__interrupt __far *pxISR)();

@@ -126,12 +126,12 @@ const size_t xMessageBufferSizeBytes = 100;
 
     if( xMessageBuffer == NULL )
     {
-	// There was not enough heap memory space available to create the
-	// message buffer.
+        // There was not enough heap memory space available to create the
+        // message buffer.
     }
     else
     {
-	// The message buffer was created successfully and can now be used.
+        // The message buffer was created successfully and can now be used.
     }
 
 </pre>
@@ -145,8 +145,8 @@ const size_t xMessageBufferSizeBytes = 100;
  *
 <pre>
 MessageBufferHandle_t xMessageBufferCreateStatic( size_t xBufferSizeBytes,
-						  uint8_t *pucMessageBufferStorageArea,
-						  StaticMessageBuffer_t *pxStaticMessageBuffer );
+                                                  uint8_t *pucMessageBufferStorageArea,
+                                                  StaticMessageBuffer_t *pxStaticMessageBuffer );
 </pre>
  * Creates a new message buffer using statically allocated memory.  See
  * xMessageBufferCreate() for a version that uses dynamically allocated memory.
@@ -190,8 +190,8 @@ void MyFunction( void )
 MessageBufferHandle_t xMessageBuffer;
 
     xMessageBuffer = xMessageBufferCreateStatic( sizeof( ucBufferStorage ),
-						 ucBufferStorage,
-						 &xMessageBufferStruct );
+                                                 ucBufferStorage,
+                                                 &xMessageBufferStruct );
 
     // As neither the pucMessageBufferStorageArea or pxStaticMessageBuffer
     // parameters were NULL, xMessageBuffer will not be NULL, and can be used to
@@ -211,9 +211,9 @@ MessageBufferHandle_t xMessageBuffer;
  *
 <pre>
 size_t xMessageBufferSend( MessageBufferHandle_t xMessageBuffer,
-			   const void *pvTxData,
-			   size_t xDataLengthBytes,
-			   TickType_t xTicksToWait );
+                           const void *pvTxData,
+                           size_t xDataLengthBytes,
+                           TickType_t xTicksToWait );
 <pre>
  *
  * Sends a discrete message to the message buffer.  The message can be any
@@ -285,8 +285,8 @@ const TickType_t x100ms = pdMS_TO_TICKS( 100 );
 
     if( xBytesSent != sizeof( ucArrayToSend ) )
     {
-	// The call to xMessageBufferSend() times out before there was enough
-	// space in the buffer for the data to be written.
+        // The call to xMessageBufferSend() times out before there was enough
+        // space in the buffer for the data to be written.
     }
 
     // Send the string to the message buffer.  Return immediately if there is
@@ -295,8 +295,8 @@ const TickType_t x100ms = pdMS_TO_TICKS( 100 );
 
     if( xBytesSent != strlen( pcStringToSend ) )
     {
-	// The string could not be added to the message buffer because there was
-	// not enough free space in the buffer.
+        // The string could not be added to the message buffer because there was
+        // not enough free space in the buffer.
     }
 }
 </pre>
@@ -310,9 +310,9 @@ const TickType_t x100ms = pdMS_TO_TICKS( 100 );
  *
 <pre>
 size_t xMessageBufferSendFromISR( MessageBufferHandle_t xMessageBuffer,
-				  const void *pvTxData,
-				  size_t xDataLengthBytes,
-				  BaseType_t *pxHigherPriorityTaskWoken );
+                                  const void *pvTxData,
+                                  size_t xDataLengthBytes,
+                                  BaseType_t *pxHigherPriorityTaskWoken );
 <pre>
  *
  * Interrupt safe version of the API function that sends a discrete message to
@@ -383,14 +383,14 @@ BaseType_t xHigherPriorityTaskWoken = pdFALSE; // Initialised to pdFALSE.
 
     // Attempt to send the string to the message buffer.
     xBytesSent = xMessageBufferSendFromISR( xMessageBuffer,
-					    ( void * ) pcStringToSend,
-					    strlen( pcStringToSend ),
-					    &xHigherPriorityTaskWoken );
+                                            ( void * ) pcStringToSend,
+                                            strlen( pcStringToSend ),
+                                            &xHigherPriorityTaskWoken );
 
     if( xBytesSent != strlen( pcStringToSend ) )
     {
-	// The string could not be added to the message buffer because there was
-	// not enough free space in the buffer.
+        // The string could not be added to the message buffer because there was
+        // not enough free space in the buffer.
     }
 
     // If xHigherPriorityTaskWoken was set to pdTRUE inside
@@ -414,9 +414,9 @@ BaseType_t xHigherPriorityTaskWoken = pdFALSE; // Initialised to pdFALSE.
  *
 <pre>
 size_t xMessageBufferReceive( MessageBufferHandle_t xMessageBuffer,
-			      void *pvRxData,
-			      size_t xBufferLengthBytes,
-			      TickType_t xTicksToWait );
+                              void *pvRxData,
+                              size_t xBufferLengthBytes,
+                              TickType_t xTicksToWait );
 </pre>
  *
  * Receives a discrete message from a message buffer.  Messages can be of
@@ -481,14 +481,14 @@ const TickType_t xBlockTime = pdMS_TO_TICKS( 20 );
     // state (so not using any CPU processing time) for a maximum of 100ms for
     // a message to become available.
     xReceivedBytes = xMessageBufferReceive( xMessageBuffer,
-					    ( void * ) ucRxData,
-					    sizeof( ucRxData ),
-					    xBlockTime );
+                                            ( void * ) ucRxData,
+                                            sizeof( ucRxData ),
+                                            xBlockTime );
 
     if( xReceivedBytes > 0 )
     {
-	// A ucRxData contains a message that is xReceivedBytes long.  Process
-	// the message here....
+        // A ucRxData contains a message that is xReceivedBytes long.  Process
+        // the message here....
     }
 }
 </pre>
@@ -502,9 +502,9 @@ const TickType_t xBlockTime = pdMS_TO_TICKS( 20 );
  *
 <pre>
 size_t xMessageBufferReceiveFromISR( MessageBufferHandle_t xMessageBuffer,
-				     void *pvRxData,
-				     size_t xBufferLengthBytes,
-				     BaseType_t *pxHigherPriorityTaskWoken );
+                                     void *pvRxData,
+                                     size_t xBufferLengthBytes,
+                                     BaseType_t *pxHigherPriorityTaskWoken );
 </pre>
  *
  * An interrupt safe version of the API function that receives a discrete
@@ -571,14 +571,14 @@ BaseType_t xHigherPriorityTaskWoken = pdFALSE;  // Initialised to pdFALSE.
 
     // Receive the next message from the message buffer.
     xReceivedBytes = xMessageBufferReceiveFromISR( xMessageBuffer,
-						  ( void * ) ucRxData,
-						  sizeof( ucRxData ),
-						  &xHigherPriorityTaskWoken );
+                                                  ( void * ) ucRxData,
+                                                  sizeof( ucRxData ),
+                                                  &xHigherPriorityTaskWoken );
 
     if( xReceivedBytes > 0 )
     {
-	// A ucRxData contains a message that is xReceivedBytes long.  Process
-	// the message here....
+        // A ucRxData contains a message that is xReceivedBytes long.  Process
+        // the message here....
     }
 
     // If xHigherPriorityTaskWoken was set to pdTRUE inside

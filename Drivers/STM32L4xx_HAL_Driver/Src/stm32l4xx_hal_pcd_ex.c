@@ -1,36 +1,36 @@
 /**
- ******************************************************************************
- * @file    stm32l4xx_hal_pcd_ex.c
- * @author  MCD Application Team
- * @brief   PCD Extended HAL module driver.
- *          This file provides firmware functions to manage the following
- *          functionalities of the USB Peripheral Controller:
- *           + Extended features functions
- *
- ******************************************************************************
- * @attention
- *
- * Copyright (c) 2017 STMicroelectronics.
- * All rights reserved.
- *
- * This software is licensed under terms that can be found in the LICENSE file
- * in the root directory of this software component.
- * If no LICENSE file comes with this software, it is provided AS-IS.
- *
- ******************************************************************************
- */
+  ******************************************************************************
+  * @file    stm32l4xx_hal_pcd_ex.c
+  * @author  MCD Application Team
+  * @brief   PCD Extended HAL module driver.
+  *          This file provides firmware functions to manage the following
+  *          functionalities of the USB Peripheral Controller:
+  *           + Extended features functions
+  *
+  ******************************************************************************
+  * @attention
+  *
+  * Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32l4xx_hal.h"
 
 /** @addtogroup STM32L4xx_HAL_Driver
- * @{
- */
+  * @{
+  */
 
 /** @defgroup PCDEx PCDEx
- * @brief PCD Extended HAL module driver
- * @{
- */
+  * @brief PCD Extended HAL module driver
+  * @{
+  */
 
 #ifdef HAL_PCD_MODULE_ENABLED
 
@@ -43,15 +43,15 @@
 /* Exported functions --------------------------------------------------------*/
 
 /** @defgroup PCDEx_Exported_Functions PCDEx Exported Functions
- * @{
- */
+  * @{
+  */
 
 /** @defgroup PCDEx_Exported_Functions_Group1 Peripheral Control functions
   * @brief    PCDEx control functions
   *
 @verbatim
  ===============================================================================
-		 ##### Extended features functions #####
+                 ##### Extended features functions #####
  ===============================================================================
     [..]  This section provides functions allowing to:
       (+) Update FIFO configuration
@@ -61,25 +61,25 @@
   */
 #if defined(USB_OTG_FS)
 /**
- * @brief  Set Tx FIFO
- * @param  hpcd PCD handle
- * @param  fifo The number of Tx fifo
- * @param  size Fifo size
- * @retval HAL status
- */
+  * @brief  Set Tx FIFO
+  * @param  hpcd PCD handle
+  * @param  fifo The number of Tx fifo
+  * @param  size Fifo size
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_PCDEx_SetTxFiFo(PCD_HandleTypeDef *hpcd, uint8_t fifo, uint16_t size) {
     uint8_t i;
     uint32_t Tx_Offset;
 
     /*  TXn min size = 16 words. (n  : Transmit FIFO index)
-	When a TxFIFO is not used, the Configuration should be as follows:
-	    case 1 :  n > m    and Txn is not used    (n,m  : Transmit FIFO indexes)
-	   --> Txm can use the space allocated for Txn.
-	   case2  :  n < m    and Txn is not used    (n,m  : Transmit FIFO indexes)
-	   --> Txn should be configured with the minimum space of 16 words
-       The FIFO is used optimally when used TxFIFOs are allocated in the top
-	   of the FIFO.Ex: use EP1 and EP2 as IN instead of EP1 and EP3 as IN ones.
-       When DMA is used 3n * FIFO locations should be reserved for internal DMA registers */
+      When a TxFIFO is not used, the Configuration should be as follows:
+          case 1 :  n > m    and Txn is not used    (n,m  : Transmit FIFO indexes)
+         --> Txm can use the space allocated for Txn.
+         case2  :  n < m    and Txn is not used    (n,m  : Transmit FIFO indexes)
+         --> Txn should be configured with the minimum space of 16 words
+     The FIFO is used optimally when used TxFIFOs are allocated in the top
+         of the FIFO.Ex: use EP1 and EP2 as IN instead of EP1 and EP3 as IN ones.
+     When DMA is used 3n * FIFO locations should be reserved for internal DMA registers */
 
     Tx_Offset = hpcd->Instance->GRXFSIZ;
 
@@ -99,11 +99,11 @@ HAL_StatusTypeDef HAL_PCDEx_SetTxFiFo(PCD_HandleTypeDef *hpcd, uint8_t fifo, uin
 }
 
 /**
- * @brief  Set Rx FIFO
- * @param  hpcd PCD handle
- * @param  size Size of Rx fifo
- * @retval HAL status
- */
+  * @brief  Set Rx FIFO
+  * @param  hpcd PCD handle
+  * @param  size Size of Rx fifo
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_PCDEx_SetRxFiFo(PCD_HandleTypeDef *hpcd, uint16_t size) {
     hpcd->Instance->GRXFSIZ = size;
 
@@ -111,10 +111,10 @@ HAL_StatusTypeDef HAL_PCDEx_SetRxFiFo(PCD_HandleTypeDef *hpcd, uint16_t size) {
 }
 
 /**
- * @brief  Activate LPM feature.
- * @param  hpcd PCD handle
- * @retval HAL status
- */
+  * @brief  Activate LPM feature.
+  * @param  hpcd PCD handle
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_PCDEx_ActivateLPM(PCD_HandleTypeDef *hpcd) {
     USB_OTG_GlobalTypeDef *USBx = hpcd->Instance;
 
@@ -127,10 +127,10 @@ HAL_StatusTypeDef HAL_PCDEx_ActivateLPM(PCD_HandleTypeDef *hpcd) {
 }
 
 /**
- * @brief  Deactivate LPM feature.
- * @param  hpcd PCD handle
- * @retval HAL status
- */
+  * @brief  Deactivate LPM feature.
+  * @param  hpcd PCD handle
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_PCDEx_DeActivateLPM(PCD_HandleTypeDef *hpcd) {
     USB_OTG_GlobalTypeDef *USBx = hpcd->Instance;
 
@@ -142,10 +142,10 @@ HAL_StatusTypeDef HAL_PCDEx_DeActivateLPM(PCD_HandleTypeDef *hpcd) {
 }
 
 /**
- * @brief  Handle BatteryCharging Process.
- * @param  hpcd PCD handle
- * @retval HAL status
- */
+  * @brief  Handle BatteryCharging Process.
+  * @param  hpcd PCD handle
+  * @retval HAL status
+  */
 void HAL_PCDEx_BCD_VBUSDetect(PCD_HandleTypeDef *hpcd) {
     USB_OTG_GlobalTypeDef *USBx = hpcd->Instance;
     uint32_t tickstart = HAL_GetTick();
@@ -166,7 +166,7 @@ void HAL_PCDEx_BCD_VBUSDetect(PCD_HandleTypeDef *hpcd) {
     }
 
     /* Primary detection: checks if connected to Standard Downstream Port
-    (without charging capability) */
+  (without charging capability) */
     USBx->GCCFG &= ~USB_OTG_GCCFG_DCDEN;
     HAL_Delay(50U);
     USBx->GCCFG |= USB_OTG_GCCFG_PDEN;
@@ -181,7 +181,7 @@ void HAL_PCDEx_BCD_VBUSDetect(PCD_HandleTypeDef *hpcd) {
 #endif /* USE_HAL_PCD_REGISTER_CALLBACKS */
     } else {
 	/* start secondary detection to check connection to Charging Downstream
-	Port or Dedicated Charging Port */
+    Port or Dedicated Charging Port */
 	USBx->GCCFG &= ~(USB_OTG_GCCFG_PDEN);
 	HAL_Delay(50U);
 	USBx->GCCFG |= USB_OTG_GCCFG_SDEN;
@@ -224,10 +224,10 @@ void HAL_PCDEx_BCD_VBUSDetect(PCD_HandleTypeDef *hpcd) {
 }
 
 /**
- * @brief  Activate BatteryCharging feature.
- * @param  hpcd PCD handle
- * @retval HAL status
- */
+  * @brief  Activate BatteryCharging feature.
+  * @param  hpcd PCD handle
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_PCDEx_ActivateBCD(PCD_HandleTypeDef *hpcd) {
     USB_OTG_GlobalTypeDef *USBx = hpcd->Instance;
 
@@ -246,10 +246,10 @@ HAL_StatusTypeDef HAL_PCDEx_ActivateBCD(PCD_HandleTypeDef *hpcd) {
 }
 
 /**
- * @brief  Deactivate BatteryCharging feature.
- * @param  hpcd PCD handle
- * @retval HAL status
- */
+  * @brief  Deactivate BatteryCharging feature.
+  * @param  hpcd PCD handle
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_PCDEx_DeActivateBCD(PCD_HandleTypeDef *hpcd) {
     USB_OTG_GlobalTypeDef *USBx = hpcd->Instance;
 
@@ -267,21 +267,21 @@ HAL_StatusTypeDef HAL_PCDEx_DeActivateBCD(PCD_HandleTypeDef *hpcd) {
 #endif /* defined (USB_OTG_FS) */
 #if defined(USB)
 /**
- * @brief  Configure PMA for EP
- * @param  hpcd  Device instance
- * @param  ep_addr endpoint address
- * @param  ep_kind endpoint Kind
- *                  USB_SNG_BUF: Single Buffer used
- *                  USB_DBL_BUF: Double Buffer used
- * @param  pmaadress: EP address in The PMA: In case of single buffer endpoint
- *                   this parameter is 16-bit value providing the address
- *                   in PMA allocated to endpoint.
- *                   In case of double buffer endpoint this parameter
- *                   is a 32-bit value providing the endpoint buffer 0 address
- *                   in the LSB part of 32-bit value and endpoint buffer 1 address
- *                   in the MSB part of 32-bit value.
- * @retval HAL status
- */
+  * @brief  Configure PMA for EP
+  * @param  hpcd  Device instance
+  * @param  ep_addr endpoint address
+  * @param  ep_kind endpoint Kind
+  *                  USB_SNG_BUF: Single Buffer used
+  *                  USB_DBL_BUF: Double Buffer used
+  * @param  pmaadress: EP address in The PMA: In case of single buffer endpoint
+  *                   this parameter is 16-bit value providing the address
+  *                   in PMA allocated to endpoint.
+  *                   In case of double buffer endpoint this parameter
+  *                   is a 32-bit value providing the endpoint buffer 0 address
+  *                   in the LSB part of 32-bit value and endpoint buffer 1 address
+  *                   in the MSB part of 32-bit value.
+  * @retval HAL status
+  */
 
 HAL_StatusTypeDef HAL_PCDEx_PMAConfig(PCD_HandleTypeDef *hpcd, uint16_t ep_addr,
 				      uint16_t ep_kind, uint32_t pmaadress) {
@@ -316,10 +316,10 @@ HAL_StatusTypeDef HAL_PCDEx_PMAConfig(PCD_HandleTypeDef *hpcd, uint16_t ep_addr,
 }
 
 /**
- * @brief  Activate BatteryCharging feature.
- * @param  hpcd PCD handle
- * @retval HAL status
- */
+  * @brief  Activate BatteryCharging feature.
+  * @param  hpcd PCD handle
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_PCDEx_ActivateBCD(PCD_HandleTypeDef *hpcd) {
     USB_TypeDef *USBx = hpcd->Instance;
     hpcd->battery_charging_active = 1U;
@@ -336,10 +336,10 @@ HAL_StatusTypeDef HAL_PCDEx_ActivateBCD(PCD_HandleTypeDef *hpcd) {
 }
 
 /**
- * @brief  Deactivate BatteryCharging feature.
- * @param  hpcd PCD handle
- * @retval HAL status
- */
+  * @brief  Deactivate BatteryCharging feature.
+  * @param  hpcd PCD handle
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_PCDEx_DeActivateBCD(PCD_HandleTypeDef *hpcd) {
     USB_TypeDef *USBx = hpcd->Instance;
     hpcd->battery_charging_active = 0U;
@@ -351,10 +351,10 @@ HAL_StatusTypeDef HAL_PCDEx_DeActivateBCD(PCD_HandleTypeDef *hpcd) {
 }
 
 /**
- * @brief  Handle BatteryCharging Process.
- * @param  hpcd PCD handle
- * @retval HAL status
- */
+  * @brief  Handle BatteryCharging Process.
+  * @param  hpcd PCD handle
+  * @retval HAL status
+  */
 void HAL_PCDEx_BCD_VBUSDetect(PCD_HandleTypeDef *hpcd) {
     USB_TypeDef *USBx = hpcd->Instance;
     uint32_t tickstart = HAL_GetTick();
@@ -371,7 +371,7 @@ void HAL_PCDEx_BCD_VBUSDetect(PCD_HandleTypeDef *hpcd) {
 #endif /* USE_HAL_PCD_REGISTER_CALLBACKS */
     }
     /* Primary detection: checks if connected to Standard Downstream Port
-    (without charging capability) */
+  (without charging capability) */
     USBx->BCDR &= ~(USB_BCDR_DCDEN);
     HAL_Delay(50U);
     USBx->BCDR |= (USB_BCDR_PDEN);
@@ -380,7 +380,7 @@ void HAL_PCDEx_BCD_VBUSDetect(PCD_HandleTypeDef *hpcd) {
     /* If Charger detect ? */
     if ((USBx->BCDR & USB_BCDR_PDET) == USB_BCDR_PDET) {
 	/* Start secondary detection to check connection to Charging Downstream
-	Port or Dedicated Charging Port */
+    Port or Dedicated Charging Port */
 	USBx->BCDR &= ~(USB_BCDR_PDEN);
 	HAL_Delay(50U);
 	USBx->BCDR |= (USB_BCDR_SDEN);
@@ -432,10 +432,10 @@ void HAL_PCDEx_BCD_VBUSDetect(PCD_HandleTypeDef *hpcd) {
 }
 
 /**
- * @brief  Activate LPM feature.
- * @param  hpcd PCD handle
- * @retval HAL status
- */
+  * @brief  Activate LPM feature.
+  * @param  hpcd PCD handle
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_PCDEx_ActivateLPM(PCD_HandleTypeDef *hpcd) {
 
     USB_TypeDef *USBx = hpcd->Instance;
@@ -449,10 +449,10 @@ HAL_StatusTypeDef HAL_PCDEx_ActivateLPM(PCD_HandleTypeDef *hpcd) {
 }
 
 /**
- * @brief  Deactivate LPM feature.
- * @param  hpcd PCD handle
- * @retval HAL status
- */
+  * @brief  Deactivate LPM feature.
+  * @param  hpcd PCD handle
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_PCDEx_DeActivateLPM(PCD_HandleTypeDef *hpcd) {
     USB_TypeDef *USBx = hpcd->Instance;
 
@@ -466,51 +466,51 @@ HAL_StatusTypeDef HAL_PCDEx_DeActivateLPM(PCD_HandleTypeDef *hpcd) {
 #endif /* defined (USB) */
 
 /**
- * @brief  Send LPM message to user layer callback.
- * @param  hpcd PCD handle
- * @param  msg LPM message
- * @retval HAL status
- */
+  * @brief  Send LPM message to user layer callback.
+  * @param  hpcd PCD handle
+  * @param  msg LPM message
+  * @retval HAL status
+  */
 __weak void HAL_PCDEx_LPM_Callback(PCD_HandleTypeDef *hpcd, PCD_LPM_MsgTypeDef msg) {
     /* Prevent unused argument(s) compilation warning */
     UNUSED(hpcd);
     UNUSED(msg);
 
     /* NOTE : This function should not be modified, when the callback is needed,
-	      the HAL_PCDEx_LPM_Callback could be implemented in the user file
-     */
+            the HAL_PCDEx_LPM_Callback could be implemented in the user file
+   */
 }
 
 /**
- * @brief  Send BatteryCharging message to user layer callback.
- * @param  hpcd PCD handle
- * @param  msg LPM message
- * @retval HAL status
- */
+  * @brief  Send BatteryCharging message to user layer callback.
+  * @param  hpcd PCD handle
+  * @param  msg LPM message
+  * @retval HAL status
+  */
 __weak void HAL_PCDEx_BCD_Callback(PCD_HandleTypeDef *hpcd, PCD_BCD_MsgTypeDef msg) {
     /* Prevent unused argument(s) compilation warning */
     UNUSED(hpcd);
     UNUSED(msg);
 
     /* NOTE : This function should not be modified, when the callback is needed,
-	      the HAL_PCDEx_BCD_Callback could be implemented in the user file
-     */
+            the HAL_PCDEx_BCD_Callback could be implemented in the user file
+   */
 }
 
 /**
- * @}
- */
+  * @}
+  */
 
 /**
- * @}
- */
+  * @}
+  */
 #endif /* defined (USB) || defined (USB_OTG_FS) */
 #endif /* HAL_PCD_MODULE_ENABLED */
 
 /**
- * @}
- */
+  * @}
+  */
 
 /**
- * @}
- */
+  * @}
+  */

@@ -217,9 +217,9 @@ StreamBufferHandle_t xStreamBufferGenericCreate(size_t xBufferSizeBytes, size_t 
     uint8_t ucFlags;
 
     /* In case the stream buffer is going to be used as a message buffer
-    (that is, it will hold discrete messages with a little meta data that
-    says how big the next message is) check the buffer will be large enough
-    to hold at least one message. */
+		(that is, it will hold discrete messages with a little meta data that
+		says how big the next message is) check the buffer will be large enough
+		to hold at least one message. */
     if (xIsMessageBuffer == pdTRUE) {
 	/* Is a message buffer but not statically allocated. */
 	ucFlags = sbFLAGS_IS_MESSAGE_BUFFER;
@@ -232,19 +232,19 @@ StreamBufferHandle_t xStreamBufferGenericCreate(size_t xBufferSizeBytes, size_t 
     configASSERT(xTriggerLevelBytes <= xBufferSizeBytes);
 
     /* A trigger level of 0 would cause a waiting task to unblock even when
-    the buffer was empty. */
+		the buffer was empty. */
     if (xTriggerLevelBytes == (size_t)0) {
 	xTriggerLevelBytes = (size_t)1;
     }
 
     /* A stream buffer requires a StreamBuffer_t structure and a buffer.
-    Both are allocated in a single call to pvPortMalloc().  The
-    StreamBuffer_t structure is placed at the start of the allocated memory
-    and the buffer follows immediately after.  The requested size is
-    incremented so the free space is returned as the user would expect -
-    this is a quirk of the implementation that means otherwise the free
-    space would be reported as one byte smaller than would be logically
-    expected. */
+		Both are allocated in a single call to pvPortMalloc().  The
+		StreamBuffer_t structure is placed at the start of the allocated memory
+		and the buffer follows immediately after.  The requested size is
+		incremented so the free space is returned as the user would expect -
+		this is a quirk of the implementation that means otherwise the free
+		space would be reported as one byte smaller than would be logically
+		expected. */
     xBufferSizeBytes++;
     pucAllocatedMemory = (uint8_t *)pvPortMalloc(xBufferSizeBytes + sizeof(StreamBuffer_t)); /*lint !e9079 malloc() only returns void*. */
 
@@ -283,7 +283,7 @@ StreamBufferHandle_t xStreamBufferGenericCreateStatic(size_t xBufferSizeBytes,
     configASSERT(xTriggerLevelBytes <= xBufferSizeBytes);
 
     /* A trigger level of 0 would cause a waiting task to unblock even when
-    the buffer was empty. */
+		the buffer was empty. */
     if (xTriggerLevelBytes == (size_t)0) {
 	xTriggerLevelBytes = (size_t)1;
     }
@@ -297,19 +297,19 @@ StreamBufferHandle_t xStreamBufferGenericCreateStatic(size_t xBufferSizeBytes,
     }
 
     /* In case the stream buffer is going to be used as a message buffer
-    (that is, it will hold discrete messages with a little meta data that
-    says how big the next message is) check the buffer will be large enough
-    to hold at least one message. */
+		(that is, it will hold discrete messages with a little meta data that
+		says how big the next message is) check the buffer will be large enough
+		to hold at least one message. */
     configASSERT(xBufferSizeBytes > sbBYTES_TO_STORE_MESSAGE_LENGTH);
 
 #if (configASSERT_DEFINED == 1)
     {
 	/* Sanity check that the size of the structure used to declare a
-	variable of type StaticStreamBuffer_t equals the size of the real
-	message buffer structure. */
+			variable of type StaticStreamBuffer_t equals the size of the real
+			message buffer structure. */
 	volatile size_t xSize = sizeof(StaticStreamBuffer_t);
 	configASSERT(xSize == sizeof(StreamBuffer_t));
-    } /*lint !e529 xSize is referenced is configASSERT() is defined. */
+    }  /*lint !e529 xSize is referenced is configASSERT() is defined. */
 #endif /* configASSERT_DEFINED */
 
     if ((pucStreamBufferStorageArea != NULL) && (pxStaticStreamBuffer != NULL)) {
@@ -320,7 +320,7 @@ StreamBufferHandle_t xStreamBufferGenericCreateStatic(size_t xBufferSizeBytes,
 				     ucFlags);
 
 	/* Remember this was statically allocated in case it is ever deleted
-	again. */
+			again. */
 	pxStreamBuffer->ucFlags |= sbFLAGS_IS_STATICALLY_ALLOCATED;
 
 	traceSTREAM_BUFFER_CREATE(pxStreamBuffer, xIsMessageBuffer);
@@ -348,19 +348,19 @@ void vStreamBufferDelete(StreamBufferHandle_t xStreamBuffer) {
 #if (configSUPPORT_DYNAMIC_ALLOCATION == 1)
 	{
 	    /* Both the structure and the buffer were allocated using a single call
-	    to pvPortMalloc(), hence only one call to vPortFree() is required. */
+			to pvPortMalloc(), hence only one call to vPortFree() is required. */
 	    vPortFree((void *)pxStreamBuffer); /*lint !e9087 Standard free() semantics require void *, plus pxStreamBuffer was allocated by pvPortMalloc(). */
 	}
 #else
 	{
 	    /* Should not be possible to get here, ucFlags must be corrupt.
-	    Force an assert. */
+			Force an assert. */
 	    configASSERT(xStreamBuffer == (StreamBufferHandle_t)~0);
 	}
 #endif
     } else {
 	/* The structure and buffer were not allocated dynamically and cannot be
-	freed - just scrub the structure so future use will assert. */
+		freed - just scrub the structure so future use will assert. */
 	(void)memset(pxStreamBuffer, 0x00, sizeof(StreamBuffer_t));
     }
 }
@@ -379,7 +379,7 @@ BaseType_t xStreamBufferReset(StreamBufferHandle_t xStreamBuffer) {
 #if (configUSE_TRACE_FACILITY == 1)
     {
 	/* Store the stream buffer number so it can be restored after the
-	reset. */
+		reset. */
 	uxStreamBufferNumber = pxStreamBuffer->uxStreamBufferNumber;
     }
 #endif
@@ -424,7 +424,7 @@ BaseType_t xStreamBufferSetTriggerLevel(StreamBufferHandle_t xStreamBuffer, size
     }
 
     /* The trigger level is the number of bytes that must be in the stream
-    buffer before a task that is waiting for data is unblocked. */
+	buffer before a task that is waiting for data is unblocked. */
     if (xTriggerLevel <= pxStreamBuffer->xLength) {
 	pxStreamBuffer->xTriggerLevelBytes = xTriggerLevel;
 	xReturn = pdPASS;
@@ -480,9 +480,9 @@ size_t xStreamBufferSend(StreamBufferHandle_t xStreamBuffer,
     configASSERT(pxStreamBuffer);
 
     /* This send function is used to write to both message buffers and stream
-    buffers.  If this is a message buffer then the space needed must be
-    increased by the amount of bytes needed to store the length of the
-    message. */
+	buffers.  If this is a message buffer then the space needed must be
+	increased by the amount of bytes needed to store the length of the
+	message. */
     if ((pxStreamBuffer->ucFlags & sbFLAGS_IS_MESSAGE_BUFFER) != (uint8_t)0) {
 	xRequiredSpace += sbBYTES_TO_STORE_MESSAGE_LENGTH;
 
@@ -497,7 +497,7 @@ size_t xStreamBufferSend(StreamBufferHandle_t xStreamBuffer,
 
 	do {
 	    /* Wait until the required number of bytes are free in the message
-	    buffer. */
+			buffer. */
 	    taskENTER_CRITICAL();
 	    {
 		xSpace = xStreamBufferSpacesAvailable(pxStreamBuffer);
@@ -563,9 +563,9 @@ size_t xStreamBufferSendFromISR(StreamBufferHandle_t xStreamBuffer,
     configASSERT(pxStreamBuffer);
 
     /* This send function is used to write to both message buffers and stream
-    buffers.  If this is a message buffer then the space needed must be
-    increased by the amount of bytes needed to store the length of the
-    message. */
+	buffers.  If this is a message buffer then the space needed must be
+	increased by the amount of bytes needed to store the length of the
+	message. */
     if ((pxStreamBuffer->ucFlags & sbFLAGS_IS_MESSAGE_BUFFER) != (uint8_t)0) {
 	xRequiredSpace += sbBYTES_TO_STORE_MESSAGE_LENGTH;
     } else {
@@ -602,19 +602,19 @@ static size_t prvWriteMessageToBuffer(StreamBuffer_t *const pxStreamBuffer,
 
     if (xSpace == (size_t)0) {
 	/* Doesn't matter if this is a stream buffer or a message buffer, there
-	is no space to write. */
+		is no space to write. */
 	xShouldWrite = pdFALSE;
     } else if ((pxStreamBuffer->ucFlags & sbFLAGS_IS_MESSAGE_BUFFER) == (uint8_t)0) {
 	/* This is a stream buffer, as opposed to a message buffer, so writing a
-	stream of bytes rather than discrete messages.  Write as many bytes as
-	possible. */
+		stream of bytes rather than discrete messages.  Write as many bytes as
+		possible. */
 	xShouldWrite = pdTRUE;
 	xDataLengthBytes = configMIN(xDataLengthBytes, xSpace);
     } else if (xSpace >= xRequiredSpace) {
 	/* This is a message buffer, as opposed to a stream buffer, and there
-	is enough space to write both the message length and the message itself
-	into the buffer.  Start by writing the length of the data, the data
-	itself will be written later in this function. */
+		is enough space to write both the message length and the message itself
+		into the buffer.  Start by writing the length of the data, the data
+		itself will be written later in this function. */
 	xShouldWrite = pdTRUE;
 	(void)prvWriteBytesToBuffer(pxStreamBuffer, (const uint8_t *)&(xDataLengthBytes), sbBYTES_TO_STORE_MESSAGE_LENGTH);
     } else {
@@ -644,10 +644,10 @@ size_t xStreamBufferReceive(StreamBufferHandle_t xStreamBuffer,
     configASSERT(pxStreamBuffer);
 
     /* This receive function is used by both message buffers, which store
-    discrete messages, and stream buffers, which store a continuous stream of
-    bytes.  Discrete messages include an additional
-    sbBYTES_TO_STORE_MESSAGE_LENGTH bytes that hold the length of the
-    message. */
+	discrete messages, and stream buffers, which store a continuous stream of
+	bytes.  Discrete messages include an additional
+	sbBYTES_TO_STORE_MESSAGE_LENGTH bytes that hold the length of the
+	message. */
     if ((pxStreamBuffer->ucFlags & sbFLAGS_IS_MESSAGE_BUFFER) != (uint8_t)0) {
 	xBytesToStoreMessageLength = sbBYTES_TO_STORE_MESSAGE_LENGTH;
     } else {
@@ -656,16 +656,16 @@ size_t xStreamBufferReceive(StreamBufferHandle_t xStreamBuffer,
 
     if (xTicksToWait != (TickType_t)0) {
 	/* Checking if there is data and clearing the notification state must be
-	performed atomically. */
+		performed atomically. */
 	taskENTER_CRITICAL();
 	{
 	    xBytesAvailable = prvBytesInBuffer(pxStreamBuffer);
 
 	    /* If this function was invoked by a message buffer read then
-	    xBytesToStoreMessageLength holds the number of bytes used to hold
-	    the length of the next discrete message.  If this function was
-	    invoked by a stream buffer read then xBytesToStoreMessageLength will
-	    be 0. */
+			xBytesToStoreMessageLength holds the number of bytes used to hold
+			the length of the next discrete message.  If this function was
+			invoked by a stream buffer read then xBytesToStoreMessageLength will
+			be 0. */
 	    if (xBytesAvailable <= xBytesToStoreMessageLength) {
 		/* Clear notification state as going to wait for data. */
 		(void)xTaskNotifyStateClear(NULL);
@@ -695,10 +695,10 @@ size_t xStreamBufferReceive(StreamBufferHandle_t xStreamBuffer,
     }
 
     /* Whether receiving a discrete message (where xBytesToStoreMessageLength
-    holds the number of bytes used to store the message length) or a stream of
-    bytes (where xBytesToStoreMessageLength is zero), the number of bytes
-    available must be greater than xBytesToStoreMessageLength to be able to
-    read bytes from the buffer. */
+	holds the number of bytes used to store the message length) or a stream of
+	bytes (where xBytesToStoreMessageLength is zero), the number of bytes
+	available must be greater than xBytesToStoreMessageLength to be able to
+	read bytes from the buffer. */
     if (xBytesAvailable > xBytesToStoreMessageLength) {
 	xReceivedLength = prvReadMessageFromBuffer(pxStreamBuffer, pvRxData, xBufferLengthBytes, xBytesAvailable, xBytesToStoreMessageLength);
 
@@ -730,20 +730,20 @@ size_t xStreamBufferNextMessageLengthBytes(StreamBufferHandle_t xStreamBuffer) {
 	xBytesAvailable = prvBytesInBuffer(pxStreamBuffer);
 	if (xBytesAvailable > sbBYTES_TO_STORE_MESSAGE_LENGTH) {
 	    /* The number of bytes available is greater than the number of bytes
-	    required to hold the length of the next message, so another message
-	    is available.  Return its length without removing the length bytes
-	    from the buffer.  A copy of the tail is stored so the buffer can be
-	    returned to its prior state as the message is not actually being
-	    removed from the buffer. */
+			required to hold the length of the next message, so another message
+			is available.  Return its length without removing the length bytes
+			from the buffer.  A copy of the tail is stored so the buffer can be
+			returned to its prior state as the message is not actually being
+			removed from the buffer. */
 	    xOriginalTail = pxStreamBuffer->xTail;
 	    (void)prvReadBytesFromBuffer(pxStreamBuffer, (uint8_t *)&xTempReturn, sbBYTES_TO_STORE_MESSAGE_LENGTH, xBytesAvailable);
 	    xReturn = (size_t)xTempReturn;
 	    pxStreamBuffer->xTail = xOriginalTail;
 	} else {
 	    /* The minimum amount of bytes in a message buffer is
-	    ( sbBYTES_TO_STORE_MESSAGE_LENGTH + 1 ), so if xBytesAvailable is
-	    less than sbBYTES_TO_STORE_MESSAGE_LENGTH the only other valid
-	    value is 0. */
+			( sbBYTES_TO_STORE_MESSAGE_LENGTH + 1 ), so if xBytesAvailable is
+			less than sbBYTES_TO_STORE_MESSAGE_LENGTH the only other valid
+			value is 0. */
 	    configASSERT(xBytesAvailable == 0);
 	    xReturn = 0;
 	}
@@ -766,10 +766,10 @@ size_t xStreamBufferReceiveFromISR(StreamBufferHandle_t xStreamBuffer,
     configASSERT(pxStreamBuffer);
 
     /* This receive function is used by both message buffers, which store
-    discrete messages, and stream buffers, which store a continuous stream of
-    bytes.  Discrete messages include an additional
-    sbBYTES_TO_STORE_MESSAGE_LENGTH bytes that hold the length of the
-    message. */
+	discrete messages, and stream buffers, which store a continuous stream of
+	bytes.  Discrete messages include an additional
+	sbBYTES_TO_STORE_MESSAGE_LENGTH bytes that hold the length of the
+	message. */
     if ((pxStreamBuffer->ucFlags & sbFLAGS_IS_MESSAGE_BUFFER) != (uint8_t)0) {
 	xBytesToStoreMessageLength = sbBYTES_TO_STORE_MESSAGE_LENGTH;
     } else {
@@ -779,10 +779,10 @@ size_t xStreamBufferReceiveFromISR(StreamBufferHandle_t xStreamBuffer,
     xBytesAvailable = prvBytesInBuffer(pxStreamBuffer);
 
     /* Whether receiving a discrete message (where xBytesToStoreMessageLength
-    holds the number of bytes used to store the message length) or a stream of
-    bytes (where xBytesToStoreMessageLength is zero), the number of bytes
-    available must be greater than xBytesToStoreMessageLength to be able to
-    read bytes from the buffer. */
+	holds the number of bytes used to store the message length) or a stream of
+	bytes (where xBytesToStoreMessageLength is zero), the number of bytes
+	available must be greater than xBytesToStoreMessageLength to be able to
+	read bytes from the buffer. */
     if (xBytesAvailable > xBytesToStoreMessageLength) {
 	xReceivedLength = prvReadMessageFromBuffer(pxStreamBuffer, pvRxData, xBufferLengthBytes, xBytesAvailable, xBytesToStoreMessageLength);
 
@@ -812,23 +812,23 @@ static size_t prvReadMessageFromBuffer(StreamBuffer_t *pxStreamBuffer,
 
     if (xBytesToStoreMessageLength != (size_t)0) {
 	/* A discrete message is being received.  First receive the length
-	of the message.  A copy of the tail is stored so the buffer can be
-	returned to its prior state if the length of the message is too
-	large for the provided buffer. */
+		of the message.  A copy of the tail is stored so the buffer can be
+		returned to its prior state if the length of the message is too
+		large for the provided buffer. */
 	xOriginalTail = pxStreamBuffer->xTail;
 	(void)prvReadBytesFromBuffer(pxStreamBuffer, (uint8_t *)&xTempNextMessageLength, xBytesToStoreMessageLength, xBytesAvailable);
 	xNextMessageLength = (size_t)xTempNextMessageLength;
 
 	/* Reduce the number of bytes available by the number of bytes just
-	read out. */
+		read out. */
 	xBytesAvailable -= xBytesToStoreMessageLength;
 
 	/* Check there is enough space in the buffer provided by the
-	user. */
+		user. */
 	if (xNextMessageLength > xBufferLengthBytes) {
 	    /* The user has provided insufficient space to read the message
-	    so return the buffer to its previous state (so the length of
-	    the message is in the buffer again). */
+			so return the buffer to its previous state (so the length of
+			the message is in the buffer again). */
 	    pxStreamBuffer->xTail = xOriginalTail;
 	    xNextMessageLength = 0;
 	} else {
@@ -836,7 +836,7 @@ static size_t prvReadMessageFromBuffer(StreamBuffer_t *pxStreamBuffer,
 	}
     } else {
 	/* A stream of bytes is being received (as opposed to a discrete
-	message), so read as many bytes as possible. */
+		message), so read as many bytes as possible. */
 	xNextMessageLength = xBufferLengthBytes;
     }
 
@@ -874,9 +874,9 @@ BaseType_t xStreamBufferIsFull(StreamBufferHandle_t xStreamBuffer) {
     configASSERT(pxStreamBuffer);
 
     /* This generic version of the receive function is used by both message
-    buffers, which store discrete messages, and stream buffers, which store a
-    continuous stream of bytes.  Discrete messages include an additional
-    sbBYTES_TO_STORE_MESSAGE_LENGTH bytes that hold the length of the message. */
+	buffers, which store discrete messages, and stream buffers, which store a
+	continuous stream of bytes.  Discrete messages include an additional
+	sbBYTES_TO_STORE_MESSAGE_LENGTH bytes that hold the length of the message. */
     if ((pxStreamBuffer->ucFlags & sbFLAGS_IS_MESSAGE_BUFFER) != (uint8_t)0) {
 	xBytesToStoreMessageLength = sbBYTES_TO_STORE_MESSAGE_LENGTH;
     } else {
@@ -954,8 +954,8 @@ static size_t prvWriteBytesToBuffer(StreamBuffer_t *const pxStreamBuffer, const 
     xNextHead = pxStreamBuffer->xHead;
 
     /* Calculate the number of bytes that can be added in the first write -
-    which may be less than the total number of bytes that need to be added if
-    the buffer will wrap back to the beginning. */
+	which may be less than the total number of bytes that need to be added if
+	the buffer will wrap back to the beginning. */
     xFirstLength = configMIN(pxStreamBuffer->xLength - xNextHead, xCount);
 
     /* Write as many bytes as can be written in the first write. */
@@ -963,7 +963,7 @@ static size_t prvWriteBytesToBuffer(StreamBuffer_t *const pxStreamBuffer, const 
     (void)memcpy((void *)(&(pxStreamBuffer->pucBuffer[xNextHead])), (const void *)pucData, xFirstLength); /*lint !e9087 memcpy() requires void *. */
 
     /* If the number of bytes written was less than the number that could be
-    written in the first write... */
+	written in the first write... */
     if (xCount > xFirstLength) {
 	/* ...then write the remaining bytes to the start of the buffer. */
 	configASSERT((xCount - xFirstLength) <= pxStreamBuffer->xLength);
@@ -995,18 +995,18 @@ static size_t prvReadBytesFromBuffer(StreamBuffer_t *pxStreamBuffer, uint8_t *pu
 	xNextTail = pxStreamBuffer->xTail;
 
 	/* Calculate the number of bytes that can be read - which may be
-	less than the number wanted if the data wraps around to the start of
-	the buffer. */
+		less than the number wanted if the data wraps around to the start of
+		the buffer. */
 	xFirstLength = configMIN(pxStreamBuffer->xLength - xNextTail, xCount);
 
 	/* Obtain the number of bytes it is possible to obtain in the first
-	read.  Asserts check bounds of read and write. */
+		read.  Asserts check bounds of read and write. */
 	configASSERT(xFirstLength <= xMaxCount);
 	configASSERT((xNextTail + xFirstLength) <= pxStreamBuffer->xLength);
 	(void)memcpy((void *)pucData, (const void *)&(pxStreamBuffer->pucBuffer[xNextTail]), xFirstLength); /*lint !e9087 memcpy() requires void *. */
 
 	/* If the total number of wanted bytes is greater than the number
-	that could be read in the first read... */
+		that could be read in the first read... */
 	if (xCount > xFirstLength) {
 	    /*...then read the remaining bytes from the start of the buffer. */
 	    configASSERT(xCount <= xMaxCount);
@@ -1016,7 +1016,7 @@ static size_t prvReadBytesFromBuffer(StreamBuffer_t *pxStreamBuffer, uint8_t *pu
 	}
 
 	/* Move the tail pointer to effectively remove the data read from
-	the buffer. */
+		the buffer. */
 	xNextTail += xCount;
 
 	if (xNextTail >= pxStreamBuffer->xLength) {
@@ -1054,13 +1054,13 @@ static void prvInitialiseNewStreamBuffer(StreamBuffer_t *const pxStreamBuffer,
 					 size_t xTriggerLevelBytes,
 					 uint8_t ucFlags) {
 /* Assert here is deliberately writing to the entire buffer to ensure it can
-be written to without generating exceptions, and is setting the buffer to a
-known value to assist in development/debugging. */
+	be written to without generating exceptions, and is setting the buffer to a
+	known value to assist in development/debugging. */
 #if (configASSERT_DEFINED == 1)
     {
 	/* The value written just has to be identifiable when looking at the
-	memory.  Don't use 0xA5 as that is the stack fill value and could
-	result in confusion as to what is actually being observed. */
+		memory.  Don't use 0xA5 as that is the stack fill value and could
+		result in confusion as to what is actually being observed. */
 	const BaseType_t xWriteValue = 0x55;
 	configASSERT(memset(pucBuffer, (int)xWriteValue, xBufferSizeBytes) == pucBuffer);
     } /*lint !e529 !e438 xWriteValue is only used if configASSERT() is defined. */

@@ -63,7 +63,7 @@ typedef uint32_t TickType_t;
 #define portMAX_DELAY (TickType_t)0xffffffffUL
 
 /* 32-bit tick type on a 32-bit architecture, so reads of the tick count do
-not need to be guarded with a critical section. */
+	not need to be guarded with a critical section. */
 #define portTICK_TYPE_IS_ATOMIC 1
 #endif
 /*-----------------------------------------------------------*/
@@ -218,7 +218,7 @@ portFORCE_INLINE static uint32_t ulPortRaiseBASEPRI(void) {
 	: "memory");
 
     /* This return will not be reached but is necessary to prevent compiler
-    warnings. */
+	warnings. */
     return ulOriginalBASEPRI;
 }
 /*-----------------------------------------------------------*/

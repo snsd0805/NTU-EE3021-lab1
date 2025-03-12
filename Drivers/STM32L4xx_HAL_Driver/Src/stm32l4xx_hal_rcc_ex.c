@@ -1,37 +1,37 @@
 /**
- ******************************************************************************
- * @file    stm32l4xx_hal_rcc_ex.c
- * @author  MCD Application Team
- * @brief   Extended RCC HAL module driver.
- *          This file provides firmware functions to manage the following
- *          functionalities RCC extended peripheral:
- *           + Extended Peripheral Control functions
- *           + Extended Clock management functions
- *           + Extended Clock Recovery System Control functions
- *
- ******************************************************************************
- * @attention
- *
- * Copyright (c) 2017 STMicroelectronics.
- * All rights reserved.
- *
- * This software is licensed under terms that can be found in the LICENSE file in
- * the root directory of this software component.
- * If no LICENSE file comes with this software, it is provided AS-IS.
- ******************************************************************************
- */
+  ******************************************************************************
+  * @file    stm32l4xx_hal_rcc_ex.c
+  * @author  MCD Application Team
+  * @brief   Extended RCC HAL module driver.
+  *          This file provides firmware functions to manage the following
+  *          functionalities RCC extended peripheral:
+  *           + Extended Peripheral Control functions
+  *           + Extended Clock management functions
+  *           + Extended Clock Recovery System Control functions
+  *
+  ******************************************************************************
+  * @attention
+  *
+  * Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file in
+  * the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  ******************************************************************************
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32l4xx_hal.h"
 
 /** @addtogroup STM32L4xx_HAL_Driver
- * @{
- */
+  * @{
+  */
 
 /** @defgroup RCCEx RCCEx
- * @brief RCC Extended HAL module driver
- * @{
- */
+  * @brief RCC Extended HAL module driver
+  * @{
+  */
 
 #ifdef HAL_RCC_MODULE_ENABLED
 
@@ -52,8 +52,8 @@
 #define LSCO_GPIO_PORT GPIOA
 #define LSCO_PIN GPIO_PIN_2
 /**
- * @}
- */
+  * @}
+  */
 
 /* Private macros ------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
@@ -79,30 +79,30 @@ static uint32_t RCCEx_GetSAIxPeriphCLKFreq(uint32_t PeriphClk, uint32_t InputFre
 
 #endif /* SAI1 */
 /**
- * @}
- */
+  * @}
+  */
 
 /* Exported functions --------------------------------------------------------*/
 
 /** @defgroup RCCEx_Exported_Functions RCCEx Exported Functions
- * @{
- */
+  * @{
+  */
 
 /** @defgroup RCCEx_Exported_Functions_Group1 Extended Peripheral Control functions
  *  @brief  Extended Peripheral Control functions
  *
 @verbatim
  ===============================================================================
-		##### Extended Peripheral Control functions  #####
+                ##### Extended Peripheral Control functions  #####
  ===============================================================================
     [..]
     This subsection provides a set of functions allowing to control the RCC Clocks
     frequencies.
     [..]
     (@) Important note: Care must be taken when HAL_RCCEx_PeriphCLKConfig() is used to
-	select the RTC clock source; in this case the Backup domain will be reset in
-	order to modify the RTC Clock source, as consequence RTC registers (including
-	the backup registers) are set to their reset values.
+        select the RTC clock source; in this case the Backup domain will be reset in
+        order to modify the RTC Clock source, as consequence RTC registers (including
+        the backup registers) are set to their reset values.
 
 @endverbatim
   * @{
@@ -743,13 +743,13 @@ HAL_StatusTypeDef HAL_RCCEx_PeriphCLKConfig(RCC_PeriphCLKInitTypeDef *PeriphClkI
 }
 
 /**
- * @brief  Get the RCC_ClkInitStruct according to the internal RCC configuration registers.
- * @param  PeriphClkInit  pointer to an RCC_PeriphCLKInitTypeDef structure that
- *         returns the configuration information for the Extended Peripherals
- *         clocks(SAI1, SAI2, LPTIM1, LPTIM2, I2C1, I2C2, I2C3, I2C4, LPUART1,
- *         USART1, USART2, USART3, UART4, UART5, RTC, ADCx, DFSDMx, SWPMI1, USB, SDMMC1 and RNG).
- * @retval None
- */
+  * @brief  Get the RCC_ClkInitStruct according to the internal RCC configuration registers.
+  * @param  PeriphClkInit  pointer to an RCC_PeriphCLKInitTypeDef structure that
+  *         returns the configuration information for the Extended Peripherals
+  *         clocks(SAI1, SAI2, LPTIM1, LPTIM2, I2C1, I2C2, I2C3, I2C4, LPUART1,
+  *         USART1, USART2, USART3, UART4, UART5, RTC, ADCx, DFSDMx, SWPMI1, USB, SDMMC1 and RNG).
+  * @retval None
+  */
 void HAL_RCCEx_GetPeriphCLKConfig(RCC_PeriphCLKInitTypeDef *PeriphClkInit) {
     /* Set all possible values for the extended clock type parameter------------*/
 
@@ -1843,15 +1843,15 @@ uint32_t HAL_RCCEx_GetPeriphCLKFreq(uint32_t PeriphClk) {
 }
 
 /**
- * @}
- */
+  * @}
+  */
 
 /** @defgroup RCCEx_Exported_Functions_Group2 Extended Clock management functions
  *  @brief  Extended Clock management functions
  *
 @verbatim
  ===============================================================================
-		##### Extended clock management functions  #####
+                ##### Extended clock management functions  #####
  ===============================================================================
     [..]
     This subsection provides a set of functions allowing to control the
@@ -1864,11 +1864,11 @@ uint32_t HAL_RCCEx_GetPeriphCLKFreq(uint32_t PeriphClk) {
 #if defined(RCC_PLLSAI1_SUPPORT)
 
 /**
- * @brief  Enable PLLSAI1.
- * @param  PLLSAI1Init  pointer to an RCC_PLLSAI1InitTypeDef structure that
- *         contains the configuration information for the PLLSAI1
- * @retval HAL status
- */
+  * @brief  Enable PLLSAI1.
+  * @param  PLLSAI1Init  pointer to an RCC_PLLSAI1InitTypeDef structure that
+  *         contains the configuration information for the PLLSAI1
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_RCCEx_EnablePLLSAI1(RCC_PLLSAI1InitTypeDef *PLLSAI1Init) {
     uint32_t tickstart;
     HAL_StatusTypeDef status = HAL_OK;
@@ -1928,9 +1928,9 @@ HAL_StatusTypeDef HAL_RCCEx_EnablePLLSAI1(RCC_PLLSAI1InitTypeDef *PLLSAI1Init) {
 }
 
 /**
- * @brief  Disable PLLSAI1.
- * @retval HAL status
- */
+  * @brief  Disable PLLSAI1.
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_RCCEx_DisablePLLSAI1(void) {
     uint32_t tickstart;
     HAL_StatusTypeDef status = HAL_OK;
@@ -1971,11 +1971,11 @@ HAL_StatusTypeDef HAL_RCCEx_DisablePLLSAI1(void) {
 #if defined(RCC_PLLSAI2_SUPPORT)
 
 /**
- * @brief  Enable PLLSAI2.
- * @param  PLLSAI2Init  pointer to an RCC_PLLSAI2InitTypeDef structure that
- *         contains the configuration information for the PLLSAI2
- * @retval HAL status
- */
+  * @brief  Enable PLLSAI2.
+  * @param  PLLSAI2Init  pointer to an RCC_PLLSAI2InitTypeDef structure that
+  *         contains the configuration information for the PLLSAI2
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_RCCEx_EnablePLLSAI2(RCC_PLLSAI2InitTypeDef *PLLSAI2Init) {
     uint32_t tickstart;
     HAL_StatusTypeDef status = HAL_OK;
@@ -2045,9 +2045,9 @@ HAL_StatusTypeDef HAL_RCCEx_EnablePLLSAI2(RCC_PLLSAI2InitTypeDef *PLLSAI2Init) {
 }
 
 /**
- * @brief  Disable PLLISAI2.
- * @retval HAL status
- */
+  * @brief  Disable PLLISAI2.
+  * @retval HAL status
+  */
 HAL_StatusTypeDef HAL_RCCEx_DisablePLLSAI2(void) {
     uint32_t tickstart;
     HAL_StatusTypeDef status = HAL_OK;
@@ -2084,15 +2084,15 @@ HAL_StatusTypeDef HAL_RCCEx_DisablePLLSAI2(void) {
 #endif /* RCC_PLLSAI2_SUPPORT */
 
 /**
- * @brief  Configure the oscillator clock source for wakeup from Stop and CSS backup clock.
- * @param  WakeUpClk  Wakeup clock
- *         This parameter can be one of the following values:
- *            @arg @ref RCC_STOP_WAKEUPCLOCK_MSI  MSI oscillator selection
- *            @arg @ref RCC_STOP_WAKEUPCLOCK_HSI  HSI oscillator selection
- * @note   This function shall not be called after the Clock Security System on HSE has been
- *         enabled.
- * @retval None
- */
+  * @brief  Configure the oscillator clock source for wakeup from Stop and CSS backup clock.
+  * @param  WakeUpClk  Wakeup clock
+  *         This parameter can be one of the following values:
+  *            @arg @ref RCC_STOP_WAKEUPCLOCK_MSI  MSI oscillator selection
+  *            @arg @ref RCC_STOP_WAKEUPCLOCK_HSI  HSI oscillator selection
+  * @note   This function shall not be called after the Clock Security System on HSE has been
+  *         enabled.
+  * @retval None
+  */
 void HAL_RCCEx_WakeUpStopCLKConfig(uint32_t WakeUpClk) {
     assert_param(IS_RCC_STOP_WAKEUPCLOCK(WakeUpClk));
 
@@ -2100,16 +2100,16 @@ void HAL_RCCEx_WakeUpStopCLKConfig(uint32_t WakeUpClk) {
 }
 
 /**
- * @brief  Configure the MSI range after standby mode.
- * @note   After Standby its frequency can be selected between 4 possible values (1, 2, 4 or 8 MHz).
- * @param  MSIRange  MSI range
- *         This parameter can be one of the following values:
- *            @arg @ref RCC_MSIRANGE_4  Range 4 around 1 MHz
- *            @arg @ref RCC_MSIRANGE_5  Range 5 around 2 MHz
- *            @arg @ref RCC_MSIRANGE_6  Range 6 around 4 MHz (reset value)
- *            @arg @ref RCC_MSIRANGE_7  Range 7 around 8 MHz
- * @retval None
- */
+  * @brief  Configure the MSI range after standby mode.
+  * @note   After Standby its frequency can be selected between 4 possible values (1, 2, 4 or 8 MHz).
+  * @param  MSIRange  MSI range
+  *         This parameter can be one of the following values:
+  *            @arg @ref RCC_MSIRANGE_4  Range 4 around 1 MHz
+  *            @arg @ref RCC_MSIRANGE_5  Range 5 around 2 MHz
+  *            @arg @ref RCC_MSIRANGE_6  Range 6 around 4 MHz (reset value)
+  *            @arg @ref RCC_MSIRANGE_7  Range 7 around 8 MHz
+  * @retval None
+  */
 void HAL_RCCEx_StandbyMSIRangeConfig(uint32_t MSIRange) {
     assert_param(IS_RCC_MSI_STANDBY_CLOCK_RANGE(MSIRange));
 
@@ -2117,21 +2117,21 @@ void HAL_RCCEx_StandbyMSIRangeConfig(uint32_t MSIRange) {
 }
 
 /**
- * @brief  Enable the LSE Clock Security System.
- * @note   Prior to enable the LSE Clock Security System, LSE oscillator is to be enabled
- *         with HAL_RCC_OscConfig() and the LSE oscillator clock is to be selected as RTC
- *         clock with HAL_RCCEx_PeriphCLKConfig().
- * @retval None
- */
+  * @brief  Enable the LSE Clock Security System.
+  * @note   Prior to enable the LSE Clock Security System, LSE oscillator is to be enabled
+  *         with HAL_RCC_OscConfig() and the LSE oscillator clock is to be selected as RTC
+  *         clock with HAL_RCCEx_PeriphCLKConfig().
+  * @retval None
+  */
 void HAL_RCCEx_EnableLSECSS(void) {
     SET_BIT(RCC->BDCR, RCC_BDCR_LSECSSON);
 }
 
 /**
- * @brief  Disable the LSE Clock Security System.
- * @note   LSE Clock Security System can only be disabled after a LSE failure detection.
- * @retval None
- */
+  * @brief  Disable the LSE Clock Security System.
+  * @note   LSE Clock Security System can only be disabled after a LSE failure detection.
+  * @retval None
+  */
 void HAL_RCCEx_DisableLSECSS(void) {
     CLEAR_BIT(RCC->BDCR, RCC_BDCR_LSECSSON);
 
@@ -2140,10 +2140,10 @@ void HAL_RCCEx_DisableLSECSS(void) {
 }
 
 /**
- * @brief  Enable the LSE Clock Security System Interrupt & corresponding EXTI line.
- * @note   LSE Clock Security System Interrupt is mapped on RTC EXTI line 19
- * @retval None
- */
+  * @brief  Enable the LSE Clock Security System Interrupt & corresponding EXTI line.
+  * @note   LSE Clock Security System Interrupt is mapped on RTC EXTI line 19
+  * @retval None
+  */
 void HAL_RCCEx_EnableLSECSS_IT(void) {
     /* Enable LSE CSS */
     SET_BIT(RCC->BDCR, RCC_BDCR_LSECSSON);
@@ -2157,9 +2157,9 @@ void HAL_RCCEx_EnableLSECSS_IT(void) {
 }
 
 /**
- * @brief Handle the RCC LSE Clock Security System interrupt request.
- * @retval None
- */
+  * @brief Handle the RCC LSE Clock Security System interrupt request.
+  * @retval None
+  */
 void HAL_RCCEx_LSECSS_IRQHandler(void) {
     /* Check RCC LSE CSSF flag  */
     if (__HAL_RCC_GET_IT(RCC_IT_LSECSS)) {
@@ -2172,23 +2172,23 @@ void HAL_RCCEx_LSECSS_IRQHandler(void) {
 }
 
 /**
- * @brief  RCCEx LSE Clock Security System interrupt callback.
- * @retval none
- */
+  * @brief  RCCEx LSE Clock Security System interrupt callback.
+  * @retval none
+  */
 __weak void HAL_RCCEx_LSECSS_Callback(void) {
     /* NOTE : This function should not be modified, when the callback is needed,
-	      the @ref HAL_RCCEx_LSECSS_Callback should be implemented in the user file
-     */
+            the @ref HAL_RCCEx_LSECSS_Callback should be implemented in the user file
+   */
 }
 
 /**
- * @brief  Select the Low Speed clock source to output on LSCO pin (PA2).
- * @param  LSCOSource  specifies the Low Speed clock source to output.
- *          This parameter can be one of the following values:
- *            @arg @ref RCC_LSCOSOURCE_LSI  LSI clock selected as LSCO source
- *            @arg @ref RCC_LSCOSOURCE_LSE  LSE clock selected as LSCO source
- * @retval None
- */
+  * @brief  Select the Low Speed clock source to output on LSCO pin (PA2).
+  * @param  LSCOSource  specifies the Low Speed clock source to output.
+  *          This parameter can be one of the following values:
+  *            @arg @ref RCC_LSCOSOURCE_LSI  LSI clock selected as LSCO source
+  *            @arg @ref RCC_LSCOSOURCE_LSE  LSE clock selected as LSCO source
+  * @retval None
+  */
 void HAL_RCCEx_EnableLSCO(uint32_t LSCOSource) {
     GPIO_InitTypeDef GPIO_InitStruct;
     FlagStatus pwrclkchanged = RESET;
@@ -2228,9 +2228,9 @@ void HAL_RCCEx_EnableLSCO(uint32_t LSCOSource) {
 }
 
 /**
- * @brief  Disable the Low Speed clock output.
- * @retval None
- */
+  * @brief  Disable the Low Speed clock output.
+  * @retval None
+  */
 void HAL_RCCEx_DisableLSCO(void) {
     FlagStatus pwrclkchanged = RESET;
     FlagStatus backupchanged = RESET;
@@ -2259,32 +2259,32 @@ void HAL_RCCEx_DisableLSCO(void) {
 }
 
 /**
- * @brief  Enable the PLL-mode of the MSI.
- * @note   Prior to enable the PLL-mode of the MSI for automatic hardware
- *         calibration LSE oscillator is to be enabled with HAL_RCC_OscConfig().
- * @retval None
- */
+  * @brief  Enable the PLL-mode of the MSI.
+  * @note   Prior to enable the PLL-mode of the MSI for automatic hardware
+  *         calibration LSE oscillator is to be enabled with HAL_RCC_OscConfig().
+  * @retval None
+  */
 void HAL_RCCEx_EnableMSIPLLMode(void) {
     SET_BIT(RCC->CR, RCC_CR_MSIPLLEN);
 }
 
 /**
- * @brief  Disable the PLL-mode of the MSI.
- * @note   PLL-mode of the MSI is automatically reset when LSE oscillator is disabled.
- * @retval None
- */
+  * @brief  Disable the PLL-mode of the MSI.
+  * @note   PLL-mode of the MSI is automatically reset when LSE oscillator is disabled.
+  * @retval None
+  */
 void HAL_RCCEx_DisableMSIPLLMode(void) {
     CLEAR_BIT(RCC->CR, RCC_CR_MSIPLLEN);
 }
 
 #if defined(OCTOSPI1) && defined(OCTOSPI2)
 /**
- * @brief  Configure OCTOSPI instances DQS delays.
- * @param  Delay1  OCTOSPI1 DQS delay
- * @param  Delay2  OCTOSPI2 DQS delay
- * @note   Delay parameters stand for unitary delays from 0 to 15. Actual delay is Delay1 or Delay2 + 1.
- * @retval None
- */
+  * @brief  Configure OCTOSPI instances DQS delays.
+  * @param  Delay1  OCTOSPI1 DQS delay
+  * @param  Delay2  OCTOSPI2 DQS delay
+  * @note   Delay parameters stand for unitary delays from 0 to 15. Actual delay is Delay1 or Delay2 + 1.
+  * @retval None
+  */
 void HAL_RCCEx_OCTOSPIDelayConfig(uint32_t Delay1, uint32_t Delay2) {
     assert_param(IS_RCC_OCTOSPIDELAY(Delay1));
     assert_param(IS_RCC_OCTOSPIDELAY(Delay2));
@@ -2294,8 +2294,8 @@ void HAL_RCCEx_OCTOSPIDelayConfig(uint32_t Delay1, uint32_t Delay2) {
 #endif /* OCTOSPI1 && OCTOSPI2 */
 
 /**
- * @}
- */
+  * @}
+  */
 
 #if defined(CRS)
 
@@ -2304,7 +2304,7 @@ void HAL_RCCEx_OCTOSPIDelayConfig(uint32_t Delay1, uint32_t Delay2) {
  *
 @verbatim
  ===============================================================================
-		##### Extended Clock Recovery System Control functions  #####
+                ##### Extended Clock Recovery System Control functions  #####
  ===============================================================================
     [..]
       For devices with Clock Recovery System feature (CRS), RCC Extension HAL driver can be used as follows:
@@ -2314,60 +2314,60 @@ void HAL_RCCEx_OCTOSPIDelayConfig(uint32_t Delay1, uint32_t Delay2) {
       (#) Enable CRS clock in IP MSP init which will use CRS functions
 
       (#) Call CRS functions as follows:
-	  (##) Prepare synchronization configuration necessary for HSI48 calibration
-	      (+++) Default values can be set for frequency Error Measurement (reload and error limit)
-			and also HSI48 oscillator smooth trimming.
-	      (+++) Macro __HAL_RCC_CRS_RELOADVALUE_CALCULATE can be also used to calculate
-			directly reload value with target and synchronization frequencies values
-	  (##) Call function HAL_RCCEx_CRSConfig which
-	      (+++) Resets CRS registers to their default values.
-	      (+++) Configures CRS registers with synchronization configuration
-	      (+++) Enables automatic calibration and frequency error counter feature
-	   Note: When using USB LPM (Link Power Management) and the device is in Sleep mode, the
-	   periodic USB SOF will not be generated by the host. No SYNC signal will therefore be
-	   provided to the CRS to calibrate the HSI48 on the run. To guarantee the required clock
-	   precision after waking up from Sleep mode, the LSE or reference clock on the GPIOs
-	   should be used as SYNC signal.
+          (##) Prepare synchronization configuration necessary for HSI48 calibration
+              (+++) Default values can be set for frequency Error Measurement (reload and error limit)
+                        and also HSI48 oscillator smooth trimming.
+              (+++) Macro __HAL_RCC_CRS_RELOADVALUE_CALCULATE can be also used to calculate
+                        directly reload value with target and synchronization frequencies values
+          (##) Call function HAL_RCCEx_CRSConfig which
+              (+++) Resets CRS registers to their default values.
+              (+++) Configures CRS registers with synchronization configuration
+              (+++) Enables automatic calibration and frequency error counter feature
+           Note: When using USB LPM (Link Power Management) and the device is in Sleep mode, the
+           periodic USB SOF will not be generated by the host. No SYNC signal will therefore be
+           provided to the CRS to calibrate the HSI48 on the run. To guarantee the required clock
+           precision after waking up from Sleep mode, the LSE or reference clock on the GPIOs
+           should be used as SYNC signal.
 
-	  (##) A polling function is provided to wait for complete synchronization
-	      (+++) Call function HAL_RCCEx_CRSWaitSynchronization()
-	      (+++) According to CRS status, user can decide to adjust again the calibration or continue
-			application if synchronization is OK
+          (##) A polling function is provided to wait for complete synchronization
+              (+++) Call function HAL_RCCEx_CRSWaitSynchronization()
+              (+++) According to CRS status, user can decide to adjust again the calibration or continue
+                        application if synchronization is OK
 
       (#) User can retrieve information related to synchronization in calling function
-	    HAL_RCCEx_CRSGetSynchronizationInfo()
+            HAL_RCCEx_CRSGetSynchronizationInfo()
 
       (#) Regarding synchronization status and synchronization information, user can try a new calibration
-	   in changing synchronization configuration and call again HAL_RCCEx_CRSConfig.
-	   Note: When the SYNC event is detected during the downcounting phase (before reaching the zero value),
-	   it means that the actual frequency is lower than the target (and so, that the TRIM value should be
-	   incremented), while when it is detected during the upcounting phase it means that the actual frequency
-	   is higher (and that the TRIM value should be decremented).
+           in changing synchronization configuration and call again HAL_RCCEx_CRSConfig.
+           Note: When the SYNC event is detected during the downcounting phase (before reaching the zero value),
+           it means that the actual frequency is lower than the target (and so, that the TRIM value should be
+           incremented), while when it is detected during the upcounting phase it means that the actual frequency
+           is higher (and that the TRIM value should be decremented).
 
       (#) In interrupt mode, user can resort to the available macros (__HAL_RCC_CRS_XXX_IT). Interrupts will go
-	  through CRS Handler (CRS_IRQn/CRS_IRQHandler)
-	      (++) Call function HAL_RCCEx_CRSConfig()
-	      (++) Enable CRS_IRQn (thanks to NVIC functions)
-	      (++) Enable CRS interrupt (__HAL_RCC_CRS_ENABLE_IT)
-	      (++) Implement CRS status management in the following user callbacks called from
-		   HAL_RCCEx_CRS_IRQHandler():
-		   (+++) HAL_RCCEx_CRS_SyncOkCallback()
-		   (+++) HAL_RCCEx_CRS_SyncWarnCallback()
-		   (+++) HAL_RCCEx_CRS_ExpectedSyncCallback()
-		   (+++) HAL_RCCEx_CRS_ErrorCallback()
+          through CRS Handler (CRS_IRQn/CRS_IRQHandler)
+              (++) Call function HAL_RCCEx_CRSConfig()
+              (++) Enable CRS_IRQn (thanks to NVIC functions)
+              (++) Enable CRS interrupt (__HAL_RCC_CRS_ENABLE_IT)
+              (++) Implement CRS status management in the following user callbacks called from
+                   HAL_RCCEx_CRS_IRQHandler():
+                   (+++) HAL_RCCEx_CRS_SyncOkCallback()
+                   (+++) HAL_RCCEx_CRS_SyncWarnCallback()
+                   (+++) HAL_RCCEx_CRS_ExpectedSyncCallback()
+                   (+++) HAL_RCCEx_CRS_ErrorCallback()
 
       (#) To force a SYNC EVENT, user can use the function HAL_RCCEx_CRSSoftwareSynchronizationGenerate().
-	  This function can be called before calling HAL_RCCEx_CRSConfig (for instance in Systick handler)
+          This function can be called before calling HAL_RCCEx_CRSConfig (for instance in Systick handler)
 
 @endverbatim
  * @{
  */
 
 /**
- * @brief  Start automatic synchronization for polling mode
- * @param  pInit Pointer on RCC_CRSInitTypeDef structure
- * @retval None
- */
+  * @brief  Start automatic synchronization for polling mode
+  * @param  pInit Pointer on RCC_CRSInitTypeDef structure
+  * @retval None
+  */
 void HAL_RCCEx_CRSConfig(RCC_CRSInitTypeDef *pInit) {
     uint32_t value; /* no init needed */
 
@@ -2397,7 +2397,7 @@ void HAL_RCCEx_CRSConfig(RCC_CRSInitTypeDef *pInit) {
 
     /* Adjust HSI48 oscillator smooth trimming */
     /* Set the TRIM[6:0] bits for STM32L412xx/L422xx or TRIM[5:0] bits otherwise
-       according to RCC_CRS_HSI48CalibrationValue value */
+     according to RCC_CRS_HSI48CalibrationValue value */
     MODIFY_REG(CRS->CR, CRS_CR_TRIM, (pInit->HSI48CalibrationValue << CRS_CR_TRIM_Pos));
 
     /* START AUTOMATIC SYNCHRONIZATION*/
@@ -2407,18 +2407,18 @@ void HAL_RCCEx_CRSConfig(RCC_CRSInitTypeDef *pInit) {
 }
 
 /**
- * @brief  Generate the software synchronization event
- * @retval None
- */
+  * @brief  Generate the software synchronization event
+  * @retval None
+  */
 void HAL_RCCEx_CRSSoftwareSynchronizationGenerate(void) {
     SET_BIT(CRS->CR, CRS_CR_SWSYNC);
 }
 
 /**
- * @brief  Return synchronization info
- * @param  pSynchroInfo Pointer on RCC_CRSSynchroInfoTypeDef structure
- * @retval None
- */
+  * @brief  Return synchronization info
+  * @param  pSynchroInfo Pointer on RCC_CRSSynchroInfoTypeDef structure
+  * @retval None
+  */
 void HAL_RCCEx_CRSGetSynchronizationInfo(RCC_CRSSynchroInfoTypeDef *pSynchroInfo) {
     /* Check the parameter */
     assert_param(pSynchroInfo != (void *)NULL);
@@ -2437,20 +2437,20 @@ void HAL_RCCEx_CRSGetSynchronizationInfo(RCC_CRSSynchroInfoTypeDef *pSynchroInfo
 }
 
 /**
- * @brief Wait for CRS Synchronization status.
- * @param Timeout  Duration of the timeout
- * @note  Timeout is based on the maximum time to receive a SYNC event based on synchronization
- *        frequency.
- * @note    If Timeout set to HAL_MAX_DELAY, HAL_TIMEOUT will be never returned.
- * @retval Combination of Synchronization status
- *          This parameter can be a combination of the following values:
- *            @arg @ref RCC_CRS_TIMEOUT
- *            @arg @ref RCC_CRS_SYNCOK
- *            @arg @ref RCC_CRS_SYNCWARN
- *            @arg @ref RCC_CRS_SYNCERR
- *            @arg @ref RCC_CRS_SYNCMISS
- *            @arg @ref RCC_CRS_TRIMOVF
- */
+* @brief Wait for CRS Synchronization status.
+* @param Timeout  Duration of the timeout
+* @note  Timeout is based on the maximum time to receive a SYNC event based on synchronization
+*        frequency.
+* @note    If Timeout set to HAL_MAX_DELAY, HAL_TIMEOUT will be never returned.
+* @retval Combination of Synchronization status
+*          This parameter can be a combination of the following values:
+*            @arg @ref RCC_CRS_TIMEOUT
+*            @arg @ref RCC_CRS_SYNCOK
+*            @arg @ref RCC_CRS_SYNCWARN
+*            @arg @ref RCC_CRS_SYNCERR
+*            @arg @ref RCC_CRS_SYNCMISS
+*            @arg @ref RCC_CRS_TRIMOVF
+*/
 uint32_t HAL_RCCEx_CRSWaitSynchronization(uint32_t Timeout) {
     uint32_t crsstatus = RCC_CRS_NONE;
     uint32_t tickstart;
@@ -2521,9 +2521,9 @@ uint32_t HAL_RCCEx_CRSWaitSynchronization(uint32_t Timeout) {
 }
 
 /**
- * @brief Handle the Clock Recovery System interrupt request.
- * @retval None
- */
+  * @brief Handle the Clock Recovery System interrupt request.
+  * @retval None
+  */
 void HAL_RCCEx_CRS_IRQHandler(void) {
     uint32_t crserror = RCC_CRS_NONE;
     /* Get current IT flags and IT sources values */
@@ -2577,62 +2577,62 @@ void HAL_RCCEx_CRS_IRQHandler(void) {
 }
 
 /**
- * @brief  RCCEx Clock Recovery System SYNCOK interrupt callback.
- * @retval none
- */
+  * @brief  RCCEx Clock Recovery System SYNCOK interrupt callback.
+  * @retval none
+  */
 __weak void HAL_RCCEx_CRS_SyncOkCallback(void) {
     /* NOTE : This function should not be modified, when the callback is needed,
-	      the @ref HAL_RCCEx_CRS_SyncOkCallback should be implemented in the user file
-     */
+            the @ref HAL_RCCEx_CRS_SyncOkCallback should be implemented in the user file
+   */
 }
 
 /**
- * @brief  RCCEx Clock Recovery System SYNCWARN interrupt callback.
- * @retval none
- */
+  * @brief  RCCEx Clock Recovery System SYNCWARN interrupt callback.
+  * @retval none
+  */
 __weak void HAL_RCCEx_CRS_SyncWarnCallback(void) {
     /* NOTE : This function should not be modified, when the callback is needed,
-	      the @ref HAL_RCCEx_CRS_SyncWarnCallback should be implemented in the user file
-     */
+            the @ref HAL_RCCEx_CRS_SyncWarnCallback should be implemented in the user file
+   */
 }
 
 /**
- * @brief  RCCEx Clock Recovery System Expected SYNC interrupt callback.
- * @retval none
- */
+  * @brief  RCCEx Clock Recovery System Expected SYNC interrupt callback.
+  * @retval none
+  */
 __weak void HAL_RCCEx_CRS_ExpectedSyncCallback(void) {
     /* NOTE : This function should not be modified, when the callback is needed,
-	      the @ref HAL_RCCEx_CRS_ExpectedSyncCallback should be implemented in the user file
-     */
+            the @ref HAL_RCCEx_CRS_ExpectedSyncCallback should be implemented in the user file
+   */
 }
 
 /**
- * @brief  RCCEx Clock Recovery System Error interrupt callback.
- * @param  Error Combination of Error status.
- *         This parameter can be a combination of the following values:
- *           @arg @ref RCC_CRS_SYNCERR
- *           @arg @ref RCC_CRS_SYNCMISS
- *           @arg @ref RCC_CRS_TRIMOVF
- * @retval none
- */
+  * @brief  RCCEx Clock Recovery System Error interrupt callback.
+  * @param  Error Combination of Error status.
+  *         This parameter can be a combination of the following values:
+  *           @arg @ref RCC_CRS_SYNCERR
+  *           @arg @ref RCC_CRS_SYNCMISS
+  *           @arg @ref RCC_CRS_TRIMOVF
+  * @retval none
+  */
 __weak void HAL_RCCEx_CRS_ErrorCallback(uint32_t Error) {
     /* Prevent unused argument(s) compilation warning */
     UNUSED(Error);
 
     /* NOTE : This function should not be modified, when the callback is needed,
-	      the @ref HAL_RCCEx_CRS_ErrorCallback should be implemented in the user file
-     */
+            the @ref HAL_RCCEx_CRS_ErrorCallback should be implemented in the user file
+   */
 }
 
 /**
- * @}
- */
+  * @}
+  */
 
 #endif /* CRS */
 
 /**
- * @}
- */
+  * @}
+  */
 
 /** @addtogroup RCCEx_Private_Functions
  * @{
@@ -2641,15 +2641,15 @@ __weak void HAL_RCCEx_CRS_ErrorCallback(uint32_t Error) {
 #if defined(RCC_PLLSAI1_SUPPORT)
 
 /**
- * @brief  Configure the parameters N & P & optionally M of PLLSAI1 and enable PLLSAI1 output clock(s).
- * @param  PllSai1  pointer to an RCC_PLLSAI1InitTypeDef structure that
- *         contains the configuration parameters N & P & optionally M as well as PLLSAI1 output clock(s)
- * @param  Divider  divider parameter to be updated
- *
- * @note   PLLSAI1 is temporary disable to apply new parameters
- *
- * @retval HAL status
- */
+  * @brief  Configure the parameters N & P & optionally M of PLLSAI1 and enable PLLSAI1 output clock(s).
+  * @param  PllSai1  pointer to an RCC_PLLSAI1InitTypeDef structure that
+  *         contains the configuration parameters N & P & optionally M as well as PLLSAI1 output clock(s)
+  * @param  Divider  divider parameter to be updated
+  *
+  * @note   PLLSAI1 is temporary disable to apply new parameters
+  *
+  * @retval HAL status
+  */
 static HAL_StatusTypeDef RCCEx_PLLSAI1_Config(RCC_PLLSAI1InitTypeDef *PllSai1, uint32_t Divider) {
     uint32_t tickstart;
     HAL_StatusTypeDef status = HAL_OK;
@@ -2822,15 +2822,15 @@ static HAL_StatusTypeDef RCCEx_PLLSAI1_Config(RCC_PLLSAI1InitTypeDef *PllSai1, u
 #if defined(RCC_PLLSAI2_SUPPORT)
 
 /**
- * @brief  Configure the parameters N & P & optionally M of PLLSAI2 and enable PLLSAI2 output clock(s).
- * @param  PllSai2  pointer to an RCC_PLLSAI2InitTypeDef structure that
- *         contains the configuration parameters N & P & optionally M as well as PLLSAI2 output clock(s)
- * @param  Divider  divider parameter to be updated
- *
- * @note   PLLSAI2 is temporary disable to apply new parameters
- *
- * @retval HAL status
- */
+  * @brief  Configure the parameters N & P & optionally M of PLLSAI2 and enable PLLSAI2 output clock(s).
+  * @param  PllSai2  pointer to an RCC_PLLSAI2InitTypeDef structure that
+  *         contains the configuration parameters N & P & optionally M as well as PLLSAI2 output clock(s)
+  * @param  Divider  divider parameter to be updated
+  *
+  * @note   PLLSAI2 is temporary disable to apply new parameters
+  *
+  * @retval HAL status
+  */
 static HAL_StatusTypeDef RCCEx_PLLSAI2_Config(RCC_PLLSAI2InitTypeDef *PllSai2, uint32_t Divider) {
     uint32_t tickstart;
     HAL_StatusTypeDef status = HAL_OK;
@@ -3187,18 +3187,18 @@ static uint32_t RCCEx_GetSAIxPeriphCLKFreq(uint32_t PeriphClk, uint32_t InputFre
 #endif /* SAI1 */
 
 /**
- * @}
- */
+  * @}
+  */
 
 /**
- * @}
- */
+  * @}
+  */
 
 #endif /* HAL_RCC_MODULE_ENABLED */
 /**
- * @}
- */
+  * @}
+  */
 
 /**
- * @}
- */
+  * @}
+  */

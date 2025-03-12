@@ -105,7 +105,7 @@ BaseType_t xCoRoutineCreate(crCOROUTINE_CODE pxCoRoutineCode, UBaseType_t uxPrio
     pxCoRoutine = (CRCB_t *)pvPortMalloc(sizeof(CRCB_t));
     if (pxCoRoutine) {
 	/* If pxCurrentCoRoutine is NULL then this is the first co-routine to
-	be created and the co-routine data structures need initialising. */
+		be created and the co-routine data structures need initialising. */
 	if (pxCurrentCoRoutine == NULL) {
 	    pxCurrentCoRoutine = pxCoRoutine;
 	    prvInitialiseCoRoutineLists();
@@ -127,8 +127,8 @@ BaseType_t xCoRoutineCreate(crCOROUTINE_CODE pxCoRoutineCode, UBaseType_t uxPrio
 	vListInitialiseItem(&(pxCoRoutine->xEventListItem));
 
 	/* Set the co-routine control block as a link back from the ListItem_t.
-	This is so we can get back to the containing CRCB from a generic item
-	in a list. */
+		This is so we can get back to the containing CRCB from a generic item
+		in a list. */
 	listSET_LIST_ITEM_OWNER(&(pxCoRoutine->xGenericListItem), pxCoRoutine);
 	listSET_LIST_ITEM_OWNER(&(pxCoRoutine->xEventListItem), pxCoRoutine);
 
@@ -136,7 +136,7 @@ BaseType_t xCoRoutineCreate(crCOROUTINE_CODE pxCoRoutineCode, UBaseType_t uxPrio
 	listSET_LIST_ITEM_VALUE(&(pxCoRoutine->xEventListItem), ((TickType_t)configMAX_CO_ROUTINE_PRIORITIES - (TickType_t)uxPriority));
 
 	/* Now the co-routine has been initialised it can be added to the ready
-	list at the correct priority. */
+		list at the correct priority. */
 	prvAddCoRoutineToReadyQueue(pxCoRoutine);
 
 	xReturn = pdPASS;
@@ -152,12 +152,12 @@ void vCoRoutineAddToDelayedList(TickType_t xTicksToDelay, List_t *pxEventList) {
     TickType_t xTimeToWake;
 
     /* Calculate the time to wake - this may overflow but this is
-    not a problem. */
+	not a problem. */
     xTimeToWake = xCoRoutineTickCount + xTicksToDelay;
 
     /* We must remove ourselves from the ready list before adding
-    ourselves to the blocked list as the same list item is used for
-    both lists. */
+	ourselves to the blocked list as the same list item is used for
+	both lists. */
     (void)uxListRemove((ListItem_t *)&(pxCurrentCoRoutine->xGenericListItem));
 
     /* The list item will be inserted in wake time order. */
@@ -165,17 +165,17 @@ void vCoRoutineAddToDelayedList(TickType_t xTicksToDelay, List_t *pxEventList) {
 
     if (xTimeToWake < xCoRoutineTickCount) {
 	/* Wake time has overflowed.  Place this item in the
-	overflow list. */
+		overflow list. */
 	vListInsert((List_t *)pxOverflowDelayedCoRoutineList, (ListItem_t *)&(pxCurrentCoRoutine->xGenericListItem));
     } else {
 	/* The wake time has not overflowed, so we can use the
-	current block list. */
+		current block list. */
 	vListInsert((List_t *)pxDelayedCoRoutineList, (ListItem_t *)&(pxCurrentCoRoutine->xGenericListItem));
     }
 
     if (pxEventList) {
 	/* Also add the co-routine to an event list.  If this is done then the
-	function must be called with interrupts disabled. */
+		function must be called with interrupts disabled. */
 	vListInsert(pxEventList, &(pxCurrentCoRoutine->xEventListItem));
     }
 }
@@ -183,8 +183,8 @@ void vCoRoutineAddToDelayedList(TickType_t xTicksToDelay, List_t *pxEventList) {
 
 static void prvCheckPendingReadyList(void) {
     /* Are there any co-routines waiting to get moved to the ready list?  These
-    are co-routines that have been readied by an ISR.  The ISR cannot access
-    the	ready lists itself. */
+	are co-routines that have been readied by an ISR.  The ISR cannot access
+	the	ready lists itself. */
     while (listLIST_IS_EMPTY(&xPendingReadyCoRoutineList) == pdFALSE) {
 	CRCB_t *pxUnblockedCRCB;
 
@@ -215,7 +215,7 @@ static void prvCheckDelayedList(void) {
 	    List_t *pxTemp;
 
 	    /* Tick count has overflowed so we need to swap the delay lists.  If there are
-	    any items in pxDelayedCoRoutineList here then there is an error! */
+			any items in pxDelayedCoRoutineList here then there is an error! */
 	    pxTemp = pxDelayedCoRoutineList;
 	    pxDelayedCoRoutineList = pxOverflowDelayedCoRoutineList;
 	    pxOverflowDelayedCoRoutineList = pxTemp;
@@ -233,10 +233,10 @@ static void prvCheckDelayedList(void) {
 	    portDISABLE_INTERRUPTS();
 	    {
 		/* The event could have occurred just before this critical
-		section.  If this is the case then the generic list item will
-		have been moved to the pending ready list and the following
-		line is still valid.  Also the pvContainer parameter will have
-		been set to NULL so the following lines are also valid. */
+				section.  If this is the case then the generic list item will
+				have been moved to the pending ready list and the following
+				line is still valid.  Also the pvContainer parameter will have
+				been set to NULL so the following lines are also valid. */
 		(void)uxListRemove(&(pxCRCB->xGenericListItem));
 
 		/* Is the co-routine waiting on an event also? */
@@ -271,7 +271,7 @@ void vCoRoutineSchedule(void) {
     }
 
     /* listGET_OWNER_OF_NEXT_ENTRY walks through the list, so the co-routines
-     of the	same priority get an equal share of the processor time. */
+	 of the	same priority get an equal share of the processor time. */
     listGET_OWNER_OF_NEXT_ENTRY(pxCurrentCoRoutine, &(pxReadyCoRoutineLists[uxTopCoRoutineReadyPriority]));
 
     /* Call the co-routine. */
@@ -293,7 +293,7 @@ static void prvInitialiseCoRoutineLists(void) {
     vListInitialise((List_t *)&xPendingReadyCoRoutineList);
 
     /* Start with pxDelayedCoRoutineList using list1 and the
-    pxOverflowDelayedCoRoutineList using list2. */
+	pxOverflowDelayedCoRoutineList using list2. */
     pxDelayedCoRoutineList = &xDelayedCoRoutineList1;
     pxOverflowDelayedCoRoutineList = &xDelayedCoRoutineList2;
 }
@@ -304,8 +304,8 @@ BaseType_t xCoRoutineRemoveFromEventList(const List_t *pxEventList) {
     BaseType_t xReturn;
 
     /* This function is called from within an interrupt.  It can only access
-    event lists and the pending ready list.  This function assumes that a
-    check has already been made to ensure pxEventList is not empty. */
+	event lists and the pending ready list.  This function assumes that a
+	check has already been made to ensure pxEventList is not empty. */
     pxUnblockedCRCB = (CRCB_t *)listGET_OWNER_OF_HEAD_ENTRY(pxEventList);
     (void)uxListRemove(&(pxUnblockedCRCB->xEventListItem));
     vListInsertEnd((List_t *)&(xPendingReadyCoRoutineList), &(pxUnblockedCRCB->xEventListItem));

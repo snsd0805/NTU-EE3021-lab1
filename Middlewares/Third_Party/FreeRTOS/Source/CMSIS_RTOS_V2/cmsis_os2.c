@@ -115,11 +115,11 @@ static osKernelState_t KernelState = osKernelInactive;
 #if defined(USE_FreeRTOS_HEAP_5)
 #if (configAPPLICATION_ALLOCATED_HEAP == 0)
 /*
-  FreeRTOS heap is not defined by the application.
-  Single region of size configTOTAL_HEAP_SIZE (defined in FreeRTOSConfig.h)
-  is provided by default. Define configHEAP_5_REGIONS to provide custom
-  HeapRegion_t array.
-*/
+    FreeRTOS heap is not defined by the application.
+    Single region of size configTOTAL_HEAP_SIZE (defined in FreeRTOSConfig.h)
+    is provided by default. Define configHEAP_5_REGIONS to provide custom
+    HeapRegion_t array.
+  */
 #define HEAP_5_REGION_SETUP 1
 
 #ifndef configHEAP_5_REGIONS
@@ -136,9 +136,9 @@ extern HeapRegion_t configHEAP_5_REGIONS[];
 #endif
 #else
 /*
-  The application already defined the array used for the FreeRTOS heap and
-  called vPortDefineHeapRegions to initialize heap.
-*/
+    The application already defined the array used for the FreeRTOS heap and
+    called vPortDefineHeapRegions to initialize heap.
+  */
 #define HEAP_5_REGION_SETUP 0
 #endif /* configAPPLICATION_ALLOCATED_HEAP */
 #endif /* USE_FreeRTOS_HEAP_5 */
