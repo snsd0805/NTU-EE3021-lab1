@@ -534,9 +534,9 @@ static void prvResetNextTaskUnblockTime(void);
 #if ((configUSE_TRACE_FACILITY == 1) && (configUSE_STATS_FORMATTING_FUNCTIONS > 0))
 
 /*
-	 * Helper function used to pad task names with spaces when printing out
-	 * human readable tables of task information.
-	 */
+ * Helper function used to pad task names with spaces when printing out
+ * human readable tables of task information.
+ */
 static char *prvWriteNameToBuffer(char *pcBuffer, const char *pcTaskName) PRIVILEGED_FUNCTION;
 
 #endif
@@ -3880,28 +3880,28 @@ void vTaskList(char *pcWriteBuffer) {
     char cStatus;
 
     /*
-		 * PLEASE NOTE:
-		 *
-		 * This function is provided for convenience only, and is used by many
-		 * of the demo applications.  Do not consider it to be part of the
-		 * scheduler.
-		 *
-		 * vTaskList() calls uxTaskGetSystemState(), then formats part of the
-		 * uxTaskGetSystemState() output into a human readable table that
-		 * displays task names, states and stack usage.
-		 *
-		 * vTaskList() has a dependency on the sprintf() C library function that
-		 * might bloat the code size, use a lot of stack, and provide different
-		 * results on different platforms.  An alternative, tiny, third party,
-		 * and limited functionality implementation of sprintf() is provided in
-		 * many of the FreeRTOS/Demo sub-directories in a file called
-		 * printf-stdarg.c (note printf-stdarg.c does not provide a full
-		 * snprintf() implementation!).
-		 *
-		 * It is recommended that production systems call uxTaskGetSystemState()
-		 * directly to get access to raw stats data, rather than indirectly
-		 * through a call to vTaskList().
-		 */
+     * PLEASE NOTE:
+     *
+     * This function is provided for convenience only, and is used by many
+     * of the demo applications.  Do not consider it to be part of the
+     * scheduler.
+     *
+     * vTaskList() calls uxTaskGetSystemState(), then formats part of the
+     * uxTaskGetSystemState() output into a human readable table that
+     * displays task names, states and stack usage.
+     *
+     * vTaskList() has a dependency on the sprintf() C library function that
+     * might bloat the code size, use a lot of stack, and provide different
+     * results on different platforms.  An alternative, tiny, third party,
+     * and limited functionality implementation of sprintf() is provided in
+     * many of the FreeRTOS/Demo sub-directories in a file called
+     * printf-stdarg.c (note printf-stdarg.c does not provide a full
+     * snprintf() implementation!).
+     *
+     * It is recommended that production systems call uxTaskGetSystemState()
+     * directly to get access to raw stats data, rather than indirectly
+     * through a call to vTaskList().
+     */
 
     /* Make sure the write buffer does not contain a string. */
     *pcWriteBuffer = (char)0x00;
@@ -3982,33 +3982,33 @@ void vTaskGetRunTimeStats(char *pcWriteBuffer) {
     }
 #endif
 
-    /*
-		 * PLEASE NOTE:
-		 *
-		 * This function is provided for convenience only, and is used by many
-		 * of the demo applications.  Do not consider it to be part of the
-		 * scheduler.
-		 *
-		 * vTaskGetRunTimeStats() calls uxTaskGetSystemState(), then formats part
-		 * of the uxTaskGetSystemState() output into a human readable table that
-		 * displays the amount of time each task has spent in the Running state
-		 * in both absolute and percentage terms.
-		 *
-		 * vTaskGetRunTimeStats() has a dependency on the sprintf() C library
-		 * function that might bloat the code size, use a lot of stack, and
-		 * provide different results on different platforms.  An alternative,
-		 * tiny, third party, and limited functionality implementation of
-		 * sprintf() is provided in many of the FreeRTOS/Demo sub-directories in
-		 * a file called printf-stdarg.c (note printf-stdarg.c does not provide
-		 * a full snprintf() implementation!).
-		 *
-		 * It is recommended that production systems call uxTaskGetSystemState()
-		 * directly to get access to raw stats data, rather than indirectly
-		 * through a call to vTaskGetRunTimeStats().
-		 */
+	/*
+	 * PLEASE NOTE:
+	 *
+	 * This function is provided for convenience only, and is used by many
+	 * of the demo applications.  Do not consider it to be part of the
+	 * scheduler.
+	 *
+	 * vTaskGetRunTimeStats() calls uxTaskGetSystemState(), then formats part
+	 * of the uxTaskGetSystemState() output into a human readable table that
+	 * displays the amount of time each task has spent in the Running state
+	 * in both absolute and percentage terms.
+	 *
+	 * vTaskGetRunTimeStats() has a dependency on the sprintf() C library
+	 * function that might bloat the code size, use a lot of stack, and
+	 * provide different results on different platforms.  An alternative,
+	 * tiny, third party, and limited functionality implementation of
+	 * sprintf() is provided in many of the FreeRTOS/Demo sub-directories in
+	 * a file called printf-stdarg.c (note printf-stdarg.c does not provide
+	 * a full snprintf() implementation!).
+	 *
+	 * It is recommended that production systems call uxTaskGetSystemState()
+	 * directly to get access to raw stats data, rather than indirectly
+	 * through a call to vTaskGetRunTimeStats().
+	 */
 
-    /* Make sure the write buffer does not contain a string. */
-    *pcWriteBuffer = (char)0x00;
+	/* Make sure the write buffer does not contain a string. */
+	*pcWriteBuffer = (char)0x00;
 
     /* Take a snapshot of the number of tasks in case it changes while this
 		function is executing. */

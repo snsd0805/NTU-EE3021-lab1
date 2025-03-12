@@ -102,7 +102,7 @@ EventGroupHandle_t xEventGroupCreateStatic(StaticEventGroup_t *pxEventGroupBuffe
 			event group structure. */
 	volatile size_t xSize = sizeof(StaticEventGroup_t);
 	configASSERT(xSize == sizeof(EventGroup_t));
-    }  /*lint !e529 xSize is referenced if configASSERT() is defined. */
+    } /*lint !e529 xSize is referenced if configASSERT() is defined. */
 #endif /* configASSERT_DEFINED */
 
     /* The user has provided a statically allocated event group - use it. */

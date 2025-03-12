@@ -1,9 +1,9 @@
 /**************************************************************************/ /**
- * @file     cmsis_iccarm.h
- * @brief    CMSIS compiler ICCARM (IAR Compiler for Arm) header file
- * @version  V5.1.0
- * @date     08. May 2019
- ******************************************************************************/
+									      * @file     cmsis_iccarm.h
+									      * @brief    CMSIS compiler ICCARM (IAR Compiler for Arm) header file
+									      * @version  V5.1.0
+									      * @date     08. May 2019
+									      ******************************************************************************/
 
 //------------------------------------------------------------------------------
 //
@@ -216,7 +216,9 @@ __IAR_FT void __iar_uint32_write(void const *ptr, uint32_t val) {
 #ifndef __UNALIGNED_UINT32 /* deprecated */
 #pragma language = save
 #pragma language = extended
-__packed struct __iar_u32 { uint32_t v; };
+__packed struct __iar_u32 {
+    uint32_t v;
+};
 #pragma language = restore
 #define __UNALIGNED_UINT32(PTR) (((struct __iar_u32 *)(PTR))->v)
 #endif

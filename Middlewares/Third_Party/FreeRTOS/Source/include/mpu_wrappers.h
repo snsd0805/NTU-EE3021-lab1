@@ -38,12 +38,12 @@ only for ports that are using the MPU. */
 #ifndef MPU_WRAPPERS_INCLUDED_FROM_API_FILE
 
 /*
-		 * Map standard (non MPU) API functions to equivalents that start
-		 * "MPU_".  This will cause the application code to call the MPU_
-		 * version, which wraps the non-MPU version with privilege promoting
-		 * then demoting code, so the kernel code always runs will full
-		 * privileges.
-		 */
+ * Map standard (non MPU) API functions to equivalents that start
+ * "MPU_".  This will cause the application code to call the MPU_
+ * version, which wraps the non-MPU version with privilege promoting
+ * then demoting code, so the kernel code always runs will full
+ * privileges.
+ */
 
 /* Map standard tasks.h API functions to the MPU equivalents. */
 #define xTaskCreate MPU_xTaskCreate

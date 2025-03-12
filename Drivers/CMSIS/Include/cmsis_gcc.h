@@ -1,9 +1,9 @@
 /**************************************************************************/ /**
- * @file     cmsis_gcc.h
- * @brief    CMSIS compiler GCC header file
- * @version  V5.2.0
- * @date     08. May 2019
- ******************************************************************************/
+									      * @file     cmsis_gcc.h
+									      * @brief    CMSIS compiler GCC header file
+									      * @version  V5.2.0
+									      * @date     08. May 2019
+									      ******************************************************************************/
 /*
  * Copyright (c) 2009-2019 Arm Limited. All rights reserved.
  *
@@ -120,16 +120,16 @@ __PACKED_STRUCT T_UINT32_READ { uint32_t v; };
 						: "memory")
 #endif
 
-    /* #########################  Startup and Lowlevel Init  ######################## */
+/* #########################  Startup and Lowlevel Init  ######################## */
 
 #ifndef __PROGRAM_START
 
 /**
   \brief   Initializes data and bss sections
   \details This default implementations initialized all data and additional bss
-           sections relying on .copy.table and .zero.table specified properly
-           in the used linker script.
-  
+	   sections relying on .copy.table and .zero.table specified properly
+	   in the used linker script.
+
  */
 __STATIC_FORCEINLINE __NO_RETURN void __cmsis_start(void) {
     extern void _start(void) __NO_RETURN;
@@ -193,7 +193,7 @@ __STATIC_FORCEINLINE __NO_RETURN void __cmsis_start(void) {
 /**
   \brief   Enable IRQ Interrupts
   \details Enables IRQ interrupts by clearing the I-bit in the CPSR.
-           Can only be executed in Privileged modes.
+	   Can only be executed in Privileged modes.
  */
 __STATIC_FORCEINLINE void __enable_irq(void) {
     __ASM volatile("cpsie i"
@@ -205,7 +205,7 @@ __STATIC_FORCEINLINE void __enable_irq(void) {
 /**
   \brief   Disable IRQ Interrupts
   \details Disables IRQ interrupts by setting the I-bit in the CPSR.
-           Can only be executed in Privileged modes.
+	   Can only be executed in Privileged modes.
  */
 __STATIC_FORCEINLINE void __disable_irq(void) {
     __ASM volatile("cpsid i"
@@ -502,7 +502,7 @@ __STATIC_FORCEINLINE void __TZ_set_PRIMASK_NS(uint32_t priMask) {
 /**
   \brief   Enable FIQ
   \details Enables FIQ interrupts by clearing the F-bit in the CPSR.
-           Can only be executed in Privileged modes.
+	   Can only be executed in Privileged modes.
  */
 __STATIC_FORCEINLINE void __enable_fault_irq(void) {
     __ASM volatile("cpsie f"
@@ -514,7 +514,7 @@ __STATIC_FORCEINLINE void __enable_fault_irq(void) {
 /**
   \brief   Disable FIQ
   \details Disables FIQ interrupts by setting the F-bit in the CPSR.
-           Can only be executed in Privileged modes.
+	   Can only be executed in Privileged modes.
  */
 __STATIC_FORCEINLINE void __disable_fault_irq(void) {
     __ASM volatile("cpsid f"
@@ -580,7 +580,7 @@ __STATIC_FORCEINLINE void __TZ_set_BASEPRI_NS(uint32_t basePri) {
 /**
   \brief   Set Base Priority with condition
   \details Assigns the given value to the Base Priority register only if BASEPRI masking is disabled,
-           or the new value increases the BASEPRI priority level.
+	   or the new value increases the BASEPRI priority level.
   \param [in]    basePri  Base Priority value to set
  */
 __STATIC_FORCEINLINE void __set_BASEPRI_MAX(uint32_t basePri) {
@@ -656,7 +656,7 @@ __STATIC_FORCEINLINE void __TZ_set_FAULTMASK_NS(uint32_t faultMask) {
   Devices without ARMv8-M Main Extensions (i.e. Cortex-M23) lack the non-secure
   Stack Pointer Limit register hence zero is returned always in non-secure
   mode.
-  
+
   \details Returns the current value of the Process Stack Pointer Limit (PSPLIM).
   \return               PSPLIM Register value
  */
@@ -700,7 +700,7 @@ __STATIC_FORCEINLINE uint32_t __TZ_get_PSPLIM_NS(void) {
   Devices without ARMv8-M Main Extensions (i.e. Cortex-M23) lack the non-secure
   Stack Pointer Limit register hence the write is silently ignored in non-secure
   mode.
-  
+
   \details Assigns the given value to the Process Stack Pointer Limit (PSPLIM).
   \param [in]    ProcStackPtrLimit  Process Stack Pointer Limit value to set
  */
@@ -911,7 +911,7 @@ __STATIC_FORCEINLINE void __set_FPSCR(uint32_t fpscr) {
 /**
   \brief   Wait For Event
   \details Wait For Event is a hint instruction that permits the processor to enter
-           a low-power state until one of a number of events occurs.
+	   a low-power state until one of a number of events occurs.
  */
 #define __WFE() __ASM volatile("wfe")
 
@@ -924,8 +924,8 @@ __STATIC_FORCEINLINE void __set_FPSCR(uint32_t fpscr) {
 /**
   \brief   Instruction Synchronization Barrier
   \details Instruction Synchronization Barrier flushes the pipeline in the processor,
-           so that all instructions following the ISB are fetched from cache or memory,
-           after the instruction has been completed.
+	   so that all instructions following the ISB are fetched from cache or memory,
+	   after the instruction has been completed.
  */
 __STATIC_FORCEINLINE void __ISB(void) {
     __ASM volatile("isb 0xF" ::
@@ -935,7 +935,7 @@ __STATIC_FORCEINLINE void __ISB(void) {
 /**
   \brief   Data Synchronization Barrier
   \details Acts as a special kind of Data Memory Barrier.
-           It completes when all explicit memory accesses before this instruction complete.
+	   It completes when all explicit memory accesses before this instruction complete.
  */
 __STATIC_FORCEINLINE void __DSB(void) {
     __ASM volatile("dsb 0xF" ::
@@ -945,7 +945,7 @@ __STATIC_FORCEINLINE void __DSB(void) {
 /**
   \brief   Data Memory Barrier
   \details Ensures the apparent order of the explicit memory operations before
-           and after the instruction, without ensuring their completion.
+	   and after the instruction, without ensuring their completion.
  */
 __STATIC_FORCEINLINE void __DMB(void) {
     __ASM volatile("dmb 0xF" ::
@@ -1023,9 +1023,9 @@ __STATIC_FORCEINLINE uint32_t __ROR(uint32_t op1, uint32_t op2) {
 /**
   \brief   Breakpoint
   \details Causes the processor to enter Debug state.
-           Debug tools can use this to investigate system state when the instruction at a particular address is reached.
+	   Debug tools can use this to investigate system state when the instruction at a particular address is reached.
   \param [in]    value  is ignored by the processor.
-                 If required, a debugger can use it to store additional information about the breakpoint.
+		 If required, a debugger can use it to store additional information about the breakpoint.
  */
 #define __BKPT(value) __ASM volatile("bkpt " #value)
 
@@ -1252,7 +1252,7 @@ __STATIC_FORCEINLINE void __CLREX(void) {
 /**
   \brief   Rotate Right with Extend (32 bit)
   \details Moves each bit of a bitstring right by one bit.
-           The carry input is shifted in at the left end of the bitstring.
+	   The carry input is shifted in at the left end of the bitstring.
   \param [in]    value  Value to rotate
   \return               Rotated value
  */

@@ -34,10 +34,10 @@
   CMSIS-RTOS2 FreeRTOS image size optimization definitions.
 
   Note: Definitions configUSE_OS2 can be used to optimize FreeRTOS image size when
-        certain functionality is not required when using CMSIS-RTOS2 API.
-        In general optimization decisions are left to the tool chain but in cases
-        when coding style prevents it to optimize the code following optional
-        definitions can be used.
+	certain functionality is not required when using CMSIS-RTOS2 API.
+	In general optimization decisions are left to the tool chain but in cases
+	when coding style prevents it to optimize the code following optional
+	definitions can be used.
 */
 
 /*
@@ -88,7 +88,7 @@
   CMSIS-RTOS2 FreeRTOS configuration check (FreeRTOSConfig.h).
 
   Note: CMSIS-RTOS API requires functions included by using following definitions.
-        In case if certain API function is not used compiler will optimize it away.
+	In case if certain API function is not used compiler will optimize it away.
 */
 #if (INCLUDE_xSemaphoreGetMutexHolder == 0)
 /*

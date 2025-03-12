@@ -1,9 +1,9 @@
 /**************************************************************************/ /**
- * @file     core_cm3.h
- * @brief    CMSIS Cortex-M3 Core Peripheral Access Layer Header File
- * @version  V5.1.0
- * @date     13. March 2019
- ******************************************************************************/
+									      * @file     core_cm3.h
+									      * @brief    CMSIS Cortex-M3 Core Peripheral Access Layer Header File
+									      * @version  V5.1.0
+									      * @date     13. March 2019
+									      ******************************************************************************/
 /*
  * Copyright (c) 2009-2019 Arm Limited. All rights reserved.
  *
@@ -1337,7 +1337,7 @@ typedef struct
   \param[in] value  Value of register. This parameter is interpreted as an uint32_t type.
   \return           Masked and shifted bit field value.
 */
-#define _FLD2VAL(field, value) (((uint32_t)(value)&field##_Msk) >> field##_Pos)
+#define _FLD2VAL(field, value) (((uint32_t)(value) & field##_Msk) >> field##_Pos)
 
 /*@} end of group CMSIS_core_bitfield */
 
@@ -1434,10 +1434,10 @@ typedef struct
 /**
   \brief   Set Priority Grouping
   \details Sets the priority grouping field using the required unlock sequence.
-           The parameter PriorityGroup is assigned to the field SCB->AIRCR [10:8] PRIGROUP field.
-           Only values from 0..7 are used.
-           In case of a conflict between priority grouping and available
-           priority bits (__NVIC_PRIO_BITS), the smallest possible priority group is set.
+	   The parameter PriorityGroup is assigned to the field SCB->AIRCR [10:8] PRIGROUP field.
+	   Only values from 0..7 are used.
+	   In case of a conflict between priority grouping and available
+	   priority bits (__NVIC_PRIO_BITS), the smallest possible priority group is set.
   \param [in]      PriorityGroup  Priority grouping field.
  */
 __STATIC_INLINE void __NVIC_SetPriorityGrouping(uint32_t PriorityGroup) {
@@ -1564,8 +1564,8 @@ __STATIC_INLINE uint32_t __NVIC_GetActive(IRQn_Type IRQn) {
 /**
   \brief   Set Interrupt Priority
   \details Sets the priority of a device specific interrupt or a processor exception.
-           The interrupt number can be positive to specify a device specific interrupt,
-           or negative to specify a processor exception.
+	   The interrupt number can be positive to specify a device specific interrupt,
+	   or negative to specify a processor exception.
   \param [in]      IRQn  Interrupt number.
   \param [in]  priority  Priority to set.
   \note    The priority cannot be set for every processor exception.
@@ -1581,11 +1581,11 @@ __STATIC_INLINE void __NVIC_SetPriority(IRQn_Type IRQn, uint32_t priority) {
 /**
   \brief   Get Interrupt Priority
   \details Reads the priority of a device specific interrupt or a processor exception.
-           The interrupt number can be positive to specify a device specific interrupt,
-           or negative to specify a processor exception.
+	   The interrupt number can be positive to specify a device specific interrupt,
+	   or negative to specify a processor exception.
   \param [in]   IRQn  Interrupt number.
   \return             Interrupt Priority.
-                      Value is aligned automatically to the implemented priority bits of the microcontroller.
+		      Value is aligned automatically to the implemented priority bits of the microcontroller.
  */
 __STATIC_INLINE uint32_t __NVIC_GetPriority(IRQn_Type IRQn) {
 
@@ -1599,9 +1599,9 @@ __STATIC_INLINE uint32_t __NVIC_GetPriority(IRQn_Type IRQn) {
 /**
   \brief   Encode Priority
   \details Encodes the priority for an interrupt with the given priority group,
-           preemptive priority value, and subpriority value.
-           In case of a conflict between priority grouping and available
-           priority bits (__NVIC_PRIO_BITS), the smallest possible priority group is set.
+	   preemptive priority value, and subpriority value.
+	   In case of a conflict between priority grouping and available
+	   priority bits (__NVIC_PRIO_BITS), the smallest possible priority group is set.
   \param [in]     PriorityGroup  Used priority group.
   \param [in]   PreemptPriority  Preemptive priority value (starting from 0).
   \param [in]       SubPriority  Subpriority value (starting from 0).
@@ -1623,9 +1623,9 @@ __STATIC_INLINE uint32_t NVIC_EncodePriority(uint32_t PriorityGroup, uint32_t Pr
 /**
   \brief   Decode Priority
   \details Decodes an interrupt priority value with a given priority group to
-           preemptive priority value and subpriority value.
-           In case of a conflict between priority grouping and available
-           priority bits (__NVIC_PRIO_BITS) the smallest possible priority group is set.
+	   preemptive priority value and subpriority value.
+	   In case of a conflict between priority grouping and available
+	   priority bits (__NVIC_PRIO_BITS) the smallest possible priority group is set.
   \param [in]         Priority   Priority value, which can be retrieved with the function \ref NVIC_GetPriority().
   \param [in]     PriorityGroup  Used priority group.
   \param [out] pPreemptPriority  Preemptive priority value (starting from 0).
@@ -1646,9 +1646,9 @@ __STATIC_INLINE void NVIC_DecodePriority(uint32_t Priority, uint32_t PriorityGro
 /**
   \brief   Set Interrupt Vector
   \details Sets an interrupt vector in SRAM based interrupt vector table.
-           The interrupt number can be positive to specify a device specific interrupt,
-           or negative to specify a processor exception.
-           VTOR must been relocated to SRAM before.
+	   The interrupt number can be positive to specify a device specific interrupt,
+	   or negative to specify a processor exception.
+	   VTOR must been relocated to SRAM before.
   \param [in]   IRQn      Interrupt number
   \param [in]   vector    Address of interrupt handler function
  */
@@ -1661,8 +1661,8 @@ __STATIC_INLINE void __NVIC_SetVector(IRQn_Type IRQn, uint32_t vector) {
 /**
   \brief   Get Interrupt Vector
   \details Reads an interrupt vector from interrupt vector table.
-           The interrupt number can be positive to specify a device specific interrupt,
-           or negative to specify a processor exception.
+	   The interrupt number can be positive to specify a device specific interrupt,
+	   or negative to specify a processor exception.
   \param [in]   IRQn      Interrupt number.
   \return                 Address of interrupt handler function
  */
@@ -1677,7 +1677,7 @@ __STATIC_INLINE uint32_t __NVIC_GetVector(IRQn_Type IRQn) {
  */
 __NO_RETURN __STATIC_INLINE void __NVIC_SystemReset(void) {
     __DSB(); /* Ensure all outstanding memory accesses included
-                                                                       buffered write are completed before reset */
+								       buffered write are completed before reset */
     SCB->AIRCR = (uint32_t)((0x5FAUL << SCB_AIRCR_VECTKEY_Pos) |
 			    (SCB->AIRCR & SCB_AIRCR_PRIGROUP_Msk) |
 			    SCB_AIRCR_SYSRESETREQ_Msk); /* Keep priority group unchanged */
@@ -1734,13 +1734,13 @@ __STATIC_INLINE uint32_t SCB_GetFPUType(void) {
 /**
   \brief   System Tick Configuration
   \details Initializes the System Timer and its interrupt, and starts the System Tick Timer.
-           Counter is in free running mode to generate periodic interrupts.
+	   Counter is in free running mode to generate periodic interrupts.
   \param [in]  ticks  Number of ticks between two interrupts.
   \return          0  Function succeeded.
   \return          1  Function failed.
   \note    When the variable <b>__Vendor_SysTickConfig</b> is set to 1, then the
-           function <b>SysTick_Config</b> is not included. In this case, the file <b><i>device</i>.h</b>
-           must contain a vendor-specific implementation of this function.
+	   function <b>SysTick_Config</b> is not included. In this case, the file <b><i>device</i>.h</b>
+	   must contain a vendor-specific implementation of this function.
  */
 __STATIC_INLINE uint32_t SysTick_Config(uint32_t ticks) {
     if ((ticks - 1UL) > SysTick_LOAD_RELOAD_Msk) {
@@ -1774,8 +1774,8 @@ extern volatile int32_t ITM_RxBuffer;		  /*!< External variable to receive chara
 /**
   \brief   ITM Send Character
   \details Transmits a character via the ITM channel 0, and
-           \li Just returns when no debugger is connected that has booked the output.
-           \li Is blocking when a debugger is connected, but the previous character sent has not been transmitted.
+	   \li Just returns when no debugger is connected that has booked the output.
+	   \li Is blocking when a debugger is connected, but the previous character sent has not been transmitted.
   \param [in]     ch  Character to transmit.
   \returns            Character to transmit.
  */
